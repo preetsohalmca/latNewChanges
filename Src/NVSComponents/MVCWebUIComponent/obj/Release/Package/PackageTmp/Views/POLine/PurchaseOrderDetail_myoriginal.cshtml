@@ -1,0 +1,396 @@
+﻿@using Volvo.LAT.POLineDomain.DomainLayer.Entities;
+@*@model Volvo.LAT.POLineDomain.DomainLayer.Entities.POLine*@
+@model IList<Volvo.LAT.POLineDomain.DomainLayer.Entities.CustomModel>
+@{
+    ViewBag.Title = "Purchase order Detail";
+}
+<style type="text/css">
+    .tb-2 {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        /*background-color: #eef2f3;*/
+        color: white;
+    }
+
+    .tb-1, .tb-3 {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        /*background-color: #7ab3c1;*/
+        color: white;
+    }
+
+        .tb-1, .tb-2, .tb-3 td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        /*.tb-1, .tb-2, .tb-3 tr:nth-child(even) {
+    background-color: #f2f2f2;
+    }*/
+        .tb-1, .tb-2, .tb-3 tr:hover {
+            background-color: #ddd;
+        }
+
+        .tb-1, .tb-3 th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            /*background-color: #eef2f3;*/
+            color: white;
+        }
+
+    .tb-2 {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        /*background-color: #7ab3c1;*/
+        color: white;
+    }
+</style>
+<div style="margin: 5px;">
+    <span class="field">
+        <label class="field" for="SearchInput">@*POLine:*@</label>
+        <input type="text" id="SearchInput" style="width:400px" />
+        <input type="button" id="SearchButton" title="POSearch" value="Search">
+        <a href="#" id="Advance">Advance Search</a>
+    </span>
+</div>
+<script type="text/javascript">
+    function onVaueChangeOrUpdate(e) {
+        debugger;
+        console.log(e);
+    }
+</script>
+
+
+<div style="overflow:auto;height:700px;">
+    @{var i = 1;}
+    @if (Model != null && Model.Count > 0)
+    {       
+        foreach (var item in Model)
+        {
+             
+            <div id="purchaseOrderDetail" style="margin-bottom:25px;margin-bottom: 25px;border: solid 2px black;">
+                <table class="tb-1" style="background-color: #eef2f3;">
+                    <tr>
+                        <td colspan="3" style="text-align: left;padding-left:100px;">
+                            @Html.HiddenFor(m => item.PurchaseOrderLineId)
+                            Owner:
+                            @(Html.Kendo().DropDownList()
+        .Name("DDLOwners_" + i)
+        .DataTextField("Name")
+        .DataValueField("OwnerId")
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("GellAllOwners", "POLine");
+            });
+        }).Value(Convert.ToString(item.Owner_ID)) //.Value(Convert.ToString(Model.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.OwnerId))
+        .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                            )
+                        </td>
+                        <td style="text-align: left;">
+                            Currency:@item.Currency
+                        </td>
+                        <td style="text-align: left;">
+                            Vender Name:@item.VendorName
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left;padding-left:100px;">
+                            Status: @(Html.Kendo().DropDownList()
+.Name("DDLStatusPoId_" + i)
+.DataTextField("Name")
+.DataValueField("StatusPoId")
+.DataSource(source =>
+{
+    source.Read(read =>
+    {
+        read.Action("GellAllStatus", "POLine");
+    });
+}).Value(Convert.ToString(item.StatusPoid))
+.HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                            )
+                        </td>
+                        <td style="text-align: left;">
+                            Total Order Amount:@item.OrderAmount
+                        </td>
+                        <td style="text-align: left;">
+                            Purchaser Name:@item.PurchaserName
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left;padding-left:100px;">
+                            Purcahse Order Name:@item.PurchaserName
+                        </td>
+                        <td style="text-align: left;">
+                            Total Order Amount(SHK):@item.OrderamountinSEK
+                        </td>
+                        <td style="text-align: left;">
+                            Invoice No:@item.InvoiceNumber
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left;padding-left:100px;">
+                            Order Date:@string.Format("{0:yyyy-MM}", item.OrderDate)
+                        </td>
+                        <td style="text-align: left;">
+                            Left Total Order Amount:
+                        </td>
+                        <td style="text-align: left;">Comments:@Html.TextAreaFor(m => item.Remark, new { @class = "save-detail" , id = "TxtAreaRemark_" + i })</td>
+                    </tr>
+                </table>
+
+                <table class="tb-2" style="height: 75px;background-color: #7ab3c1;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            Purchase Order Line:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            @item.PoLine
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            Contract Start Date: @(Html.Kendo().DatePicker()
+                            .Name("DDLContractStartDate_" + i)
+                            .Value(item.StartDate)
+                            .Events(e => {
+                                e.Change("onVaueChangeOrUpdate");
+                            })
+                            )
+                        </td>
+                        <td>
+                            Contratct Type:
+                            @(Html.Kendo().DropDownList()
+                .Name("DDLContractTypeId_" + i)
+                .DataTextField("Name")
+                .DataValueField("ContractTypeId")
+                .DataSource(source =>
+                {
+                    source.Read(read => { read.Action("GetAllContractTypes", "POLine"); });
+                }).Value(Convert.ToString(item.ContractTypeId))
+                .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                            )
+
+                        </td>
+                        <td>Left Po Line Amount: <label id="lblLeftPoLineAmount"></label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left;padding-left:100px;">
+                            Assignment Code / WBS:
+                            @*<input id="section2AcOrWbsTextbox" type="text" value="@Model.AcOrWbs" />*@
+                            @Html.TextBoxFor(m => item.AcOrWbs, new { @class = "save-detail", id = "AssignmentCodeWBS" + i })
+                            @*@Model.AcOrWbs*@
+                        </td>
+                        <td>
+                            Contract End Date: @(Html.Kendo().DatePicker()
+.Name("DatePickerContractEndDate_" + i)
+.Value(item.EndDate).HtmlAttributes(new { @class = "save-detail" })
+                            )
+                        </td>
+                        <td>
+                            Requestor:
+                            @*<input id="section2RequesterTextbox" type="text" value="@Model.RequestorName" />*@
+                            @Html.TextBoxFor(m => item.RequestorName, new { @class = "save-detail", id = "TxtBoxRequestor_" + i })
+                            @*@Model.RequestorName*@
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left;padding-left:100px;">
+                            Application Name: @(Html.Kendo().DropDownList()
+  .Name("DDLAppId_" + i)
+  .DataTextField("Name")
+  .DataValueField("AppId")
+  .DataSource(source =>
+  {
+      source.Read(read => { read.Action("GetAllApplications", "POLine"); });
+  }).Value(Convert.ToString(item.App_ID))
+  .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                            )
+                        </td>
+                        <td>
+                            Recharge Amount:
+                            <input id="@("TxtBoxRechargeAmount_" + i)" type="text" />
+                        </td>
+                        <td>
+                            Monthly rate:
+                            <label id="@("LblMonthlyRate_" + i)"></label>
+                        </td>
+                        <td>@*Split*@</td>
+                    </tr>
+                </table>
+                <ul id="panelbar">
+                    <li class="k-state-active">
+                        First Item
+                        <ul>
+                            <li>
+                                <table class="tb-3" style="background-color: #eef2f3;">
+                                    <tr>
+                                        <td>
+                                            <div class="col-md-12">
+                                                <div class="col-md-3">Earlier Payment Date:</div>
+                                                <div class="col-md-9"> @Html.TextBoxFor(m => item.EarlierPaymentDate, new { @class = "save-detail", id = "TxtBoxEarlierPaymentDate_" + i }) </div>
+                                            </div>
+                                        </td>
+                                        <td>Renewal Order Purchase Line:<input id="@("section3RenewalOrderPurchaseLineTextbox_"+ i)" type="text" value="" /></td>
+                                        <td>Exchange Rate Year: @Html.TextBoxFor(m => item.ExchangeRateYear, new { @class = "save-detail", id = "TxtBoxExchangeRateYear_" + i })</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Delayed Payment Date:@Html.TextBoxFor(m => item.DelayedDate, new { @class = "save-detail", id = "TxtBoxDelayedPaymentDate_" + i }) </td>
+                                        <td>Renewal:@Html.CheckBoxFor(m => item.Renewal, new { @class = "save-detail", id = "ChkBoxRenewal_" + i })</td>
+                                        <td>Commnets:@Html.TextAreaFor(m => item.Remark, new { @class = "save-detail", id = "TxtBoxCommnets_" + i })</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Activity Type:
+                                            @(Html.Kendo().DropDownList()
+                    .Name("DDLActivityTypeId_" + i)
+                    .DataTextField("Name")
+                    .DataValueField("ActivityTypeId")
+                    .DataSource(source =>
+                    {
+                        source.Read(read => { read.Action("GetActivityTypes", "POLine"); });
+                    }).Value(Convert.ToString(item.ActivityTypeId))
+                    .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                                            )
+                                        </td>
+                                        <td>SDU:</td>
+                                        <td>Invoice Number:@Html.TextBoxFor(m => item.InvoiceNumber, new { @class = "save-detail", id = "TxtBoxSDU_" + i })</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WBS:</td>
+                                        <td>Contact Person:@Html.TextBoxFor(m => item.ContactPerson, new { @class = "save-detail", id = "TxtBoxContactPerson_" + i })</td>
+                                        <td>AMP ID:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Software Name:item.Software</td>
+                                        <td>PO LIne Amount:</td>
+                                        <td>Product Number:@Html.TextBoxFor(m => item.ProductNumber, new { @class = "save-detail", id = "TxtBoxProductNumber_" + i })</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last Modified by:@item.LastChangeBy</td>
+                                        <td>PO Line Amount (SEK): @item.OrderamountinSEK</td>
+                                        <td>
+                                            Product:
+                                            @(Html.Kendo().DropDownList()
+                                                .Name("DDLProductId_" + i)
+                                                .DataTextField("Name")
+                                                .DataValueField("ProductId")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GellAllProducts", "POLine");
+                                                    });
+                                                }).Value(Convert.ToString(item.ProductId))
+                                                .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                                            )
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last Modified Date:@String.Format("{0:dd/MM/yyyy}", item.LastChangeDate)</td>
+                                        <td>No Of Change Months:</td>
+                                        <td>
+                                            Cost Type:
+                                            @(Html.Kendo().DropDownList()
+                                                .Name("DDLCostTypeId_" + i)
+                                                .DataTextField("Name")
+                                                .DataValueField("CostTypeId")
+                                                .DataSource(source =>
+                                                {
+                                                    source.Read(read =>
+                                                    {
+                                                        read.Action("GellAllCostTypes", "POLine");
+                                                    });
+                                                }).Value(Convert.ToString(item.CostType))
+                                                .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                                            )
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cost Center:@item.CostCenter</td>
+                                        <td>Line Description:@item.LineItemDescription</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+            </div>
+
+            i++;
+        }
+    }
+</div>
+<script>
+    $(function () {
+
+
+        $('.save-detail').on('change', function () {
+
+            var model = {
+                'PurchaseOrderLineId': $('#PurchaseOrderLineId').val(),
+                'OwnerId': $('#OwnerId').val(),
+                'StatusPoId': $('#StatusPoId').val(),
+                'Remark': $('#Remark').val(),
+                'ContractStartDate': $('#ContractStartDate').val(),
+                'AcOrWbs': $('#AcOrWbs').val(),
+                'ContractEndDate': $('#ContractEndDate').val(),
+                'AppId': $('#AppId').val(),
+                'EarlierPaymentDate': $('#EarlierPaymentDate').val(),
+                'ExchangeRateYear': $('#ExchangeRateYear').val(),
+                'Renewal': $('#Renewal').val(),
+                'ActivityTypeId': $('#ActivityTypeId').val(),
+                'InvoiceNumber': $('#InvoiceNumber').val(),
+                'ContactPerson': $('#ContactPerson').val(),
+                'ProductNumber': $('#ProductNumber').val(),
+                'ProductId': $('#ProductId').val(),
+                'CostTypeId': $('#CostTypeId').val()
+            }
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/poline/SaveDetail',
+                data: JSON.stringify(model),
+                contentType: "application/json",
+                success: function (msg) {
+                    alert('wow' + msg);
+                }
+            });
+
+
+
+        });
+
+        function onVaueChangeOrUpdate(e) {
+            debugger;
+            console.log(e);
+        }
+
+    });
+</script>

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Volvo.NVS.Security.SystemWeb.Windows</name>
+    </assembly>
+    <members>
+        <member name="T:Volvo.NVS.Security.SystemWeb.Windows.Handlers.WindowsAuthenticationHandlerWeb">
+            <summary>
+            The Windows specific authentication handler.
+            </summary>
+            <remarks>
+            The Windows authentication is realized by a standard ASP.NET authentication module which should be configured
+            in the application configuration file. It is up to this standard module to provide the identity. The purpose
+            of the <see cref="T:Volvo.NVS.Security.SystemWeb.Windows.Handlers.WindowsAuthenticationHandlerWeb"/> is to only execute logic specific for the NVS applications 
+            when the windows identity is already obtained and authenticated. For example: the handler will use the <see cref="T:Volvo.NVS.Security.Claims.IClaimsProvider"/>
+            and assigning the identity into the <see cref="T:Volvo.NVS.Security.Claims.IClaimsService"/>.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Windows.Handlers.WindowsAuthenticationHandlerWeb.#ctor(System.Web.HttpContextBase)">
+            <summary>
+            Create an instance of the Windows authentication handler for the HttpContext base host.
+            </summary>
+            <param name="context">The current Http context to be used.</param>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Windows.Handlers.WindowsAuthenticationHandlerWeb.#ctor(Volvo.NVS.Security.Handlers.IAuthenticationHostContext)">
+            <summary>
+            Create the instance of the Windows authentication related handler.
+            </summary>
+            <param name="context">The context abstracting access into the host related authentication methods.</param>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Windows.Handlers.WindowsAuthenticationHandlerWeb.Identify">
+            <summary>
+            Obtains an identity which will be used during the authentication process.
+            No identity is provided for Windows authentication as it should be given by the original handler.
+            </summary>
+            <remarks>
+            <para>
+            Obtaining the identity is the major step in the authentication process. For Windows authentication the standard
+            module should be configured in the web configuration file. It will be up to this module to provide the identity
+            and this should be the windows identity.
+            </para>
+            </remarks>
+            <returns>The object representing the recognized identity.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Windows.Handlers.WindowsAuthenticationHandlerWeb.Authenticate">
+            <summary>
+            Run the authentication process establishing the identity of a user.
+            For Windows authentication this should be run by the original handler configured in the web.config.
+            </summary>
+            <remarks>
+            <para>
+            The authentication will obtain an identity. For Windows authentication the standard module should be
+            configured in the web configuration file. It will be up to this module to authenticate and to provide
+            the identity (the windows identity).
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Security.SystemWeb.Windows.PreApplicationStart">
+            <summary>
+            Registers the Windows authentication module at application startup. The module extends the already configured ASP.NET Windows 
+            authentication with the Security library functionalities.
+            </summary>
+            <remarks>
+            The registration of the module is automated and happens when a reference into the Security.SystemWeb.Windows is added from you
+            web project. It may however be disabled using one of the Security library settings. Check the web node and the IsAutomaticAppStartupEnabled
+            configuration attribute.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Windows.PreApplicationStart.Initialize">
+            <summary>
+            Registers the Windows authentication module.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Security.SystemWeb.Windows.WindowsHttpModule">
+            <summary>
+            The module completing the Windows authentication with the Security Library specific steps.
+            </summary>
+            <remarks>
+            <para>
+            The Windows authentication is realized by a standard ASP.NET authentication module which should be configured
+            in the application configuration file. It is up to this standard module to provide the identity. It means you
+            MUST set the ASP.NET authentication to 'Windows' in the web.config.
+            </para>
+            <para>
+            The purpose of the <see cref="T:Volvo.NVS.Security.SystemWeb.Windows.WindowsHttpModule"/> is to only execute logic specific for the NVS applications 
+            when the windows identity is obtained and authenticated. For example: this module will call the <see cref="T:Volvo.NVS.Security.Claims.IClaimsProvider"/>
+            and assigning the identity into the <see cref="T:Volvo.NVS.Security.Claims.IClaimsService"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Windows.WindowsHttpModule.CreateNewHandler(System.Web.HttpContext)">
+            <summary>
+            Creates the authentication handler to be used by the module.
+            </summary>
+            <param name="context">The current http context.</param>
+            <returns>The authentication handler instance.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Windows.WindowsHttpModule.ValidateConfiguration">
+            <summary>
+            Validates configuration of the web application for the current http module and for the current authentication handler.
+            </summary>
+        </member>
+    </members>
+</doc>

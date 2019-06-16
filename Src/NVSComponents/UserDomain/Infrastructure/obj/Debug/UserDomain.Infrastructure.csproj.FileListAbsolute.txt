@@ -1,0 +1,294 @@
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.pdb
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.Caches.SysCache2.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.pdb
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.pdb
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.xml
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.dll
+C:\Users\a043838\Desktop\GILM\NEw\GLB-NVS\Samples\POS\Release\R4.2.0\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.Caches.SysCache2.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.Caches.SysCache2.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.xml
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.dll
+C:\Users\a043838\Desktop\LAT - SOURCE\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.pdb
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.pdb
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.Caches.SysCache2.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.pdb
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.pdb
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.xml
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.dll
+C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.pdb
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.pdb
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.Caches.SysCache2.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.pdb
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.pdb
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.xml
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.dll
+C:\Users\a043838\Desktop\LAT status\Final\new\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Infrastructure.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.Caches.SysCache2.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.EF6.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.Linq.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\UserDomain.Model.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Iesi.Collections.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\NHibernate.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\System.Data.SQLite.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\bin\Debug\AutoMapper.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.csprojResolveAssemblyReference.cache
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Infrastructure\obj\Debug\UserDomain.Infrastructure.pdb

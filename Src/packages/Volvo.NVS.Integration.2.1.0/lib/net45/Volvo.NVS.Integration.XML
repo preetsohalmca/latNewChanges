@@ -1,0 +1,2752 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Volvo.NVS.Integration</name>
+    </assembly>
+    <members>
+        <member name="T:Volvo.NVS.Signing.NVSLibrarySigning">
+            <summary>
+            Providing information about the current NVS Library signing (e.g. signing public key).
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Signing.NVSLibrarySigning.PublickKey">
+            <summary>
+            The public key used by all the library assemblies.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.IChannelPropertyKey">
+            <summary>
+            Interface for providing a channel property key
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.IChannelPropertyKey.Key">
+            <summary>
+            Provides the key of the channel property
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Properties.CommonAssemblyInfoConstants">
+            <summary>
+            Public constants related into the assembly information and assembly signing.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Properties.CommonAssemblyInfoConstants.PublickKeyAttribute">
+            <summary>
+            The Utility library public key attribute string which can be applied directly on the InternalsVisibleTo.
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.LocalizationRequiredAttribute">
+            <summary>
+            Indicates that marked element should be localized or not.
+            </summary>
+        </member>
+        <member name="M:JetBrains.Annotations.LocalizationRequiredAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.Annotations.LocalizationRequiredAttribute"/> class.
+            </summary>
+            <param name="required"><c>true</c> if a element should be localized; otherwise, <c>false</c>.</param>
+        </member>
+        <member name="M:JetBrains.Annotations.LocalizationRequiredAttribute.Equals(System.Object)">
+            <summary>
+            Returns whether the value of the given object is equal to the current <see cref="T:JetBrains.Annotations.LocalizationRequiredAttribute"/>.
+            </summary>
+            <param name="obj">The object to test the value equality of. </param>
+            <returns>
+            <c>true</c> if the value of the given object is equal to that of the current; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.Annotations.LocalizationRequiredAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A hash code for the current <see cref="T:JetBrains.Annotations.LocalizationRequiredAttribute"/>.</returns>
+        </member>
+        <member name="P:JetBrains.Annotations.LocalizationRequiredAttribute.Required">
+            <summary>
+            Gets a value indicating whether a element should be localized.
+            <value><c>true</c> if a element should be localized; otherwise, <c>false</c>.</value>
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.StringFormatMethodAttribute">
+            <summary>
+            Indicates that marked method builds string by format pattern and (optional) arguments. 
+            Parameter, which contains format string, should be given in constructor.
+            The format string should be in <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])"/> -like form
+            </summary>
+        </member>
+        <member name="M:JetBrains.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+            <summary>
+            Initializes new instance of StringFormatMethodAttribute
+            </summary>
+            <param name="formatParameterName">Specifies which parameter of an annotated method should be treated as format-string</param>
+        </member>
+        <member name="P:JetBrains.Annotations.StringFormatMethodAttribute.FormatParameterName">
+            <summary>
+            Gets format parameter name
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.InvokerParameterNameAttribute">
+            <summary>
+            Indicates that the function argument should be string literal and match one  of the parameters of the caller function.
+            For example, <see cref="T:System.ArgumentNullException"/> has such parameter.
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.AssertionMethodAttribute">
+            <summary>
+            Indicates that the marked method is assertion method, i.e. it halts control flow if one of the conditions is satisfied. 
+            To set the condition, mark one of the parameters with <see cref="T:JetBrains.Annotations.AssertionConditionAttribute"/> attribute
+            </summary>
+            <seealso cref="T:JetBrains.Annotations.AssertionConditionAttribute"/>
+        </member>
+        <member name="T:JetBrains.Annotations.AssertionConditionAttribute">
+            <summary>
+            Indicates the condition parameter of the assertion method. 
+            The method itself should be marked by <see cref="T:JetBrains.Annotations.AssertionMethodAttribute"/> attribute.
+            The mandatory argument of the attribute is the assertion type.
+            </summary>
+            <seealso cref="T:JetBrains.Annotations.AssertionConditionType"/>
+        </member>
+        <member name="M:JetBrains.Annotations.AssertionConditionAttribute.#ctor(JetBrains.Annotations.AssertionConditionType)">
+            <summary>
+            Initializes new instance of AssertionConditionAttribute
+            </summary>
+            <param name="conditionType">Specifies condition type</param>
+        </member>
+        <member name="P:JetBrains.Annotations.AssertionConditionAttribute.ConditionType">
+            <summary>
+            Gets condition type
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.AssertionConditionType">
+            <summary>
+            Specifies assertion type. If the assertion method argument satisifes the condition, then the execution continues. 
+            Otherwise, execution is assumed to be halted
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.AssertionConditionType.IsTrue">
+            <summary>
+            Indicates that the marked parameter should be evaluated to true
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.AssertionConditionType.IsFalse">
+            <summary>
+            Indicates that the marked parameter should be evaluated to false
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.AssertionConditionType.IsNull">
+            <summary>
+            Indicates that the marked parameter should be evaluated to null value
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.AssertionConditionType.IsNotNull">
+            <summary>
+            Indicates that the marked parameter should be evaluated to not null value
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.TerminatesProgramAttribute">
+            <summary>
+            Indicates that the marked method unconditionally terminates control flow execution.
+            For example, it could unconditionally throw exception
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.CanBeNullAttribute">
+            <summary>
+            Indicates that the value of marked element could be <c>null</c> sometimes, so the check for <c>null</c> is necessary before its usage
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.NotNullAttribute">
+            <summary>
+            Indicates that the value of marked element could never be <c>null</c>
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.CannotApplyEqualityOperatorAttribute">
+            <summary>
+            Indicates that the value of marked type (or its derivatives) cannot be compared using '==' or '!=' operators.
+            There is only exception to compare with <c>null</c>, it is permitted
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.BaseTypeRequiredAttribute">
+            <summary>
+            When applied to target attribute, specifies a requirement for any type which is marked with 
+            target attribute to implement or inherit specific type or types
+            </summary>
+            <example>
+            <code>
+            [BaseTypeRequired(typeof(IComponent)] // Specify requirement
+            public class ComponentAttribute : Attribute 
+            {}
+            
+            [Component] // ComponentAttribute requires implementing IComponent interface
+            public class MyComponent : IComponent
+            {}
+            </code>
+            </example>
+        </member>
+        <member name="M:JetBrains.Annotations.BaseTypeRequiredAttribute.#ctor(System.Type[])">
+            <summary>
+            Initializes new instance of BaseTypeRequiredAttribute
+            </summary>
+            <param name="baseTypes">Specifies which types are required</param>
+        </member>
+        <member name="P:JetBrains.Annotations.BaseTypeRequiredAttribute.BaseTypes">
+            <summary>
+            Gets enumerations of specified base types
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.UsedImplicitlyAttribute">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+            so this symbol will not be marked as unused (as well as by other usage inspections)
+            </summary>
+        </member>
+        <member name="P:JetBrains.Annotations.UsedImplicitlyAttribute.TargetFlags">
+            <summary>
+            Gets value indicating what is meant to be used
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.MeansImplicitUseAttribute">
+            <summary>
+            Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections)
+            </summary>
+        </member>
+        <member name="P:JetBrains.Annotations.MeansImplicitUseAttribute.TargetFlags">
+            <summary>
+            Gets value indicating what is meant to be used
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.ImplicitUseKindFlags.Access">
+            <summary>
+            Only entity marked with attribute considered used
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.ImplicitUseKindFlags.Assign">
+            <summary>
+            Indicates implicit assignment to a member
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.ImplicitUseKindFlags.Instantiated">
+            <summary>
+            Indicates implicit instantiation of a type
+            </summary>
+        </member>
+        <member name="T:JetBrains.Annotations.ImplicitUseTargetFlags">
+            <summary>
+            Specify what is considered used implicitly when marked with <see cref="T:JetBrains.Annotations.MeansImplicitUseAttribute"/> or <see cref="T:JetBrains.Annotations.UsedImplicitlyAttribute"/>
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.ImplicitUseTargetFlags.Members">
+            <summary>
+            Members of entity marked with attribute are considered used
+            </summary>
+        </member>
+        <member name="F:JetBrains.Annotations.ImplicitUseTargetFlags.WithMembers">
+            <summary>
+            Entity marked with attribute and all its members considered used
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.BaseIntegration">
+            <summary>
+            Class who provide access to the integration configuration section. It is used as base class for specialized factory classes.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.BaseIntegration.Config">
+            <summary>
+            Configuration section of volvo.nvs.integration
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.BaseIntegration.#cctor">
+            <summary>
+            Initializes the <see cref="T:Volvo.NVS.Integration.BaseIntegration"/> class.
+            </summary>
+            <remarks>That constructor reads integration configuration section from configuration file and sets temporary file stream folder if specified in configuration.</remarks>
+        </member>
+        <member name="T:Volvo.NVS.Integration.ChannelFactory">
+             <summary>
+             Factory responsible for creating channel instances.
+             </summary>
+             <remarks>
+             <para>Each time when channel is needed use <see cref="M:Volvo.NVS.Integration.ChannelFactory.Create(System.Uri)"/> or <see cref="M:Volvo.NVS.Integration.ChannelFactory.Create(System.String)"/> static methods.
+             </para>
+             <para>Before using the channel implementation need to be registered in unity. That can be done by configuration file or by code.
+             </para>
+             <para>
+             Registration by configuration file:
+             <code language="xml">
+             <![CDATA[
+             <configSections>
+                ...
+                <!-- Register unity configuration section -->
+                <section name="unity" type="Microsoft.Practices.Unity.Configuration.UnityConfigurationSection, Microsoft.Practices.Unity.Configuration"/>
+                ...
+             </configSections>
+            
+             <unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
+              <container>
+                <!-- Register WMQ channel implementation -->
+                <register type="Volvo.NVS.Integration.IChannel, Volvo.NVS.Integration"
+                          name ="wmq"
+                          mapTo="Volvo.NVS.Integration.WebsphereMQ.WmqChannel, Volvo.NVS.Integration.WebsphereMQ"/>
+                <!-- Register VCOM channel implementation -->
+                <register type="Volvo.NVS.Integration.IChannel, Volvo.NVS.Integration"
+                          name ="vcom"
+                          mapTo="Volvo.NVS.Integration.VCom.VComChannel, Volvo.NVS.Integration.VCom"/>
+              </container>
+             </unity>
+             ]]>
+             </code>
+             </para>
+             <para>Registration by code:
+             <code language="C#">
+             <![CDATA[
+             using Volvo.NVS.Core.Unity;
+             using Volvo.NVS.Core.Unity.Configuration;
+             using Volvo.NVS.Integration;
+             
+             static void RegisterComponentsInUnity ()
+             {
+                LibraryConfigurator.Current.ConfigureContainer(builder => builder.FromApplicationConfigurationFile());
+             
+                Container.RegisterType<IChannel, Volvo.NVS.Integration.WebsphereMQ.WmqChannel>("wmq")
+                         .RegisterType<IChannel, Volvo.NVS.Integration.VCom.VComChannel>("vcom");
+             }
+             ]]>
+             </code>
+             </para>
+             </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Integration.ChannelFactory.Create(System.Uri)">
+            <summary>
+            Create a an instance of IChannel implementation from uri.
+            </summary>
+            <param name="uri">The Uri defining the channel to be created</param>
+            <returns>The created channel</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.ChannelFactory.Create(System.String)">
+            <summary>
+            Create instance of IChannel implementation from channel name in application configuration.
+            </summary>
+            <param name="channelElementName">The name of the config element describing the channel.</param>
+            <returns>The created channel</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Configuration.ChannelElement">
+            <summary>
+            Defines a channel
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.ChannelElement.Name">
+            <summary>
+            The channel name
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.ChannelElement.Uri">
+            <summary>
+            The channel URI
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Configuration.ChannelElementCollection">
+            <summary>
+            A collection of channels, configuration elements, of type <see cref="T:Volvo.NVS.Integration.Configuration.ChannelElement"/>.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ChannelElementCollection.CreateNewElement">
+            <summary>
+            Creates a new configuration element of type <see cref="T:Volvo.NVS.Integration.Configuration.ChannelElement"/>. 
+            </summary>
+            <returns>A new <see cref="T:Volvo.NVS.Integration.Configuration.ChannelElement"/>, which inherits from the <see cref="T:System.Configuration.ConfigurationElement"/> class</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ChannelElementCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the <see cref="T:System.Configuration.ConfigurationElement"/> key value, used as the unique key within the collection.
+            </summary>
+            <param name="element">The <see cref="T:System.Configuration.ConfigurationElement"/> instance to get the Key from. In this case it will be a 
+            <see cref="T:Volvo.NVS.Integration.Configuration.ChannelElement"/> object.</param>
+            <returns>An object representing the key value.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ChannelElementCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the list of <see cref="T:Volvo.NVS.Integration.Configuration.ChannelElement"/> objects.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerator`1}"/> of <see cref="T:Volvo.NVS.Integration.Configuration.ChannelElement"/> objetcs.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Configuration.ConfigManager">
+            <summary>
+            Contains methods for managing the loading and saving of configuration settings for the Integration library.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ConfigManager.GetConfiguration">
+            <summary>
+            Gets the complete configuration for the current application.
+            </summary>
+            <returns>The <see cref="T:System.Configuration.Configuration"/> object representing the complete configuration for the current application.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ConfigManager.GetConfiguration(System.Reflection.Assembly)">
+            <summary>
+            Gets the complete configuration for a specific assembly.
+            </summary>
+            <param name="assembly">Assembly who has it's own configuration file</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ConfigManager.IsSectionDeclared``1">
+            <summary>
+            Determines whether there is a section of type T declared in the config file
+            </summary>
+            <typeparam name="T">Section type to look for</typeparam>
+            <returns>True if there is a section of type T. True if not able to determine whether the section is declared. False otherwise.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ConfigManager.GetConfigurationSection``1">
+            <summary>
+            Gets the configuration section for a specific type.
+            </summary>
+            <remarks>
+            <para>
+            The type must inherit from the <see cref="T:System.Configuration.ConfigurationSection"/> class to be mapped to a 
+            configuration section in the .config file.
+            </para>
+            </remarks>
+            <typeparam name="T">The type representing a section in the configuration.</typeparam>
+            <returns>The configuration section object, implemented by the type "T", representing the configuration from the app.config.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ConfigManager.SetEntryAssembly">
+            <summary>
+            Manually sets the caller assembly as the entry assembly for the current domain.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Configuration.ConfigManager.SetEntryAssembly(System.Reflection.Assembly)">
+            <summary>
+            Sets the entry assembly for the current domain.
+            </summary>
+            <remarks>
+            Derived work from original code by Jamie Cansdale.
+            </remarks>
+            <param name="assembly">The assembly to be set as entry assembly.</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Configuration.IntegrationSection">
+            <summary>
+            The NVS Integration configuration section
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.IntegrationSection.TempPath">
+            <summary>
+            The path where temp files will be placed
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.IntegrationSection.ChannelCollection">
+            <summary>
+            Contains the defined channels
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.IntegrationSection.PoolMaxAge">
+            <summary>
+            Maximum time period(in seconds) which will make WMQ Queue Manager connection active. Default value is 180 seconds.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.IntegrationSection.PublishRetryCount">
+            <summary>
+            Count by which publish will do retries on failure
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.IntegrationSection.ExtensiveLoggingPath">
+            <summary>
+            If set to a path, extensive logging will be enabled and logfiles are written to that path. Default value is "", disabling extensive logging
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.IntegrationSection.PoolMaxLife">
+            <summary>
+            If set to a path, extensive logging will be enabled and logfiles are written to that path. Default value is "", disabling extensive logging
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Configuration.IntegrationSection.ShareBlocked">
+            <summary>
+            If true then MQQueueManager will be created using MQC.MQCNO_HANDLE_SHARE_BLOCK
+            If false (or not set in configuration) then will use MQC.MQCNO_HANDLE_SHARE_NO_BLOCK
+            Default value is "false"
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Events.CommunicationEventArgs`1">
+            <summary>
+            Argument for communication error event.
+            </summary>
+            <typeparam name="T">Type of event value.</typeparam>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Events.EventArgs`1">
+            <summary>
+            Strongly typed event argument
+            </summary>
+            <typeparam name="T">Type for Value</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Events.EventArgs`1.#ctor(`0)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="value">Value of argument</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.EventArgs`1.Value">
+            <summary>
+            The value provided by event argument
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Events.CommunicationEventArgs`1.#ctor(`0)">
+            <summary>
+            Constructs event argument with value.
+            </summary>
+            <param name="value">Value of event argument.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Events.CommunicationEventArgs`1.#ctor(`0,System.Exception,System.Boolean,System.Int32)">
+            <summary>
+            Constructs event argument with all data.
+            </summary>
+            <param name="value">Value of event argument.</param>
+            <param name="exception">Exception thrown during channel communication.</param>
+            <param name="recommendedForStop">Will channel stop his operations.</param>
+            <param name="retryCount">Number of retries without success.</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.CommunicationEventArgs`1.RecommendedForStop">
+            <summary>
+            True if NVS Integration recommends stopping the channel due to unrecoverable error.
+            </summary>
+            <remarks>That field can be set by the handler to stop channel operations.</remarks>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.CommunicationEventArgs`1.RetryCount">
+            <summary>
+            The number of times NVS Integration has retried last operation.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.CommunicationEventArgs`1.Exception">
+            <summary>
+            The exception causing this event
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Events.CommunicationStatus">
+            <summary>
+            Describes the status of the listener thread while subscribing.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Events.CommunicationStatus.Offline">
+            <summary>
+            The listener is offline. In this state, the listener will not recieve any more messages.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Events.CommunicationStatus.Connecting">
+            <summary>
+            The listener is connecting to the infrastructure
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Events.CommunicationStatus.Connected">
+            <summary>
+            The listener is connected to the insfrastructure.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Events.CommunicationStatus.Disconnected">
+            <summary>
+            The listener is disconnected from the infrastructure
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Events.CommunicationStatusChanged">
+            <summary>
+            Event argument for communication status changes
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Events.CommunicationStatusChanged.#ctor(Volvo.NVS.Integration.IChannel,Volvo.NVS.Integration.Events.CommunicationStatus)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="sender">Channel who send event.</param>
+            <param name="value">Current <see cref="T:Volvo.NVS.Integration.Events.CommunicationStatus"/> of channel.</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.CommunicationStatusChanged.Channel">
+            <summary>
+            The channel this event concerns.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.CommunicationStatusChanged.Value">
+            <summary>
+            The new status of the channel
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs">
+            <summary>
+            Event args for post process event
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.#ctor(Volvo.NVS.Integration.Messages.IMessage,System.TimeSpan,Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.TransactionOutcomeEnum)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.Message">
+            <summary>
+            The message that has been handled
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.ElapsedTime">
+            <summary>
+            The time elapsed while processing the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.TransactionOutcome">
+            <summary>
+            The outcome of the transaction while processing the message
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.TransactionOutcomeEnum">
+            <summary>
+            Enum defining possible transaction outcomes
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.TransactionOutcomeEnum.Commit">
+            <summary>
+            Transaction committed
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.TransactionOutcomeEnum.Rollback">
+            <summary>
+            Transaction rolled back
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Events.PostProcessMessageEventArgs.TransactionOutcomeEnum.Exception">
+            <summary>
+            Transaction rolled back due to exception
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Exceptions.InfrastructureException">
+            <summary>
+            Problems with VCom infrastructure
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Exceptions.IntegrationException">
+            <summary>
+            Integration library specific exception
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.IntegrationException.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.IntegrationException.#ctor(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception description.</param>
+            <param name="uri">Uri used by channel.</param>
+            <param name="reasonCode">The reason code from the backend.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.IntegrationException.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception description.</param>
+            <param name="uri">Uri used by channel.</param>
+            <param name="reasonCode">The reason code from the backend.</param>
+            <param name="innerException">Inner exception caused that exception.</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Exceptions.IntegrationException.Uri">
+            <summary>
+            The URI controlling the channel throwing the exception
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Exceptions.IntegrationException.ReasonCode">
+            <summary>
+            The reason code from the backend
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.InfrastructureException.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.InfrastructureException.#ctor(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception description.</param>
+            <param name="uri">Uri used by channel.</param>
+            <param name="reasonCode">Reason code returned by VCom client.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.InfrastructureException.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception description.</param>
+            <param name="uri">Uri used by channel.</param>
+            <param name="reasonCode">Reason code returned by VCom client.</param>
+            <param name="innerException">Inner exception caused that exception.</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Exceptions.InvalidConfigurationException">
+            <summary>
+            Problems in integration library configuration
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.InvalidConfigurationException.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.InvalidConfigurationException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Description of the configuration problem.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Exceptions.InvalidConfigurationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Description of the configuration problem.</param>
+            <param name="innerException">Inner exception caused that exception.</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Extensions.AssemblyExtensions">
+            <summary>
+            Helper method for getting name from assembly
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.AssemblyExtensions.GetNormalizedName``1(``0)">
+            <summary>
+            Gets the normalized name of the assembly.
+            </summary>
+            <typeparam name="T">Type of the assembly.</typeparam>
+            <param name="self">Assembly</param>
+            <returns>Full path of the assembly</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.AssemblyExtensions.GetApplicationPath``1(``0)">
+            <summary>
+            Gets path to the assembly.
+            </summary>
+            <typeparam name="T">Type of the assembly.</typeparam>
+            <param name="self">Assembly</param>
+            <returns>Return path to the assembly.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Extensions.DateTimeExtension">
+            <summary>
+            Date time extensions
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.DateTimeExtension.GetTimeSpanDifference(System.DateTime,System.DateTime)">
+            <summary>
+            Get difference between two dates.
+            </summary>
+            <param name="endTime">End of the period.</param>
+            <param name="startTime">Start of the period.</param>
+            <returns><see cref="T:System.TimeSpan"/> of provided period.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.ObjectExtensions.GetAttribute``1(System.Object)">
+            <summary>
+            Gets an attribute on the specified object instance.
+            </summary>
+            <typeparam name="T">Type of attribute to get.</typeparam>
+            <param name="value">Object instance to look for attribute on.</param>
+            <returns>First instance of the specified attribute.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Extensions.StringExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.ToEnum``1(System.String)">
+            <summary>
+            Parse <see cref="T:System.String"/> to <see cref="T:System.Enum"/>
+            </summary>
+            <param name="self">String representation of enumerable.</param>
+            <typeparam name="T">Type of enumerable.</typeparam>
+            <returns>Enumerable value represented by string.</returns>
+            <exception cref="T:System.ArgumentNullException">Provided string is null.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.FormatWith(System.String,System.Object[])">
+            <summary>
+            Format provided arguments with format string.
+            </summary>
+            <param name="self">Format string.</param>
+            <param name="args">Arguments</param>
+            <exception cref="T:System.ArgumentNullException">Format string is null.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.FormatWith(System.String,System.IFormatProvider,System.Object[])">
+            <summary>
+            Format provided arguments with format string using specific <see cref="T:System.IFormatProvider"/>.
+            </summary>
+            <param name="self">Format string.</param>
+            <param name="provider">Format provider.</param>
+            <param name="args">Arguments</param>
+            <exception cref="T:System.ArgumentNullException">Format string is null.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.IsEqualIgnoreCase(System.String,System.String)">
+            <summary>
+            Checks strings are the same ignoring case.
+            </summary>
+            <param name="self">String to be compared.</param>
+            <param name="ref2">String to compare with.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.Contains(System.String,System.String,System.StringComparison)">
+            <summary>
+            Does string contain substring
+            </summary>
+            <param name="self">String to be searched.</param>
+            <param name="toCheck">String to be found.</param>
+            <param name="comparison">Comparison options.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.AtLeast(System.String,System.Int32)">
+            <summary>
+            Get a string that has a minimum length. Padded with spaces if needed.
+            </summary>
+            <param name="self">String to be padded.</param>
+            <param name="length">Required minimal length.</param>
+            <returns>String padded to the left who have length not shorter than provided length.</returns>
+            <exception cref="T:System.ArgumentNullException">Padded string is null.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.ReplaceEmpty(System.String,System.String)">
+            <summary>
+            Replace string if empty, otherwise remain the same
+            </summary>
+            <param name="self">String to be replaced.</param>
+            <param name="replacement">Value to be returned if string is empty.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.IsNullOrEmpty(System.String)">
+            <summary>
+            Is null or empty
+            </summary>
+            <param name="self">String to be checked.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Is null or contains only whitespace characters
+            </summary>
+            <param name="self">String to be checked.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.ToHexString(System.Byte[])">
+            <summary>
+            Converts byte array to string.
+            </summary>
+            <remarks>
+            <para>
+            That function allows to convert <see cref="P:Volvo.NVS.Integration.Messages.IMessage.MessageId"/> or <see cref="P:Volvo.NVS.Integration.Messages.IMessage.CorrelationObject"/> to <see cref="T:System.String"/> type.
+            </para>
+            <para>To convert back from that string to byte array use <see cref="M:Volvo.NVS.Integration.Extensions.StringExtensions.HexAsByteArray(System.String)"/> function.</para>
+            </remarks>
+            <param name="self">Byte array to be converted to string</param>
+            <returns>String formatted as "0xAABBCC..." where AA, BB and CC is a hex representation of byte.</returns>
+            <exception cref="T:System.ArgumentNullException">Provided byte array is null.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.HexAsByteArray(System.String)">
+            <summary>
+            Converts string obtained from <see cref="M:Volvo.NVS.Integration.Extensions.StringExtensions.ToHexString(System.Byte[])"/> back to byte array.
+            </summary>
+            <param name="selfHexString">String representation of byte array obtained from <see cref="M:Volvo.NVS.Integration.Extensions.StringExtensions.ToHexString(System.Byte[])"/> function.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.CompareWith(System.Byte[],System.Byte[])">
+            <summary>
+            Compare two byte arrays.
+            </summary>
+            <remarks>This function helps to compare <see cref="P:Volvo.NVS.Integration.Messages.IMessage.MessageId"/> and <see cref="P:Volvo.NVS.Integration.Messages.IMessage.CorrelationObject"/></remarks>
+            <param name="self">Array to be compared.</param>
+            <param name="ref2">Array to compare with.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.CompareWith(System.Byte[],System.String)">
+            <summary>
+            Compare byte array with string obtained from <see cref="M:Volvo.NVS.Integration.Extensions.StringExtensions.ToHexString(System.Byte[])"/>.
+            </summary>
+            <param name="self">Byte array to be compared.</param>
+            <param name="ref2HexString">String to cmpare with.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Extensions.StringExtensions.ParseQueryString(System.String)">
+            <summary>
+            Parse as query string part of Uri
+            </summary>
+            <remarks>Provided query string can be formatted as required in Uri but also allows to use "?" character instead of "&amp;".</remarks>
+            <param name="s">Query string</param>
+            <returns><see cref="T:System.Collections.Specialized.NameValueCollection"/> containing all properties with their values.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Filtering.MessageFilter">
+            <summary>
+            Used in the filtering predicate when receiving messages.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Messages.IMessageFilter">
+            <summary>
+            Interface for filtering messages
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.Priority">
+            <summary>
+            The priority of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.ApplicationId">
+            <summary>
+            The application id data of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.UserId">
+            <summary>
+            The user id data of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.MessageId">
+            <summary>
+            The id of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.CorrelationObject">
+            <summary>
+            The correlation id of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.Properties">
+            <summary>
+            All properties of the message. The different areas are accessed via prefixes, for example usr.MyProperty and so on.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.Jms">
+            <summary>
+            The JMS properties of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.Mcd">
+            <summary>
+            The MCD (Message Content Descriptor) properties of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.Psc">
+            <summary>
+            The PSC (Publish Subscribe Command) properties of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.Pscr">
+            <summary>
+            The PSCR (Publish Subscribe Command Response) properties of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessageFilter.Usr">
+            <summary>
+            The USR (User) properties of the message
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Filtering.MessageFilter.#ctor(Volvo.NVS.Integration.Messages.IMessage)">
+            <summary>
+            Constructs a new instance of the <see cref="T:Volvo.NVS.Integration.Filtering.MessageFilter"/> class using information 
+            from an object implementing the <see cref="T:Volvo.NVS.Integration.Messages.IMessage"/> interface.
+            </summary>
+            <param name="message">The message to copy information from</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.Priority">
+            <summary>
+            The priority of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.ApplicationId">
+            <summary>
+            The application id data of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.UserId">
+            <summary>
+            The user id data of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.MessageId">
+            <summary>
+            The id of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.CorrelationObject">
+            <summary>
+            The correlation id of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.Properties">
+            <summary>
+            All properties of the message. The different areas are accessed via prefixes, for example usr.MyProperty and so on.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.Jms">
+            <summary>
+            The JMS properties of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.Mcd">
+            <summary>
+            The MCD (Message Content Descriptor) properties of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.Psc">
+            <summary>
+            The PSC (Publish Subscribe Command) properties of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.Pscr">
+            <summary>
+            The PSCR (Publish Subscribe Command Response) properties of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Filtering.MessageFilter.Usr">
+            <summary>
+            The USR (User) properties of the message
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Messages.Message">
+            <summary>
+            Implementation of the IMessage interface
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Messages.IMessage">
+            <summary>
+            The interface defining the contract for messages. Used when sending and receiving messages.
+            </summary>
+            <remarks>
+            <para>Note that objects implementing IMessage should be disposed.</para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.CreateReplyMessage">
+            <summary>
+            Creates a reply message
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.SendReply">
+            <summary>
+            Used to manually send the reply
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.SendDecoupledReplyMessage">
+            <summary>
+            Used to send reply message from different thread other than Subscribe thread in request reply pattern
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AppendData(System.Byte[])">
+            <summary>
+            Appends data to this message, not creating a new record.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AppendData(System.String)">
+            <summary>
+            Appends data to this message, not creating a new record.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AppendData(System.String,System.Text.Encoding)">
+            <summary>
+            Appends data to this message, not creating a new record.
+            </summary>
+            <param name="data">Data to be added</param>
+            <param name="encoding">The encoding of the string</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AppendData(System.IO.Stream)">
+            <summary>
+            Appends data to this message, not creating a new record.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AddRecord(System.Byte[])">
+            <summary>
+            Adds a new record of data to the message.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AddRecord(System.String)">
+            <summary>
+            Adds a new record of data to the message.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AddRecord(System.String,System.Text.Encoding)">
+            <summary>
+            Adds a new record of data to the message.
+            </summary>
+            <param name="data">Data to be added</param>
+            <param name="encoding">The encoding of the string</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AddRecord(System.IO.Stream)">
+            <summary>
+            Adds a new record of data to the message.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AddRecords(System.Collections.Generic.IEnumerable{System.Byte[]})">
+            <summary>
+            Adds several records of data to the message
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AddRecords(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds several records of data to the message
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.AddRecords(System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)">
+            <summary>
+            Adds several records of data to the message
+            </summary>
+            <param name="data">Data to be added</param>
+            <param name="encoding">The encoding of the string</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.GetValue(System.Int32)">
+            <summary>
+            Gets the string value of the given record
+            </summary>
+            <param name="idx">The index of the record to get the value from.</param>
+            <returns>The value of the record as string.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.GetRaw(System.Int32)">
+            <summary>
+            Gets the raw representation of the given record
+            </summary>
+            <param name="idx">The index of the record to get the raw representation from.</param>
+            <returns>The array of bytes representing the raw record.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.GetStream(System.Int32)">
+            <summary>
+            Gets the stream containing the given record. The stream should be disposed after usage.
+            </summary>
+            <param name="idx">The index of the record to get the stream from.</param>
+            <returns>The stream containing the record.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.ToString">
+            <summary>
+            Gets the string representation of the message
+            </summary>
+            <returns>The string representation of the message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.ToString(System.Text.Encoding)">
+            <summary>
+            Gets the string representation of the message with the given encoding
+            </summary>
+            <param name="encoding">The encoding to be used.</param>
+            <returns>The string representation of the message, using the given encoding.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.SetProperty(System.String,System.String)">
+            <summary>
+            Set a property of the message
+            </summary>
+            <param name="key">The property key</param>
+            <param name="value">The property value</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.GetProperty(System.String)">
+            <summary>
+            Gets the property value of the message by its key.
+            </summary>
+            <param name="key">The property key</param>
+            <returns>The property value, given its key</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.IMessage.Clone">
+            <summary>
+            Clones the message.
+            </summary>
+            <returns>A new cloned instance of this <see cref="T:Volvo.NVS.Integration.Messages.IMessage"/> object.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.TargetClient">
+            <summary>
+            WMQ only: If true, no header information is added to the message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Priority">
+            <summary>
+            WMQ only: The priority of the message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Retries">
+            <summary>
+            The number of retries done on this message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Timeout">
+            <summary>
+            The time out used when handling this message. (Currently unused)
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Binary">
+            <summary>
+            WMQ only: If true, the message will be sent as a binary message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Compress">
+            <summary>
+            WMQ only: If true, the message will be compressed before sending.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Encoding">
+            <summary>
+            The encoding used when sending the message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.ApplicationId">
+            <summary>
+            WMQ only: The application identity
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.UserId">
+            <summary>
+            WMQ only: The user identifier
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.MessageId">
+            <summary>
+            WMQ only: The message id
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.CorrelationObject">
+            <summary>
+            WMQ only: The correlation id
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Expiry">
+            <summary>
+            WMQ only: The expiry time of the message in seconds.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Properties">
+            <summary>
+            WMQ only: The properties set on the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.ReplyTo">
+            <summary>
+            WMQ only: The reply to queue
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.ReplyToQMgr">
+            <summary>
+            WMQ only: The reply to queue manager
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.RequiresReply">
+            <summary>
+            Indicates if this message requires a reply.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.HaveReply">
+            <summary>
+            Indicates if this message has a reply created
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.ReplyMessage">
+            <summary>
+            The reply message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Channel">
+            <summary>
+            The channel used when creating this message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.TransactionBehavior">
+            <summary>
+            The transaction behavior of this message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.UseRecords">
+            <summary>
+            True if records are used in this message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.IsEmpty">
+            <summary>
+            True if this message is empty.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.RecordCount">
+            <summary>
+            The number of records in the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Value">
+            <summary>
+            The string value of the first record of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.Raw">
+            <summary>
+            The raw representation of the first record of the message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.IMessage.SplitNewLineRecord">
+            <summary>
+            If Enabled, splits records based on new line(\t or \n) while sending or receiving messages from both WMQ and VCOM.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Messages.Message.BinaryCompressionHeader">
+            <summary>
+            The header added to compressed records sent in binary form
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Messages.Message.StringCompressionHeader">
+            <summary>
+            The header added to compressed records sent in BASE64 encoding
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.#ctor(System.Boolean,System.Int32,System.Int32,System.Int32,System.Byte[],System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.Boolean,Volvo.NVS.Integration.IChannel,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Text.Encoding,System.Int32,System.String,System.String,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="targetClient">WMQ only: If true, no header information is added to the message</param>
+            <param name="priority">The priority of the message</param>
+            <param name="retries">The number of retries done on this message</param>
+            <param name="timeout">The time out used when handling this message. (Currently unused)</param>
+            <param name="messageId">The message id</param>
+            <param name="correlationObject">WMQ only: The correlation id</param>
+            <param name="header">WMQ only: The headears to be added to tbe message</param>
+            <param name="replyTo">WMQ only: The queue to reply to</param>
+            <param name="replyToQMgr">WMQ only: The reply to queue manager</param>
+            <param name="requiresReply">Indicates if this message requires a reply</param>
+            <param name="channel">The channel used when creating this message.</param>
+            <param name="useRecords">True if records are used in this message.</param>
+            <param name="tempFiles">True if message should be stored in temporary files</param>
+            <param name="compress">WMQ only: If true, the message will be compressed before sending.</param>
+            <param name="binary">WMQ only: If true, the message will be sent as a binary message.</param>
+            <param name="encoding">The encoding used when sending the message.</param>
+            <param name="expiry">WMQ only: The expiry time of the message in seconds.</param>
+            <param name="applicationId">WMQ only: The application identity</param>
+            <param name="userId">WMQ only: The user identifier</param>
+            <param name="splitNewLineRecord">If Enabled, splits records based on new line(\t or \n) while sending or receiving messages from both WMQ and VCOM.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.#ctor(System.Int32,System.Boolean,Volvo.NVS.Integration.IChannel,System.Byte[],System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="retries">The number of retries done on this message</param>
+            <param name="requiresReply">Indicates if this message requires a reply</param>
+            <param name="channel">The channel used when creating this message.</param>
+            <param name="correlationId">WMQ only: The correlation id</param>
+            <param name="useRecords">True if records are used in this message.</param>
+            <param name="tempFiles">True if message should be stored in temporary files</param>
+            <param name="compress">WMQ only: If true, the message will be compressed before sending.</param>
+            <param name="binary">WMQ only: If true, the message will be sent as a binary message.</param>
+            <param name="expiry">WMQ only: The expiry time of the message in seconds.</param>
+            <param name="splitNewLineRecord">If Enabled, splits records based on new line(\t or \n) while sending or receiving messages from both WMQ and VCOM.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.CreateReplyMessage">
+            <summary>
+            Creates a reply message
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.SendReply">
+            <summary>
+            Used to manually send the reply
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.SendDecoupledReplyMessage">
+            <summary>
+            Used to send reply message from different thread other than Subscribe thread in request reply pattern
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.InternalSendReply">
+            <summary>
+            Sends a reply message. 
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.InternalSendDecoupledReply">
+            <summary>
+            Sends decoupled reply message from different thread
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AppendData(System.Byte[])">
+            <summary>
+            Appends data to this message, not creating a new record.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AppendData(System.String)">
+            <summary>
+            Appends data to this message, not creating a new record.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AppendData(System.String,System.Text.Encoding)">
+            <summary>
+            Appends data to this message, not creating a new record.
+            </summary>
+            <param name="data">Data to be added</param>
+            <param name="encoding">The encoding of the string</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AppendData(System.IO.Stream)">
+            <summary>
+            Appends data to this message, not creating a new record.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AddRecord(System.Byte[])">
+            <summary>
+            Adds a new record of data to the message.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AddRecord(System.String)">
+            <summary>
+            Adds a new record of data to the message.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AddRecord(System.String,System.Text.Encoding)">
+            <summary>
+            Adds a new record of data to the message.
+            </summary>
+            <param name="data">Data to be added</param>
+            <param name="encoding">The encoding of the string</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AddRecord(System.IO.Stream)">
+            <summary>
+            Adds a new record of data to the message.
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AddRecords(System.Collections.Generic.IEnumerable{System.Byte[]})">
+            <summary>
+            Adds several records of data to the message
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AddRecords(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds several records of data to the message
+            </summary>
+            <param name="data">Data to be added</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.AddRecords(System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)">
+            <summary>
+            Adds several records of data to the message
+            </summary>
+            <param name="data">Data to be added</param>
+            <param name="encoding">The encoding of the string</param>
+            <returns>this</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.GetValue(System.Int32)">
+            <summary>
+            Gets the string value of the given record
+            </summary>
+            <param name="idx">The index of the record to get the value from.</param>
+            <returns>The value of the record as string.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.GetRaw(System.Int32)">
+            <summary>
+            Gets the raw representation of the given record
+            </summary>
+            <param name="idx">The index of the record to get the raw representation from.</param>
+            <returns>The array of bytes representing the raw record.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.GetStream(System.Int32)">
+            <summary>
+            Gets the stream containing the given record. The stream should be disposed after usage.
+            </summary>
+            <param name="idx">The index of the record to get the stream from.</param>
+            <returns>The stream containing the record.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.ToString(System.Text.Encoding)">
+            <summary>
+            Gets the string representation of the message with the given encoding
+            </summary>
+            <param name="encoding">The encoding to be used.</param>
+            <returns>The string representation of the message, using the given encoding.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.ToString">
+            <summary>
+            Gets the string representation of the message
+            </summary>
+            <returns>The string representation of the message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.SetProperty(System.String,System.String)">
+            <summary>
+            Set a property of the message
+            </summary>
+            <param name="key">The property key</param>
+            <param name="value">The property value</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.GetProperty(System.String)">
+            <summary>
+            Gets the property value of the message by its key.
+            </summary>
+            <param name="key">The property key</param>
+            <returns>The property value, given its key</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.Clone">
+            <summary>
+            Clones the message.
+            </summary>
+            <returns>A new cloned instance of this <see cref="T:Volvo.NVS.Integration.Messages.IMessage"/> object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.Dispose">
+            <summary>
+            Disposes the Message object
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.Dispose(System.Boolean)">
+            <summary>
+            Disposes the Message object
+            </summary>
+            <param name="disposing">Pass true only if calling this method from the <see cref="M:System.IDisposable.Dispose"/> method.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.Finalize">
+            <summary>
+            Destructor of the Message object
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.StartReading">
+            <summary>
+            Initialize for reading using GetNextPart
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.GetNextPart(System.Int32,System.Byte[]@)">
+            <summary>
+            Read the next part of the message
+            </summary>
+            <param name="messageMaxLength">The max size of the part</param>
+            <param name="buffer">The buffer to place the data. May be reused.</param>
+            <returns>Same content as stored in <b>buffer</b> param.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.IsLastPart">
+            <summary>
+            Return true if this is the last part of the message
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.IsMultiPart(System.Int32)">
+            <summary>
+            Return true if message is a multi part message.
+            </summary>
+            <param name="messageMaxLength">Max length of one individual message.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.StartWriting">
+            <summary>
+            Internal method used to start writing data to the message from the backend
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.WritePart(System.Byte[])">
+            <summary>
+            Internal method used to write data to the message from the backend
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Messages.Message.EndWriting">
+            <summary>
+            Internal methof used to end writing data to the message from the backend
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.TargetClient">
+            <summary>
+            WMQ only: If true, no header information is added to the message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Priority">
+            <summary>
+            WMQ only: The priority of the message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Retries">
+            <summary>
+            The number of retries done on this message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Timeout">
+            <summary>
+            The time out used when handling this message. (Currently unused)
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.MessageId">
+            <summary>
+            WMQ only: The message id
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.CorrelationObject">
+            <summary>
+            WMQ only: The correlation id
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Expiry">
+            <summary>
+            WMQ only: The expiry time of the message in seconds.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Properties">
+            <summary>
+            WMQ only: The properties set on the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.ReplyTo">
+            <summary>
+            WMQ only: The reply to queue
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.ReplyToQMgr">
+            <summary>
+            WMQ only: The reply to queue manager
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.RequiresReply">
+            <summary>
+            Indicates if this message requires a reply.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.HaveReply">
+            <summary>
+            Indicates if this message has a reply created
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.TempFiles">
+            <summary>
+            True if message should be stored in temporary files
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Binary">
+            <summary>
+            WMQ only: If true, the message will be sent as a binary message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Compress">
+            <summary>
+            WMQ only: If true, the message will be compressed before sending.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Encoding">
+            <summary>
+            The encoding used when sending the message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.ApplicationId">
+            <summary>
+            WMQ only: The application identity
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.UserId">
+            <summary>
+            WMQ only: The user identifier
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.SplitNewLineRecord">
+            <summary>
+            If Enabled, splits records based on new line(\t or \n) while sending or receiving messages from both WMQ and VCOM.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.SeqNo">
+            <summary>
+            Message sequence number
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.ReplyMessage">
+            <summary>
+            The reply message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.ReplySent">
+            <summary>
+            True if reply is already sent
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Channel">
+            <summary>
+            The channel used when creating this message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.TransactionBehavior">
+            <summary>
+            The transaction behavior of this message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.UseRecords">
+            <summary>
+            True if records are used in this message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.IsEmpty">
+            <summary>
+            True if this message is empty.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.RecordCount">
+            <summary>
+            The number of records in the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Value">
+            <summary>
+            The string value of the first record of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Messages.Message.Raw">
+            <summary>
+            The raw representation of the first record of the message.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.ICallbackChannel">
+            <summary>
+            Defines the parts of the IChannel interface handling internal callback methods
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.IChannel">
+            <summary>
+            Defines the interface for channels
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.IInputChannel">
+            <summary>
+            Defines the parts of the IChannel interface handling reception of messages.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.IChannelProperty">
+            <summary>
+            Defines the parts of the IChannel interface handling properties.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IChannelProperty.SetProperty(System.String,System.Int32)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.Int32"/></param>
+            <returns>The <see cref="T:Volvo.NVS.Integration.IChannel"/> which the property was set to, allowing fluent usage.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IChannelProperty.SetProperty(System.String,System.String)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.String"/></param>
+            <returns>The <see cref="T:Volvo.NVS.Integration.IChannel"/> which the property was set to, allowing fluent usage.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IChannelProperty.SetProperty(System.String,System.Boolean)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.Boolean"/></param>
+            <returns>The <see cref="T:Volvo.NVS.Integration.IChannel"/> which the property was set to, allowing fluent usage.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IChannelProperty.SetProperty(Volvo.NVS.Integration.IChannelPropertyKey,System.Int32)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.Int32"/></param>
+            <returns>The <see cref="T:Volvo.NVS.Integration.IChannel"/> which the property was set to, allowing fluent usage.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IChannelProperty.SetProperty(Volvo.NVS.Integration.IChannelPropertyKey,System.String)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.String"/></param>
+            <returns>The <see cref="T:Volvo.NVS.Integration.IChannel"/> which the property was set to, allowing fluent usage.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IChannelProperty.SetProperty(Volvo.NVS.Integration.IChannelPropertyKey,System.Boolean)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.Boolean"/></param>
+            <returns>The <see cref="T:Volvo.NVS.Integration.IChannel"/> which the property was set to, allowing fluent usage.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Receive">
+            <summary>
+            Reads the first message if available
+            </summary>
+            <returns><b>null</b> if no message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.ReceiveWithFilter(System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Reads the first message if available, using a filter condition.
+            </summary>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+            <returns><b>null</b> if no message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Receive(System.Action{Volvo.NVS.Integration.Messages.IMessage})">
+            <summary>
+            Read the first message. If available, call action and return true. If not available return false.
+            </summary>
+            <param name="action">The method to be called if message is available</param>
+            <returns><b>true</b> if message is available</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Receive(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Read the first message, using a filter condition. If available, call action and return true. 
+            If not available return false.
+            </summary>
+            <param name="action">The method to be called if message is available</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+            <returns><b>true</b> if message is available</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}},System.Transactions.IsolationLevel)">
+            <summary>
+            Subscribe with no filtering.
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+            <param name="isolationLevel">The Isolation Level to use in the transaction started when the message is received</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}},System.Transactions.IsolationLevel,System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe with filtering
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+            <param name="isolationLevel">The Isolation Level to use in the transaction started when the message is received</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}})">
+            <summary>
+            Subscribe on channel using background thread 
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}},System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, using a filter condition.
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.Transactions.IsolationLevel)">
+            <summary>
+            Subscribe on channel using background thread 
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="isolationLevel">Transaction isolation level to be used for handler transaction.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.Transactions.IsolationLevel,System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, using a filter condition.
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="isolationLevel">Transaction isolation level to be used for handler transaction.</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IMessage})">
+            <summary>
+            Subscribe on channel using background thread 
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, using a filter condition.
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.PeekSubscribe(System.Action{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, but without "touching" the incoming message.
+            </summary>
+            <remarks>
+            <para>
+            In case when application needs to be informed about incoming messages without "touching" them 
+            or custom message handling is needed use PeekSubscribe method instead of Subscribe. 
+            </para>
+            <para>
+            PeekSubscribe starts new thread and call registered callback (action) each time when new message arrive. 
+            Callback method receives only message info (without content) defined by IMessageFilter interface to 
+            distinguish them from normal Subscribe. 
+            </para>
+            </remarks>
+            <param name="action">The method to be called when message arrives</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.PeekSubscribe(System.Action{Volvo.NVS.Integration.Messages.IMessageFilter},System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, using a filter condition, but without "touching" the incoming message.
+            </summary>
+            <remarks>
+            <para>
+            In case when application needs to be informed about incoming messages without "touching" them 
+            or custom message handling is needed use PeekSubscribe method instead of Subscribe. 
+            </para>
+            <para>
+            PeekSubscribe starts new thread and call registered callback (action) each time when new message arrive. 
+            Callback method receives only message info (without content) defined by IMessageFilter interface to 
+            distinguish them from normal Subscribe. 
+            </para>
+            </remarks>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.AsynchReceiveForRequestReply(System.Action{Volvo.NVS.Integration.Messages.IMessage})">
+            <summary>
+            Receive messages for Request Reply asynchronously for WMQ Only
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.CanPeek">
+            <summary>
+            Is peek supported?
+            </summary>
+            <returns><b>true</b> if supported</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Peek">
+            <summary>
+            Read the first message if available without consuming.
+            </summary>
+            <returns>The next message on the queue. <b>null</b> if queue is empty.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.Peek(System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Read the first message if available without consuming, using a filter condition.
+            </summary>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+            <returns>The next message on the queue. <b>null</b> if queue is empty.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.ReceiveWithFilter(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Read the first message, using a filter condition. If available, call action and return true. 
+            If not available return false.
+            </summary>
+            <param name="action">The method to be called if message is available</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+            <returns><b>true</b> if message is available</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.SubscribeWithFilter(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}},System.Transactions.IsolationLevel,System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe with filtering
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+            <param name="isolationLevel">The Isolation Level to use in the transaction started when the message is received</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.SubscribeWithFilter(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}},System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, using a filter condition.
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.SubscribeWithFilter(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.Transactions.IsolationLevel,System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, using a filter condition.
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="isolationLevel">Transaction isolation level to be used for handler transaction.</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.SubscribeWithFilter(System.Action{Volvo.NVS.Integration.Messages.IMessage},System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, using a filter condition.
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.PeekSubscribeWithFilter(System.Action{Volvo.NVS.Integration.Messages.IMessageFilter},System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Subscribe on channel using background thread, using a filter condition, but without "touching" the incoming message.
+            </summary>
+            <remarks>
+            <para>
+            In case when application needs to be informed about incoming messages without "touching" them 
+            or custom message handling is needed use PeekSubscribe method instead of Subscribe. 
+            </para>
+            <para>
+            PeekSubscribe starts new thread and call registered callback (action) each time when new message arrive. 
+            Callback method receives only message info (without content) defined by IMessageFilter interface to 
+            distinguish them from normal Subscribe. 
+            </para>
+            </remarks>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IInputChannel.PeekWithFilter(System.Predicate{Volvo.NVS.Integration.Messages.IMessageFilter})">
+            <summary>
+            Read the first message if available without consuming, using a filter condition.
+            </summary>
+            <param name="filter">Filter condition used when receiving messages. 
+            Only the messages matching the filter condition will be read.</param>
+            <returns>The next message on the queue. <b>null</b> if queue is empty.</returns>
+        </member>
+        <member name="E:Volvo.NVS.Integration.IInputChannel.StatusChanged">
+            <summary>
+            Communication status change event handler
+            </summary>
+        </member>
+        <member name="E:Volvo.NVS.Integration.IInputChannel.ErrorOccurred">
+            <summary>
+            Error event handler
+            </summary>
+        </member>
+        <member name="E:Volvo.NVS.Integration.IInputChannel.PostProcessMessageHandler">
+            <summary>
+            Event handler for post processing
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.IInputChannel.TransactionTimeout">
+            <summary>
+            The transaction timeout to use when subscribing to messages (in seconds).
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.IInputChannel.IsolationLevel">
+            <summary>
+            The isolation level to use in transactions when subscribing to messages.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.IOutputChannel">
+            <summary>
+            Defines the parts of the IChannel interface handling sending messages.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.CreateMessage">
+            <summary>
+            Creates a message for usage with the channel
+            </summary>
+            <returns>The created <see cref="T:Volvo.NVS.Integration.Messages.IMessage"/> message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.CreateMessage(System.String,System.String,System.String,System.String)">
+            <summary>
+            Create a new message for usage with the channel filled with GimR informations. 
+            </summary>
+            <remarks>GimR works only with Websphere MQ and that method is not implemented for VCom channel</remarks>
+            <param name="gimSenderId">GimR sender identification.</param>
+            <param name="gimMessageVersion">GimR message version.</param>
+            <param name="gimMessageType">GimR message type.</param>
+            <param name="gimMessageExchangePattern">GimR message exchange pattern.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Publish(System.String,System.String)">
+            <summary>
+            Publish message using channel with UTF8 encoding
+            </summary>
+            <param name="message">Message content as string</param>
+            <param name="topic">Overrides the topic specified in URI</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Publish(System.String)">
+            <summary>
+            Publish message using channel with UTF8 encoding
+            </summary>
+            <param name="message">Message content as string</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Publish(Volvo.NVS.Integration.Messages.IMessage,System.String)">
+            <summary>
+            Publish a message on the given topic
+            </summary>
+            <param name="message">Message to be send.</param>
+            <param name="topic">Overrides the topic specified in URI</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Publish(Volvo.NVS.Integration.Messages.IMessage)">
+            <summary>
+            Publish a message
+            </summary>
+            <param name="message">Message to be send.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Send(System.String)">
+            <summary>
+            Send a message. The message will be UTF8 encoded.
+            </summary>
+            <param name="message">Message content as string.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Send(Volvo.NVS.Integration.Messages.IMessage)">
+            <summary>
+            Send a message
+            </summary>
+            <param name="message">Message to be send.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Request(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Sends a request and waits for a reply
+            </summary>
+            <param name="message">The request content as string to be sent.</param>
+            <param name="timeout">Override the default time out.</param>
+            <returns>The reply message. <b>null</b> on time out.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Request(System.String)">
+            <summary>
+            Sends a request and waits for a reply
+            </summary>
+            <param name="message">The request content as string to be sent.</param>
+            <returns>The reply message. <b>null</b> on time out.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Request(Volvo.NVS.Integration.Messages.IMessage,System.Nullable{System.TimeSpan})">
+            <summary>
+            Sends a request and waits for a reply
+            </summary>
+            <param name="message">The request message to be sent.</param>
+            <param name="timeout">Override the default time out.</param>
+            <returns>The reply message. <b>null</b> on time out.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.Request(Volvo.NVS.Integration.Messages.IMessage)">
+            <summary>
+            Sends a request and waits for a reply
+            </summary>
+            <param name="message">The request message to be sent.</param>
+            <returns>The reply message. <b>null</b> on time out.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.AsyncRequest(System.String)">
+            <summary>
+            Asynchronous request (WMQ Only)
+            </summary>
+            <param name="message">The request content as string to be sent.</param>
+            <returns>The <see cref="P:Volvo.NVS.Integration.Messages.IMessage.MessageId"/> of request message. Reply will have <see cref="P:Volvo.NVS.Integration.Messages.IMessage.CorrelationObject"/> set to the same value.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.IOutputChannel.AsyncRequest(Volvo.NVS.Integration.Messages.IMessage)">
+            <summary>
+            Asynchronous request (WMQ Only)
+            </summary>
+            <param name="message">The request message to be sent.</param>
+            <returns>The <see cref="P:Volvo.NVS.Integration.Messages.IMessage.MessageId"/> of request message. Reply will have <see cref="P:Volvo.NVS.Integration.Messages.IMessage.CorrelationObject"/> set to the same value.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.IChannel.DestinationName">
+            <summary>
+            The name of the destination (regardless of queue/topic/expediter/partner)
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.ICallbackChannel.SetTransactionBehavior(Volvo.NVS.Integration.TransactionBehavior)">
+            <summary>
+            Used internaly to handle transaction behavior.
+            </summary>
+            <param name="transactionBehavior">The transaction behavior</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.StreamImplementation.MemoryTributary">
+            <summary>
+            MemoryTributary is a re-implementation of MemoryStream that uses a dynamic list of byte arrays as a backing store, instead of a single byte array, the allocation
+            of which will fail for relatively small streams as it requires contiguous memory.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.#ctor(System.Byte[])">
+            <summary>
+            Constructor
+            </summary>
+            <param name="source">Initial content of the stream.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.#ctor(System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="length">Initial length of the stream.</param>
+            <remarks>That constructor creates all memory blocks needed to store content with provided length.</remarks>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.Flush">
+            <summary>
+            Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+            </summary>
+            <returns>
+            The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are 
+            not currently available, or zero (0) if the end of the stream has been reached.
+            </returns>
+            <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the 
+            values between <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the 
+            bytes read from the current source. </param><param name="offset">The zero-based byte offset in <paramref name="buffer"/> 
+            at which to begin storing the data read from the current stream. </param><param name="count">The maximum number of bytes 
+            to be read from the current stream. </param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Sets the position within the current stream.
+            </summary>
+            <returns>
+            The new position within the current stream.
+            </returns>
+            <param name="offset">A byte offset relative to the <paramref name="origin"/> parameter. </param><param name="origin">A value 
+            of type <see cref="T:System.IO.SeekOrigin"/> indicating the reference point used to obtain the new position. </param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.SetLength(System.Int64)">
+            <summary>
+            Sets the length of the current stream.
+            </summary>
+            <param name="value">The desired length of the current stream in bytes. </param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+            </summary>
+            <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the 
+            current stream. </param><param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying 
+            bytes to the current stream. </param><param name="count">The number of bytes to be written to the current stream. </param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.ReadByte">
+            <summary>
+            Reads a byte from the stream and advances the position within the stream by one byte, or returns -1 if at the end of the stream.
+            </summary>
+            <returns>
+            The unsigned byte cast to an Int32, or -1 if at the end of the stream.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.WriteByte(System.Byte)">
+            <summary>
+            Writes a byte to the current position in the stream and advances the position within the stream by one byte.
+            </summary>
+            <param name="value">The byte to write to the stream. </param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.Dispose(System.Boolean)">
+            <summary>
+            Disposes the current instance of MemoryTributary
+            </summary>
+            <param name="disposing">Pass true only if calling this method from the <see cref="M:System.IDisposable.Dispose"/> method.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.ToArray">
+            <summary>
+            Returns the entire content of the stream as a byte array. This is not safe because the call to new byte[] may 
+            fail if the stream is large enough. Where possible use methods which operate on streams directly instead.
+            </summary>
+            <returns>A byte[] containing the current data in the stream</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.ReadFrom(System.IO.Stream,System.Int64)">
+            <summary>
+            Reads length bytes from source into the this instance at the current position.
+            </summary>
+            <param name="source">The stream containing the data to copy</param>
+            <param name="length">The number of bytes to copy</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.WriteTo(System.IO.Stream)">
+            <summary>
+            Writes the entire stream into destination, regardless of Position, which remains unchanged.
+            </summary>
+            <param name="destination">The stream to write the content of this stream to</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.ReadNextBytes(System.Int32)">
+            <summary>
+            Reads the contents of the stream into a byte array.
+            data is returned as a byte array. An IOException is
+            thrown if any of the underlying IO calls fail.
+            </summary>
+            <returns>A byte array containing the contents of the stream.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.CanRead">
+            <summary>
+            Gets a value indicating whether the current stream supports reading.
+            </summary>
+            <returns>true if the stream supports reading; otherwise, false.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.CanSeek">
+            <summary>
+            Gets a value indicating whether the current stream supports seeking.
+            </summary>
+            <returns>true if the stream supports seeking; otherwise, false.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.CanWrite">
+            <summary>
+            Gets a value indicating whether the current stream supports writing.
+            </summary>
+            <returns>true if the stream supports writing; otherwise, false.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.Length">
+            <summary>
+            Gets the length in bytes of the stream.
+            </summary>
+            <returns>A long value representing the length of the stream in bytes.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.Position">
+            <summary>
+            Gets or sets the position within the current stream.
+            </summary>
+            <returns>The current position within the stream.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.Block">
+            <summary>
+            The block of memory currently addressed by Position
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.BlockId">
+            <summary>
+            The id of the block currently addressed by Position
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.MemoryTributary.BlockOffset">
+            <summary>
+            The offset of the byte currently addressed by Position, into the block that contains it
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.StreamImplementation.NoCloseStreamReader">
+            <summary>
+            Encapsulates a stream writer which does not close the underlying stream.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.NoCloseStreamReader.#ctor(System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Creates a new stream writer object.
+            </summary>
+            <param name="stream">The underlying stream to write to.</param>
+            <param name="encoding">The encoding for the stream.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.NoCloseStreamReader.#ctor(System.IO.Stream)">
+            <summary>
+            Creates a new stream writer object using default encoding.
+            </summary>
+            <param name="stream">The underlying stream to write to.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.NoCloseStreamReader.Dispose(System.Boolean)">
+            <summary>
+            Disposes of the stream writer.
+            </summary>
+            <param name="disposeManaged">True to dispose managed objects.</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.StreamImplementation.SubStream">
+            <summary>
+            SubStream class implements read only stream who represents part of provided parent stream where original data is stored
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.SubStream.#ctor(System.IO.Stream,System.Int64,System.Int64)">
+            <summary>
+            Constructor with minimal data needed for SubStream
+            </summary>
+            <param name="parent">Stream where original data is stored. Stream must implement reading and seeking.</param>
+            <param name="offset">Starting point of sub stream inside the parent stream</param>
+            <param name="length">Length of the parent stream</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.SubStream.Dispose(System.Boolean)">
+            <summary>
+            Disposes the SubStream object
+            </summary>
+            <param name="disposing">Pass true only if calling this method from the <see cref="M:System.IDisposable.Dispose"/> method.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.SubStream.Flush">
+            <summary>
+            Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.SubStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Sets the position within the current stream.
+            </summary>
+            <param name="offset">A byte offset relative to the <paramref name="origin"/> parameter. </param>
+            <param name="origin">A value of type <see cref="T:System.IO.SeekOrigin"/> indicating the reference point used to obtain the new position. </param>
+            <returns>The new position within the current stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.SubStream.SetLength(System.Int64)">
+            <summary>
+            Sets the length of the current stream.
+            </summary>
+            <param name="value">The desired length of the current stream in bytes. </param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.SubStream.ReadByte">
+            <summary>
+            Reads a byte from the stream and advances the position within the stream by one byte, or returns -1 if at the end of the stream.
+            </summary>
+            <returns>The unsigned byte cast to an Int32, or -1 if at the end of the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.SubStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+            </summary>
+            <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values 
+            between <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the bytes read from 
+            the current source. </param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin storing the data read from the 
+            current stream. </param>
+            <param name="count">The maximum number of bytes to be read from the current stream. </param>
+            <returns>
+            The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are 
+            not currently available, or zero (0) if the end of the stream has been reached.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.SubStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+            </summary>
+            <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the 
+            current stream. </param><param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying 
+            bytes to the current stream. </param><param name="count">The number of bytes to be written to the current stream. </param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.SubStream.CanRead">
+            <summary>
+            Gets a value indicating whether the current stream supports reading.
+            </summary>
+            <returns>true if the stream supports reading; otherwise, false.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.SubStream.CanSeek">
+            <summary>
+            Gets a value indicating whether the current stream supports seeking.
+            </summary>
+            <returns> true if the stream supports seeking; otherwise, false.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.SubStream.CanWrite">
+            <summary>
+            Gets a value indicating whether the current stream supports writing.
+            </summary>
+            <returns>true if the stream supports writing; otherwise, false.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.SubStream.Length">
+            <summary>
+            Gets the length in bytes of the stream.
+            </summary>
+            <returns>
+            A long value representing the length of the stream in bytes.
+            </returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.SubStream.Position">
+            <summary>
+            Gets or sets the position within the current stream.
+            </summary>
+            <returns>
+            The current position within the stream.
+            </returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.StreamImplementation.TemporaryFileStream">
+            <summary>
+            Implementation of temporary file streams. File created when stream created. File deleted when stream disposed. File name is automatically created.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.TemporaryFileStream.SetDirectory(System.String)">
+            <summary>
+            Set the directory where the temporary files should be created.
+            </summary>
+            <param name="dir">Patch to the folder.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.TemporaryFileStream.Create">
+            <summary>
+            Factory method creating a new temporary file stream.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.TemporaryFileStream.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.TemporaryFileStream.#ctor(System.IO.FileAccess)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="access">Access type to the temporary file.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.TemporaryFileStream.#ctor(System.IO.FileAccess,System.IO.FileShare)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="access">Access type to the temporary file.</param>
+            <param name="share">Type of temporary file sharing.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.StreamImplementation.TemporaryFileStream.#ctor(System.IO.FileAccess,System.IO.FileShare,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="access">Access type to the temporary file.</param>
+            <param name="share">Type of temporary file sharing.</param>
+            <param name="bufferSize">Size of the buffer</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.StreamImplementation.TemporaryFileStream.Directory">
+            <summary>
+            The directory where temporary files are created.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Utilities.Timing">
+            <summary>
+            Helper class to provide timing information.
+            Currently disabled.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Utilities.Timing.BeginLogHeader">
+            <summary>
+            The header text to be written in the beginning of the log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Utilities.Timing.EndLogHeader">
+            <summary>
+            The header text to be written in the end of the log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Utilities.Timing.NvsIntegrationWmq">
+            <summary>
+            Text to be displayed as a label to NvsIntegration.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Utilities.Timing.Application">
+            <summary>
+            Text to be displayed as a label to Application.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.Utilities.Timing.DateTimeFormat">
+            <summary>
+            The date-time format used when writing logs
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.Timing.Log(System.String)">
+            <summary>
+            Logs a line to the timing log.
+            </summary>
+            <param name="msg">The message to be logged</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.Timing.StartTimer(System.String)">
+            <summary>
+            Starts a timer with the given name with logging.
+            </summary>
+            <param name="name">The timer name.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.Timing.EndTimer(System.String)">
+            <summary>
+            Ends a timer with the given name, logging the elapsed time.
+            </summary>
+            <param name="name">The timer name.</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.TransactionBehavior">
+            <summary>
+            Defines transaction behavior when reading a message from queue.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.TransactionBehavior.Auto">
+            <summary>
+            Current transaction behavior of the library will be set.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.TransactionBehavior.Commit">
+            <summary>
+            Commit the message in MQ/VCOM.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.TransactionBehavior.Rollback">
+            <summary>
+            Rollback the message in MQ/VCOM.
+            </summary>
+            <remarks>That behavior increase backout count and move the message to the backout queue if reach backout threshold value</remarks>
+        </member>
+        <member name="F:Volvo.NVS.Integration.TransactionBehavior.MarkAsPoison">
+            <summary>
+            Move the message to the backout queue in MQ/VCOM without regarding backout count value.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.TransactionBehavior.Leave">
+            <summary>
+            Rollback the message without increasing backout count in MQ/WMQ.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2">
+            <summary>
+            Read only implementation if IDictionay
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="dictionary">Initial content of the dictionary.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.ContainsKey(`0)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.IDictionary`2"/> contains an element with the specified key.
+            </summary>
+            <param name="key">The key to locate in the <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <returns>true if the <see cref="T:System.Collections.Generic.IDictionary`2"/> contains an element with the key; otherwise, false.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.TryGetValue(`0,`1@)">
+            <summary>
+            Gets the value associated with the specified key.
+            </summary>
+            <param name="key">The key whose value to get.</param>
+            <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, 
+            the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
+            <returns>true if the object that implements <see cref="T:System.Collections.Generic.IDictionary`2"/> contains an element with the specified key; otherwise, false.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <returns>true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"/> to an <see cref="T:System.Array"/>, 
+            starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied 
+            from <see cref="T:System.Collections.Generic.ICollection`1"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.Keys">
+            <summary>
+            Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the object that 
+            implements <see cref="T:System.Collections.Generic.IDictionary`2"/>.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.Values">
+            <summary>
+            Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the object that implements 
+            <see cref="T:System.Collections.Generic.IDictionary`2"/>.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.Item(`0)">
+            <summary>
+            Indexer for this class. Returns the value associated with the key.
+            </summary>
+            <param name="key">The key to look for.</param>
+            <returns>The value associated with the key</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Utilities.ReadOnlyDictionary`2.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Utilities.Threading.ThreadEx">
+            <summary>
+            Support methods for threading
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.Threading.ThreadEx.GetNextWaitDuration(System.Int32)">
+            <summary>
+            Get the time to wait for this retry
+            </summary>
+            <param name="retry">Retry number.</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Utilities.TransactionUtilities">
+            <summary>
+            Support methods for handling transactions
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Utilities.TransactionUtilities.CreateGetCurrentScopeDelegate">
+            <summary>
+            Returns the current transaction scope - or null.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Utilities.TransactionUtilities.IsInsideTransactionScope">
+            <summary>
+            Returns true if we currently are in a transaction scope.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Validation.IValidator">
+            <summary>
+            Validator interface
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Validation.IValidator.Validate">
+            <summary>
+            Do validation
+            </summary>
+            <returns>Result of validation.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Validation.IValidator.Valid">
+            <summary>
+            Is valid
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Validation.IValidator.ValidationResults">
+            <summary>
+            Validation results
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Validation.ValidationBase">
+            <summary>
+            Implementation of validation
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Validation.ValidationBase.Validate">
+            <summary>
+            Validates this instance.
+            </summary>
+            <returns>Validation results represented by set of validation messages</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Validation.ValidationBase.SelfValidation">
+            <summary>
+            Perform validation logic. All validation problems need to be added to <see cref="P:Volvo.NVS.Integration.Validation.ValidationBase.ValidationResults"/> property. 
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Validation.ValidationBase.ValidationResults">
+            <summary>
+            Gets the validation results.
+            </summary>
+            <value>
+            The validation results.
+            </value>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Validation.ValidationBase.Valid">
+            <summary>
+            Gets the indication of whether the validation was successful.
+            
+            </summary>
+            
+            <remarks>
+            An unsuccessful validation will be represented by a <see cref="P:Volvo.NVS.Integration.Validation.ValidationBase.ValidationResults"/> instance with
+                        <see cref="T:System.String"/> elements.
+            
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Integration.Validation.ValidationResults">
+            <summary>
+            Represents the result of validating an object, in the form of a collection of <see cref="T:System.String"/> elements.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Validation.ValidationResults.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Integration.Validation.ValidationResults"/> class.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Validation.ValidationResults.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the list of validation results.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> of strings representing the validation results.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Validation.ValidationResults.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the list of validation results.
+            </summary>
+            <returns>A <see cref="T:System.Collections.IEnumerator"/> representing the validation results.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.Validation.ValidationResults.AddResult(System.String)">
+            <summary>
+            Adds a <see cref="T:System.String"/> representing a validation problem.
+            </summary>
+            <param name="validationResult">The validation result to be added.</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Validation.ValidationResults.IsValid">
+            <summary>
+            Gets the indication of whether the validation was successful.
+            </summary> 
+            <remarks>
+            An unsuccessful validation will be represented by a <see cref="T:Volvo.NVS.Integration.Validation.ValidationResults"/> instance with
+            more than one <see cref="T:System.String"/> element. 
+            </remarks>
+        </member>
+        <member name="P:Volvo.NVS.Integration.Validation.ValidationResults.Count">
+            <summary>
+            Gets the count of validation results.
+            </summary>
+        </member>
+    </members>
+</doc>

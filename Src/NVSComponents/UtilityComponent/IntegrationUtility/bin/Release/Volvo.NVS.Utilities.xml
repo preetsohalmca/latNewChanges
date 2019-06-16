@@ -1,0 +1,2612 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Volvo.NVS.Utilities</name>
+    </assembly>
+    <members>
+        <member name="T:Volvo.NVS.Signing.NVSLibrarySigning">
+            <summary>
+            Providing information about the current NVS Library signing (e.g. signing public key).
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Signing.NVSLibrarySigning.PublickKey">
+            <summary>
+            The public key used by all the library assemblies.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Expressions.ExpressionHelper">
+            <summary>
+            Provides helper methods for lambda expressions.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Expressions.ExpressionHelper.ExtractPropertyName(System.Linq.Expressions.Expression{System.Func{System.String}})">
+            <summary>
+            Gets a name of the property from a given expression.
+            </summary>
+            <param name="propertyExpression">An expression pointing at the property from which a name should be taken.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration">
+            <summary>
+            The class provides global, single (per-application) AutoMapper configuration capabilities.
+            </summary>
+            <remarks>
+            <para>
+            The AutoMapperConfiguration allows to configure the AutoMapper globally and only once.
+            </para>
+            <para>
+            It is recommended to run the global AutoMapper configuration at the application startup. It is also 
+            recommended to perform this global configuration instead of using multiple AutoMapper related attributes
+            based on the <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationAttribute"/>.
+            </para>
+            <para>
+            The AutoMapper configuration is described via the profile classes. The profiles are public, non-abstract and 
+            with a default constructor classes inheriting from the <see cref="T:AutoMapper.Profile"/> AutoMapper base class. You should
+            create profile classes and write configuration code in those classes.
+            </para>
+            <para>
+            The AutoMapperConfiguration will look for the Profiles (profile classes) and will perform the global configuration. 
+            It is possible to configure individual profiles or complete assemblies. It is also possible to configure the AutoMapper 
+            resolving all the Profiles to be used from the Unity container. Check the <see cref="T:Volvo.NVS.Core.Unity.Container"/> for details.
+            </para>
+            <para>
+            One may also use the code-based, common library configuration methods configuring AutomMapper (<b>recommended</b>).
+            </para>
+            <example>
+            This example is resolving all the profiles from the current unity container using the fluent, common library configuration object:
+            <code>
+            ILibraryConfigurator configurator = LibraryConfigurator.Current;
+            ...
+            configurator.ConfigureAutoMapper(automapper =&gt; automapper.RegisterProfiles());
+            ...
+            </code>
+            </example>
+            <example>
+            A similar configuration can be realized using the <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration"/> class directly:
+            <code>
+            // Configure all the profiles registered in the current unity container
+            AutoMapperConfiguration.RegisterProfiles();
+            </code>
+            </example>
+            <example>
+            This example registers all the profiles from the given assembly. It is still using the fluent configuration:
+            <code>
+            ILibraryConfigurator configurator = LibraryConfigurator.Current;
+            Assembly myAssembly;
+            ...
+            configurator.ConfigureAutoMapper(automapper =&gt; automapper.RegisterProfiles(myAssembly));
+            ...
+            </code>
+            </example>
+            <para>
+            Check the <see cref="T:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder"/> for the list of all the fluent AutoMapper configuration methods.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.profileType">
+            <summary>
+            The type of the base profile class which will serve the mapping configuration for the AutoMapper.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.registeredProfiles">
+            <summary>
+            The profiles which are currently registered.
+            The same profile is never registered more than once.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.sync">
+            <summary>
+            The synchronization object, memory barrier allowing thread safety for AutoMapper configuration operations.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.RegisterProfiles">
+            <summary>
+            Register the AutoMapper configuration profiles resolving all Profile objects using the unity container.
+            The default container is used to resolve all the Profiles. Check the <see cref="T:Volvo.NVS.Core.Unity.Container"/> for details.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.RegisterProfiles(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Register the AutoMapper configuration profiles resolving all Profile objects using the given unity container.
+            </summary>
+            <param name="container">
+            The unity container having information about all the Profiles to be initialized and configured.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.RegisterProfiles(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Register the AutoMapper configuration profiles looking for the profile classes in the given assemblies.
+            </summary>
+            <param name="assemblies">
+            The assemblies in which we will look for the Profile classes.
+            Each profile class must be derived from the <see cref="T:AutoMapper.Profile"/>.
+            It must also contain a default, public ctor in order to be initialized.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.RegisterProfiles(System.Reflection.Assembly)">
+            <summary>
+            Register the AutoMapper configuration profiles looking for the profile classes in the given assembly.
+            </summary>
+            <param name="assembly">
+            The assembly in which we will look for the Profile classes.
+            Each profile class must be derived from the <see cref="T:AutoMapper.Profile"/>.
+            It must also contain a default, public ctor in order to be initialized.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.RegisterProfiles(System.Collections.Generic.IEnumerable{AutoMapper.Profile})">
+            <summary>
+            Register the collection of AutoMapper profiles so the types described by these profiles can be mapped.
+            </summary>
+            <param name="profiles">The collection of profiles to be registered.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.RegisterProfile(System.Type)">
+            <summary>
+            Register the single AutoMapper profile so the types described by this profile are known and can be mapped.
+            </summary>
+            <param name="type">
+            The type of the profile class to be registered.
+            It must be public, non-abstract type inherited from the <see cref="T:AutoMapper.Profile"/>.
+            It must have the default, public ctor.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.RegisterProfile(AutoMapper.Profile)">
+            <summary>
+            Register the single AutoMapper profile so the types described by this profile are known and can be mapped.
+            </summary>
+            <param name="profile">The profile to be registered.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration.IsProfileRegistered(System.Type)">
+            <summary>
+            Determines if the given profile type is registered meaning it has already been configured.
+            Only profiles registered via the <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration"/> class are visible.
+            </summary>
+            <param name="type">Type of the <see cref="T:AutoMapper.Profile"/> derived class to be checked for registration.</param>
+            <returns>True if the Profile has been registered and configured.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationAttribute">
+            <summary>
+            The class provides base implementation for attributes assigning AutoMapper Profiles to AutoMapper Configuration.
+            </summary>
+            <remarks>
+            <para>
+            This is the base implementation for attributes assigning AutoMapper Profiles to AutoMapper Configuration.
+            </para>
+            <para>
+            Once the profile is assigned the AutoMapper knows how to map types described by the profile.
+            </para>
+            <para>
+            <b>NOTE</b>: It is recommended to initialize the AutoMapper configuration once, in a single place at the application
+            startup instead of marking types with the configuration attributes. It is recommended to use the fluent library configuration.
+            </para>
+            <para>
+            Adding this attribute to types does not automatically enforce assignment of Profiles, configurations. 
+            The attribute is only used when you ask for the list of attributes using the Reflection mechanism. 
+            There is also no guarantee about the cache so it can be initialized and called multiple times.
+            </para>
+            <para>
+            Because applying this attribute into the class or method will not automatically configure the AutoMapper
+            and still manual code examining the attribute is needed the class itself is marked as abstract. It is to
+            identify the above case and to force usage of this attribute as the base one only for operations already
+            using the attributes. Such an attribute can be <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute"/> since
+            the WCF infrastructure will examine all the applied attributes at the same time initializing them.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationAttribute.#ctor(System.Type)">
+            <summary>
+            Assigns AutoMapper Profile to the AutoMapper Configuration so the mapping between the types is known
+            for the AutoMapper library as described and implemented by the Profile class itself.
+            </summary>
+            <param name="profileType">The AutoMapper Profile Type to be configured.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationAttribute.#ctor(System.Type,System.Type)">
+            <summary>
+            Assigns AutoMapper Profiles to the AutoMapper Configuration so the mapping between the types is known
+            for the AutoMapper library as described and implemented by the Profile classes itself.
+            </summary>
+            <param name="profileType">The AutoMapper Profile Type to be configured.</param>
+            <param name="profileType2">The additional AutoMapper Profile Type to be configured.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationAttribute.#ctor(System.Type,System.Type,System.Type)">
+            <summary>
+            Assigns AutoMapper Profiles to the AutoMapper Configuration so the mapping between the types is known
+            for the AutoMapper library as described and implemented by the Profile classes itself.
+            </summary>
+            <param name="profileType">The AutoMapper Profile Type to be configured.</param>
+            <param name="profileType2">The additional AutoMapper Profile Type to be configured.</param>
+            <param name="profileType3">The additional AutoMapper Profile Type to be configured.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationAttribute.#ctor(System.Type,System.Type,System.Type,System.Type)">
+            <summary>
+            Assigns AutoMapper Profiles to the AutoMapper Configuration so the mapping between the types is known
+            for the AutoMapper library as described and implemented by the Profile classes itself.
+            </summary>
+            <param name="profileType">The AutoMapper Profile Type to be configured.</param>
+            <param name="profileType2">The additional AutoMapper Profile Type to be configured.</param>
+            <param name="profileType3">The additional AutoMapper Profile Type to be configured.</param>
+            <param name="profileType4">The additional AutoMapper Profile Type to be configured.</param>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute">
+            <summary>
+            The attribute enables Services, Service Methods and Operations as well as Behaviours to assign AutoMapper Profiles 
+            to AutoMapper Configuration. 
+            </summary>
+            <remarks>
+            <para>
+            The attribute configures the AutoMapper when the Service is used. It means the AutoMapper configuration is done when 
+            the applied attribute is examined by the WCF.
+            </para>
+            <para>
+            Once the profile is assigned the AutoMapper knows how to map types described by the profile class.
+            </para>
+            <para>
+            <b>NOTE</b>: It is recommended to initialize the AutoMapper configuration once, in a single place at the application
+            startup instead of marking type with the configuration attributes. It is recommended to use the fluent library configuration.
+            </para>
+            </remarks>
+            <example>
+            This is an example about how to use <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute"/>.
+            The configuration will be done when the FindPartsInStock is used.
+            <code>
+            [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+            public class WarehouseUIService : IWarehouseUIService
+            {
+                [AutoMapperConfigurationService(typeof(MyProfile))]
+                public IList&lt;PartsInStockContract&gt; FindPartsInStock(int warehouseId) {}
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.#ctor(System.Type)">
+            <summary>
+            Assigns AutoMapper Profile to the AutoMapper Configuration so the mapping between the types is known
+            for the AutoMapper library as described and implemented by the Profile class itself.
+            </summary>
+            <param name="profileType">The AutoMapper Profile Type to be configured.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.#ctor(System.Type,System.Type)">
+            <summary>
+            Assigns AutoMapper Profiles to the AutoMapper Configuration so the mapping between the types is known
+            for the AutoMapper library as described and implemented by the Profile classes itself.
+            </summary>
+            <param name="profileType">The AutoMapper Profile Type to be configured.</param>
+            <param name="profileType2">The additional AutoMapper Profile Type to be configured.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.#ctor(System.Type,System.Type,System.Type)">
+            <summary>
+            Assigns AutoMapper Profiles to the AutoMapper Configuration so the mapping between the types is known
+            for the AutoMapper library as described and implemented by the Profile classes itself.
+            </summary>
+            <param name="profileType">The AutoMapper Profile Type to be configured.</param>
+            <param name="profileType2">The additional AutoMapper Profile Type to be configured.</param>
+            <param name="profileType3">The additional AutoMapper Profile Type to be configured.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.#ctor(System.Type,System.Type,System.Type,System.Type)">
+            <summary>
+            Assigns AutoMapper Profiles to the AutoMapper Configuration so the mapping between the types is known
+            for the AutoMapper library as described and implemented by the Profile classes itself.
+            </summary>
+            <param name="profileType">The AutoMapper Profile Type to be configured.</param>
+            <param name="profileType2">The additional AutoMapper Profile Type to be configured.</param>
+            <param name="profileType3">The additional AutoMapper Profile Type to be configured.</param>
+            <param name="profileType4">The additional AutoMapper Profile Type to be configured.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.AddBindingParameters(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            Not used and provided only in order for the class to be marked with an interface.
+            Called when passing data at runtime to bindings.
+            </summary>
+            <param name="operationDescription">The operation being examined. Use for examination only. If the operation description is modified, the results are undefined.</param>
+            <param name="bindingParameters">The collection of objects that binding elements require to support the behavior.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.ApplyClientBehavior(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Dispatcher.ClientOperation)">
+            <summary>
+            Not used and provided only in order for the class to be marked with an interface.
+            Provides a modification or extension of the client across an operation.
+            </summary>
+            <param name="operationDescription">The operation being examined. Use for examination only. If the operation description is modified, the results are undefined.</param>
+            <param name="clientOperation">The run-time object that exposes customization properties for the operation described by operationDescription.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.ApplyDispatchBehavior(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Dispatcher.DispatchOperation)">
+            <summary>
+            Not used and provided only in order for the class to be marked with an interface.
+            Provides a modification or extension of the service across an operation.
+            </summary>
+            <param name="operationDescription">The operation being examined. Use for examination only. If the operation description is modified, the results are undefined.</param>
+            <param name="dispatchOperation">The run-time object that exposes customization properties for the operation described by operationDescription.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.Validate(System.ServiceModel.Description.OperationDescription)">
+            <summary>
+            Not used and provided only in order for the class to be marked with an interface.
+            Called to confirm that the operation meets some intended criteria.
+            </summary>
+            <param name="operationDescription">The operation being examined. Use for examination only. If the operation description is modified, the results are undefined.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            Not used and provided only for a type to be able to be marked with a specific interface.
+            Called when passing custom data to binding elements to support the contract implementation.
+            </summary>
+            <param name="serviceDescription">The service description of the service.</param>
+            <param name="serviceHostBase">The host of the service.</param>
+            <param name="endpoints">The service endpoints.</param>
+            <param name="bindingParameters">Custom objects to which binding elements have access.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)">
+            <summary>
+            Not used and provided only for a type to be able to be marked with a specific interface.
+            Called when changing run-time property values or inserting custom extension objects such as error handlers, message or parameter interceptors, 
+            security extensions, and other custom extension objects.
+            </summary>
+            <param name="serviceDescription">The service description.</param>
+            <param name="serviceHostBase">The host that is currently being built.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)">
+            <summary>
+            Not used and provided only for a type to be able to be marked with a specific interface.
+            Called when inspecting the service host and the service description to confirm that the service can run successfully.
+            </summary>
+            <param name="serviceDescription">The service description.</param>
+            <param name="serviceHostBase">The service host that is currently being constructed.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.AddBindingParameters(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            Not used and provided only in order for the class to be marked with an interface.
+            Called when configuring any binding elements to support the contract behavior.
+            </summary>
+            <param name="contractDescription">The contract description to modify.</param>
+            <param name="endpoint">The endpoint to modify.</param>
+            <param name="bindingParameters">The objects that binding elements require to support the behavior.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.ApplyClientBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)">
+            <summary>
+            Not used and provided only in order for the class to be marked with an interface.
+            Used for a modification or extension of the client across a contract.
+            </summary>
+            <param name="contractDescription">The contract description for which the extension is intended.</param>
+            <param name="endpoint">The endpoint.</param>
+            <param name="clientRuntime">The client runtime.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.ApplyDispatchBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.DispatchRuntime)">
+            <summary>
+            Not used and provided only in order for the class to be marked with an interface.
+            USed for a modification or extension of the client across a contract.
+            </summary>
+            <param name="contractDescription">The contract description to be modified.</param>
+            <param name="endpoint">The endpoint that exposes the contract.</param>
+            <param name="dispatchRuntime">The dispatch runtime that controls service execution.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperConfigurationServiceAttribute.Validate(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint)">
+            <summary>
+            Not used and provided only in order for the class to be marked with an interface.
+            Used to confirm that the contract and endpoint can support the contract behavior.
+            </summary>
+            <param name="contractDescription">The contract to validate.</param>
+            <param name="endpoint">The endpoint to validate.</param>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Automapper.AutoMapperLibraryConfigurationBuilder">
+            <summary>
+            The class is the fluent AutoMapper configuration builder.
+            </summary>
+            <remarks>
+            See the <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration"/> for configuration samples.
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder">
+            <summary>
+            Defines a contract for the AutoMapper fluent configuration building objects.
+            </summary>
+            <remarks>
+            See the <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration"/> for configuration samples and details.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder.RegisterProfiles">
+            <summary>
+            Registers the AutoMapper configuration profiles resolving all Profile objects using the current <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Unity.Container"/> must be already configured in order to use this method.
+            </para>
+            <para>
+            The method configures all the <see cref="T:AutoMapper.Profile"/> types currently registered within the unity <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder.RegisterProfiles(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Registers the AutoMapper configuration profiles looking for the profile classes in the given assemblies.
+            </summary>
+            <param name="assemblies">
+            The assemblies in which we will look for the Profile classes. Each profile class must be derived from the <see cref="T:AutoMapper.Profile"/>.
+            It must also contain a default, public ctor in order to be initialized and configured.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder.RegisterProfiles(System.Reflection.Assembly)">
+            <summary>
+            Registers the AutoMapper configuration profiles looking for the profile classes in the given assembly.
+            </summary>
+            <param name="assembly">
+            The assembly in which we will look for the <see cref="T:AutoMapper.Profile"/> derived classes. Each profile class must be derived from 
+            the <see cref="T:AutoMapper.Profile"/>. It must also contain a default, public ctor in order to be initialized.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder.RegisterProfiles(System.Collections.Generic.IEnumerable{AutoMapper.Profile})">
+            <summary>
+            Registers the collection of AutoMapper profiles.
+            </summary>
+            <param name="profiles">The collection of profiles to be registered.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder.RegisterProfile(System.Type)">
+            <summary>
+            Registers the single AutoMapper profile according to the given profile type.
+            </summary>
+            <param name="type">
+            The type of the profile class to be registered. It must be public, non-abstract type inherited from the <see cref="T:AutoMapper.Profile"/>.
+            It must have the default, public ctor in order to be configured.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder.RegisterProfile(AutoMapper.Profile)">
+            <summary>
+            Registers the single AutoMapper profile.
+            </summary>
+            <param name="profile">The profile to be registered.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperLibraryConfigurationBuilder.RegisterProfiles">
+            <summary>
+            Registers the AutoMapper configuration profiles resolving all Profile objects using the current <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Unity.Container"/> must be already configured in order to use this method.
+            </para>
+            <para>
+            The method configures all the <see cref="T:AutoMapper.Profile"/> types currently registered within the unity <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperLibraryConfigurationBuilder.RegisterProfiles(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Registers the AutoMapper configuration profiles looking for the profile classes in the given assemblies.
+            </summary>
+            <param name="assemblies">
+            The assemblies in which we will look for the Profile classes. Each profile class must be derived from the <see cref="T:AutoMapper.Profile"/>.
+            It must also contain a default, public ctor in order to be initialized and configured.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperLibraryConfigurationBuilder.RegisterProfiles(System.Reflection.Assembly)">
+            <summary>
+            Registers the AutoMapper configuration profiles looking for the profile classes in the given assembly.
+            </summary>
+            <param name="assembly">
+            The assembly in which we will look for the <see cref="T:AutoMapper.Profile"/> derived classes. Each profile class must be derived from 
+            the <see cref="T:AutoMapper.Profile"/>. It must also contain a default, public ctor in order to be initialized.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperLibraryConfigurationBuilder.RegisterProfiles(System.Collections.Generic.IEnumerable{AutoMapper.Profile})">
+            <summary>
+            Registers the collection of AutoMapper profiles.
+            </summary>
+            <param name="profiles">The collection of profiles to be registered.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperLibraryConfigurationBuilder.RegisterProfile(System.Type)">
+            <summary>
+            Registers the single AutoMapper profile according to the given profile type.
+            </summary>
+            <param name="type">
+            The type of the profile class to be registered. It must be public, non-abstract type inherited from the <see cref="T:AutoMapper.Profile"/>.
+            It must have the default, public ctor in order to be configured.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Automapper.AutoMapperLibraryConfigurationBuilder.RegisterProfile(AutoMapper.Profile)">
+            <summary>
+            Registers the single AutoMapper profile.
+            </summary>
+            <param name="profile">The profile to be registered.</param>
+        </member>
+        <member name="T:Volvo.NVS.Core.Configuration.AutoMapperLibraryConfigurator">
+            <summary>
+            Extends the common <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/> contract providing the AutoMapper related fluent configuration methods. 
+            (requires Volvo.NVS.Utilities)
+            </summary>
+            <remarks>
+            <para>
+            You never use this type directly. You use extensions methods provided by this class via types implementing the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/>
+            which is extended by the <see cref="T:Volvo.NVS.Core.Configuration.AutoMapperLibraryConfigurator"/>.
+            </para>
+            <para>
+            <example>
+            This example is resolving all the AutoMapper profiles from the current unity container using the fluent, common library
+            configuration object:
+            <code>
+            ILibraryConfigurator configurator = LibraryConfigurator.Current;
+            ...
+            configurator.ConfigureAutoMapper(automapper =&gt; automapper.RegisterProfiles());
+            ...
+            </code>
+            </example>
+            </para>
+            <para>
+            Check the <see cref="T:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder"/> interface in order to see all available AutoMapper registration
+            methods. For example <see cref="M:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder.RegisterProfile(AutoMapper.Profile)"/> or <see cref="M:Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder.RegisterProfile(System.Type)"/>.
+            </para>
+            <para>
+            See also the <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration"/> class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.AutoMapperLibraryConfigurator.ConfigureAutoMapper(Volvo.NVS.Core.Configuration.ILibraryConfigurator,System.Action{Volvo.NVS.Utilities.Automapper.IAutoMapperLibraryConfigurationBuilder})">
+            <summary>
+            Configures AutoMapper by usage of the AutoMapper configuration building object.
+            </summary>
+            <param name="configurator">
+            The common library configurator object to be extended.
+            </param>
+            <param name="builder">
+            The action configuring, building the AutoMapper configuration.
+            </param>
+            <returns>The library configuration object.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Extensions.DateTimeExtensions">
+            <summary>
+            Provides <see cref="T:System.DateTime"/> extension methods.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Extensions.DateTimeExtensions.GetWeekNumber(System.DateTime)">
+            <summary>
+            Calculates Volvo week number (ISO 8601) for a given <see cref="T:System.DateTime"/>.
+            </summary>
+            <param name="fromDate">The date object for which the week number should calculated.</param>
+            <returns>The Volvo (ISO 8601) week number.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Extensions.DateTimeExtensions.GetYearForWeek(System.DateTime)">
+            <summary>
+            Returns year corresponds to the Volvo week number. See also <see cref="M:Volvo.NVS.Utilities.Extensions.DateTimeExtensions.GetWeekNumber(System.DateTime)"/>.
+            </summary>
+            <param name="date">A date for which the year corresponding into a Volvo week number should be returned.</param>
+            <returns>Year corresponding to the Volvo week number into which the requested date belongs.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Properties.CommonAssemblyInfoConstants">
+            <summary>
+            Public constants related into the assembly information and assembly signing.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Properties.CommonAssemblyInfoConstants.PublickKeyAttribute">
+            <summary>
+            The Utility library public key attribute string which can be applied directly on the InternalsVisibleTo.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Exceptions.NVSLocalizationException">
+            <summary>
+            The localization exception used when it is not possible to localize one of the values
+            using one of the NVS provided localization mechanism, methods, classes.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.NVSLocalizationException.#ctor">
+            <summary>
+            Creates the NVS localization related exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.NVSLocalizationException.#ctor(System.String)">
+            <summary>
+            Creates the NVS localization related exception.
+            </summary>
+            <param name="message">The error message string.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.NVSLocalizationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates the NVS localization related exception.
+            </summary>
+            <param name="message">The error message string.</param>
+            <param name="inner">The inner exception reference. </param>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Exceptions.NVSValidationException">
+            <summary>
+            The common NVS validation exception.
+            </summary>
+            <remarks>
+            <para>
+            The class does not contain additional properties to hold validation results since it should not be used
+            to pass results from methods implementing validation logic at all. It should also never be used to pass 
+            any information into the UI or any other caller. It is recommended to avoid controlling flows by Exceptions.
+            </para>
+            
+            <para>
+            The message passed on this object does not have to be localized as exception messages should never be
+            displayed directly into the user. One should not pass localized texts on exceptions in any form or even
+            try to pass ids of the localized texts.
+            </para>
+            
+            <para>
+            This exception class should be used when the object did not pass validation and the executing code was
+            expecting the object to be always valid. In other words it should only be used for 'real' exceptional
+            cases which identifies an application problem.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.NVSValidationException.#ctor">
+            <summary>
+            Creates the NVS validation exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.NVSValidationException.#ctor(System.String)">
+            <summary>
+            Creates the NVS validation exception.
+            </summary>
+            <param name="message">The error message string. It should not be localized and never presented in the UI.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.NVSValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates the NVS exception.
+            </summary>
+            <param name="message">The error message string. . It should not be localized and never presented in the UI.</param>
+            <param name="inner">The inner exception reference. </param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.NVSValidationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the NSV Exception with serialization data
+            </summary>
+            <param name="info">All data needed to deserialize.</param>
+            <param name="context">Serialization context, describes the serialization source</param>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Exceptions.ProfileActivationException">
+            <summary>
+            The exception class used when it is not possible to activate the AutoMapper Profile class.
+            </summary>
+            <remarks>
+            Check the <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration"/> for details about the Profile registration and activation.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.ProfileActivationException.#ctor">
+            <summary>
+            Creates the NVS Profile Activation related exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.ProfileActivationException.#ctor(System.String)">
+            <summary>
+            Creates the NVS Profile Activation related exception.
+            </summary>
+            <param name="message">The error message string.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.ProfileActivationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates the NVS Profile Activation related exception.
+            </summary>
+            <param name="message">The error message string.</param>
+            <param name="inner">The inner exception reference. </param>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Exceptions.XmlValidationException">
+            <summary>
+            The Xml Validation exception used when it is not possible to run validation or the validation
+            gives any errors. 
+            </summary>
+            <remarks>
+            The exception is used when no explicit result from the validation is given.
+            Check also usage of the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidationResult"/> and sample from the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/>.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.XmlValidationException.#ctor">
+            <summary>
+            Creates the NVS Xml Validation related exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.XmlValidationException.#ctor(System.String)">
+            <summary>
+            Creates the NVS Xml Validation related exception.
+            </summary>
+            <param name="message">The error message string.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Exceptions.XmlValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates the NVS Xml Validation related exception.
+            </summary>
+            <param name="message">The error message string.</param>
+            <param name="inner">The inner exception reference. </param>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Resources.AutomapperResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.AutomapperResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.AutomapperResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.AutomapperResources.OnlyNonAbstract">
+            <summary>
+              Looks up a localized string similar to Only non-abstract Profile types can be registered.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.AutomapperResources.OnlyPublic">
+            <summary>
+              Looks up a localized string similar to Only public Profile types can be registered.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.AutomapperResources.OnlyTypesInheritedCanBeRegistered">
+            <summary>
+              Looks up a localized string similar to Only types inherited from the {0} can be registered.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.AutomapperResources.TypeCouldNoBeActivated">
+            <summary>
+              Looks up a localized string similar to &quot;Unable to register Profile. The instance of type &apos;{0}&apos; could not be activated. Check innner Exception for details.&quot;.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Resources.UtilitiesResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.UtilitiesResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.UtilitiesResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.UtilitiesResources.ExpressionNotProperty_Exception">
+            <summary>
+              Looks up a localized string similar to The member access expression does not access a property..
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.UtilitiesResources.NotMemberAccessExpression_Exception">
+            <summary>
+              Looks up a localized string similar to The expression is not a member access expression..
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Resources.XmlResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.XmlResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.XmlResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.XmlResources.MultipleEmbeddedXmlEntitiesFound">
+            <summary>
+              Looks up a localized string similar to Multiple embedded resources found for &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.XmlResources.NoEmdeddedXmlEntityFound">
+            <summary>
+              Looks up a localized string similar to Unable to locate the embedded resource for &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.XmlResources.NoSchemaFound">
+            <summary>
+              Looks up a localized string similar to No schema &apos;{0}&apos; found in &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.XmlResources.NotSupportedEntity">
+            <summary>
+              Looks up a localized string similar to The entity &apos;{0}&apos; is not supported by the resolver.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.XmlResources.NotSupportedUriFileRequired">
+            <summary>
+              Looks up a localized string similar to The resolver does not support the &apos;{0}&apos; uri scheme. Only files are supported..
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.XmlResources.NotSupportSeek">
+            <summary>
+              Looks up a localized string similar to Validation is not supported for {0} based stream as this stream / reader does not support Seek operation..
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Resources.ResourceManagementResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.ResourceManagementResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.ResourceManagementResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Resources.ResourceManagementResources.NotEnumType">
+            <summary>
+              Looks up a localized string similar to The type {0} is not the Enumeration type and cannot be localized using this method.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.SettingsManagement.ISettingsProvider">
+            <summary>
+            This interface defines the common way for setting and getting settings. Create your own implementation class
+            for this interface if you need a SettingsProvider.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.SettingsManagement.ISettingsProvider.Get``1(System.String)">
+            <summary>
+            Gets a value from the provider given a key.
+            </summary>
+            <typeparam name="T">The type of the value to be returned</typeparam>
+            <param name="key">The key used as the index for retrieving the value.</param>
+            <returns>Returns the value associated with the given key. 
+            If no value is found for the given key, the type default value ( default(T) ) is returned.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.SettingsManagement.ISettingsProvider.Set``1(System.String,``0)">
+            <summary>
+            Sets a value in the provider given a key.
+            </summary>
+            <typeparam name="T">The type of the value to be set</typeparam>
+            <param name="key">The key used as the index for storing the value</param>
+            <param name="value">The value to be stored</param>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.SettingsManagement.ISettingsProvider.Timeout">
+            <summary>
+            The session timeout in minutes.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.ResourceManagement.NVSResourceManagerExtension">
+            <summary>
+            This extension class provides helper methods to work with <see cref="T:System.Resources.ResourceManager"/>.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.ResourceManagement.NVSResourceManagerExtension.EnumPrefix">
+            <summary>
+            The prefix of the resource name which is used for the enum localization
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.ResourceManagement.NVSResourceManagerExtension.EnumSeparator">
+            <summary>
+            The separator used in the resource name between the type name and the value name
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.ResourceManagement.NVSResourceManagerExtension.GetEnumValue``1(System.Resources.ResourceManager,``0)">
+            <summary>
+            This method localizes an enum value according to the predefined pattern expected in the resource object.
+            The name of the resource is determined as:
+            "Enum_" + enumTypeName + "_" + enumValue
+            Example: Enum_OrderStatus_Draft
+            </summary>
+            <typeparam name="T">The type of the enumeration for which the translation should be performed.</typeparam>
+            <example>
+            Localizing the enum value OrderStatus.Draft from a resource object with key Enum_OrderStatus_Draft:
+            <code>
+            var localizedEnum = MyResource.ResourceManager.GetEnumValue(OrderStatus.Draft);
+            </code>
+            </example>
+            <param name="resourceManager">The instance of ResourceManager</param>
+            <param name="value">The localized value of the enum.</param>
+            <returns>string value.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Translators.BaseEntityTranslator`2">
+            <summary>
+            The class creates an abstraction to convert one type to another one.
+            </summary>
+            <remarks>
+            <para>
+            This solution should be used only when the AutoMapper doesn't fit.
+            </para>
+            <para>
+            Check also <see cref="T:Volvo.NVS.Utilities.Automapper.AutoMapperConfiguration"/> class.
+            </para>
+            <para>
+            The implemented solution is based on: http://msdn.microsoft.com/en-us/library/cc304747.aspx
+            </para>
+            </remarks>
+            <typeparam name="TEntity">Type of the Entity.</typeparam>
+            <typeparam name="TService">Type of the Service.</typeparam>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Translators.IEntityTranslator`2">
+            <summary>
+            This interface defines how to convert one type to another one.
+            </summary>
+            <typeparam name="TEntity">Type of Entity.</typeparam>
+            <typeparam name="TService">Type of Service.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.IEntityTranslator`2.CanTranslate(System.Type,System.Type)">
+            <summary>
+            Determines whether translator supports the translation of the given source and target.
+            </summary>
+            <param name="sourceType">Source object type</param>
+            <param name="targetType">Target object type</param>
+            <returns>Boolean value.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.IEntityTranslator`2.ToEntity(`1)">
+            <summary>
+            The definition of the translator method from Service to Entity.
+            </summary>
+            <param name="obj">The object that needs to be converted to Entity type.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.IEntityTranslator`2.ToEntity(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            This method translate a set of Service entities to a set o Entity entities.
+            </summary>
+            <param name="obj">A set o Services.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.IEntityTranslator`2.ToService(`0)">
+            <summary>
+            The definition of the translator method from Entity to Service.
+            </summary>
+            <param name="obj">The object that needs to be converted to Service Type.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.IEntityTranslator`2.ToService(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            This method translate a set of Entity entities to a set o Service entities.
+            </summary>
+            <param name="obj">A set o Services.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.BaseEntityTranslator`2.CanTranslate(System.Type,System.Type)">
+            <summary>
+            Determines if the translation between the two type is supported by the current implementation.
+            </summary>
+            <param name="sourceType">Source type.</param>
+            <param name="targetType">Target type.</param>
+            <returns>True if translation is supported from source to target.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.BaseEntityTranslator`2.ToEntity(`1)">
+            <summary>
+            Performs the translation from <typeparamref name="TService"/> to <typeparamref name="TEntity"/>
+            </summary>
+            <param name="obj">The object to be translated.</param>
+            <returns>The translated object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.BaseEntityTranslator`2.ToEntity(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Performs the translation from <typeparamref name="TService"/> to <typeparamref name="TEntity"/> for the collection of objects.
+            </summary>
+            <param name="services">The objects to be translated.</param>
+            <returns>The translated object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.BaseEntityTranslator`2.ToService(`0)">
+            <summary>
+            Performs the translation from <typeparamref name="TEntity"/> to <typeparamref name="TService"/>
+            </summary>
+            <param name="obj">The object to be translated.</param>
+            <returns>The translated object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Translators.BaseEntityTranslator`2.ToService(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Performs the translation from <typeparamref name="TEntity"/> to <typeparamref name="TService"/> for the collection of objects.
+            </summary>
+            <param name="entities">The object to be translated.</param>
+            <returns>The translated object.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.WCF.FaultContracts.NVSFaultContract">
+            <summary>
+            The base NVS fault contract class.
+            </summary>
+            <remarks>
+            <para>
+            In most cases errors in .NET are represented by Exceptions. In SOAP-based applications (ex. using WCF), service methods communicate processing error 
+            information using SOAP fault messages. Exceptions that must be sent to the client must be converted from exceptions into SOAP faults. This base
+            class can be used to transfer such fault in a unified form.
+            </para>
+            
+            <para>
+            See also <see cref="T:System.ServiceModel.FaultContractAttribute"/> and the <see cref="T:System.ServiceModel.FaultException"/> class.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.WCF.FaultContracts.NVSFaultContract.Message">
+            <summary>
+            The fault message.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.StreamViews.IXmlDeserializationStreamView">
+            <summary>
+            The interface provides an abstract view on various stream types used in the Xml deserialization process.
+            </summary>
+            <remarks>
+            The interface is required since the deserialization may be performed on various stream types which are 
+            not sharing any common base classes and are not implementing any common interfaces. For example: <see cref="T:System.IO.Stream"/>
+            and the <see cref="T:System.IO.StringReader"/> types.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.IXmlDeserializationStreamView.SeekToStart">
+            <summary>
+            Positions the stream at the beginning so we can read it from the start.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.IXmlDeserializationStreamView.Deserialize``1(System.Xml.Serialization.XmlSerializer)">
+            <summary>
+            Deserializes the stream using the given xml serializer.
+            </summary>
+            <typeparam name="T">A type into which we would like to deserialize.</typeparam>
+            <param name="serializer">Serializer used to perform the deserialization process.</param>
+            <returns>The deserialized object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.IXmlDeserializationStreamView.Validate(Volvo.NVS.Utilities.Xml.IXmlValidator,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validate the current xml document using the given validator and schema.
+            </summary>
+            <param name="validator">The xml validator use to perform the validation.</param>
+            <param name="schema">The schema use to validate the document.</param>
+            <param name="settings">The settings used and passed into the xml validator.</param>
+            <returns>The xml validation result.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.IXmlSerializer">
+            <summary>
+            Defines a contract for the Xml serialization and deserialization types.
+            </summary>
+            <remarks>
+            Check the <see cref="T:Volvo.NVS.Utilities.Xml.XmlSerializer"/> for details.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.SerializeToStream``1(``0,System.IO.Stream,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.SerializeToStream``1(``0,System.IO.Stream,System.Xml.Serialization.XmlSerializerNamespaces,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <param name="settings">Settings used for the xml validation against the schema</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.SerializeToStream``1(``0,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.SerializeToStream``1(``0,System.IO.Stream)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.SerializeToStream``1(``0,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.SerializeToStream``1(``0)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.IO.Stream,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.IO.Stream,System.Xml.Serialization.XmlSerializerNamespaces,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.IO.Stream)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.String)">
+            <summary>
+            Serializes the object, message into the Xml, validate it and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document in the calling assembly.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml, validate it and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document in the calling assembly.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.String,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml, validate it and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document in the calling assembly.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0,System.String,System.Xml.Serialization.XmlSerializerNamespaces,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml, validate it and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document in the calling assembly.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Serialize``1(``0)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.IO.Stream,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.IO.Stream,System.String)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="embeddedResourceName">Full name of the embedded resource (from the calling assembly) holding the schema to be used.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.IO.Stream,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="embeddedResourceName">Full name of the embedded resource (from the calling assembly) holding the schema to be used.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.IO.Stream)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.IO.TextReader)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="reader">The Xml document to be deserialized.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.String,System.IO.Stream)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.String,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.String,System.String)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <param name="embeddedResourceName">Full name of the embedded resource (from the calling assembly) holding the schema to be used.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.String,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <param name="embeddedResourceName">Full name of the embedded resource (from the calling assembly) holding the schema to be used.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.String)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlSerializer.Deserialize``1(System.IO.StringReader)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="reader">The Xml document to be deserialized.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.IXmlValidator">
+            <summary>
+            Defines a contract for the Xml validator helping in the Xml validation process.
+            </summary>
+            <remarks>
+            Check the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/> for details.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.Stream,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.Stream,System.String)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document and is located in your (caller) assembly.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.Stream,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document and is located in your (caller) assembly.</param>
+            <param name="settings">The Xml reader settings used during the validation process or null in order to use default settings.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.TextReader,System.IO.Stream)">
+            <summary>
+            Validates the Xml message according to the given schema and default settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.TextReader,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="settings">The Xml reader settings used during the validation process or null in order to use default settings.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.TextReader,System.String)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.TextReader,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.StringReader,System.IO.Stream)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.StringReader,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.StringReader,System.String)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.IO.StringReader,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and using given settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.IO.Stream)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and using given settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.String)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Validate the Xml message according to the given schema and forcing usage of the given encoding.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.IO.Stream,System.Text.Encoding,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.String,System.Reflection.Assembly,System.Text.Encoding)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the embedded resource xml schema.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.String,System.Reflection.Assembly,System.Text.Encoding,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.IXmlValidator.Validate(System.String,System.String,System.Text.Encoding,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationStream">
+            <summary>
+            Provides an abstract view on stream of type <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <remarks>
+            The view on the stream is abstracted in order to have a single serialization, deserialization 
+            implementation independent from the type of stream. See the <see cref="T:Volvo.NVS.Utilities.Xml.XmlSerializer"/> for details.
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationStream.stream">
+            <summary>
+            The wrapped stream.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationStream.#ctor(System.IO.Stream)">
+            <summary>
+            Creates the view on the stream used during the deserialization process.
+            </summary>
+            <param name="stream">The stream to be wrapped.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationStream.SeekToStart">
+            <summary>
+            Positions the stream at the beginning so we can read it from the start.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationStream.Deserialize``1(System.Xml.Serialization.XmlSerializer)">
+            <summary>
+            Deserializes the stream using the given xml serializer.
+            </summary>
+            <typeparam name="T">A type into which we would like to deserialize.</typeparam>
+            <param name="serializer">Serializer used to perform the deserialization process.</param>
+            <returns>The deserialized object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationStream.Validate(Volvo.NVS.Utilities.Xml.IXmlValidator,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validate the current xml document using the given validator and schema.
+            </summary>
+            <param name="validator">The xml validator use to perform the validation.</param>
+            <param name="schema">The schema use to validate the document.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The xml validation result.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationString">
+            <summary>
+            Provides an abstract view on the <see cref="T:System.String"/> in the stream like manner.
+            </summary>
+            <remarks>
+            The view on the stream is abstracted in order to have a single serialization, deserialization 
+            implementation independent from the type of stream. See the <see cref="T:Volvo.NVS.Utilities.Xml.XmlSerializer"/> for details.
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationString.message">
+            <summary>
+            The wrapped xml message.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationString.#ctor(System.String)">
+            <summary>
+            Creates the view on the string used during the deserialization process.
+            </summary>
+            <param name="message">The message to be wrapped.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationString.SeekToStart">
+            <summary>
+            Positions the stream at the beginning so we can read it from the start.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationString.Deserialize``1(System.Xml.Serialization.XmlSerializer)">
+            <summary>
+            Deserializes the stream using the given xml serializer.
+            </summary>
+            <typeparam name="T">A type into which we would like to deserialize.</typeparam>
+            <param name="serializer">Serializer used to perform the deserialization process.</param>
+            <returns>The deserialized object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationString.Validate(Volvo.NVS.Utilities.Xml.IXmlValidator,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validate the current xml document using the given validator and schema.
+            </summary>
+            <param name="validator">The xml validator use to perform the validation.</param>
+            <param name="schema">The schema use to validate the document.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The xml validation result.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationTextReader">
+            <summary>
+            Provides an abstract view on the reader of type <see cref="T:System.IO.TextReader"/> in the stream manner.
+            </summary>
+            <remarks>
+            The view on the stream is abstracted in order to have a single serialization, deserialization 
+            implementation independent from the type of stream. See the <see cref="T:Volvo.NVS.Utilities.Xml.XmlSerializer"/> for details.
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationTextReader.stream">
+            <summary>
+            The wrapped stream.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationTextReader.#ctor(System.IO.TextReader)">
+            <summary>
+            Creates the view on the stream used during the deserialization process.
+            </summary>
+            <param name="stream">The stream to be wrapped.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationTextReader.SeekToStart">
+            <summary>
+            Positions the stream at the beginning so we can read it from the start.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationTextReader.Deserialize``1(System.Xml.Serialization.XmlSerializer)">
+            <summary>
+            Deserializes the stream using the given xml serializer.
+            </summary>
+            <typeparam name="T">A type into which we would like to deserialize.</typeparam>
+            <param name="serializer">Serializer used to perform the deserialization process.</param>
+            <returns>The deserialized object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.StreamViews.XmlDeserializationTextReader.Validate(Volvo.NVS.Utilities.Xml.IXmlValidator,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validate the current xml document using the given validator and schema.
+            </summary>
+            <param name="validator">The xml validator use to perform the validation.</param>
+            <param name="schema">The schema use to validate the document.</param>
+            <param name="settings">The settings used and passed into the xml validator.</param>
+            <returns>The xml validation result.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver">
+            <summary>
+            Resolves Xml entities from the application embedded resources.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver"/> is used to resolve external XML resources, such as entities, document type definitions (DTDs), or 
+            schemas. It is also used to process include and import elements found in Extensible StyleSheet Language (XSL) style sheets or XML Schema definition
+            language (XSD) schemas. 
+            </para>
+            <para>
+            The <see cref="T:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver"/> is only capable of resolving file entities and it is resolving them from the application embedded 
+            resources.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver.Assembly">
+            <summary>
+            The assembly from which an entity should be resolved.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver.searchPredicate">
+            <summary>
+            The search predicate (pattern) used to look for an embedded resource within the given assembly.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Creates an instance of the Xml resolver resolving Xml entities from application embedded resources expected in a given 
+            assembly and expected with a given name among all the namespaces in this assembly.
+            </summary>
+            <param name="assembly">The assembly from which an entity should be resolved.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver.#ctor(System.Reflection.Assembly,System.String)">
+            <summary>
+            Creates an instance of the Xml resolver resolving Xml entities from application embedded resources expected in a given 
+            assembly and expected under a given namespace in this assembly.
+            </summary>
+            <param name="assembly">The assembly from which an entity should be resolved.</param>
+            <param name="namespaceName">The namespace under which the entity (embedded file) is expected to be found.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver.GetManifestResourceName(System.String)">
+            <summary>
+            Returns the name of the manifest resource according to the resolver assembly and resolver namespace (if given).
+            </summary>
+            <param name="fileName">Name of the file, which is requested by the Xml processor.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver.GetResourceStream(System.String)">
+            <summary>
+            Returns the stream into the embedded resource for the given file name and for the resolver assembly and namespace.
+            </summary>
+            <param name="fileName">Name of the file, which is requested by the Xml processor.</param>
+            <returns>The stream into the given embedded resource.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlEmbeddedResourceResolver.GetEntity(System.Uri,System.String,System.Type)">
+            <summary>
+            Resolves an Xml entity from the application embedded resource.
+            </summary>
+            <param name="absoluteUri">The uri into the entity to be resolved.</param>
+            <param name="role">Not used. This is provided for future extensibility purposes.</param>
+            <param name="ofObjectToReturn">The type of object to return. The current version only returns <see cref="T:System.IO.Stream"/> objects.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.XmlSerializer">
+            <summary>
+            Helps in the Xml serialization and deserialization processes. 
+            Use it in order to change objects to Xmls and Xmls to objects.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Utilities.Xml.XmlSerializer"/> is using standard .NET Xml serialization behind the scene. It provides a simplified usage combined with validation.
+            </para>
+            <para>
+            You may create your own classes, annotated with attributes, or use the XML Schema Definition Tool (Xsd.exe) to generate the classes
+            basing on the existing XSD schema documents. Such classes can later be used in the Xml serialization and deserialization processes.
+            In both cases it is possible to use this XmlSerializer to perform the serialization and deserialization operations.
+            </para>
+            <para>
+            It is highly recommended to always validate your messages, Xml streams. It should be done for newly serialized content or before the 
+            deserialization process is started. You should validate the Xmls even if you use classes generated by usage of the Xsd tool.
+            </para>
+            <para>
+            When you perform validation and you need full information about the validation result you should perform it explicitly using the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/>. 
+            If you just want to ensure that the message is against the schema and you want to have an exception if it's not valid then you may use 
+            one of the XmlSerializer methods taking information about the xsd document directly.
+            </para>
+            <para>
+            If you are passing information about the xsd document as one of the parameters to the XmlSerializer methods you may receive the <see cref="T:Volvo.NVS.Utilities.Exceptions.XmlValidationException"/>
+            when the message is not according to the schema. You should not program by exceptions and appearance of the <see cref="T:Volvo.NVS.Utilities.Exceptions.XmlValidationException"/> 
+            should be a critical system error.
+            </para>
+            </remarks>
+            <example>
+            This sample shows how to serialize a sample entity class into the Xml. The xml generated is of the <see cref="T:System.String"/> type:
+            <code>
+            var entity = new SerializableEntity { Id = 1, Name = "Sample" };
+            
+            IXmlSerializer serializer = new XmlSerializer();
+            string xml = serializer.Serialize(entity);
+            
+            </code>
+            This sample shows how to serialize a simple object into the Xml where the result is available on the <see cref="T:System.IO.Stream"/>:
+            <code>
+            var order = new SerializableOrder { Id = 1, Name = "Test" };
+            
+            IXmlSerializer serializer = new XmlSerializer();
+            using (Stream stream = serializer.SerializeToStream(order))
+            {
+                // Do something with the result stream
+            }
+            </code>
+            This sample shows how to serialize a sample object into the Xml where the Xml is of type <see cref="T:System.String"/>. At the same time an Xml
+            generated is validated against the xsd schema. When the Xml is not valid an exception of type <see cref="T:Volvo.NVS.Utilities.Exceptions.XmlValidationException"/> is produced:
+            <code>
+            var order = new SerializableOrder { Id = 1, Name = "Test" };
+            
+            IXmlSerializer serializer = new XmlSerializer();
+            using (Stream schema = GetStreamToSchema("SerializableOrder.xsd"))
+            {
+                var xml = serializer.Serialize(order, schema);
+            }
+            </code>
+            This sample shows how to deserialize an Xml into the object of a given type. The deserializer validates the given Xml via the provided schema first.
+            When the Xml is not valid an exception of type <see cref="T:Volvo.NVS.Utilities.Exceptions.XmlValidationException"/> is produced:
+            <code>
+            IXmlSerializer serializer = new XmlSerializer();
+            
+            using (Stream message = GetStreamToMessage("SerializableOrder.xml"))
+            using (Stream schema = GetStreamToSchema("SerializableOrder.xsd"))
+            {
+                var deserialized = serializer.Deserialize&lt;SerializableOrder&gt;(message, schema);
+            }
+            </code>
+            
+            This sample shows how to deserialize an Xml into the object and validate the message against the schema. The schema used is expected to be placed in the
+            calling assembly as the embedded resource:
+            <code>
+            IXmlSerializer serializer = new XmlSerializer();
+            
+            using (Stream message = GetStreamToMessage("SerializableOrder.xml"))
+            {
+                var deserialized = serializer.Deserialize&lt;SerializableOrder&gt;(message, "Volvo.Sample.Xml.Schemas.SerializableOrder.xsd");
+            }
+            </code>
+            In all the samples the <see cref="T:Volvo.NVS.Utilities.Xml.XmlSerializer"/> object is created using a new keyword. 
+            It should be resolved via <see cref="T:Volvo.NVS.Core.Unity.Container"/> or another custom container if Unity is in use in your application.
+            </example>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Xml.XmlSerializer.xmlValidator">
+            <summary>
+            The Xml validator used to perform any Xml validation actions.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.#ctor">
+            <summary>
+            Creates the Xml Serializer using the default xml validator when the validation is used and requested.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.#ctor(Volvo.NVS.Utilities.Xml.IXmlValidator)">
+            <summary>
+            Creates the Xml Serializer with the given validator use to perform the validation if it's requested.
+            </summary>
+            <param name="xmlValidator">The xml validator to be used to perform validation if this is requested and schemas are given.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.CreateXmlValidator">
+            <summary>
+            Provides an instance of the Xml Validator to be used during the Xml Validator process.
+            </summary>
+            <returns>The xml validator.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.SerializeToStream``1(``0,System.IO.Stream,System.Xml.Serialization.XmlSerializerNamespaces,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <param name="settings">Settings used for the xml validation against the schema</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.SerializeToStream``1(``0,System.IO.Stream,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.SerializeToStream``1(``0,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.SerializeToStream``1(``0,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.SerializeToStream``1(``0,System.IO.Stream)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.SerializeToStream``1(``0)">
+            <summary>
+            Serializes the object, message into the Xml and provide a generic view on the result using the <see cref="T:System.IO.Stream"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <returns>A view on the Xml through the stream.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.GetStreamContent(System.IO.Stream)">
+            <summary>
+            Reads the content of the stream.
+            </summary>
+            <param name="stream">Stream to be fully read. It should be positioned at the beginning.</param>
+            <returns>The read stream content.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.IO.Stream,System.Xml.Serialization.XmlSerializerNamespaces,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.IO.Stream,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.IO.Stream)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="schema">The stream into the Xml schema document if the validation should be performed for the serialized content.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.GetSchemaFromAssembly(System.String,System.Reflection.Assembly)">
+            <summary>
+            Gets the stream into the schema from the manifest resource stream located in the specified assembly.
+            </summary>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <returns>The stream into the xml schema.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.String,System.Reflection.Assembly,System.Xml.Serialization.XmlSerializerNamespaces,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml, validate it and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document in the calling assembly.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.String)">
+            <summary>
+            Serializes the object, message into the Xml, validate it and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document in the calling assembly.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.String,System.Xml.Serialization.XmlSerializerNamespaces,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Serializes the object, message into the Xml, validate it and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document in the calling assembly.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <param name="settings">Settings used during the xml validation and passed into the xml validator.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0,System.String,System.Xml.Serialization.XmlSerializerNamespaces)">
+            <summary>
+            Serializes the object, message into the Xml, validate it and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document in the calling assembly.</param>
+            <param name="namespaces">The referenced namespaces. One may define default namespaces, used namespaces or other if they are required.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Serialize``1(``0)">
+            <summary>
+            Serializes the object, message into the Xml and provide the result on the <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="T">Type of the object to be serialized.</typeparam>
+            <param name="obj">The object, message to be serialized.</param>
+            <returns>The serialized object as the Xml.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(Volvo.NVS.Utilities.Xml.StreamViews.IXmlDeserializationStreamView,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <param name="settings">Settings used during the xml validation and pases into the xml validator.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.IO.Stream,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.IO.Stream,System.String,System.Reflection.Assembly,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="embeddedResourceName">Full name of the embedded schema in the given schema assembly.</param>
+            <param name="schemaAssembly">The assembly in which the schema is expected.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.IO.Stream,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="embeddedResourceName">Full name of the embedded resource (from the calling assembly) holding the schema to be used.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.IO.Stream,System.String)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <param name="embeddedResourceName">Full name of the embedded resource (from the calling assembly) holding the schema to be used.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.IO.Stream)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="stream">A stream giving a view on the Xml document.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.IO.TextReader)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="reader">The Xml document to be deserialized.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.String,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.String,System.IO.Stream)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <param name="schema">The stream into the Xml schema used to validate the Xml document before the deserialization starts.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.String,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <param name="embeddedResourceName">Full name of the embedded resource (from the calling assembly) holding the schema to be used.</param>
+            <param name="settings">Settings used during the xml validation.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.String,System.String)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <param name="embeddedResourceName">Full name of the embedded resource (from the calling assembly) holding the schema to be used.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.String)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="xml">The Xml document to be deserialized.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlSerializer.Deserialize``1(System.IO.StringReader)">
+            <summary>
+            Deserializes the Xml document into the object graph.
+            </summary>
+            <typeparam name="T">Type of the object into which the Xml should be deserialized.</typeparam>
+            <param name="reader">The Xml document to be deserialized.</param>
+            <returns>The deserialized object from the Xml document.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.XmlValidationResult">
+            <summary>
+            Represents the result from the Xml Validation.
+            </summary>
+            <remarks>
+            <para>
+            It is possible to check validation result using <see cref="P:Volvo.NVS.Utilities.Xml.XmlValidationResult.Valid"/> property or by directly comparing
+            into the instance of the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidationResult"/> because the implicit conversion operator
+            is provided for that purpose.
+            </para>
+            
+            <para>
+            One may examine detailed validation error and / or validation warning messages using the <see cref="P:Volvo.NVS.Utilities.Xml.XmlValidationResult.Errors"/>
+            and <see cref="P:Volvo.NVS.Utilities.Xml.XmlValidationResult.Warnings"/> properties accordingly. 
+            </para>
+            
+            <para>
+            When result is valid and the <see cref="P:Volvo.NVS.Utilities.Xml.XmlValidationResult.Valid"/> property returns true then we never have elements on the collection
+            of error messages available on the <see cref="P:Volvo.NVS.Utilities.Xml.XmlValidationResult.Errors"/> property.
+            </para>
+            
+            <para>
+            See also the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/> class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidationResult.#ctor(System.Collections.ObjectModel.ReadOnlyCollection{System.String},System.Collections.ObjectModel.ReadOnlyCollection{System.String})">
+            <summary>
+            Creates the object representing the result from the Xml Validation.
+            </summary>
+            <param name="errors">Collection of detected validation errors, error messages.</param>
+            <param name="warnings">Collection of detected validation warnings, warning messages.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidationResult.op_Implicit(Volvo.NVS.Utilities.Xml.XmlValidationResult)~System.Boolean">
+            <summary>
+            Determines if the validation result is valid or not.
+            </summary>
+            <param name="result">The validation result to be checked.</param>
+            <returns>True if validation is with no errors and warnings.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Xml.XmlValidationResult.Valid">
+            <summary>
+            Determines if any validation errors have been detected.
+            If only warnings are detected then the state is still treated as valid.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Xml.XmlValidationResult.Errors">
+            <summary>
+            The errors detected during the validation process.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Xml.XmlValidationResult.Warnings">
+            <summary>
+            The warnings detected during the validation process.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.XmlValidator">
+            <summary>
+            Provides Xml Validation methods simplifying Xml validation process.
+            It is recommended to always validate all Xml messages used in the application.
+            </summary>
+            <remarks>
+            <para>
+            The XmlValidator provides a simple API to perform common Xml validation tasks.
+            </para>
+            <para>
+            It is highly recommended NOT to store any xml messages or xml schema documents on disc. For example: the 
+            application should store xsd schemas as embedded resources instead of keeping them directly on disc.
+            </para>
+            <para>
+            When Xml schemas are stored as embedded resources and you have them stored in the assembly calling, using
+            this class you may then use one of the Validation methods taking name of the embedded resource as one of
+            the parameters. For example: <see cref="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.String)"/>. In that case the schema will be 
+            automatically loaded according to the provided embedded resource name.
+            </para>
+            <para>
+            It is also possible to load a schema from any source you like and pass it using one of the stream 
+            objects. Various stream types can also be used to pass a message to be validated.
+            </para>
+            <para>
+            All the time when the validation is performed the result is passed on the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidationResult"/> object.
+            A full access to the collection of received warning and error messages is possible.
+            </para>
+            </remarks>
+            <example>
+            This sample validates the Xml against the xsd schema where both documents are provided on streams of type <see cref="T:System.IO.Stream"/>:
+            <code>
+            using (Stream schema = GetStreamSchema("SerializableOrder.xsd"))
+            using (Stream message = GetStreamToXml("SerializableOrder.xml"))
+            {
+                IXmlValidator service = new XmlValidator();
+                var result = service.Validate(message, schema);
+                if (result)
+                {
+                    // OK - no validation errors
+                }
+                else
+                {
+                    // We have some errors on result.Errors
+                }
+            }
+            </code>
+            This sample validates the Xml which is provided on the object of type <see cref="T:System.String"/>. The schema is taken from the <see cref="T:System.IO.Stream"/>:
+            <code>
+            string xml = GetSampleXml();
+            
+            using (Stream schema = GetStreamToSchema("SerializableOrder.xsd"))
+            {
+                IXmlValidator service = new XmlValidator();
+                var result = service.Validate(xml, schema);
+                // Process the validation result
+            }
+            </code>
+            This sample validates the Xml which is given on the <see cref="T:System.String"/>. It also reads the embedded resource schema from the current assembly.
+            The current assembly is the one using and calling the method on the XmlValidator object:
+            <code>
+            string xml = GetSampleXml();
+            
+            IXmlValidator service = new XmlValidator();
+            var result = service.Validate(xml, "Volvo.Samples.Schemas.SerializableOrder.xsd");
+            // Process the validation result
+            </code>
+            </example>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Xml.XmlValidator.errors">
+            <summary>
+            The collection of validation error messages.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Utilities.Xml.XmlValidator.warnings">
+            <summary>
+            The collection of validation warning messages.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Reset">
+            <summary>
+            Resets the state of the validator so a new validation can be performed using the same instance.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.LoadSchema(System.IO.Stream)">
+            <summary>
+            Loads the Xml Schema from the given Stream.
+            </summary>
+            <remarks>
+            The loading operation may already fill the warnings and errors.
+            This may happen when the given schema is incorrect itself.
+            </remarks>
+            <param name="schema">The stream giving access into the Xml Schema to be loaded.</param>
+            <returns>An in-memory representation of the Xml Schema.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.SetCommonXmlReaderSettings(Volvo.NVS.Utilities.Xml.XmlValidatorSettings,System.Xml.Schema.XmlSchema)">
+            <summary>
+            Sets common settings for the <see cref="T:System.Xml.XmlReader"/> which are required by the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/> class.
+            </summary>
+            <param name="settings">The settings object onto which settings should be set.</param>
+            <param name="schema">The schema to be used in order to validate the Xml document.</param>
+            <returns>The Xml Reader settings used to perform the Xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.SetCommonXmlReaderSettings(Volvo.NVS.Utilities.Xml.XmlValidatorSettings,System.IO.Stream)">
+            <summary>
+            Sets common settings for the <see cref="T:System.Xml.XmlReader"/> which are required by the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/> class.
+            </summary>
+            <param name="settings">The settings object onto which settings should be set.</param>
+            <param name="schema">The schema to be used in order to validate the Xml document.</param>
+            <returns>The Xml Reader settings used to perform the Xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.ValidationEventHandler(System.Object,System.Xml.Schema.ValidationEventArgs)">
+            <summary>
+            An event handler collecting information about all the detected validation errors and warnings.
+            </summary>
+            <param name="sender">The owning objects.</param>
+            <param name="arg">The validation argument with information about the validation state.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.Xml.XmlReader)">
+            <summary>
+            Validates the Xml document using the already configured reader.
+            </summary>
+            <param name="reader">The reader configured to validate the Xml document while the reading operation proceeds.</param>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.Stream,System.Func{System.Xml.XmlReaderSettings,System.Xml.XmlReader},Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and using the created message reader object.
+            </summary>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="reader">The Xml reader creating function which is used to perform the validation.</param>
+            <param name="settings">The Xml settings used during the validation process or null in order to use default settings.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.GetSchemaFromAssembly(System.String,System.Reflection.Assembly)">
+            <summary>
+            Gets the stream into the schema from the manifest resource stream located in the specified assembly.
+            </summary>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <returns>The stream into the xml schema.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.Stream,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Validates the Xml message according to the given schema and default settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.Stream,System.String,System.Reflection.Assembly,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="settings">The Xml reader settings used during the validation process or null in order to use default settings.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.Stream,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document and is located in your (caller) assembly.</param>
+            <param name="settings">The Xml reader settings used during the validation process or null in order to use default settings.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.Stream,System.String)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document and is located in your (caller) assembly.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.TextReader,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.TextReader,System.IO.Stream)">
+            <summary>
+            Validates the Xml message according to the given schema and using default settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.TextReader,System.String,System.Reflection.Assembly,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <param name="settings">The Xml reader settings used during the validation process or null in order to use default settings.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.TextReader,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.TextReader,System.String)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <remarks>
+            The schema used by the validation process is expected to be placed in your assembly which is about to call this method.
+            </remarks>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.StringReader,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.StringReader,System.IO.Stream)">
+            <summary>
+            Validates the Xml message according to the given schema and default settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.StringReader,System.String,System.Reflection.Assembly,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <param name="settings">The Xml reader settings used during the validation process or null to use default settings.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.StringReader,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and using given settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.IO.StringReader,System.String)">
+            <summary>
+            Validates the Xml message according to the given schema and using default settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.IO.Stream,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and using given settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.IO.Stream)">
+            <summary>
+            Validates the Xml message according to the given schema and using default validation settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.String,System.Reflection.Assembly,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.String,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.String)">
+            <summary>
+            Validates the Xml message according to the given schema and using default validation settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.IO.Stream,System.Text.Encoding,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="schema">The Xml schema to be used during the validation process.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.String,System.Reflection.Assembly,System.Text.Encoding,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.String,System.Reflection.Assembly,System.Text.Encoding)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="schemaAssembly">Assembly containing the <paramref name="embeddedSchemaResourceName"/> xml schema.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.String,System.Text.Encoding,Volvo.NVS.Utilities.Xml.XmlValidatorSettings)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding and settings.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <param name="settings">The Xml reader settings used during the validation process.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidator.Validate(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Validates the Xml message according to the given schema and forcing usage of the given encoding.
+            </summary>
+            <param name="message">The Xml message to be validated.</param>
+            <param name="embeddedSchemaResourceName">Full name of the manifest, embedded resource which holds the xml schema document.</param>
+            <param name="encoding">The encoding to be forced and assumed in the message.</param>
+            <returns>The result from the performed xml validation.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Utilities.Xml.XmlValidatorSettings">
+            <summary>
+            Defines explicit settings for the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/>.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidatorSettings"/> is used when non-default settings must be applied fro the 
+            Xml validation. For standard cases there is no need to use the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidatorSettings"/>
+            at all.
+            </para>
+            <para>
+            Typically the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidatorSettings"/> is passed as one of the arguments into multiple validation
+            methods exposed by the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/> class. See the <see cref="T:Volvo.NVS.Utilities.Xml.XmlValidator"/> for details.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Utilities.Xml.XmlValidatorSettings.#ctor">
+            <summary>
+            Creates an instance of the Xml validation settings.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Utilities.Xml.XmlValidatorSettings.XmlResolver">
+            <summary>
+            Custom resolver used to resolve external Xml and Xsd resources.
+            </summary>
+        </member>
+    </members>
+</doc>

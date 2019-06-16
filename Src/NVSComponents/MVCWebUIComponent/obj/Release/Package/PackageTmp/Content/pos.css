@@ -1,0 +1,61 @@
+﻿#basket {
+    text-align: right;
+    
+}
+
+#basket button {
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 4px;
+    background-color: #F3F5F7;
+    color: #4E4E4E;
+}
+
+#basket button:hover
+{
+    color: #0C106B;
+    background-color: #E2E9ED;
+    border-color: #BCCCD5;
+}
+
+/*
+kendo ui footer - oveloading the defaults
+*/
+.k-grid-footer td {
+    color: black !important;
+    border: 0 !important;
+}
+
+.indexItem {
+    clear: both;
+}
+
+.indexItem img {
+    width: 32px; 
+    height: 32px; 
+    float: left; 
+    padding: 10px;
+}
+
+.indexItem p {
+    height: 32px;  
+    vertical-align: middle; 
+    display: table-cell; 
+    padding: 10px;
+}
+
+    .indexItem p > a {
+        font-size: large;
+    }
+
+hr.nvs
+{
+    clear: both;
+    visibility: hidden;
+}
+
+/*div .nvs
+{
+    padding-right: 100px; 
+    float: left;
+}*/

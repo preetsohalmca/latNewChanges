@@ -1,0 +1,246 @@
+2019-05-23T06:58:45.0811809Z	ErrorId: 923869b3-76b0-4adf-83ad-64a673b10b9d
+
+	Utc:		2019-05-23T06:58:45.0811809Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-23T07:12:31.660509Z	ErrorId: df42c5ae-52a8-4b03-8151-317be3540750
+
+	Utc:		2019-05-23T07:12:31.660509Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-23T09:13:00.6964821Z	ErrorId: e5e39adf-43b3-42ba-957f-a8fd98a140cc
+
+	Utc:		2019-05-23T09:13:00.6964821Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The if block is missing a closing "}" character.  Make sure you have a matching "}" character for all the "{" characters within this block, and that none of the "}" characters are being interpreted as markup.
+
+	   Type: System.Web.HttpParseException
+	      at System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+	      at System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+	      at System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+	      at System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+	      at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+	      at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+	      at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+	      at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+	      at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+	      at System.Web.Compilation.BuildManager.GetCompiledType(VirtualPath virtualPath)
+	      at System.Web.Compilation.BuildManager.GetCompiledType(String virtualPath)
+	      at System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.GetCompiledType(String virtualPath)
+	      at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+	      at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-23T09:13:18.9703946Z	ErrorId: 1bc8cd18-11d5-489b-bd81-b7306189bbca
+
+	Utc:		2019-05-23T09:13:18.9703946Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The if block is missing a closing "}" character.  Make sure you have a matching "}" character for all the "{" characters within this block, and that none of the "}" characters are being interpreted as markup.
+
+	   Type: System.Web.HttpParseException
+	      at System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+	      at System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+	      at System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+	      at System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+	      at System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+	      at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+	      at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+	      at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+	      at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+	      at System.Web.Compilation.BuildManager.GetCompiledType(VirtualPath virtualPath)
+	      at System.Web.Compilation.BuildManager.GetCompiledType(String virtualPath)
+	      at System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.GetCompiledType(String virtualPath)
+	      at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+	      at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-23T09:55:56.9159391Z	ErrorId: 11a43731-62c2-4d81-85c0-ed41b2ed85ca
+
+	Utc:		2019-05-23T09:55:56.9159391Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-23T09:55:56.9189476Z	ErrorId: 698f6fcd-acc7-4f06-8913-f7b3ea042f79
+
+	Utc:		2019-05-23T09:55:56.9189476Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+

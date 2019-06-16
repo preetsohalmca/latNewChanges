@@ -1,0 +1,19 @@
+Tree, Expand/Collapse Icon 
+------------------------------------------
+
+Created: 2007-06-29
+By: Design & Usability, Volvo Information Technology, dept 9615
+
+
+Description of usage:
+Expand or collapse container contents when navigating through a hierarchy. The item stays expanded until the user collapse it. Two opposite icons. May be showed together at the same time. 
+	
+Action:
+Expand or collapse a folder view.
+
+Action mandatory:
+Yes
+
+Note:
+Not available in all sizes. Used in tables and tree hierarchy.
+------------------------------------------

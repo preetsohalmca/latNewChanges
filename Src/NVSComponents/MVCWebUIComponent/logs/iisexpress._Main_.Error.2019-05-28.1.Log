@@ -1,0 +1,1455 @@
+2019-05-27T04:03:15.9910192Z	ErrorId: ffe2b32f-a4c6-461f-b963-310eaef73907
+
+	Utc:		2019-05-27T04:03:15.9910192Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-27T04:03:16.0030512Z	ErrorId: d09ff312-0cbf-4052-bb16-f16e170b8e04
+
+	Utc:		2019-05-27T04:03:16.0030512Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-27T04:03:15.9932526Z	ErrorId: 0c471bf5-1f8f-4c83-9140-9b69594205c5
+
+	Utc:		2019-05-27T04:03:15.9932526Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-27T04:03:15.9955578Z	ErrorId: 56dea09d-5246-45b9-882a-36d332606d5c
+
+	Utc:		2019-05-27T04:03:15.9955578Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-27T04:03:15.9932526Z	ErrorId: 81648818-3938-41e7-9e19-7dee756a8ffd
+
+	Utc:		2019-05-27T04:03:15.9932526Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-27T04:03:19.1060649Z	ErrorId: f1ecc7ad-d502-4565-944b-159fe1ebf1d7
+
+	Utc:		2019-05-27T04:03:19.1060649Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-27T04:04:22.70766Z	ErrorId: bc348d6b-6c85-46e1-a6b6-070b4e9dd87e
+
+	Utc:		2019-05-27T04:04:22.70766Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-27T04:04:35.0641502Z	ErrorId: 92132fc8-c710-4b24-a85b-89b647d4511d
+
+	Utc:		2019-05-27T04:04:35.0641502Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:44:49.7033171Z	ErrorId: ab3c13b7-2d49-4007-a793-5a2d1389e12c
+
+	Utc:		2019-05-27T12:44:49.7033171Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:46:08.6080824Z	ErrorId: 73bdc74a-3f75-4007-a571-a11e4447cc45
+
+	Utc:		2019-05-27T12:46:08.6080824Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:46:57.6515258Z	ErrorId: 22aec513-08e5-411f-b4ed-ef8e1fcd5061
+
+	Utc:		2019-05-27T12:46:57.6515258Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:47:08.2400888Z	ErrorId: c40e559f-37e1-4996-b02c-1fdfef79f887
+
+	Utc:		2019-05-27T12:47:08.2400888Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:47:08.7401149Z	ErrorId: ec7b6369-2bb4-4e1f-96e2-42b275bf00e1
+
+	Utc:		2019-05-27T12:47:08.7401149Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:47:39.8377725Z	ErrorId: b6f3f9f4-cd2d-4f4a-8dce-9d21d2b35a51
+
+	Utc:		2019-05-27T12:47:39.8377725Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:48:26.2427954Z	ErrorId: 0cd38788-6650-4a44-b451-b7229e574363
+
+	Utc:		2019-05-27T12:48:26.2427954Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:48:35.1975779Z	ErrorId: 3ea9a414-234e-4fd6-8c8b-d5289e8ae3c9
+
+	Utc:		2019-05-27T12:48:35.1975779Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:49:48.2147424Z	ErrorId: 82bc725e-7096-429e-829c-5570750c038e
+
+	Utc:		2019-05-27T12:49:48.2147424Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:50:13.249918Z	ErrorId: 17153633-6cd0-4bd3-a594-bea6642de108
+
+	Utc:		2019-05-27T12:50:13.249918Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:50:25.1808259Z	ErrorId: e9722ef3-4540-44df-9456-319c3eaafb32
+
+	Utc:		2019-05-27T12:50:25.1808259Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:50:34.152309Z	ErrorId: 5d3cd545-a9e2-4359-9e6e-d278f77d29ec
+
+	Utc:		2019-05-27T12:50:34.152309Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T12:51:14.2428234Z	ErrorId: 4a2cacc2-d440-441f-ad67-2292702c6211
+
+	Utc:		2019-05-27T12:51:14.2428234Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-27T13:05:51.4107658Z	ErrorId: 77d37902-b2cd-48a3-a284-1724b89a2309
+
+	Utc:		2019-05-27T13:05:51.4107658Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute batch command.[SQL: SQL not available]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatchWithTiming(IDbCommand ps)
+	      at NHibernate.AdoNet.AbstractBatcher.ExecuteBatch()
+	      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+	      at NHibernate.Engine.ActionQueue.ExecuteActions()
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 122
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 392
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> String or binary data would be truncated.
+		  The statement has been terminated.
+
+		   Type: System.Data.SqlClient.SqlException
+		      at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+		      at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+		      at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+		      at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+		      at System.Data.SqlClient.SqlCommand.ExecuteBatchRPCCommand()
+		      at System.Data.SqlClient.SqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientSqlCommandSet.ExecuteNonQuery()
+		      at NHibernate.AdoNet.SqlClientBatchingBatcher.DoExecuteBatch(IDbCommand ps)
+		------------------------------------------------------------------------------------------
+
+

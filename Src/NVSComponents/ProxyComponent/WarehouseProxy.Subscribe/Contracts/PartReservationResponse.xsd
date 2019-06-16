@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+ 
+<!-- -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="PartReservationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="OrderRows">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Part" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Number" type="xs:long" minOccurs="0"/>
+                    <xs:element name="RequestedQuantity" type="xs:decimal" minOccurs="0"/>
+                    <xs:element name="ReservedQuantity" type="xs:decimal" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>   
+      <xs:attribute name="OrderNumber" type="xs:string" use="required"/>    
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

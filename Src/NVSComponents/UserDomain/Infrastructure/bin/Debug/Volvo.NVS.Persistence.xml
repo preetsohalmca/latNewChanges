@@ -1,0 +1,1997 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Volvo.NVS.Persistence</name>
+    </assembly>
+    <members>
+        <member name="T:Volvo.NVS.Signing.NVSLibrarySigning">
+            <summary>
+            Providing information about the current NVS Library signing (e.g. signing public key).
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Signing.NVSLibrarySigning.PublickKey">
+            <summary>
+            The public key used by all the library assemblies.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.ADM.ADMHelper">
+            <summary>
+            The helper to manage archiving and deletion of entities.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:Volvo.NVS.Persistence.ADM.ADMHelper"/> class.
+            </summary>
+            <remarks>
+            If configuration in XML file exists, it will be loaded. It is possible to replace configurations by code after
+            initial load.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.IsRegistered(System.String)">
+            <summary>
+            Checks if the type is registered.
+            </summary>
+            <param name="type">The string representation of the type.</param>
+            <returns><see langword="true"/> if the type is registered; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.IsRegistered(System.Type)">
+            <summary>
+            Checks if the type is registered.
+            </summary>
+            <param name="type">The type.</param>
+            <returns><see langword="true"/> if the type is registered; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.SetTypeExpiration(System.String,System.Boolean,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan})">
+            <summary>
+            Adds a configuration to a specific type. In the type is already configured, the configuration will be replaced.
+            </summary>
+            <param name="type">The string representation of the type.</param>
+            <param name="expireFromCreation">
+            Indicates whether expiration should be calculated from creation date (<see langword="true"/>) or from last change
+            date (<see langword="false"/>).
+            </param>
+            <param name="timeToArchive">The time span representing period after which the entity should be archived.</param>
+            <param name="timeToDelete">The time span representing period after which the entity should be deleted.</param>
+            <remarks>
+            Only the days components of the time span in <paramref name="timeToArchive"/> and <paramref name="timeToDelete"/> are
+            used. This is because in order to reduce the impact of expiration functionality on exising database we are only
+            storing the date without time.
+            </remarks>
+            <remarks>
+            If the configuration for the given type already existed, it will be overwritten.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.SetTypeExpiration(System.Type,System.Boolean,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan})">
+            <summary>
+            Adds a configuration to a specific type. If the type is already configured, the configuration will be replaced.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="expireFromCreation">
+            Indicates whether expiration should be calculated from creation date (<see langword="true"/>) or from last change
+            date (<see langword="false"/>).
+            </param>
+            <param name="timeToArchive">The time span representing period after which the entity should be archived.</param>
+            <param name="timeToDelete">The time span representing period after which the entity should be deleted.</param>
+            <remarks>
+            Only the days components of the time span in <paramref name="timeToArchive"/> and <paramref name="timeToDelete"/> are
+            used. This is because in order to reduce the impact of expiration functionality on exising database we are only
+            storing the date without time.
+            </remarks>
+            <remarks>
+            If the configuration for the given type already existed, it will be overwritten.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.IsTimeToArchive(Volvo.NVS.Persistence.Entities.IExpireEntity,System.Nullable{System.Boolean})">
+            <summary>
+            Checks if the entity is expired and can be archived.
+            </summary>
+            <param name="entity">The entity to check.</param>
+            <param name="throwExceptionWhenNotConfigured">
+            Indicates whether exception should be thrown if the entity is not configured, otherwise <see langword="false"/>
+            will be returned.
+            </param>
+            <returns>
+            <see langword="true"/> if entity is expired, <see langword="false"/> if it is not expired or it is not configured for
+            expiration checks.
+            </returns>
+            <remarks>
+            Due to the fact the entity does not save time in the database, this method will return <see langword="true"/> if
+            <c>CURRENT_DATE > CREATION_OR_MODIFICATION_DATE + TIME_TO_ARCHIVE</c>.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.GetIsTimeToExpireExpression``1(System.TimeSpan)">
+            <summary>
+            Gets the expression that returns whether a given entity should expires.
+            </summary>
+            <param name="days">The time span in days when an entity must be expired.</param>
+            <typeparam name="TEntity">The type of the entity being handled.</typeparam>
+            <returns>The expression that should be executed to validate expiration.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.IsTimeToDelete(Volvo.NVS.Persistence.Entities.IExpireEntity,System.Nullable{System.Boolean})">
+            <summary>
+            Checks if the entity is expired and can be deleted.
+            </summary>
+            <param name="entity">The entity to check.</param>
+            <param name="throwExceptionWhenNotConfigured">
+            Indicates whether exception should be thrown if the entity is not configured, otherwise <see langword="false"/>
+            will be returned.
+            </param>
+            <returns>
+            <see langword="true"/> if entity is expired, <see langword="false"/> if it is not expired or it is not configured for
+            expiration checks.
+            </returns>
+            <remarks>
+            Due to the fact the entity does not save time in the database, this method will return <see langword="true"/> if
+            <c>CURRENT_DATE > CREATION_OR_MODIFICATION_DATE + TIME_TO_DELETE</c>.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.RemoveTypeFromConfig(System.String)">
+            <summary>
+            Remove the configuration for a specific type.
+            </summary>
+            <param name="type">The type to have the configuration removed.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.RemoveTypeFromConfig(System.Type)">
+            <summary>
+            Remove the configuration for a specific type.
+            </summary>
+            <param name="type">The type to have the configuration removed.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.GetTimeToArchive(System.String)">
+            <summary>
+            Gets the type interval for a specific type to be archived from the configuration. An exception will be raised in
+            case of negative number of days to expire.
+            </summary>
+            <param name="type">The full name of the type to be checked.</param>
+            <returns>A time span with the archiving interval.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.GetTimeToArchive(System.Type)">
+            <summary>
+            Gets the type interval for a specific type to be archived from the configuration. An exception will be raised in
+            case of negative number of days to expire.
+            </summary>
+            <param name="type">The full name of the type to be checked.</param>
+            <returns>A time span with the archiving interval.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.GetTimeToDelete(System.String)">
+            <summary>
+            Check in the configuration the time interval for a specific type to be deleted.
+            An exception will be raised in case of negative number of days to expire.
+            </summary>
+            <param name="type">The full type name to be checked.</param>
+            <returns>A timespan with the interval to delete.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.GetTimeToDelete(System.Type)">
+            <summary>
+            Check in the configuration the time interval for a specific type to be deleted.
+            An exception will be raised in case of negative number of days to expire.
+            </summary>
+            <param name="type">The full type name to be checked.</param>
+            <returns>A timespan with the interval to delete.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.ExpireFromCreation(System.String)">
+            <summary>
+            Check if a specific type is expiring from creation or from last change.
+            Default value is false.
+            </summary>
+            <param name="type">The type to be checked.</param>
+            <returns>
+            <see langword="true"/> if expiration is calculated from creation; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelper.ExpireFromCreation(System.Type)">
+            <summary>
+            Check if a specific type is expiring from creation or from last change.
+            Default value is false.
+            </summary>
+            <param name="type">The type to be checked.</param>
+            <returns>
+            <see langword="true"/> if expiration is calculated from creation; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.ADM.ADMHelperElement">
+            <summary>
+            The ADM helper configuration element.
+            </summary>
+            <seealso cref="T:System.Configuration.ConfigurationElement" />
+        </member>
+        <member name="P:Volvo.NVS.Persistence.ADM.ADMHelperElement.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.ADM.ADMHelperElement.ExpireFromCreation">
+            <summary>
+            Gets a value indicating whether expiration should be calculated from creation date.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.ADM.ADMHelperElement.DaysToArchive">
+            <summary>
+            Gets the days to archive.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.ADM.ADMHelperElement.DaysToDelete">
+            <summary>
+            Gets the days to delete.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.ADM.ADMHelperElementCollection">
+            <summary>
+            The ADM helper configuration element collection.
+            </summary>
+            <seealso cref="T:System.Configuration.ConfigurationElementCollection" />
+            <seealso cref="T:System.Collections.Generic.IEnumerable`1" />
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelperElementCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator{ADMHelperElement}" /> that can be used to iterate through the
+            collection.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelperElementCollection.CreateNewElement">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.ADM.ADMHelperElementCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.ADM.ADMHelperSection">
+            <summary>
+            The ADM helper configuration section.
+            </summary>
+            <seealso cref="T:System.Configuration.ConfigurationSection" />
+        </member>
+        <member name="P:Volvo.NVS.Persistence.ADM.ADMHelperSection.ConfigTypes">
+            <summary>
+            Gets the configuration types.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Attributes.NamedSectionAttribute">
+            <summary>
+            Set the named section.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Attributes.NamedSectionAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Attributes.NamedSectionAttribute"/> class.
+            </summary>
+            <param name="name">The name of the section.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Attributes.NamedSectionAttribute.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Attributes.ProjectionMappingAttribute">
+            <summary>
+            The projection mapping attribute that should be applied on all projection mapping so that they are ignored from
+            schema export.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Config.ConfigurationLoader">
+            <summary>
+            Loads configuration from configuration files.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Config.ConfigurationLoader.GetConfiguration">
+            <summary>
+            Gets the complete configuration for the current application.
+            </summary>
+            <returns>The assembly configuration.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Config.ConfigurationLoader.GetConfiguration(System.Reflection.Assembly)">
+            <summary>
+            Gets the complete configuration for a specific assembly.
+            </summary>
+            <param name="assembly">The assembly.</param>
+            <returns>The assembly configuration.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Config.ConfigurationLoader.GetSection``1">
+            <summary>
+            Gets the configuration section for a specific type. The type must implement the <see cref="T:System.Configuration.ConfigurationSection"/>
+            to be mapped to a configuration section in the configuration file.
+            </summary>
+            <typeparam name="TSection">The type of the configuration section.</typeparam>
+            <returns>The configuration for the given type.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Config.ConfigurationLoader.GetAttribute``1(System.Object)">
+            <summary>
+            Gets the attribute.
+            </summary>
+            <typeparam name="TAttribute">The type of the attribute.</typeparam>
+            <param name="value">The value.</param>
+            <returns>The attribute.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Entities.BaseObject">
+            <summary>
+            Provides a standard base class for facilitating comparison of objects.
+            </summary>
+            <remarks>
+            This base class has been inspired from SharpArch see
+            <a href="http://groups.google.com/group/sharp-architecture?hl=en">this</a>.
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Persistence.Entities.BaseObject.signaturePropertiesDictionary">
+            <summary>
+            This static member caches the domain signature properties to avoid looking them up for
+            each instance of the same type.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.BaseObject.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.BaseObject.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.BaseObject.HasSameObjectSignatureAs(Volvo.NVS.Persistence.Entities.BaseObject)">
+            <summary>
+            You may override this method to provide your own comparison routine.
+            </summary>
+            <param name="compareTo">The object to compare to.</param>
+            <returns><see langword="true"/> if signature properties is found; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            It doesn't work for collections.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.BaseObject.GetSignatureProperties">
+            <summary>
+            Gets the signature properties.
+            </summary>
+            <returns>The enumerable of signature properties.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.BaseObject.GetTypeUnproxied">
+            <summary>
+            When ORM proxies objects, it masks the type of the actual entity object.
+            This wrapper burrows into the proxied object to get its actual type.
+            </summary>
+            <returns>The object type.</returns>
+            <remarks>
+            This solution take advantage of the fact that NHibernate proxies are shadowing <see cref="M:System.Object.GetType"/> method.
+            </remarks>
+            <remarks>
+            Although this assumes the ORM is being used, it doesn't require any ORM related dependencies and has no bad side
+            effects if ORM isn't being used. Related discussion is
+            <a href="http://groups.google.com/group/sharp-architecture/browse_thread/thread/ddd05f9baede023a">here</a>.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.BaseObject.GetTypeSpecificSignatureProperties">
+            <summary>
+            Enforces the template method pattern to have child objects determine which specific
+            properties should and should not be included in the object signature comparison.
+            </summary>
+            <returns>The enumerable of property information.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Entities.Constants">
+            <summary>
+            The entities constants.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Persistence.Entities.Constants.HashMultiplier">
+            <summary>
+            To help ensure hash code uniqueness, a carefully selected random number multiplier is used within the calculation.
+            Goodrich and Tamassia's Data Structures and Algorithms in Java asserts that 31, 33, 37, 39 and 41 will produce the
+            fewest number of collisions. See
+            <a href="http://computinglife.wordpress.com/2008/11/20/why-do-hash-functions-use-prime-numbers">this</a> for more
+            information.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Entities.DomainSignatureAttribute">
+            <summary>
+            Facilitates indicating which property(s) describe the unique signature of an entity. See
+            <see cref="M:Volvo.NVS.Persistence.Entities.BaseObject.GetTypeSpecificSignatureProperties"/> for when this is leveraged.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Entities.GenericValueObject">
+            <summary>
+            Code inspired from SharpArchitecture.
+            Provides a standard base class for facilitating comparison of value objects using all the object's properties.
+            </summary>
+            <remarks>
+            For a discussion of the implementation of Equals/GetHashCode, see
+            <a href="http://devlicio.us/blogs/billy_mccafferty/archive/2007/04/25/using-equals-gethashcode-effectively.aspx">this</a>
+            and <a href="http://groups.google.com/group/sharp-architecture/browse_thread/thread/f76d1678e68e3ece?hl=en">this</a> for
+            an in depth and conclusive resolution.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.GenericValueObject.op_Equality(Volvo.NVS.Persistence.Entities.GenericValueObject,Volvo.NVS.Persistence.Entities.GenericValueObject)">
+            <summary>
+            Compares the objects for equality.
+            </summary>
+            <param name="valueObject1">The first object to compare.</param>
+            <param name="valueObject2">The second object to compare.</param>
+            <returns><see langword="true"/> if objects are equal; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.GenericValueObject.op_Inequality(Volvo.NVS.Persistence.Entities.GenericValueObject,Volvo.NVS.Persistence.Entities.GenericValueObject)">
+            <summary>
+            Compares the objects for inequality.
+            </summary>
+            <param name="valueObject1">The first object to compare.</param>
+            <param name="valueObject2">The second object to compare.</param>
+            <returns><see langword="true"/> if objects are not equal; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.GenericValueObject.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.GenericValueObject.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.GenericValueObject.GetTypeSpecificSignatureProperties">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Entities.IExpireEntity">
+            <summary>
+            The interface to help in the archiving and deletion process.
+            </summary>
+            <seealso cref="T:Volvo.NVS.Persistence.Specifications.ExpireEntitySpecification`1"/>
+            <seealso cref="T:Volvo.NVS.Persistence.ADM.ADMHelper"/>
+            <remarks>
+            This interface together with the <see cref="T:Volvo.NVS.Persistence.ADM.ADMHelper"/> will provide tools to configure, track and execute archiving
+            and deletion operations.
+            </remarks>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.IExpireEntity.ModificationOrCreationDateExp">
+            <summary>
+            Gets or sets the date of last modification or creation of entity (defined by configuration).
+            </summary>
+            <returns>The modification or creation date.</returns>
+            <remarks>
+            Uses UTC time. Is persisted in database, mapped as 'date' uses just 3 bytes in the database. As the time is not
+            persisted, the precision is +/- 24 hours.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.IExpireEntity.IsTimeToDelete">
+            <summary>
+            Check if the entity is expired and should be deleted.
+            </summary>
+            <returns><see langword="true"/> if entity is expired; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.IExpireEntity.IsTimeToArchive">
+            <summary>
+            Check if the entity is expired and should be archived.
+            </summary>
+            <returns><see langword="true"/> if entity is expired; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Entities.IGenericEntity`1">
+            <summary>
+            Generic entity interface which is the base class for the objects to be persisted in the database.
+            </summary>
+            <typeparam name="TId">The type of the ID of the entity.</typeparam>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.IGenericEntity`1.Id">
+            <summary>
+            Gets or sets the ID of an entity.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.IGenericEntity`1.IsTransient">
+            <summary>
+            Indicates whether object is in transient state.
+            </summary>
+            <returns><see langword="true"/> if entity is in transient state; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Entities.IGenericEntity`1.GetSignatureProperties">
+            <summary>
+            Gets the signature properties.
+            </summary>
+            <returns>The signature property.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Entities.IStampedEntity">
+            <summary>
+            The interface that entities must implement to support stamping.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.IStampedEntity.ResolveUser">
+            <summary>
+            Gets or sets the resolve user.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.IStampedEntity.LocalTime">
+            <summary>
+            Gets or sets the local time.
+            </summary>
+            <remarks>
+            Use local time instead of UTC.
+            </remarks>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.IStampedEntity.CreatedBy">
+            <summary>
+            Gets or sets the creation author.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.IStampedEntity.CreatedTS">
+            <summary>
+            Gets or sets the created time stamp.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.IStampedEntity.ChangedBy">
+            <summary>
+            Gets or sets the change author.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.IStampedEntity.ChangedTS">
+            <summary>
+            Gets or sets the changed time stamp.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Entities.ValidatableObject">
+            <summary>
+            The base for the object that support validation.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.ValidatableObject.ValidationResults">
+            <summary>
+            Gets or sets the validation results.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.ValidatableObject.IsValid">
+            <summary>
+            Gets a value indicating whether the object is valid.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Entities.ValidatableObject.Validate">
+            <summary>
+            Gets the validation results for the entire entity that derives from this class.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException">
+            <summary>
+            The invalid configuration exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException"/> class.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner
+            exception is specified.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceADMHelperException"/> class.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+            </param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException">
+            <summary>
+            The generic persistence exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException"/> class.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner
+            exception is specified.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceGenericException"/> class.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+            </param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Exceptions.PersistenceException">
+            <summary>
+            The generic persistence exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceException"/> class.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner
+            exception is specified.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceException"/> class.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+            </param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException">
+            <summary>
+            The invalid configuration exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException"/> class.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner
+            exception is specified.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceBulkOperationException"/> class.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+            </param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException">
+            <summary>
+            The invalid configuration exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException"/> class.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner
+            exception is specified.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceInvalidConfigurationException"/> class.
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.
+            </param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.NamedQuery.INamedQuery">
+            <summary>
+            The interface used to wrap a named query as a Query Object. The basic interface without any generic type for the result.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.NamedQuery.INamedQuery.QueryName">
+            <summary>
+            Gets the name of the query.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.NamedQuery.INamedQuery`1">
+            <summary>
+            The Interface used to wrap a named query as a Query Object. An extension to the basic defining resulting type and basic
+            operations.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.NamedQuery.INamedQuery`1.MaxResult">
+            <summary>
+            Gets or sets the maximum result.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.NamedQuery.INamedQuery`1.Execute">
+            <summary>
+            Executes this instance.
+            </summary>
+            <returns>The result of the activity execution.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Repositories.IDao`1">
+            <summary>
+            The data access object interface.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IDao`1.Retrieve(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Retrieves the data matching given specification.
+            </summary>
+            <param name="specification">The specification.</param>
+            <returns>The enumerable of data access objects.</returns>
+            <remarks>
+            This is the implementation of the <a href="http://joseoncode.com/2010/06/04/linqspecs-the-why/">LinqSpec</a> pattern.
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Repositories.IGenericRepository`2">
+            <summary>
+            The interface of Repository implementations. Provides CRUD methods (Create, Retrieve, Update, Delete).
+            </summary>
+            <typeparam name="TEntity">The type to be persisted.</typeparam>
+            <typeparam name="TId">The type of the identifier property of <typeparamref name="TEntity"/>.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.Save(`0)">
+            <summary>
+            Saves or inserts an entity to the repository.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.Save(System.Collections.Generic.IList{`0})">
+            <summary>
+            Saves or inserts a list of entities to the repository.
+            </summary>
+            <param name="entities">The entities.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.Merge(`0)">
+            <summary>
+            Merges an entity to the repository.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns>The merged entity.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.Remove(`0)">
+            <summary>
+            Removes one entity from the repository.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.Remove(System.Collections.Generic.IList{`0})">
+            <summary>
+            Removes a list of entities from the repository.
+            </summary>
+            <param name="entities">The entities.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.Flush">
+            <summary>
+            Synchronizes the contents of the first level cache with the database.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.BulkInsert(System.Collections.Generic.IList{`0},System.Nullable{System.Int32})">
+            <summary>
+            Inserts a list of entities to the repository.
+            </summary>
+            <param name="entities">The entities.</param>
+            <param name="batchSize">The size of the batch.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.BulkUpdate(System.Collections.Generic.IList{`0},System.Nullable{System.Int32})">
+            <summary>
+            Updates a list of entities in the repository.
+            </summary>
+            <param name="entities">The entities.</param>
+            <param name="batchSize">The size of the batch.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IGenericRepository`2.BulkDelete(System.Collections.Generic.IList{`0},System.Nullable{System.Int32})">
+            <summary>
+            Removes a list of entities to the repository.
+            </summary>
+            <param name="entities">The entities.</param>
+            <param name="batchSize">The size of the batch.</param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Repositories.IGenericRepository`1">
+            <summary>
+            Specialized interface using <see cref="T:System.Int64"/> as ID (as it is the most common ID type).
+            </summary>
+            <typeparam name="TEntity">The type to be persisted.</typeparam>
+            <seealso cref="T:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2" />
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2">
+            <summary>
+            The interface for read-only repositories.
+            </summary>
+            <typeparam name="TEntity">The type of the entity to be persisted.</typeparam>
+            <typeparam name="TId">The type of the identifier property of <typeparamref name="TEntity"/>.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2.Evict(`0)">
+            <summary>
+            Removes the entity from the session cache.
+            </summary>
+            <param name="entity">The entity to remove.</param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2.Find(`1)">
+            <summary>
+            Finds the entity based on its ID. Returns <see langword="null"/> if the entity could not be found.
+            </summary>
+            <param name="entityId">The ID of the entity.</param>
+            <returns>The entity with the given ID.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2.Load(`1)">
+            <summary>
+            Loads the entity based on its ID. Throws an exception if the entity is not found.
+            </summary>
+            <param name="entityId">The ID of the entity.</param>
+            <returns>The entity with the given ID.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2.Find">
+            <summary>
+            Returns queryable for the whole repository data.
+            </summary>
+            <returns>The queryable of repository data.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2.FindAll">
+            <summary>
+            Finds all of the entities stored in the repository.
+            </summary>
+            <returns>The all entities stored in the repository.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2.FindAll(System.Int32)">
+            <summary>
+            Finds all of the entities stored in the repository respecting the given maximal number of results.
+            </summary>
+            <param name="maxResults">The maximal number of results to return.</param>
+            <returns>The all entities stored in the repository limited to maximal number of results given.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.IReadOnlyRepository`2.Refresh(`0)">
+            <summary>
+            Refreshes the state of the entity from the database.
+            </summary>
+            <param name="entity">The entity to refresh.</param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1">
+            <summary>
+            The specification container interface.
+            </summary>
+            <typeparam name="TEntity">The type of the entity for which specification is given.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.FindUnique(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            With a Specification we split the logic of how a selection is made, away from the thing we are selecting.
+            So, with this method we open the possibility to find a list of objects based on a specific specification.
+            This method will return a single unique entity.
+            </summary>
+            <param name="specification">The specification.</param>
+            <returns>The find result.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Finds the data matching given specification, and sets up paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Int32,System.Int32)">
+            <summary>
+            Finds the data matching given specification, and sets up paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0})">
+            <summary>
+            Finds the data matching given specification and sets up sorting.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}})">
+            <summary>
+            Finds the data matching given specification and sets up sorting.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},System.Int32,System.Int32)">
+            <summary>
+            Finds the data matching given specification, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},System.Int32,System.Int32)">
+            <summary>
+            Finds the data matching given specification, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},System.Int32,System.Int32)">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},System.Int32,System.Int32)">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},System.Int32,System.Int32)">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},System.Int32,System.Int32)">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},System.Int32,System.Int32,Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},System.Int32,System.Int32,Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},System.Int32,System.Int32,Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecification">The fetch specification describing which data should be eagerly loaded.</param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0}},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},System.Int32,System.Int32,Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and paging and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="fetchSpecifications">
+            The enumerable of fetch specification describing which data should be eagerly loaded.
+            </param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.ISortSpecification{`0},System.Int32,System.Int32,Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="sortSpecification">The sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Find``1(Volvo.NVS.Persistence.Specifications.ISpecification{`0},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.ISortSpecification{`0}},System.Int32,System.Int32,Volvo.NVS.Persistence.Specifications.IGroupSpecification{`0,``0})">
+            <summary>
+            Finds the data matching given specification, eagerly loads members, sets up sorting and groups the data.
+            </summary>
+            <typeparam name="TGroup">The type of the group.</typeparam>
+            <param name="specification">The filter specification.</param>
+            <param name="sortSpecifications">The enumerable of sort specification describing how data should be sorted.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="pageSize">Size of the page.</param>
+            <param name="groupSpecification">The group specification describing how data should be grouped.</param>
+            <returns>The list of results matching given specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Count">
+            <summary>
+            Gets the number of entities in the repository.
+            </summary>
+            <returns>The number of entities in the repository.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Repositories.ISpecificationContainer`1.Count(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Gets the number of entities in the repository matching specification.
+            </summary>
+            <param name="specification">The filter specification.</param>
+            <returns>The number of entities in the repository matching specification.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.SessionHandling.INonGuiSessionContext">
+            <summary>
+            The interface for non GUI session handling.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.SessionHandling.INonGuiSessionContext.Complete">
+            <summary>
+            Indicates that all operations within the scope are completed successfully.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.SessionHandling.ISessionContext">
+            <summary>
+            The interface for the ORM session handling.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.AndNotSpecification`1">
+            <summary>
+            The specification that represents two specifications that must be satisfied.
+            </summary>
+            <typeparam name="TEntity">The type of the specified object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.AndNotSpecification`1.#ctor(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.AndNotSpecification`1" /> class.
+            </summary>
+            <param name="left">The left-hand-side specification.</param>
+            <param name="right">The right-hand-side specification.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.AndNotSpecification`1.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.AndNotSpecification`1.IsSatisfiedBy(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.AndSpecification`1">
+            <summary>
+            The specification that represents two specifications that must be satisfied.
+            </summary>
+            <typeparam name="TEntity">The type of the specified object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.AndSpecification`1.#ctor(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.AndSpecification`1" /> class.
+            </summary>
+            <param name="left">The left-hand-side specification.</param>
+            <param name="right">The right-hand-side specification.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.AndSpecification`1.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.AndSpecification`1.IsSatisfiedBy(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2">
+            <summary>
+            The abstract fetch option specification that serves as a base for all fetch specifications.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <typeparam name="TRelated">The type of related object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2.#ctor(System.Linq.Expressions.LambdaExpression,Volvo.NVS.Persistence.Specifications.FetchMode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2"/> class.
+            </summary>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+            <param name="fetchMode">
+            The indication whether single or multiple results are expected as a result of eager loading.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2.#ctor(Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Type,System.Linq.Expressions.LambdaExpression,Volvo.NVS.Persistence.Specifications.FetchMode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2"/> class.
+            </summary>
+            <param name="parentFetch">The parent eager loading specification.</param>
+            <param name="fetchType">The type of the first-level eager loading entity.</param>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+            <param name="fetchMode">
+            The indication whether single or multiple results are expected as a result of eager loading.
+            </param>
+            <remarks>
+            Since this type only contains <typeparamref name="TQueried"/> and <typeparamref name="TRelated"/> generic
+            parameters we need to specify <paramref name="fetchType"/> (the type of entity between
+            <typeparamref name="TQueried"/> and <typeparamref name="TRelated"/>) in order to properly execute eager fetching.
+            </remarks>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2.Expression">
+            <inheritdoc/>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2.FetchMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2.GenericTypes">
+            <inheritdoc/>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2.NestedFetch">
+            <inheritdoc/>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2.ParentFetch">
+            <inheritdoc/>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.BaseFetchSpecification`2.InitialFetch">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.BaseSpecification`1">
+            <summary>
+            The interface describing entity specification.
+            </summary>
+            <typeparam name="TEntity">The type that is specified.</typeparam>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.op_BitwiseAnd(Volvo.NVS.Persistence.Specifications.BaseSpecification{`0},Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Creates new specification from the two base specification in which both input specifications must be satisfied.
+            </summary>
+            <param name="left">The left-hand-side specification.</param>
+            <param name="right">The right-hand-side specification.</param>
+            <returns>The specification in which both input specifications must be satisfied.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.op_BitwiseOr(Volvo.NVS.Persistence.Specifications.BaseSpecification{`0},Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Creates new specification from the two base specification in which any input specifications must be satisfied.
+            </summary>
+            <param name="left">The left-hand-side specification.</param>
+            <param name="right">The right-hand-side specification.</param>
+            <returns>The specification in which any input specifications must be satisfied.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.op_LogicalNot(Volvo.NVS.Persistence.Specifications.BaseSpecification{`0})">
+            <summary>
+            Creates new specification in which input specifications must not be satisfied.
+            </summary>
+            <param name="spec">The other specification.</param>
+            <returns>The specification in which input specifications must not be satisfied.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.op_False(Volvo.NVS.Persistence.Specifications.BaseSpecification{`0})">
+            <summary>
+            Overload for the <see langword="false"/> operator to ensure that <c>&amp;&amp;</c> and <c>||</c> operators function
+            properly.
+            </summary>
+            <param name="spec">The specification.</param>
+            <returns>A value indicating whether specification is false.</returns>
+            <remarks>
+            This method has to always return <see langword="false"/> to ensure that both sides of the operation are always
+            evaluated.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.op_True(Volvo.NVS.Persistence.Specifications.BaseSpecification{`0})">
+            <summary>
+            Overload for the <see langword="true"/> operator to ensure that <c>&amp;&amp;</c> and <c>||</c> operators function
+            properly.
+            </summary>
+            <param name="spec">The specification.</param>
+            <returns>A value indicating whether specification is true.</returns>
+            <remarks>
+            This method has to always return <see langword="false"/> to ensure that both sides of the operation are always
+            evaluated.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.IsSatisfiedBy(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.And(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.AndNot(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.Or(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.OrNot(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.BaseSpecification`1.Not">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.EagerLoadingExtensions">
+            <summary>
+            The eager loading extensions.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.EagerLoadingExtensions.ThenFetch``3(Volvo.NVS.Persistence.Specifications.BaseFetchSpecification{``0,``1},System.Linq.Expressions.Expression{System.Func{``1,``2}})">
+            <summary>
+            Sets up the initial nested eager loading of a single related item.
+            </summary>
+            <typeparam name="TQueried">The type of the queried entity.</typeparam>
+            <typeparam name="TFetch">The type of the entity fetched on first level.</typeparam>
+            <typeparam name="TRelated">The type of the entity fetched on the second level.</typeparam>
+            <param name="fetch">The fetch specification on which to perform eager loading.</param>
+            <param name="expression">The expression to locate the property to eager load.</param>
+            <returns>The specification indicating nested eager loading.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.EagerLoadingExtensions.ThenFetchMany``3(Volvo.NVS.Persistence.Specifications.BaseFetchSpecification{``0,``1},System.Linq.Expressions.Expression{System.Func{``1,System.Collections.Generic.IEnumerable{``2}}})">
+            <summary>
+            Sets up the initial nested eager loading of multiple related items.
+            </summary>
+            <typeparam name="TQueried">The type of the queried entity.</typeparam>
+            <typeparam name="TFetch">The type of the entity fetched on first level.</typeparam>
+            <typeparam name="TRelated">The type of the entity fetched on the second level.</typeparam>
+            <param name="fetch">The fetch specification on which to perform eager loading.</param>
+            <param name="expression">The expression to locate the property to eager load.</param>
+            <returns>The specification indicating nested eager loading.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.ExpireEntitySpecification`1">
+            <summary>
+            The specification to locate expired entities, depending on the type of the expiration (archive or delete).
+            </summary>
+            <typeparam name="TEntity">The type of the entity to search for, must implement <see cref="T:Volvo.NVS.Persistence.Entities.IExpireEntity"/>.</typeparam>
+            <remarks>
+            <para>
+            Requires the ADM configuration to be in place.
+            </para>
+            <para>
+            The specified entity must implement <see cref="T:Volvo.NVS.Persistence.Entities.IExpireEntity"/> interface in order to support expiration dates and also
+            have configuration defined as per <see cref="T:Volvo.NVS.Persistence.ADM.ADMHelperSection"/> like:
+            <code>
+            &lt;ADMHelper&gt;
+              &lt;ConfigTypes&gt;
+                &lt;add type="NAMESPACE.CLASSNAME" expireFromCreation="TRUE_OR_FALSE" daysToArchive="NUMBER"
+                  daysToDelete="NUMBER"/&gt;
+              &lt;/ConfigTypes&gt;
+            &lt;/ADMHelper&gt;
+            </code>
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ExpireEntitySpecification`1.#ctor(Volvo.NVS.Persistence.Specifications.ExpireSpecificationType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.ExpireEntitySpecification`1"/> class.
+            </summary>
+            <param name="type">Type of the expiration (archive or delete).</param>
+            <exception cref="T:Volvo.NVS.Persistence.Exceptions.PersistenceException">Thrown when configuration cannot be fetched.</exception>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.ExpireSpecificationType">
+            <summary>
+            Indicates whether specification relates to archiving or deleting of an entity.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Persistence.Specifications.ExpireSpecificationType.Archive">
+            <summary>
+            Expiration type to archive entity.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Persistence.Specifications.ExpireSpecificationType.Delete">
+            <summary>
+            Expiration type to delete entity.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.FetchManySpecification`2">
+            <summary>
+            The specification that enables eager loading of multiple related entities.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <typeparam name="TRelated">The type of related object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.FetchManySpecification`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{`1}}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.FetchManySpecification`2"/> class.
+            </summary>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.FetchManySpecification`1">
+            <summary>
+            The specification that enables eager loading of multiple related entities.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <remarks>
+            This can can be used whenever further access to resolved type is not required. If such access is required than
+            <see cref="T:Volvo.NVS.Persistence.Specifications.FetchManySpecification`2"/> should be used instead.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.FetchManySpecification`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{System.Object}}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.FetchManySpecification`1"/> class.
+            </summary>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.FetchMode">
+            <summary>
+            The fetch mode enumeration that determines whether a single or multiple results are expected by fetching.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Persistence.Specifications.FetchMode.Single">
+            <summary>
+            Fetch single entity.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Persistence.Specifications.FetchMode.Many">
+            <summary>
+            Fetch multiple entities.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.FetchSpecification`2">
+            <summary>
+            The fetch specification.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <typeparam name="TRelated">The type of related object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.FetchSpecification`2.#ctor(System.Linq.Expressions.Expression{System.Func{`0,`1}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.FetchSpecification`2"/> class.
+            </summary>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.FetchSpecification`1">
+            <summary>
+            The fetch specification.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <remarks>
+            This can can be used whenever further access to resolved type is not required. If such access is required than
+            <see cref="T:Volvo.NVS.Persistence.Specifications.FetchSpecification`2"/> should be used instead.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.FetchSpecification`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.FetchSpecification`1"/> class.
+            </summary>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.Group">
+            <summary>
+            The group specification.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.Group.Items">
+            <summary>
+            Gets or sets the items in the group.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.Group.Key">
+            <summary>
+            Gets or sets the group key.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.Group.HasSubgroups">
+            <summary>
+            Gets or sets a value indicating whether this instance has subgroups.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.Group.BuildInnerGroup``2(System.Collections.Generic.IEnumerable{``1},System.Func{``1,``0})">
+            <summary>
+            Builds the inner group.
+            </summary>
+            <typeparam name="T">The type of the group.</typeparam>
+            <typeparam name="TEntity">The type of the entity in a group.</typeparam>
+            <param name="group">The group in which to create the inner group.</param>
+            <param name="groupSelector">The group selector.</param>
+            <returns>The enumerable of groups with inner groups.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.Group.BuildGroup``2(System.Func{``1,``0},System.Linq.Expressions.Expression{System.Func{System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{Volvo.NVS.Persistence.Specifications.Group}}})">
+            <summary>
+            Builds the group.
+            </summary>
+            <typeparam name="T">The type of the group.</typeparam>
+            <typeparam name="TEntity">The type of the entity in a group.</typeparam>
+            <param name="groupSelector">The group selector.</param>
+            <param name="selectorBuilder">The selector builder.</param>
+            <returns>The grouped result.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.Group.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:IEnumerator{object}" /> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.Group.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:IEnumerator" /> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.GroupSpecification`2">
+            <summary>
+            The specification describing the grouping of entities.
+            </summary>
+            <typeparam name="TEntity">The type of the entity to group.</typeparam>
+            <typeparam name="TGroup">The type of the group created as a result of the group operation.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.GroupSpecification`2.#ctor(System.Linq.Expressions.Expression{System.Func{System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`1}}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.GroupSpecification`2"/> class.
+            </summary>
+            <param name="selector">The selector to resolve property.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.GroupSpecification`2.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.IFetchSpecification`1">
+            <summary>
+            The fetch specification interface.
+            </summary>
+            <typeparam name="TEntity">The type of queried object.</typeparam>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.IFetchSpecification`1.Expression">
+            <summary>
+            Gets the expression used to get locate the data to eager-load.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.IFetchSpecification`1.FetchMode">
+            <summary>
+            Gets the indication whether single or multiple results are expected as a result of eager loading.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.IFetchSpecification`1.GenericTypes">
+            <summary>
+            Gets the enumerable of generic types required to invoke fetch method.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.IFetchSpecification`1.NestedFetch">
+            <summary>
+            Gets or sets the nested fetch specification.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.IFetchSpecification`1.ParentFetch">
+            <summary>
+            Gets the parent fetch specification.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.IFetchSpecification`1.InitialFetch">
+            <summary>
+            Gets the initial (top-level) fetch specification.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.IGroupSpecification`2">
+            <summary>
+            The interface for the specification describing the grouping of entities.
+            </summary>
+            <typeparam name="TEntity">The type of the entity to group.</typeparam>
+            <typeparam name="TGroup">The type of the group created as a result of the group operation.</typeparam>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.IGroupSpecification`2.Predicate">
+            <summary>
+            Gets the grouping predicate.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.ISortSpecification`1">
+            <summary>
+            The interface for the specification describing order of the collection of entities.
+            </summary>
+            <typeparam name="TQueried">The type of the queried entity.</typeparam>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.ISortSpecification`1.Direction">
+            <summary>
+            Gets the sort direction.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.ISortSpecification`1.Predicate">
+            <summary>
+            Gets the predicate.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.ISpecification`1">
+            <summary>
+            The specification interface.
+            </summary>
+            <typeparam name="TEntity">The type of the specified entity.</typeparam>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.ISpecification`1.Predicate">
+            <summary>
+            Gets the predicate to evaluate if specification is satisfied.
+            </summary>
+            <remarks>
+            Predicate is used by ORMs to create SQL queried that match specification criteria.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ISpecification`1.IsSatisfiedBy(`0)">
+            <summary>
+            Determines whether specification is satisfied.
+            </summary>
+            <param name="candidate">The entity to check the specification against.</param>
+            <returns><see langword="true"/> if specification is satisfied; otherwise, <see langword="false"/>.</returns>
+            <remarks>
+            This method is used to filter in-memory data. ORMs are using <see cref="P:Predicate"/> property.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ISpecification`1.And(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Creates the new composite specification based on the current specification and the <paramref name="other"/>
+            specification in which both specifications must to be met in order for the composite specification to be met.
+            </summary>
+            <param name="other">The other specification.</param>
+            <returns>The composite specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ISpecification`1.AndNot(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Creates the new composite specification based on the current specification and the <paramref name="other"/>
+            specification in which current specification must be met and the <paramref name="other"/> must not be met in order
+            for the composite specification to be met.
+            </summary>
+            <param name="other">The other specification.</param>
+            <returns>The composite specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ISpecification`1.Or(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Creates the new composite specification based on the current specification and the <paramref name="other"/>
+            specification in which any specifications must to be met in order for the composite specification to be met.
+            </summary>
+            <param name="other">The other specification.</param>
+            <returns>The composite specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ISpecification`1.OrNot(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Creates the new composite specification based on the current specification and the <paramref name="other"/>
+            specification in which current specification must be met or the <paramref name="other"/> must not be met in order
+            for the composite specification to be met.
+            </summary>
+            <param name="other">The other specification.</param>
+            <returns>The composite specification.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ISpecification`1.Not">
+            <summary>
+            Creates the new composite specification based on the current specification. The composite specification will be met
+            if the current specification is not met.
+            </summary>
+            <returns>The composite specification.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.NotSpecification`1">
+            <summary>
+            The specification that represents the specification that must not be satisfied.
+            </summary>
+            <typeparam name="TEntity">The type of the specified object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.NotSpecification`1.#ctor(Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.NotSpecification`1" /> class.
+            </summary>
+            <param name="other">The other specification.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.NotSpecification`1.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.NotSpecification`1.IsSatisfiedBy(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.OrNotSpecification`1">
+            <summary>
+            The specification that represents two specifications from which any must be satisfied.
+            </summary>
+            <typeparam name="TEntity">The type of the specified object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.OrNotSpecification`1.#ctor(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.OrNotSpecification`1" /> class.
+            </summary>
+            <param name="left">The left-hand-side specification.</param>
+            <param name="right">The right-hand-side specification.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.OrNotSpecification`1.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.OrNotSpecification`1.IsSatisfiedBy(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.OrSpecification`1">
+            <summary>
+            The specification that represents two specifications from which any must be satisfied.
+            </summary>
+            <typeparam name="TEntity">The type of the specified object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.OrSpecification`1.#ctor(Volvo.NVS.Persistence.Specifications.ISpecification{`0},Volvo.NVS.Persistence.Specifications.ISpecification{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.OrSpecification`1" /> class.
+            </summary>
+            <param name="left">The left-hand-side specification.</param>
+            <param name="right">The right-hand-side specification.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.OrSpecification`1.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.OrSpecification`1.IsSatisfiedBy(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.SortAscendingSpecification`1">
+            <summary>
+            The specification describing ascending order of the collection of entities.
+            </summary>
+            <typeparam name="TEntity">The type of the entity specified.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.SortAscendingSpecification`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.SortAscendingSpecification`1"/> class.
+            </summary>
+            <param name="selector">The selector to resolve property to sort.</param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.SortDescendingSpecification`1">
+            <summary>
+            The specification describing descending order of the collection of entities.
+            </summary>
+            <typeparam name="TEntity">The type of the entity specified.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.SortDescendingSpecification`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.SortDescendingSpecification`1"/> class.
+            </summary>
+            <param name="selector">The selector to resolve property to sort.</param>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.SortSpecification`1">
+            <summary>
+            The specification describing order of the collection of entities.
+            </summary>
+            <typeparam name="TEntity">The type of the entity specified.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.SortSpecification`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.ComponentModel.ListSortDirection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.SortSpecification`1"/> class.
+            </summary>
+            <param name="selector">The selector to resolve property to sort.</param>
+            <param name="direction">The sort direction.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.SortSpecification`1.Direction">
+            <inheritdoc/>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.SortSpecification`1.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.Specification`1">
+            <summary>
+            The specification describes a way of filtering collections of data.
+            </summary>
+            <typeparam name="TEntity">The type of the specified object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.Specification`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.Specification`1" /> class.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.Specification`1.#ctor(System.Linq.Expressions.Expression{System.Predicate{`0}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.Specification`1" /> class.
+            </summary>
+            <param name="predicate">The specification predicate.</param>
+        </member>
+        <member name="P:Volvo.NVS.Persistence.Specifications.Specification`1.Predicate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.Specification`1.IsSatisfiedBy(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.ThenFetchManySpecification`2">
+            <summary>
+            The then-fetch option specification that describes fetching of multiple related objects.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <typeparam name="TRelated">The type of related object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ThenFetchManySpecification`2.#ctor(Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Type,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.ThenFetchManySpecification`2"/> class.
+            </summary>
+            <param name="parentFetch">The parent fetch specification.</param>
+            <param name="fetchType">The type of the first-level eager loading entity.</param>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+            <remarks>
+            Since this type only contains <typeparamref name="TQueried"/> and <typeparamref name="TRelated"/> generic
+            parameters we need to specify <paramref name="fetchType"/> (the type of entity between
+            <typeparamref name="TQueried"/> and <typeparamref name="TRelated"/>) in order to properly execute eager loading.
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.ThenFetchManySpecification`1">
+            <summary>
+            The then-fetch option specification that describes fetching of multiple related objects.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <remarks>
+            This can can be used whenever further access to resolved type is not required. If such access is required than
+            <see cref="T:Volvo.NVS.Persistence.Specifications.ThenFetchManySpecification`2"/> should be used instead.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ThenFetchManySpecification`1.#ctor(Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Type,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.ThenFetchManySpecification`1"/> class.
+            </summary>
+            <param name="parentFetch">The parent fetch specification.</param>
+            <param name="fetchType">The type of the first-level eager loading entity.</param>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+            <remarks>
+            Since this type only contains <typeparamref name="TQueried"/> generic parameter we need to specify
+            <paramref name="fetchType"/> (the type of entity between <typeparamref name="TQueried"/> and related objects) in
+            order to properly execute eager loading.
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.ThenFetchSpecification`2">
+            <summary>
+            The then-fetch option specification that describes fetching of a single related object.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <typeparam name="TRelated">The type of related object.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ThenFetchSpecification`2.#ctor(Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Type,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.ThenFetchSpecification`2"/> class.
+            </summary>
+            <param name="parentFetch">The parent fetch specification.</param>
+            <param name="fetchType">The type of the first-level eager loading entity.</param>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+            <remarks>
+            Since this type only contains <typeparamref name="TQueried"/> and <typeparamref name="TRelated"/> generic
+            parameters we need to specify <paramref name="fetchType"/> (the type of entity between
+            <typeparamref name="TQueried"/> and <typeparamref name="TRelated"/>) in order to properly execute eager loading.
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Persistence.Specifications.ThenFetchSpecification`1">
+            <summary>
+            The then-fetch option specification that describes fetching of a single related object.
+            </summary>
+            <typeparam name="TQueried">The type of queried object.</typeparam>
+            <remarks>
+            This can can be used whenever further access to resolved type is not required. If such access is required than
+            <see cref="T:Volvo.NVS.Persistence.Specifications.ThenFetchSpecification`2"/> should be used instead.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Persistence.Specifications.ThenFetchSpecification`1.#ctor(Volvo.NVS.Persistence.Specifications.IFetchSpecification{`0},System.Type,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Persistence.Specifications.ThenFetchSpecification`1"/> class.
+            </summary>
+            <param name="parentFetch">The parent fetch specification.</param>
+            <param name="fetchType">The type of the first-level eager loading entity.</param>
+            <param name="expression">The expression used to get locate the data to eager-load.</param>
+            <remarks>
+            Since this type only contains <typeparamref name="TQueried"/> generic parameter we need to specify
+            <paramref name="fetchType"/> (the type of entity between <typeparamref name="TQueried"/> and related objects) in
+            order to properly execute eager loading.
+            </remarks>
+        </member>
+    </members>
+</doc>

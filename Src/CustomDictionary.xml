@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>Mvc</Word>
+      <Word>Wms</Word>
+      <Word>Ent</Word>
+      <Word>Deserializer</Word>
+      <Word>Pos</Word>
+      <Word>Api</Word>
+      <Word>Minification</Word>
+      <Word>Highlightable</Word>
+      <Word>Unexistent</Word>
+      <Word>Logon</Word>
+      <Word>Trackings</Word>
+    </Recognized>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>NVS</Acronym>
+      <Acronym>MVC</Acronym>
+      <Acronym>POS</Acronym>
+      <Acronym>NOK</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>

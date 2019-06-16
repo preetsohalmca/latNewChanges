@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Volvo.NVS.Security.SystemWeb.Ping</name>
+    </assembly>
+    <members>
+        <member name="T:Volvo.NVS.Security.SystemWeb.Ping.Configuration.JwtValidationConfigurationData">
+            <summary>
+            Holds currently configured JWT validation and processing related settings.
+            </summary>
+            <remarks>
+            See the <see cref="T:Volvo.NVS.Core.Configuration.SecurityLibraryJwtConfiguration"/> for details.
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Security.SystemWeb.Ping.Configuration.JwtValidationConfigurationData.Current">
+            <summary>
+            A current set of options to be used by the Ping Http Module.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Security.SystemWeb.Ping.Handlers.PingWebAuthenticationHandler">
+            <summary>
+            The Security Library, Ping related authentication handler operating on the <see cref="T:System.Web.HttpContext"/> and processing signed, JSON Web Tokens.
+            </summary>
+            <remarks>
+            See the <see cref="T:Volvo.NVS.Security.Handlers.PingAuthenticationHandler"/> for details.
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Security.SystemWeb.Ping.Handlers.PingWebAuthenticationHandler.context">
+            <summary>
+            The current Http context.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.Handlers.PingWebAuthenticationHandler.#ctor(System.Web.HttpContextBase,Volvo.NVS.Security.Handlers.PingAuthenticationHandlerOptions)">
+            <summary>
+            Creates an instance of the Ping, JSON Web Token based security library authentication handler for SystemWeb based applications.
+            </summary>
+            <param name="context">A current http context.</param>
+            <param name="options">Options used to process and validate JSON Web, Ping related tokens.</param>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.Handlers.PingWebAuthenticationHandler.#ctor(System.Web.HttpContextBase,Volvo.NVS.Security.Handlers.PingAuthenticationHandlerOptions,System.IdentityModel.Tokens.SecurityTokenHandler,Volvo.NVS.Security.Tokens.IJwtSignedValidator)">
+            <summary>
+            Creates an instance of the Ping, JSON Web Token based security library authentication handler for SystemWeb based applications.
+            </summary>
+            <param name="context">A current http context.</param>
+            <param name="options">Options used to process and validate JSON Web, Ping related tokens.</param>
+            <param name="tokenHandler">A security token handler used to parse and validate received bearer tokens. Null when default Jwt token handler should be used.</param>
+            <param name="validator">A validator used in order to validate JSON Web Tokens.</param>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.Handlers.PingWebAuthenticationHandler.ReadAuthorizationHeader(System.String)">
+            <summary>
+            Reads an authorization header from the current web request.
+            </summary>
+            <param name="name">A name of the authorization request header to be read by the function.</param>
+            <returns>The authorization header read from the current http request or null when no header has been found.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.Handlers.PingWebAuthenticationHandler.ReadAuthorizationCookie(System.String)">
+            <summary>
+            Reads an authorization cookie which is expected to contain a JSON Web Token to be consumed.
+            </summary>
+            <param name="name">A name of the cookie which should be read by the function.</param>
+            <returns>An authorization cookie holding the JSON Web Token or null when no cookie or token is found.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Security.SystemWeb.Ping.PingJwtHttpModule">
+            <summary>
+            The Ping, JSON Web Token (JWT) based Http module realizing the authentication. Registered and run automatically when a reference into
+            the Volvo.NSV.Security.SystemWeb.Ping assembly is added and when an automated activation is not disabled (default).
+            </summary>
+            <remarks>
+            <para>
+            The Ping module will be used automatically when a reference into the Security.SystemWeb.Ping assembly is added from
+            your web project. One does not have to manually use or initialize the <see cref="T:Volvo.NVS.Security.SystemWeb.Ping.PingJwtHttpModule"/>. It is however
+            required to set the JWT validation settings using the <see cref="T:Volvo.NVS.Core.Configuration.SecurityLibraryJwtConfiguration"/> class extension methods.
+            See the <see cref="T:Volvo.NVS.Core.Configuration.SecurityLibraryJwtConfiguration"/> for configuration details.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.PingJwtHttpModule.CreateNewHandler(System.Web.HttpContext)">
+            <summary>
+            Creates the authentication handler to be used by the module.
+            </summary>
+            <param name="context">A current http context.</param>
+            <returns>The authentication handler instance.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.PingJwtHttpModule.PostInitialize(System.Web.HttpApplication)">
+            <summary>
+            Performs an additional module initialization code (post initialization).
+            </summary>
+            <remarks>
+            The <see cref="T:Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1"/> initializes the <see cref="T:System.Web.HttpApplication"/> connecting the
+            Authenticate and PostAuthenticate events with the current authentication handler. When an additional events should
+            be handled by the http module then those events can be setup in this post initialization function.
+            </remarks>
+            <param name="application">The current http application.</param>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.PingJwtHttpModule.EndRequest(System.Object,System.EventArgs)">
+            <summary>
+            The last event in the HTTP pipeline chain of execution when ASP.NET responds to a request.
+            </summary>
+            <param name="sender">The sender which is the http application.</param>
+            <param name="e">The even arguments.</param>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.PingJwtHttpModule.ValidateConfiguration">
+            <summary>
+            Validates configuration of the web application for the current http module and for the current authentication handler.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Security.SystemWeb.Ping.PreApplicationStart">
+            <summary>
+            Registers the PingJwtHttpModule for automated start-up when a reference into the Volvo.NVS.Security.SystemWeb.Ping is added.
+            </summary>
+            <remarks>
+            The registration of the module is automated and happens when a reference into the Security.SystemWeb.Ping is added from you
+            web project. It may however be disabled using one of the Security library settings. Check the web node and the IsAutomaticAppStartupEnabled
+            configuration attribute.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Security.SystemWeb.Ping.PreApplicationStart.Initialize">
+            <summary>
+            Registers the SiteMinder authentication module.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Configuration.SecurityLibraryJwtConfiguration">
+            <summary>
+            Provides fluent library configuration methods used to setup Ping and JSON Web Token (JWT) based authentication modules.
+            It is used for SystemWeb based libraries only and for example has NO effect on the Owin, Katana middleware components 
+            which are using their own configuration methods available on the IAppBuilder.
+            </summary>
+            <remarks>
+            <para>
+            In order to use Ping and JWT based http module all the obligatory settings required to consume JSON Web tokens must 
+            be specified. For this one of the configuration methods available on that class should be used. See the
+            <see cref="M:Volvo.NVS.Core.Configuration.SecurityLibraryJwtConfiguration.SetJwtValidationProperties(Volvo.NVS.Core.Configuration.ISecurityLibraryConfigurationBuilder,System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2)"/> or
+            <see cref="M:Volvo.NVS.Core.Configuration.SecurityLibraryJwtConfiguration.SetJwtValidationProperties(Volvo.NVS.Core.Configuration.ISecurityLibraryConfigurationBuilder,Volvo.NVS.Security.Handlers.PingAuthenticationHandlerOptions)"/>. The
+            configuration should be run at the application start-up and only once.
+            </para>
+            <para>
+            Depending on the configuration ordered on the Ping side it might also be needed to change a default JWT validator.
+            For this the <see cref="M:Volvo.NVS.Core.Configuration.ISecurityLibraryConfigurationBuilder.SetJwtValidator(Volvo.NVS.Security.Tokens.IJwtSignedValidator)"/> method is used.
+            When not explicitly defined then the <see cref="T:Volvo.NVS.Security.Tokens.JwtRSASignedValidator"/> is run by default and only RSA based signatures
+            are supported. The validator to be consumed depends on the select JWT signature algorithm. For example for standard
+            configurations involving PingAccess and tokens stored on cookies the ES family of algorithms is applied and then the
+            <see cref="T:Volvo.NVS.Security.Tokens.JwtESSignedValidator"/> must be setup. 
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.SecurityLibraryJwtConfiguration.SetJwtValidationProperties(Volvo.NVS.Core.Configuration.ISecurityLibraryConfigurationBuilder,System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Specifies common settings used during JSON Web token parsing and validation. Configures a constant certificate to be involved in JWT signature checks.
+            </summary>
+            <param name="builder">A current security library configuration builder.</param>
+            <param name="audience">An allowed audience an inbound JWT will be checked against.</param>
+            <param name="issuer">A principal that issued the JWT and against which an inbound token will be checked.</param>
+            <param name="certificate">A certificate used in order to check the signature of the signed JSON Web Token.</param>
+            <remarks>
+            <para>
+            This configuration method should be used when an authentication handler with automated activation is configured and the handler
+            uses JSON Web tokens (JWTs). Typically this is true for SystemWeb based handlers using JWTs as those may be automatically activated
+            when a reference into an handler assembly is added. For such handlers one must have a way allowing to pass additional JWT token 
+            validation properties.
+            </para>
+            <para>
+            This method is not used when JWT validation parameters can be passed directly when configuring the authentication handler.
+            For example: this method is not used when the Owin, Katana implementation authentication handler is configured as in that
+            case all needed properties are passed into the Owin pipeline configuration method.
+            </para>
+            <para>
+            One should specify an audience, issuer used for the JWT validation.
+            </para>
+            <para>
+            An audience specifies allowed audiences an inbound JWT will be checked against. The JSON Web Token should be received with a 
+            special, audience (aud) claim. That claim specifies the recipients of the token. Each party reading the token must check if 
+            it's on the list of the allowed audiences. If it is not then the token is immediately rejected.
+            </para>
+            <para>
+            An issuer specifies a principal that issued the JWT and against which an inbound token will be checked. The JSON Web Token 
+            should be received with a special issuer (iss) claim. This claim is optional according to the JWT specification but it is 
+            REQUIRED by Volvo implementation as well as Volvo, Security Library implementation (as the one following the Katana approach).
+            The issuer acts here like the signing issuer and is related to the given certificate.
+            </para>
+            <para>
+            It is possible to consume JSON Web Tokens from both Authorization headers and cookies. The authorization header receives a precedence and its 
+            value is used first. The cookie is used when there is no token in the authorization header. A default name of a cookie can be modified by usage 
+            of middleware options object.
+            </para>
+            <para>
+            This Ping authentication handler validates read JSON Web Tokens. By default the <see cref="T:Volvo.NVS.Security.Tokens.JwtRSASignedValidator"/> is used.  It means that the 
+            default settings will support the RS256, RS384, RS512 signature algorithms. If you are about to use different signature algorithms then you 
+            should specify a different validator. For example you may configure the <see cref="T:Volvo.NVS.Security.Tokens.JwtHSSignedValidator"/> or the <see cref="T:Volvo.NVS.Security.Tokens.JwtESSignedValidator"/> 
+            and pass it into the <see cref="M:Volvo.NVS.Core.Configuration.SecurityLibraryConfigurationBuilder.SetJwtValidator(Volvo.NVS.Security.Tokens.IJwtSignedValidator)"/> configuration method.
+            </para>
+            <para>
+            You may use a constant, non-changing key in order to validate signatures of your tokens. This is a default behaviour and is achieved when
+            you specify a certificate to be used for token validation. A certificate is not suitable for all types of validations. You may also define
+            a key rollover strategy where keys are not constant and they change over time. In that case new keys can be downloaded from a given key http
+            endpoints. The dynamic key strategy can be configured setting the <see cref="P:Volvo.NVS.Security.Handlers.PingAuthenticationHandlerOptions.KeyProvider"/>.
+            </para>
+            </remarks>
+            <example>
+            The following code configures the Ping, JWT based authentication. We first look for a token in the http Authorization header and when not present in cookies. 
+            A cookie name holding a token can be changed via an options object. A single, constant key is used for token validation and is passed on the provided certificate. 
+            A default (RSA) signature algorithm is expected to be used for token signatures.
+            <code>
+            private const string Issuer = "SampleIssuer";
+            private const string Audience = "SampleAudience";
+            private const string CertificateStoreName = "WebHosting";
+            private const string CertificateName = "PingSampleApp";
+            
+            ...
+            
+            public static void Configure(ILibraryConfigurator configurator)
+            {
+               X509Certificate2 certificate = CertificateFactory.CreateFromStore(CertificateStoreName, CertificateName);
+            
+               configurator
+            
+                  // Configure the Unity Container
+                  .ConfigureContainer(container => container.Empty())
+            
+                  // Configure the Security Library, setup the Web Claims Service and JWT validation parameters
+                  .ConfigureSecurity(security => security
+                     .SetClaimsService(service => service.UseWebClaimsService())
+                     .SetJwtValidationProperties(Audience, Issuer, certificate));
+            }
+            
+            ...
+            
+            protected void Application_Start()
+            {
+                ...
+                LibraryConfig.Configure(LibraryConfigurator.Current);
+                ...
+            }
+            </code>
+            </example>
+            <example>
+            The following code configures Ping so JSON Web Tokens are validated and processed. This time we are not using a single, constant key for token signature
+            validation. We are specifying the JwsKeyProvider to be used and we set an http key endpoint from which keys should be taken. Additionally we are changing
+            a default signature algorithm so the ECDSA is possible. This is done with help of the JwtESSignedValidator (ECDSA specific validator).
+            <code>
+            private const string Issuer = "SampleIssuer";
+            private const string Audience = "SampleAudience";
+            
+            ...
+            
+            public static void Configure(ILibraryConfigurator configurator)
+            {
+            
+              PingAuthenticationHandlerOptions options = new PingAuthenticationHandlerOptions();
+              options.Issuer = Issuer;
+              options.AllowedAudience = Audience;
+              options.KeyProvider = new JwsKeyProvider(new Uri("https://securemobile-qa.volvo.com/pa/oidc/JWKS"));
+            
+               configurator
+            
+                  // Configure the Unity Container
+                  .ConfigureContainer(container => container.Empty())
+            
+                  // Configure the Security Library, setup the Web Claims Service and JWT validation parameters
+                  .ConfigureSecurity(security => security
+                     .SetClaimsService(service => service.UseWebClaimsService())
+                     .SetJwtValidationProperties(options)
+                     .SetJwtValidator(new JwtESSignedValidator()));
+            }
+            
+            ...
+            
+            protected void Application_Start()
+            {
+                ...
+                LibraryConfig.Configure(LibraryConfigurator.Current);
+                ...
+            }
+            </code>
+            </example>
+            <returns>The current security library configuration builder.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.SecurityLibraryJwtConfiguration.SetJwtValidationProperties(Volvo.NVS.Core.Configuration.ISecurityLibraryConfigurationBuilder,Volvo.NVS.Security.Handlers.PingAuthenticationHandlerOptions)">
+            <summary>
+            Specifies common settings used during JSON Web token parsing and validation.
+            </summary>
+            <param name="builder">A current security library configuration builder.</param>
+            <param name="options">Options used by the middleware component.</param>
+            <remarks>
+            <para>
+            This configuration method should be used when an authentication handler with automated activation is configured and the handler
+            uses JSON Web tokens (JWTs). Typically this is true for SystemWeb based handlers using JWTs as those may be automatically activated
+            when a reference into an handler assembly is added. For such handlers one must have a way allowing to pass additional JWT token 
+            validation properties.
+            </para>
+            <para>
+            This method is not used when JWT validation parameters can be passed directly when configuring the authentication handler.
+            For example: this method is not used when the Owin, Katana implementation authentication handler is configured as in that
+            case all needed properties are passed into the Owin pipeline configuration method.
+            </para>
+            <para>
+            One should specify an audience, issuer used for the JWT validation.
+            </para>
+            <para>
+            An audience specifies allowed audiences an inbound JWT will be checked against. The JSON Web Token should be received with a 
+            special, audience (aud) claim. That claim specifies the recipients of the token. Each party reading the token must check if 
+            it's on the list of the allowed audiences. If it is not then the token is immediately rejected.
+            </para>
+            <para>
+            An issuer specifies a principal that issued the JWT and against which an inbound token will be checked. The JSON Web Token 
+            should be received with a special issuer (iss) claim. This claim is optional according to the JWT specification but it is 
+            REQUIRED by Volvo implementation as well as Volvo, Security Library implementation (as the one following the Katana approach).
+            The issuer acts here like the signing issuer and is related to the given certificate.
+            </para>
+            <para>
+            It is possible to consume JSON Web Tokens from both Authorization headers and cookies. The authorization header receives a precedence and its 
+            value is used first. The cookie is used when there is no token in the authorization header. A default name of a cookie can be modified by usage 
+            of middleware options object.
+            </para>
+            <para>
+            This Ping authentication handler validates read JSON Web Tokens. By default the <see cref="T:Volvo.NVS.Security.Tokens.JwtRSASignedValidator"/> is used.  It means that the 
+            default settings will support the RS256, RS384, RS512 signature algorithms. If you are about to use different signature algorithms then you 
+            should specify a different validator. For example you may configure the <see cref="T:Volvo.NVS.Security.Tokens.JwtHSSignedValidator"/> or the <see cref="T:Volvo.NVS.Security.Tokens.JwtESSignedValidator"/> 
+            and pass it into the <see cref="M:Volvo.NVS.Core.Configuration.SecurityLibraryConfigurationBuilder.SetJwtValidator(Volvo.NVS.Security.Tokens.IJwtSignedValidator)"/> configuration method.
+            </para>
+            <para>
+            You may use a constant, non-changing key in order to validate signatures of your tokens. This is a default behaviour and is achieved when
+            you specify a certificate to be used for token validation. A certificate is not suitable for all types of validations. You may also define
+            a key rollover strategy where keys are not constant and they change over time. In that case new keys can be downloaded from a given key http
+            endpoints. The dynamic key strategy can be configured setting the <see cref="P:Volvo.NVS.Security.Handlers.PingAuthenticationHandlerOptions.KeyProvider"/>.
+            </para>
+            </remarks>
+            <example>
+            The following code adds Ping middleware component into the Owin pipeline so JSON Web Tokens are validated and processed.
+            We first look for a token in the http Authorization header and when not present in cookies. A cookie name holding a token can be changed
+            via an options object. A single, constant key is used for token validation and is passed on the provided certificate. A default (RSA)
+            signature algorithm is expected to be used for token signatures. The settings are typical for client-centric applications.
+            <code>
+            private const string Issuer = "SampleIssuer";
+            private const string Audience = "SampleAudience";
+            private const string CertificateStoreName = "WebHosting";
+            private const string CertificateName = "PingSampleApp";
+            
+            ...
+            
+            public static void Configure(ILibraryConfigurator configurator)
+            {
+               X509Certificate2 certificate = CertificateFactory.CreateFromStore(CertificateStoreName, CertificateName);
+            
+               configurator
+            
+                  // Configure the Unity Container
+                  .ConfigureContainer(container => container.Empty())
+            
+                  // Configure the Security Library, setup the Web Claims Service and JWT validation parameters
+                  .ConfigureSecurity(security => security
+                     .SetClaimsService(service => service.UseWebClaimsService())
+                     .SetJwtValidationProperties(Audience, Issuer, certificate));
+            }
+            
+            ...
+            
+            protected void Application_Start()
+            {
+                ...
+                LibraryConfig.Configure(LibraryConfigurator.Current);
+                ...
+            }
+            </code>
+            </example>
+            <example>
+            The following code configures Ping so JSON Web Tokens are validated and processed. This time we are not using a single, constant key for token signature
+            validation. We are specifying the JwsKeyProvider to be used and we set an http key endpoint from which keys should be taken. Additionally we are changing
+            a default signature algorithm so the ECDSA is possible which is typical for tokens coming from the PingAccess (classic, server side applications). This 
+            is done with help of the JwtESSignedValidator (ECDSA specific validator). The token mode is also changed so no inner tokens (e.g. access token received 
+            on the main token) are processed.
+            <code>
+            private const string Issuer = "SampleIssuer";
+            private const string Audience = "SampleAudience";
+            
+            ...
+            
+            public static void Configure(ILibraryConfigurator configurator)
+            {
+            
+              PingAuthenticationHandlerOptions options = new PingAuthenticationHandlerOptions();
+              options.Issuer = Issuer;
+              options.TokenMode = PingAuthenticationHandlerTokenMode.RootTokenOnly;
+              options.AllowedAudience = Audience;
+              options.KeyProvider = new JwsKeyProvider(new Uri("https://securemobile-qa.volvo.com/pa/oidc/JWKS"));
+            
+               configurator
+            
+                  // Configure the Unity Container
+                  .ConfigureContainer(container => container.Empty())
+            
+                  // Configure the Security Library, setup the Web Claims Service and JWT validation parameters
+                  .ConfigureSecurity(security => security
+                     .SetClaimsService(service => service.UseWebClaimsService())
+                     .SetJwtValidationProperties(options)
+                     .SetJwtValidator(new JwtESSignedValidator()));
+            }
+            
+            ...
+            
+            protected void Application_Start()
+            {
+                ...
+                LibraryConfig.Configure(LibraryConfigurator.Current);
+                ...
+            }
+            </code>
+            </example>
+            <returns>The current security library configuration builder.</returns>
+        </member>
+    </members>
+</doc>

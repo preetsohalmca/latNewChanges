@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+
+
+<div id="divParentContainer" class="col-md-12">
+    @Html.Partial("_SearchPO")
+    <div id="divContainer">
+    <div id="newPurchaseOrder" class="col-md-6">
+        @Html.Partial("_NewPurchaseOrders")
+    </div>
+    <div id="groupName" class="col-md-6" style="padding:0!important">
+        @Html.Partial("_GroupName")
+    </div>
+    <div id="myRenewals" class="col-md-12">
+        @Html.Partial("_Renewals")
+    </div>
+        </div>
+</div>
+
+<style>
+    #newPurchaseOrder {
+        padding: 40px;
+    }
+
+    #groupName {
+        padding: 40px;
+        border: 2px solid #808080;
+        margin: 42px 0 0 0;
+        height: 324px
+    }
+
+        #groupName ul li {
+            padding: 27px 0px 0 0;
+            list-style: none;
+        }
+
+            #groupName ul li a {
+                font-size: 12px;
+            }
+
+    #myRenewals {
+        padding: 0px 0px 0px 40px;
+    }
+</style>
+

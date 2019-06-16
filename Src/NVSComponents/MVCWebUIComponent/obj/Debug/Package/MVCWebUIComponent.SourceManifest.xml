@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\obj\Debug\Package\PackageTmp" managedRuntimeVersion="v4.0" />
+</sitemanifest>

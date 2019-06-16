@@ -1,0 +1,24 @@
+﻿@using Volvo.LAT.POLineDomain.DomainLayer.Entities;
+<h4>PO Line renewals</h4>
+@(Html.Kendo().Grid<DashboardNewOrders>()
+ .Name("gridNewPurchaseOrders")
+ .Columns(columns =>
+ {
+
+     columns.Bound(o => o.EbdNumber).Title("PO Number").ClientTemplate("<a href='" + Url.Action("GetPurchaseOrderDetail", "PoLine", new { purchaseOrderId = "#= EbdNumber #'" }) + ">#= EbdNumber #</a>");
+     columns.Bound(o => o.VendorName).Title("VendorName");
+
+ })
+ .Selectable()
+ .Sortable()
+ .Pageable(p => p.Input(true).Refresh(true).PageSizes(new[] { 10, 20, 50, 100 }))
+ .AutoBind(true)
+ .Scrollable(x => x.Enabled(false))
+ .DataSource(dataSource => dataSource
+     .Ajax()
+     .Read(read => read.Action("GetNewPurchaseOrders", "Dashboard"))
+     .PageSize(10)
+                                                                                                  )
+
+)
+

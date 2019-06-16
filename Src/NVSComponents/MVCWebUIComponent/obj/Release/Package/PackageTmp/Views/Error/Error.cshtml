@@ -1,0 +1,16 @@
+﻿@model HandleErrorInfo
+
+@{
+    ViewBag.Title = CommonResource.Error_Title;
+}
+
+@if (Model != null)
+{
+    <div class="group">
+        <span class="field">
+            <label class="field">@CommonResource.Error_Message:</label>
+            @Html.Raw(Model.Exception.Message)
+        </span>
+        <hr class="nvs"/>
+    </div>
+}

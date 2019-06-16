@@ -1,0 +1,154 @@
+﻿@using System.Configuration
+@using System.Web.Optimization;
+@using Volvo.NVS.Utilities.Web.Messaging
+@using Volvo.NVS.Utilities.Web.Localization
+@using Volvo.LAT.MVCWebUIComponent.Common.Extensions
+@using Volvo.LAT.MVCWebUIComponent.Common.ActionFilter
+<!DOCTYPE html>
+
+<html>
+<head>
+    <!-- disable compatibility view, regardless of user settings -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Scripts/bootstrap-3.4.1-dist/css/bootstrap.min.css")" rel="stylesheet" />
+
+    <!-- Latest compiled JavaScript -->
+
+
+    @{ var currentTheme = Html.GetCurrentTheme(); }
+
+    <!-- CSS bundles -->
+    @Styles.Render(Html.FormatValue(currentTheme, "~/Content/nvs/{0}/CssBundle"))
+
+    <!-- Javascript bundles -->
+    @Scripts.Render("~/Scripts/Js/CommonJsBundle")
+
+    @Html.SetCultureForKendoUi(string.Format("~/Scripts/kendo/{0}/cultures/", ConfigurationManager.AppSettings["KendoVersion"]))
+
+
+
+    @RenderSection("Header", required: false)
+    <style>
+        .sidenav {
+            position: relative;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #D5D9E3;
+            overflow-x: hidden;
+            transition: 0.5s;
+            /* padding-top: 60px; */
+            float: right;
+            border: 1px solid #23527C;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 20px;
+                text-decoration: none;
+                font-size: 12px;
+                color: #23527C;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+
+        #mySidenav {
+            width: 195px;
+            clear: right;
+            margin: 45px 118px 0px 0px;
+            position: absolute;
+            display: none;
+            height: 230px;
+            padding: 23px 0 0 0;
+        }
+
+        #spanBtnMenu {
+            cursor: pointer;
+            float: right;
+            z-index: 999999999999999;
+            position: relative;
+            font-size: 20px;
+            clear: right;
+            width: 197px;
+            margin: 13px 70px 0 0;
+            background: #cdcdcd;
+        }
+
+            #spanBtnMenu span {
+                padding: 7px 9px 5px 8px;
+            }
+    </style>
+</head>
+<body>
+    <div id="nvsMainWindow">
+        <div id="nvsHeader">
+            <div id="nvsSurroundingArea">
+                <div id="nvsApplicationId">
+                    <h1><a href="@Url.Action("Index", "Dashboard")">LAT Application</a></h1>
+                    <h2>Invoice Master Mod</h2>
+                </div>
+                <span id="nvsSupportingFunctions">
+                </span>
+                <div id="nvsUserId">
+                    @*@Html.Raw(Html.GetCurrentUser())*@
+                </div>
+                <div id="spanBtnMenu" onclick="openNav()"> <span style="float:left;">MENU</span><span style="float:right;font-size:10px;">&#9776;</span></div>
+                <div id="mySidenav" class="sidenav">
+                    @*<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>*@
+
+                    <a href="/home?purchaseorder=true">My Purchase Orders</a>
+                    
+                    @if (AuthorizationFilter.IsAdmin())
+                    {
+                        <a href="/poline/reports">Administration</a>
+                        <a href="/poline/reports/3">Import from EBD (Pure)</a>
+                    }
+                    <a href="/home?purchaseorder=true&renewals=true">My Renewals</a>
+                    @if (AuthorizationFilter.IsAdmin())
+                    {
+                        <a href="/poline/reports">Invoice Report</a>
+
+                        <a href="https://app.powerbi.com/" target="_blank">Power Bi</a>
+                    }
+                </div>
+
+
+                <hr />
+            </div>
+
+        </div>
+        <div id="nvsFlashMessagesContainer">
+            @Html.Summary()
+        </div>
+
+        <div id="nvsBody">
+            @RenderBody()
+        </div>
+
+        @*<div id="nvsFooter">
+                <span id="nvsVersion">@CommonResource.Layout_Version - @(Html.GetAssemblyInformation())</span>
+                <span id="nvsLegal">@CommonResource.Layout_Legal</span>
+            </div>*@
+    </div>
+</body>
+</html>
+<script src="@Url.Content("~/Scripts/bootstrap-3.4.1-dist/js/bootstrap.min.js")"></script>
+<script src="@Url.Content("~/Scripts/bootbox/bootbox.all.min.js")"></script>
+<script>
+    function openNav() {
+        $('#mySidenav').slideToggle();
+    }
+
+    $(document).mouseup(function (e) {
+
+        if ($('#mySidenav').is(":visible")) {
+            $('#mySidenav').hide();
+        }
+    });
+</script>

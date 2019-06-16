@@ -1,0 +1,1977 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Volvo.NVS.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Volvo.NVS.Core.Configuration.ConfigurationLoader">
+            <summary>
+            Contains configuration processing and configuration loading helper methods.
+            </summary>
+            <remarks>
+            <para>
+            Static methods provided by the <see cref="T:Volvo.NVS.Core.Configuration.ConfigurationLoader"/> class are often used together with the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/>.
+            The <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> allows to assign a name into the class representing the configuration section while the <see cref="T:Volvo.NVS.Core.Configuration.ConfigurationLoader"/>
+            gives easy reading of such sections. See the <see cref="M:Volvo.NVS.Core.Configuration.ConfigurationLoader.GetSection``1"/> method.
+            </para>
+            <para>
+            One may also read configuration sections when the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> is not used. In such case a name of the section must be
+            explicitly provided. See the <see cref="M:Volvo.NVS.Core.Configuration.ConfigurationLoader.GetSection``1(System.String)"/> method.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.ConfigurationLoader.GetName(System.Type)">
+            <summary>
+            Returns the name of the configuration section for a given type as specified by the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> applied on this type.
+            </summary>
+            <param name="type">
+            A type decorated with the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> attribute and for which name should be read.
+            </param>
+            <exception cref="T:Volvo.NVS.Core.Exceptions.NamedConfigurationException">
+            Thrown when the type if not decorated with the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> attribute or the name is not given.
+            </exception>
+            <returns>The name of the attribute according to the applied <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.ConfigurationLoader.GetSection``1">
+            <summary>
+            Returns the configuration section object of the <typeparamref name="T"/> type looking for the xml element, section element with the name
+            given on the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> which itself is applied on the <typeparamref name="T"/> type. The current application configuration
+            file is used in order to look for the configuration section.
+            </summary>
+            <remarks>
+            <para>
+            This method checks if the <typeparamref name="T"/> configuration section class is decorated with the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/>. 
+            This decoration is required as the name of the xml element to be used is read from the value given on the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/>.
+            See the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> for more details.
+            </para>
+            <example>
+            <para>
+            The following will specify a name of the sample configuration section expected in the configuration file. The section is represented
+            by the SampleSection class and it should be named as 'sample' in the configuration file:
+            <code>
+            [NamedSection("sample")]
+            public class SampleSection : ConfigurationSection
+            {
+            }
+            </code>
+            </para>
+            <para>
+            Once the section class is decorated with the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> the section can be read from the current application
+            configuration file:
+            <code>
+            <![CDATA[
+            // It will expect the section called "sample" as define on the attribute
+            SampleSection section = ConfigurationLoader.GetSection<SampleSection>();
+            ]]>
+            </code>
+            </para>
+            </example>
+            </remarks>
+            <typeparam name="T">Type of the configuration section class decorated with the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/>.</typeparam>
+            <returns>The configuration section object or null when no such section is defined.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.ConfigurationLoader.GetSection``1(System.String)">
+            <summary>
+            Returns the configuration section object of the <typeparamref name="T"/> type looking for the xml element, section with the given name
+            in the current application configuration file.
+            </summary>
+            <param name="name">Name of the configuration section which is expected in the current application configuration file.</param>
+            <typeparam name="T">Type of the configuration section class.</typeparam>
+            <returns>The configuration section object or null when no such section is defined.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator">
+            <summary>
+            Defines a contract for the common NVS library configuration object. This contract is extended
+            by multiple NVS Libraries so we have a unified, code-based and single place for configuration of
+            multiple NVS libraries.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Configuration.LibraryConfigurator">
+            <summary>
+            Base NVS library configuration class extended by multiple NVS libraries. Extension methods are added into the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/>
+            interface implemented by this class so fluent, common and unified configuration is possible for different NVS projects.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Configuration.LibraryConfigurator"/> is the common configuration class for all NVS libraries. It unifies the NVS library configuration
+            acting like a single point for all configuration methods. Every library may add its own configuration methods into the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/> 
+            interface implemented by this class.
+            </para>
+            <para>
+            In the most simple scenario one references the wanted NSV library, accesses an instance of the <see cref="F:Volvo.NVS.Core.Configuration.LibraryConfigurator.Current"/> and uses the 
+            configuration method specific for the referenced library.
+            </para>
+            <para>
+            Please note it is up to the library to decide if configuration capabilities will be provided as extension methods into the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/>.
+            Check the target library documentation for details and make sure the fluent configuration is available for the used library.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Core.Configuration.LibraryConfigurator.Current">
+            <summary>
+            The current NVS library common configuration object.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.LibraryConfigurator.#ctor">
+            <summary>
+            Creates an instance of the main library configuration object.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute">
+            <summary>
+            Specifies a name of the configuration section represented by a class onto which this attribute is applied.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> provides a name for the application configuration section, element. The attribute
+            should be applied on a class representing this element. Typically it is applied on a class derived from the <see cref="T:System.Configuration.ConfigurationSection"/>.
+            </para>
+            <example>
+            The following will specify a name of the sample configuration section expected in the configuration file. The section is represented
+            by the SampleSection class and it should be named as 'sample' in the configuration file:
+            <code>
+            [NamedSection("sample")]
+            public class SampleSection : ConfigurationSection
+            {
+            }
+            </code>
+            </example>
+            <example>
+            Once the configuration section class is marked with the <see cref="T:Volvo.NVS.Core.Configuration.NamedSectionAttribute"/> the <see cref="M:Volvo.NVS.Core.Configuration.ConfigurationLoader.GetSection``1"/>
+            can be used to read the section from the current application configuration file using the name provided on the attribute.
+            </example>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.NamedSectionAttribute.#ctor(System.String)">
+            <summary>
+            Provide the name of the configuration element under which it appears in the application configuration file.
+            </summary>
+            <param name="name">
+            A name of the configuration element for example: the application configuration file xml node name.
+            </param>
+        </member>
+        <member name="P:Volvo.NVS.Core.Configuration.NamedSectionAttribute.Name">
+            <summary>
+            Name of the configuration element.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.LocalizationRequiredAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates that marked element (e.g. class) should be localized or not.
+            </summary>
+            <example>
+            <code>
+            [LocalizationRequiredAttribute(true)]
+            public class Foo
+            {
+              private string str = "my string"; // Warning: Localizable string
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.LocalizationRequiredAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Core.Diagnostics.Annotations.LocalizationRequiredAttribute"/> class.
+            </summary>
+            <param name="required"><c>true</c> if a element should be localized; otherwise, <c>false</c>.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.LocalizationRequiredAttribute.Equals(System.Object)">
+            <summary>
+            Returns whether the value of the given object is equal to the current <see cref="T:Volvo.NVS.Core.Diagnostics.Annotations.LocalizationRequiredAttribute"/>.
+            </summary>
+            <param name="obj">The object to test the value equality of. </param>
+            <returns>
+            <c>true</c> if the value of the given object is equal to that of the current; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.LocalizationRequiredAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A hash code for the current <see cref="T:Volvo.NVS.Core.Diagnostics.Annotations.LocalizationRequiredAttribute"/>.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Core.Diagnostics.Annotations.LocalizationRequiredAttribute.Required">
+            <summary>
+            Gets a value indicating whether a element should be localized.
+            <value><c>true</c> if a element should be localized; otherwise, <c>false</c>.</value>
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.StringFormatMethodAttribute">
+            <summary>
+            The ReSharper annotation attribute. 
+            Indicates that marked method builds string by format pattern.
+            </summary>
+            <remarks>
+            Indicates that the marked method builds string by format pattern and (optional) arguments. Parameter, 
+            which contains format string, should be given in constructor. The format string should be in 
+            <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])"/> -like form 
+            <example>
+            <code>
+            [StringFormatMethod("message")]
+            public void ShowError(string message, params object[] args) { /* do something */ }
+            public void Foo() {
+               ShowError("Failed: {0}"); // Warning: Non-existing argument in format string
+            }
+            </code>
+            </example>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+            <summary>
+            Initializes new instance of StringFormatMethodAttribute
+            </summary>
+            <param name="formatParameterName">Specifies which parameter of an annotated method should be treated as format-string</param>
+        </member>
+        <member name="P:Volvo.NVS.Core.Diagnostics.Annotations.StringFormatMethodAttribute.FormatParameterName">
+            <summary>
+            Gets format parameter name
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.InvokerParameterNameAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates that the function argument should be string literal and match one  of the parameters of the caller function.
+            For example, <see cref="T:System.ArgumentNullException"/> has such parameter.
+            </summary>
+            <remarks>
+            <example>
+            <code>
+            public void Foo(string param) {
+            if (param == null)
+              throw new ArgumentNullException("par"); // Warning: Cannot resolve symbol
+            }
+            </code>
+            </example>
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.AssertionMethodAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates that the marked method is assertion method, i.e. it halts control flow if one of the conditions is satisfied. 
+            To set the condition, mark one of the parameters with <see cref="T:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionAttribute"/> attribute
+            </summary>
+            <seealso cref="T:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionAttribute"/>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates the condition parameter of the assertion method. 
+            The method itself should be marked by <see cref="T:Volvo.NVS.Core.Diagnostics.Annotations.AssertionMethodAttribute"/> attribute.
+            The mandatory argument of the attribute is the assertion type.
+            </summary>
+            <seealso cref="T:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionType"/>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionAttribute.#ctor(Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionType)">
+            <summary>
+            Initializes new instance of AssertionConditionAttribute
+            </summary>
+            <param name="conditionType">Specifies condition type</param>
+        </member>
+        <member name="P:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionAttribute.ConditionType">
+            <summary>
+            Gets condition type
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionType">
+            <summary>
+            The ReSharper annotation attribute.
+            Specifies assertion type. If the assertion method argument satisfies the condition, then the execution continues. 
+            Otherwise, execution is assumed to be halted
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionType.IsTrue">
+            <summary>
+            Indicates that the marked parameter should be evaluated to true
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionType.IsFalse">
+            <summary>
+            Indicates that the marked parameter should be evaluated to false
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionType.IsNull">
+            <summary>
+            Indicates that the marked parameter should be evaluated to null value
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.AssertionConditionType.IsNotNull">
+            <summary>
+            Indicates that the marked parameter should be evaluated to not null value
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.TerminatesProgramAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates that the marked method unconditionally terminates control flow execution.
+            For example, it could unconditionally throw exception
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.CanBeNullAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates that the value of marked element could be <c>null</c> sometimes, so the check for <c>null</c> is necessary before its usage
+            </summary>
+            <example>
+            <code>
+            [CanBeNull] public object Test() { return null; }
+            public void UseTest() {
+               var p = Test();
+               var s = p.ToString(); // Warning: Possible 'System.NullReferenceException'
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.NotNullAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates that the value of marked element could never be <c>null</c>
+            </summary>
+            <example>
+            <code>
+            [NotNull] public object Foo() {
+               return null; // Warning: Possible 'null' assignment
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.CannotApplyEqualityOperatorAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates that the value of marked type (or its derivatives) cannot be compared using '==' or '!=' operators.
+            There is only exception to compare with <c>null</c>, it is permitted
+            </summary>
+            <remarks>
+            <example>
+            <code>
+            [CannotApplyEqualityOperator]
+            class NoEquality { }
+            class UsesNoEquality
+            {
+                public void Test()
+                {
+                    var ca1 = new NoEquality();
+                    var ca2 = new NoEquality();
+                    if (ca1 != null)
+                    { // OK
+                       bool condition = ca1 == ca2; // Warning
+                    }
+                }
+            }
+            </code>
+            </example>
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.BaseTypeRequiredAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            When applied to target attribute, specifies a requirement for any type which is marked with 
+            target attribute to implement or inherit specific type or types
+            </summary>
+            <example>
+            <code>
+            [BaseTypeRequired(typeof(IComponent)] // Specify requirement
+            public class ComponentAttribute : Attribute 
+            {}
+            
+            [Component] // ComponentAttribute requires implementing IComponent interface
+            public class MyComponent : IComponent
+            {}
+            </code>
+            </example>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.BaseTypeRequiredAttribute.#ctor(System.Type[])">
+            <summary>
+            Initializes new instance of BaseTypeRequiredAttribute
+            </summary>
+            <param name="baseTypes">Specifies which types are required</param>
+        </member>
+        <member name="P:Volvo.NVS.Core.Diagnostics.Annotations.BaseTypeRequiredAttribute.BaseTypes">
+            <summary>
+            Gets enumerations of specified base types
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.UsedImplicitlyAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+            so this symbol will not be marked as unused (as well as by other usage inspections)
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.UsedImplicitlyAttribute.#ctor">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library), so this symbol will not be marked as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.UsedImplicitlyAttribute.#ctor(Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags,Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags)">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library), so this symbol will not be marked as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.UsedImplicitlyAttribute.#ctor(Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags)">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library), so this symbol will not be marked as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.UsedImplicitlyAttribute.#ctor(Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags)">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library), so this symbol will not be marked as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Diagnostics.Annotations.UsedImplicitlyAttribute.UseKindFlags">
+            <summary>
+            Get the currently assigned flags.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Diagnostics.Annotations.UsedImplicitlyAttribute.TargetFlags">
+            <summary>
+            Gets value indicating what is meant to be used.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.MeansImplicitUseAttribute">
+            <summary>
+            The ReSharper annotation attribute.
+            Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.MeansImplicitUseAttribute.#ctor">
+            <summary>
+            Used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.MeansImplicitUseAttribute.#ctor(Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags,Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags)">
+            <summary>
+            Used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections).
+            </summary>
+            <param name="useKindFlags">Kind</param>
+            <param name="targetFlags">Target</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.MeansImplicitUseAttribute.#ctor(Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags)">
+            <summary>
+            Used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections).
+            </summary>
+            <param name="useKindFlags">Kind</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Annotations.MeansImplicitUseAttribute.#ctor(Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags)">
+            <summary>
+            Used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections).
+            </summary>
+            <param name="targetFlags">Target</param>
+        </member>
+        <member name="P:Volvo.NVS.Core.Diagnostics.Annotations.MeansImplicitUseAttribute.UseKindFlags">
+            <summary>
+            Used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Diagnostics.Annotations.MeansImplicitUseAttribute.TargetFlags">
+            <summary>
+            Gets value indicating what is meant to be used
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags">
+            <summary>
+            Kind of implicit usage.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags.Default">
+            <summary>
+            Default, applicable to all.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags.Access">
+            <summary>
+            Only entity marked with attribute considered used
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags.Assign">
+            <summary>
+            Indicates implicit assignment to a member
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseKindFlags.Instantiated">
+            <summary>
+            Indicates implicit instantiation of a type
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags">
+            <summary>
+            Specify what is considered used implicitly when marked with <see cref="T:Volvo.NVS.Core.Diagnostics.Annotations.MeansImplicitUseAttribute"/> or <see cref="T:Volvo.NVS.Core.Diagnostics.Annotations.UsedImplicitlyAttribute"/>
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags.Default">
+            <summary>
+            Default, itself
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags.Itself">
+            <summary>
+            Itself.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags.Members">
+            <summary>
+            Members of entity marked with attribute are considered used
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Diagnostics.Annotations.ImplicitUseTargetFlags.WithMembers">
+            <summary>
+            Entity marked with attribute and all its members considered used
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Exceptions.ContainerConfigurationException">
+            <summary>
+            Thrown when it is not possible to configure <see cref="T:Volvo.NVS.Core.Unity.Container"/>. It is only one of multiple
+            possible <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration exceptions.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Exceptions.NVSException">
+            <summary>
+            The class represents the common, base Exception which should be used by all NVS components.
+            </summary>
+            <remarks>
+            <para>
+            Use this class in the application in order to have a common, exception base class.
+            </para>
+            <para>
+            It is NOT recommended to control the application flow using Exception objects in any way. 
+            It means exceptions should be used for exceptional cases only. Exception details should 
+            never be revealed in the user interface.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.NVSException.#ctor">
+            <summary>
+            Creates the NVS exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.NVSException.#ctor(System.String)">
+            <summary>
+            Creates the NVS exception with a given message.
+            </summary>
+            <param name="message">The error message string.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.NVSException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates the NVS exception with a given message and in relation to another exception.
+            </summary>
+            <param name="message">The error message string.</param>
+            <param name="inner">The inner exception reference. </param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.NVSException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the NSV Exception from the serialization data.
+            </summary>
+            <param name="info">All data needed to deserialize an object.</param>
+            <param name="context">Serialization context, describes the serialization source</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.ContainerConfigurationException.#ctor">
+            <summary>
+            Creates an instance of the named configuration section.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.ContainerConfigurationException.#ctor(System.String)">
+            <summary>
+            Creates an instance of the named configuration section.
+            </summary>
+            <param name="message">The error message string.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.ContainerConfigurationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates an instance of the named configuration section.
+            </summary>
+            <param name="message">The error message string.</param>
+            <param name="inner">The inner exception reference. </param>
+        </member>
+        <member name="T:Volvo.NVS.Core.Exceptions.NamedConfigurationException">
+            <summary>
+            Thrown when it is not possible to locate the requested named configuration section, node.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.NamedConfigurationException.#ctor">
+            <summary>
+            Creates an instance of the named configuration section.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.NamedConfigurationException.#ctor(System.String)">
+            <summary>
+            Creates an instance of the named configuration section.
+            </summary>
+            <param name="message">The error message string.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Exceptions.NamedConfigurationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates an instance of the named configuration section.
+            </summary>
+            <param name="message">The error message string.</param>
+            <param name="inner">The inner exception reference. </param>
+        </member>
+        <member name="T:Volvo.NVS.Core.Logging.EmptyLogger">
+            <summary>
+            Empty logger discarding all the log messages, known also as the null logger. The emtpy logger can be used when
+            no specific implementation of the <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> is provided.
+            </summary>
+            <remarks>
+            <para>
+            Various classes in NVS libraries need a way to access the application logging infrastructure.
+            The <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> provides an abstraction for the logging functionality. Users may
+            provide implementation of the <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> which is specific for their application
+            and register such implementation within the unity. When it is registered the classes using the
+            <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> will output all the logging information into the given implementation.
+            </para>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Logging.EmptyLogger"/> is an empty, null logger meaning that in fact it does not log
+            any data. It is useful when an instance of a logger is always expected but not specific implementation
+            of a logger is given.
+            </para>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Logging.EmptyLogger"/> is most useful to be used in utility library and by the NVS classes
+            and NVS libraries themselves.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Core.Logging.ILogger">
+            <summary>
+            Provides an abstraction for the logging functionality. Applications implement this interface in order to notify 
+            the NVS libraries how the logging should be realized.
+            </summary>
+            <remarks>
+            <para>
+            Various classes in NVS libraries need a way to access the application logging infrastructure.
+            The <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> provides an abstraction for the logging functionality. Users may
+            provide implementation of the <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> which is specific for their application
+            and register such implementation within the unity. When it is registered the classes using the
+            <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> will output all the logging information into the given implementation.
+            </para>
+            <para>
+            Implement this interface in your application and register the implementation within the unity
+            in order to notify various NVS libraries and classes about a way in which the logging should
+            be realized.
+            </para>
+            <para>
+            Registration of the <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> implementation is optional.
+            </para>
+            <para>
+            Not all NVS classes, libraries are using the logging. Check each class in order to ensure
+            the logging in supported by the class.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogDebug(System.String)">
+            <summary>
+            Log the debug message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogInfo(System.String)">
+            <summary>
+            Log the information message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogTrace(System.String)">
+            <summary>
+            Log the trace message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogError(System.String)">
+            <summary>
+            Log the error message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogError(System.String,System.Exception)">
+            <summary>
+            Log the error message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="ex">An exception related into the error message.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogError(System.Exception)">
+            <summary>
+            Log the error exception.
+            </summary>
+            <param name="ex">An exception related into the error.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogNotify(System.String)">
+            <summary>
+            Log the notification message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogNotify(System.String,System.Exception)">
+            <summary>
+            Log the notification message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="ex">An exception related into the notification message.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogNotify(System.Exception)">
+            <summary>
+            Log the notification exception.
+            </summary>
+            <param name="ex">The exception to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.ILogger.LogBusinessTask(System.String)">
+            <summary>
+            Log the business message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogDebug(System.String)">
+            <summary>
+            Log the debug message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogInfo(System.String)">
+            <summary>
+            Log the information message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogTrace(System.String)">
+            <summary>
+            Log the trace message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogError(System.String)">
+            <summary>
+            Log the error message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogError(System.String,System.Exception)">
+            <summary>
+            Log the error message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="ex">An exception related into the error message.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogError(System.Exception)">
+            <summary>
+            Log the error exception.
+            </summary>
+            <param name="ex">An exception related into the error.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogNotify(System.String)">
+            <summary>
+            Log the notification message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogNotify(System.String,System.Exception)">
+            <summary>
+            Log the notification message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="ex">An exception related into the notification message.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogNotify(System.Exception)">
+            <summary>
+            Log the notification exception.
+            </summary>
+            <param name="ex">The exception to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Logging.EmptyLogger.LogBusinessTask(System.String)">
+            <summary>
+            Log the business message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="T:Volvo.NVS.Core.Resources.CoreResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.ConfigurationLoaderEmptyNameAttribute">
+            <summary>
+              Looks up a localized string similar to The type {0} uses the {1} attribute with an empty name.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.ConfigurationLoaderMissingNameAttribute">
+            <summary>
+              Looks up a localized string similar to The type {0} is not decorated with the {1} attribute.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.ConfigurationLoaderNoCastPossible">
+            <summary>
+              Looks up a localized string similar to The configuration section {0} cannot be converted to {1}. Check .config file section node..
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.ConfigurationLoaderNoName">
+            <summary>
+              Looks up a localized string similar to The name of the configuration element for {0} must be given.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.ContainerIncorrectSection">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; configuration section in &apos;{1}&apos; is not the correct unity configuration section.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.ContainerNoSection">
+            <summary>
+              Looks up a localized string similar to Unable to locate &apos;{0}&apos; configuration section in &apos;{1}&apos; or the file is not correct.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Resources.CoreResources.ContainerNoSectionInCurrentFile">
+            <summary>
+              Looks up a localized string similar to Unable to configure unity container. No &apos;{0}&apos; configuration section has been found in the currently used application configuration file. Configure Unity from code or ensure file based configuration is correct..
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.CachedContainer`1">
+            <summary> 
+            The class provides a single type specific unity container which itself is using cache in order to increase performance of
+            type registration checks and in order to provide optional type instance resolution.
+            </summary>
+            <typeparam name="T">
+            The type which we would like to resolve and which may or may not be registered within the current unity container.
+            </typeparam>
+            <remarks>
+            <para>
+            In most of the cases one should use the <see cref="T:Volvo.NVS.Core.Unity.Container"/> class in order to resolve types from the Unity container.
+            The <see cref="T:Volvo.NVS.Core.Unity.CachedContainer`1"/> can be used if one wants to check if a type is registered, mapped within the <see cref="T:Volvo.NVS.Core.Unity.Container"/>
+            and perform the optional resolution.
+            </para>
+            <para>
+            The <see cref="M:Volvo.NVS.Core.Unity.CachedContainer`1.IsRegistered"/> and <see cref="M:Volvo.NVS.Core.Unity.CachedContainer`1.IsRegistered(System.String)"/> methods provide an optimized version of the type registration check. 
+            The check is performed only once for the given type and name and the cache is used. This is different from the <see cref="M:Volvo.NVS.Core.Unity.Container.IsRegistered(System.Type)"/> 
+            method which is always scanning the collection of registered types and which is not optimal from the performance perspective.
+            </para>
+            <para>
+            By usage of one of the TryResolved method one may try to resolve instance of the given type while the type may or may not be registered within the 
+            current unity container. When a type is not registered the null value can be returned or a function providing the default value can be passed and used.
+            </para>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Unity.Container"/> must be fully configured before the <see cref="T:Volvo.NVS.Core.Unity.CachedContainer`1"/> is used.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.CachedContainer`1.status">
+            <summary>
+            The status of the performed registration check for the complete type (not named registration, fast path).
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.CachedContainer`1.namedStatuses">
+            <summary>
+            The cache for named registration checks. It is used if and only if the a registration  name is passed into the check methods.
+            When name is not given then we are using a fast path basing on the <see cref="F:Volvo.NVS.Core.Unity.CachedContainer`1.status"/> field.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.CachedContainer`1.sync">
+            <summary>
+            The synchronization and memory barrier providing thread safety for the operations.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.CachedContainer`1.IsRegistered">
+            <summary>
+            Determines if the current type is registered within the current <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            The check is performed once and the result is cached. The cached result is used when available.
+            </summary>
+            <returns>True if the current type is recognized as the registered one.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.CachedContainer`1.IsRegistered(System.String)">
+            <summary>
+            Determines if the current type is registered within the current <see cref="T:Volvo.NVS.Core.Unity.Container"/> with the given registration name.
+            The check is performed once and the result is cached. The cached result is used when available.
+            </summary>
+            <param name="name">Name of the registration to be checked.</param>
+            <returns>True if type is mapped with the given name otherwise false.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.CachedContainer`1.TryResolve(Microsoft.Practices.Unity.ResolverOverride[])">
+            <summary>
+            Try to resolve an instance of the type if it is a registered and mapped type in the current unity container.
+            When it is not possible to resolve an instance of the given type return null.
+            </summary>
+            <remarks>
+            <para>
+            The function resolves the instance for a given type if it is the registered type in the current <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            It returns null if the type is not the registered one.
+            </para>
+            <para>
+            The check for the type registration is performed only once and it is cached. When cache is available
+            the information about the type registration status is given from the cached.
+            </para>
+            </remarks>
+            <param name="overrides">Any overrides for the resolve call.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.CachedContainer`1.TryResolve(System.String,Microsoft.Practices.Unity.ResolverOverride[])">
+            <summary>
+            Try to resolve an instance of the type if it is a registered and mapped type in the current unity container.
+            When it is not possible to resolve an instance of the given type return null.
+            </summary>
+            <remarks>
+            <para>
+            The function resolves the instance for a given type if it is the registered type in the current <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            It returns null if the type is not the registered one.
+            </para>
+            <para>
+            The check for the type registration is performed only once and it is cached. When cache is available
+            the information about the type registration status is given from the cached.
+            </para>
+            </remarks>
+            <param name="name">Name of the registration.</param>
+            <param name="overrides">Any overrides for the resolve call.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.CachedContainer`1.TryResolve(System.Func{`0},Microsoft.Practices.Unity.ResolverOverride[])">
+            <summary>
+            Try to resolve an instance of the type if it is a registered and mapped type in the current unity container.
+            When it is not possible to resolve an instance of the given type from the container use the given factory 
+            function in order to create an instance (a default instance).
+            </summary>
+            <remarks>
+            <para>
+            The function resolves the instance for a given type if it is the registered type in the current <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            It returns null if the type is not the registered one.
+            </para>
+            <para>
+            The check for the type registration is performed only once and it is cached. When cache is available
+            the information about the type registration status is given from the cached.
+            </para>
+            </remarks>
+            <param name="factory">The function providing a new instance when the type is not registered within the unity container.</param>
+            <param name="overrides">Any overrides for the resolve call.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.CachedContainer`1.TryResolve(System.String,System.Func{`0},Microsoft.Practices.Unity.ResolverOverride[])">
+            <summary>
+            Try to resolve an instance of the type if it is a registered and mapped type in the current unity container.
+            When it is not possible to resolve an instance of the given type from the container use the given factory 
+            function in order to create an instance (a default instance).
+            </summary>
+            <remarks>
+            <para>
+            The function resolves the instance for a given type if it is the registered type in the current <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            It returns null if the type is not the registered one.
+            </para>
+            <para>
+            The check for the type registration is performed only once and it is cached. When cache is available
+            the information about the type registration status is given from the cached.
+            </para>
+            </remarks>
+            <param name="name">Name of the registration.</param>
+            <param name="factory">The function providing a new instance when the type is not registered within the unity container.</param>
+            <param name="overrides">Any overrides for the resolve call.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.CachedContainer`1.TypeRegistrationStatus">
+            <summary>
+            Provides information about registration check performed for the complete type (cache of registration).
+            This enum is used in the fast path when no name of the registration type mapping is provided. When name 
+            is given a slow path using the <see cref="F:Volvo.NVS.Core.Unity.CachedContainer`1.namedStatuses"/> will be used.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.CachedContainer`1.TypeRegistrationStatus.NotChecked">
+            <summary>
+            The check for the registration of the current type has not been performed yet.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.CachedContainer`1.TypeRegistrationStatus.Registered">
+            <summary>
+            The type is recognized as the registered one. The check has been performed.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.CachedContainer`1.TypeRegistrationStatus.NotRegistered">
+            <summary>
+            The type is not registered. The check has been performed.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Configuration.ContainerConfigurationBuilder">
+            <summary>
+            The class provides the fluent <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration capabilities. This class is not used directly
+            but via one of the <see cref="T:Volvo.NVS.Core.Configuration.ContainerLibraryConfigurator"/> extension method.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder">
+            <summary>
+            Defines a contract for the <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration building object.
+            </summary>
+            <remarks>
+            The <see cref="T:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder"/> is used by the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/> methods which are
+            specific for the unity container configuration. It allows to fluently configure the container from code.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder.FromApplicationConfigurationFile">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> from the unity node in the current application configuration file.
+            </summary>
+            <returns>The container configuration building object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder.FromApplicationConfigurationFile(System.String)">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> from a given configuration file and from the unity section in this file.
+            </summary>
+            <param name="configurationFileName">
+            A name of the configuration file having the unity configuration node e.f. 'unity.config'
+            </param>
+            <returns>The container configuration building object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder.FromConfigurator(Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator)">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> using the given, custom configuration object.
+            </summary>
+            <param name="configurator">The container configuration object to be used.</param>
+            <returns>The container configuration building object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder.Empty">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> creating a brand new, empty container object.
+            No mappings and any other configuration is initialized when this method is used.
+            </summary>
+            <returns>The container configuration building object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.ContainerConfigurationBuilder.FromApplicationConfigurationFile">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> from the unity node in the current application configuration file.
+            </summary>
+            <returns>The container configuration building object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.ContainerConfigurationBuilder.FromApplicationConfigurationFile(System.String)">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> from a given configuration file and from the unity section in this file.
+            </summary>
+            <param name="configurationFileName">
+            A name of the configuration file having the unity configuration node. 
+            </param>
+            <returns>The container configuration building object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.ContainerConfigurationBuilder.FromConfigurator(Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator)">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> using the given, custom configuration object.
+            </summary>
+            <param name="configurator">The container configuration object to be used.</param>
+            <returns>The container configuration building object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.ContainerConfigurationBuilder.Empty">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> creating a brand new, empty container object.
+            No mappings and any other configuration is initialized when this method is used.
+            </summary>
+            <returns>The container configuration building object.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Container">
+            <summary>
+            The class configures, wraps and manages a single instance of the Unity Container. It allows to have a single composition root
+            and simplifies usage of the Unity. Use it in order to resolve types from the unity container when needed.
+            </summary>
+            <remarks>
+            <para>
+            The configuration process of the unity container is guaranteed to be thread safe. It is true for the configuration only and you 
+            should still not try to Resolve any types while doing the configuration. Because of this it is recommended to configure unity
+            container only once and at the application start-up.
+            </para>
+            <para>
+            Please note, it is recommended to <b>explicitly</b> configure the Unity when your application starts. It should be done as close as possible
+            to the application's entry point by a call to one of the configuration methods or by usage of the fluent and common library configuration
+            object.
+            </para>
+            <para>
+            It is possible to explicitly configure the Unity using default application configuration file. Other configuration methods are also available.
+            </para>
+            <example>
+            This sample shows how to configure the unity container using the current application configuration file and default unity section from this file. 
+            Having the common configuration object the following can be done:
+            <code>
+            ILibraryConfigurator configurator = LibraryConfigurator.Current;
+            ...
+            configurator.ConfigureContainer(configure =&gt; configure.FromApplicationConfigurationFile());
+            ...
+            </code>
+            </example>  
+            <example>
+            This sample shows how to do the same but using the Container class directly:
+            <code>
+            Container.Configure();
+            </code>
+            </example>
+            <para>
+            One may provide a class implementing the <see cref="T:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator"/> interface. Such a class may wrap the configuration of
+            the unity container and may realize more advanced configuration. Multiple such classes can be defined.
+            </para>
+            <example>
+            <code>
+            <![CDATA[
+            private class TestContainerConfigurator : IContainerConfigurator
+            {
+               public void Configure(IUnityContainer container)
+               {
+                  container.RegisterType<IRegisteredInCode, RegisteredInCode>();
+               }
+            }
+             ...
+            ILibraryConfigurator configurator = LibraryConfigurator.Current;
+            ...
+            configurator.ConfigureContainer(configure => configure.FromConfigurator(new TestContainerConfigurator()));
+            ...
+            ]]>
+            </code>
+            </example>
+            <para>
+            See the <see cref="T:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder"/> interface in order to examine all the container fluent configuration methods.
+            </para>
+            <para>
+            The configuration of the Container should be executed as close as possible to the application starting point. It should only
+            be executed once. For example: in web applications it is the Global.cs.
+            </para>
+            <para>
+            Code based, fluent configuration is the recommended approach.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.Container.UnityConfigurationSectionName">
+            <summary>
+            Name of the unity configuration section expected in the application configuration file.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.Container.sync">
+            <summary>
+            The synchronization object ensuring thread safety during configuration.
+            No sync between other operations and configuration itself is done.
+            This synchronization object is only used when a custom call to the configuration
+            method is made. Automatic, first time configuration does not require any locks
+            and it is realized within the static constructor of the <see cref="T:Volvo.NVS.Core.Unity.Container.UnityContainerManager"/>
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.Configure(Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator)">
+            <summary>
+            Configure the unity container using custom configuration code.
+            It configures the Unity for the first time use when it has not been used or configured yet.
+            When called for already configured container then the re-configuration will take place.
+            </summary>
+            <param name="configurator">The custom unity configuration implementation.</param>
+            <returns>The configured unity container.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.Configure">
+            <summary>
+            Configure the unity container using the default configuration source, which is the application
+            configuration file and the unit node in that file. It configures the Unity for the first time 
+            use when it has not been used or configured yet. When called for already configured container 
+            then the re-configuration will take place.
+            </summary>
+            <returns>The unity container.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.Resolve``1(Microsoft.Practices.Unity.ResolverOverride[])">
+            <summary>
+            Resolve an instance of the default requested type from the container.
+            </summary>
+            <typeparam name="T"><see cref="T:System.Type"/> of object to get from the container.</typeparam>
+            <param name="overrides">Any overrides for the resolve call.</param>
+            <returns>The retrieved object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.Resolve``1(System.String,Microsoft.Practices.Unity.ResolverOverride[])">
+            <summary>
+            Resolve an instance of the requested type with the given name from the container.
+            </summary>
+            <typeparam name="T"><see cref="T:System.Type"/> of object to get from the container.</typeparam>
+            <param name="name">Name of the object to retrieve.</param>
+            <param name="overrides">Any overrides for the resolve call.</param>
+            <returns>The retrieved object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.Resolve(System.Type,Microsoft.Practices.Unity.ResolverOverride[])">
+            <summary>
+            Resolve an instance of the default requested type from the container.
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> of object to get from the container.</param>
+            <param name="overrides">Any overrides for the resolve call.</param>
+            <returns>The retrieved object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.RegisterInstance``1(``0)">
+            <summary>
+            Register an instance with the container.
+            </summary>
+            <remarks>
+            <para>
+            Instance registration is much like setting a type as a singleton, except that instead
+            of the container creating the instance the first time it is requested, the user
+            creates the instance ahead of type and adds that instance to the container.
+            </para>
+            <para>
+            This overload does a default registration and has the container take over the lifetime of the instance.</para>
+            </remarks>
+            <typeparam name="TInterface">Type of instance to register (may be an implemented interface instead of the full type).</typeparam>
+            <param name="instance">Object to returned.</param>
+            <returns>The <see cref="P:Volvo.NVS.Core.Unity.Container.UnityContainer"/> object that this method was called on (this in C#, Me in Visual Basic).</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.RegisterInstance``1(``0,Microsoft.Practices.Unity.LifetimeManager)">
+            <summary>
+            Register an instance with the container.
+            </summary>
+            <remarks>
+            <para>
+            Instance registration is much like setting a type as a singleton, except that instead
+            of the container creating the instance the first time it is requested, the user
+            creates the instance ahead of type and adds that instance to the container.
+            </para>
+            <para>
+            This overload does a default registration (name = null).
+            </para>
+            </remarks>
+            <typeparam name="TInterface">Type of instance to register (may be an implemented interface instead of the full type).</typeparam>
+            <param name="instance">Object to returned.</param>
+            <param name="lifetimeManager">
+            <see cref="T:Microsoft.Practices.Unity.LifetimeManager"/> object that controls how this instance will be managed by the container.</param>
+            <returns>The <see cref="P:Volvo.NVS.Core.Unity.Container.UnityContainer"/> object that this method was called on (this in C#, Me in Visual Basic).</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.RegisterInstance``1(System.String,``0)">
+            <summary>
+            Register an instance with the container.
+            </summary>
+            <remarks>
+            <para>
+            Instance registration is much like setting a type as a singleton, except that instead
+            of the container creating the instance the first time it is requested, the user
+            creates the instance ahead of type and adds that instance to the container.
+            </para>
+            <para>
+            This overload automatically has the container take ownership of the <paramref name="instance"/>.</para>
+            </remarks>
+            <typeparam name="TInterface">Type of instance to register (may be an implemented interface instead of the full type).</typeparam>
+            <param name="instance">Object to returned.</param>
+            <param name="name">Name for registration.</param>
+            <returns>The <see cref="P:Volvo.NVS.Core.Unity.Container.UnityContainer"/> object that this method was called on (this in C#, Me in Visual Basic).</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.RegisterInstance``1(System.String,``0,Microsoft.Practices.Unity.LifetimeManager)">
+            <summary>
+            Register an instance with the container.
+            </summary>
+            <remarks>
+            <para>
+            Instance registration is much like setting a type as a singleton, except that instead
+            of the container creating the instance the first time it is requested, the user
+            creates the instance ahead of type and adds that instance to the container.
+            </para>
+            </remarks>
+            <typeparam name="TInterface">Type of instance to register (may be an implemented interface instead of the full type).</typeparam>
+            <param name="instance">Object to returned.</param>
+            <param name="name">Name for registration.</param>
+            <param name="lifetimeManager">
+            <see cref="T:Microsoft.Practices.Unity.LifetimeManager"/> object that controls how this instance will be managed by the container.</param>
+            <returns>The <see cref="P:Volvo.NVS.Core.Unity.Container.UnityContainer"/> object that this method was called on (this in C#, Me in Visual Basic).</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.RegisterType``2(Microsoft.Practices.Unity.InjectionMember[])">
+            <summary>
+            Register a type mapping with the container.
+            </summary>
+            <remarks>
+            <para>
+            This method is used to tell the container that when asked for type <typeparamref name="TFrom"/>, actually return an instance 
+            of type <typeparamref name="TTo"/>. This is commonly used for getting instances of interfaces.
+            </para>
+            </remarks>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <param name="injectionMembers">Injection configuration objects.</param>
+            <returns>The <see cref="P:Volvo.NVS.Core.Unity.Container.UnityContainer"/> object that this method was called on.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.RegisterType``2(Microsoft.Practices.Unity.LifetimeManager,Microsoft.Practices.Unity.InjectionMember[])">
+            <summary>
+            Register a type mapping with the container, where the created instances will use the given <see cref="T:Microsoft.Practices.Unity.LifetimeManager"/>.
+            </summary>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <param name="lifetimeManager">The <see cref="T:Microsoft.Practices.Unity.LifetimeManager"/> that controls the lifetime of the returned instance.</param>
+            <param name="injectionMembers">Injection configuration objects.</param>
+            <returns>The <see cref="P:Volvo.NVS.Core.Unity.Container.UnityContainer"/> object that this method was called on.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.RegisterType``2(System.String,Microsoft.Practices.Unity.InjectionMember[])">
+            <summary>
+            Register a type mapping with the container.
+            </summary>
+            <remarks>
+            <para>
+            This method is used to tell the container that when asked for type <typeparamref name="TFrom"/>, actually return an instance 
+            of type <typeparamref name="TTo"/>. This is commonly used for getting instances of interfaces.
+            </para>
+            </remarks>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <param name="name">Name of this mapping.</param>
+            <param name="injectionMembers">Injection configuration objects.</param>
+            <returns>The <see cref="P:Volvo.NVS.Core.Unity.Container.UnityContainer"/> object that this method was called on.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.IsRegistered(System.Type)">
+            <summary>
+             Check if a particular type has been registered with the container with
+             the default name.
+            </summary>
+            <param name="typeToCheck">Type to check registration for.</param>
+            <returns>True if this type has been registered, false if not.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.IsRegistered``1">
+            <summary>
+            Check if a particular type has been registered with the container with the default name.
+            </summary>
+            <typeparam name="T">Type to check registration for.</typeparam>
+            <returns>True if this type has been registered, false if not.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.IsRegistered``1(System.String)">
+            <summary>
+            Check if a particular type has been registered with the container with the default name.
+            </summary>
+            <typeparam name="T">Type to check registration for.</typeparam>
+            <returns>True if this type has been registered, false if not.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.Register(Volvo.NVS.Core.Unity.IContainerRegistrar)">
+            <summary>
+            Add type registrations into the Container using the custom object managing all the registrations to be performed.
+            </summary>
+            <param name="registrar">
+            The object, which will register all the types within the container. See the <see cref="M:Volvo.NVS.Core.Unity.IContainerRegistrar.RegisterTypes(Volvo.NVS.Core.Unity.IContainerRegistrationBuilder)"/>.
+            </param>
+        </member>
+        <member name="P:Volvo.NVS.Core.Unity.Container.UnityContainer">
+            <summary>
+            The wrapped Unity Container. 
+            The <see cref="T:Volvo.NVS.Core.Unity.Container"/> guarantees that a singleton is provided.
+            The container will be configured if it's not already done.
+            In most cases you should use <see cref="T:Volvo.NVS.Core.Unity.Container"/> methods directly.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Unity.Container.Registrations">
+            <summary>
+            Get a sequence of <see cref="T:Microsoft.Practices.Unity.ContainerRegistration"/> that describe the current state of the container.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Container.UnityContainerManager">
+            <summary>
+            The class manages a single instance of the unity container.
+            
+            An additional class is used in order to avoid a need for any memory barriers.
+            We do not want to use lock or even volatile on any of the fields. We ensure
+            single instance in the explicit constructor which is guaranteed to be called once.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.Container.UnityContainerManager.Instance">
+            <summary>
+            The singleton instance of the wrapped Unity Container.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.Container.UnityContainerManager.InitialRegistrations">
+            <summary>
+            Holds information about the initial container type registrations, mappings (snapshot).
+            These mappings are treated as user given ones since they come from the default application
+            configuration file or from the default configuration object provided by the library consumer.
+            Types which are registered by libraries (as Utility, Utility.Web) are not within this information object.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.UnityContainerManager.#cctor">
+            <summary>
+            Explicit static constructor so we are able to execute the instance configuration logic.
+            We are also sure the C# compiler won't mark the type as beforefieldinit so we know the point
+            at which the constructor is called. It should be on the first access.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.UnityContainerManager.ConfigureUnityContainer(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Configure the unity container.
+            </summary>
+            <param name="container">The container to be configured.</param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Container.UnityContainerManager.Reconfigure">
+            <summary>
+            Reconfigure the already configured container.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Configuration.ContainerConfiguration">
+            <summary>
+            The class manages an instance of the custom <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration object implementing the <see cref="T:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator"/>.
+            In most of the cases one should use methods on the <see cref="T:Volvo.NVS.Core.Unity.Container"/> class and not ContainerConfiguration directly.
+            </summary>
+            <remarks>
+            <para>
+            The custom configuration can be used if we want to configure Unity using the custom configuration, implementation.
+            </para>
+            <para>
+            By default the <see cref="T:Volvo.NVS.Core.Unity.Container"/> configures the Unity from the application configuration file and 
+            according to the unity configuration node in that file. If default approach should be used no usage of 
+            this class and the <see cref="T:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator"/> is needed at all.
+            </para>
+            <para>
+            When a custom configuration is required you may set the <see cref="P:Volvo.NVS.Core.Unity.Configuration.ContainerConfiguration.Configurator"/>
+            property to your own implementation. It must be done before the Unity is used for the first time. It is
+            however recommended to use one of the <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration methods instead. For example:
+            one may use the <see cref="M:Volvo.NVS.Core.Unity.Container.Configure"/> or <see cref="M:Volvo.NVS.Core.Unity.Container.Configure(Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator)"/>
+            which takes the custom configuration object.
+            </para>
+            </remarks>
+            <example>
+            The sample shows the recommended approach configuring the unity by usage of the custom configuration code:
+            <code>
+            IContainerConfigurator customConfigurator = new CustomConfigurator();
+            Container.Configure(customConfigurator);
+            </code>
+            The configuration should be executed once and as close as possible into the application entry point.
+            </example>
+        </member>
+        <member name="P:Volvo.NVS.Core.Unity.Configuration.ContainerConfiguration.Configurator">
+            <summary>
+            The object providing custom configuration of the Unity used by the <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Unity.Configuration.ContainerConfiguration.Configured">
+            <summary>
+            The flag telling if the container has been configured using the <see cref="P:Volvo.NVS.Core.Unity.Configuration.ContainerConfiguration.Configurator"/>.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Configuration.ContainerConfigurators">
+            <summary>
+            Holds predefined <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration objects.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.Configuration.ContainerConfigurators.Manual">
+            <summary>
+            The manual container configurator where a unity section is not needed in the application
+            configuration file and a complete configuration must be done manually.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Configuration.ContainerLibraryConfigurator">
+            <summary>
+            Extends the common <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/> contract providing the Unity <see cref="T:Volvo.NVS.Core.Unity.Container"/> related configuration methods.
+            (requires Volvo.NVS.Core)
+            </summary>
+            <remarks>
+            <para>
+            You never use this type directly. You use extensions methods provided by this class via types implementing the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/>
+            which is extended by the <see cref="T:Volvo.NVS.Core.Configuration.ContainerLibraryConfigurator"/>.
+            </para>
+            <para>
+            Extension methods given by this class are providing one of multiple ways allowing you to configure the <see cref="T:Volvo.NVS.Core.Unity.Container"/>. Configuration of 
+            the unity container is required by many NVS libraries. See the <see cref="T:Volvo.NVS.Core.Unity.Container"/> for details.
+            </para>
+            <para>
+            <example>
+            Having the common configuration object the following can be done:
+            <code>
+            ILibraryConfigurator configurator = LibraryConfigurator.Current;
+            ...
+            configurator.ConfigureContainer(configure =&gt; configure.FromApplicationConfigurationFile());
+            </code>
+            </example>  
+            </para>
+            <para>
+            See the <see cref="T:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder"/> for a full list of fluent container configuration methods.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.ContainerLibraryConfigurator.ConfigureContainer(Volvo.NVS.Core.Configuration.ILibraryConfigurator)">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> initializing an empty one.
+            No mapping and registrations are read from any files. All mappings must be added manually as the
+            initial state of the <see cref="T:Volvo.NVS.Core.Unity.Container"/> object is recognized as being empty.
+            </summary>
+            <param name="configurator">
+            The library configuration object to be extended.
+            </param>
+            <returns>
+            The current library configuration object.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.ContainerLibraryConfigurator.ConfigureContainer(Volvo.NVS.Core.Configuration.ILibraryConfigurator,System.Action{Volvo.NVS.Core.Unity.Configuration.IContainerConfigurationBuilder})">
+            <summary>
+            Configures the <see cref="T:Volvo.NVS.Core.Unity.Container"/> using the fluent container configuration object.
+            </summary>
+            <param name="configurator">
+            The library configuration object to be extended.
+            </param>
+            <param name="builder">
+            The action configuring the <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            </param>
+            <returns>
+            The current library configuration object.
+            </returns>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder">
+            <summary>
+            The class provides utility methods used during the type registration process in custom type registration classes
+            implementing the <see cref="T:Volvo.NVS.Core.Unity.IContainerRegistrar"/> interface. You never create instances of this class directly.
+            It is a builder object passed to methods on <see cref="T:Volvo.NVS.Core.Unity.IContainerRegistrar"/>.
+            </summary>
+            <remarks>
+            <para>
+            The class helps in the registration of type within the <see cref="T:Volvo.NVS.Core.Unity.Container"/>. It also ensures we give
+            access into the specific registration methods only.
+            </para>
+            <para>
+            See also the <see cref="T:Volvo.NVS.Core.Unity.IContainerRegistrar"/> interface and the <see cref="T:Volvo.NVS.Core.Unity.Container"/> for details.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.IContainerRegistrationBuilder">
+            <summary>
+            The interface defines the contract for the <see cref="T:Volvo.NVS.Core.Unity.Container"/> registration helper classes.
+            </summary>
+            <remarks>
+            See the <see cref="T:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder"/> for details.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationBuilder.RegisterIfNotDone``2">
+            <summary>
+            Registers the type mapping within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> if it's not already registered.
+            </summary>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationBuilder.RegisterIfNotDone``2(System.String)">
+            <summary>
+            Registers the type mapping within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> if it's not already registered.
+            </summary>
+            <param name="name">Name to use for registration, null if a default registration.</param>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationBuilder.OverrideIfMappedTo``3">
+            <summary>
+            The method registers (overrides) the type mapping within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> if it's already registered and mapped into the given type
+            and if this already existing mapping has not been provided by the user (initial Container configuration).
+            The method overrides previous registration and adds a new one if and only if the above is fulfilled.
+            </summary>
+            <typeparam name="TExistingTo">
+            <see cref="T:System.Type"/> into which the registration should already be done and registered.
+            The new registration is added if and only if there is already a mapping from <typeparamref name="TFrom"/> into the <typeparamref name="TExistingTo"/>.
+            </typeparam>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationBuilder.OverrideIfMappedTo``3(System.String)">
+            <summary>
+            The method registers (overrides) the type mapping within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> if it's already registered and mapped into the given type
+            and if this already existing mapping has not been provided by the user (initial Container configuration).
+            The method overrides previous registration and adds a new one if and only if the above is fulfilled.
+            </summary>
+            <param name="name">Name to use for registration, null if a default registration.</param>
+            <typeparam name="TExistingTo">
+            <see cref="T:System.Type"/> into which the registration should already be done and registered.
+            The new registration is added if and only if there is already a mapping from <typeparamref name="TFrom"/> into the <typeparamref name="TExistingTo"/>.
+            </typeparam>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder.registrations">
+            <summary>
+            Contains the snapshot of the registrations done in the Unity Container (latest registrations).
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder.initialRegistrations">
+            <summary>
+            Contains the snapshot of the initial registrations done in the Container when it was configured for the first time.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder.container">
+            <summary>
+            The container which is wrapped by this registration builder;
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder.#ctor(Microsoft.Practices.Unity.IUnityContainer,Volvo.NVS.Core.Unity.IContainerRegistrationSnapshot)">
+            <summary>
+            Creates an instance of the container registration builder, helper object for a given unity container.
+            </summary>
+            <param name="container">
+            The unity container to be managed by the builder (acting as the wrapper).
+            </param>
+            <param name="initialRegistrations">
+            The snapshot of the initial container registrations (done when the container was Configured for the first time).
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder.RegisterIfNotDone``2">
+            <summary>
+            Registers the type mapping within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> if it's not already registered.
+            </summary>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder.RegisterIfNotDone``2(System.String)">
+            <summary>
+            Registers the type mapping within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> if it's not already registered.
+            </summary>
+            <param name="name">Name to use for registration, null if a default registration.</param>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder.OverrideIfMappedTo``3">
+            <summary>
+            The method registers (overrides) the type mapping within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> if it's already registered and mapped into the given type
+            and if this already existing mapping has not been provided by the user (initial Container configuration).
+            The method overrides previous registration and adds a new one if and only if the above is fulfilled.
+            </summary>
+            <typeparam name="TExistingTo">
+            <see cref="T:System.Type"/> into which the registration should already be done and registered.
+            The new registration is added if and only if there is already a mapping from <typeparamref name="TFrom"/> into the <typeparamref name="TExistingTo"/>.
+            </typeparam>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationBuilder.OverrideIfMappedTo``3(System.String)">
+            <summary>
+            The method registers (overrides) the type mapping within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> if it's already registered and mapped into the given type
+            and if this already existing mapping has not been provided by the user (initial Container configuration).
+            The method overrides previous registration and adds a new one if and only if the above is fulfilled.
+            </summary>
+            <param name="name">Name to use for registration, null if a default registration.</param>
+            <typeparam name="TExistingTo">
+            <see cref="T:System.Type"/> into which the registration should already be done and registered.
+            The new registration is added if and only if there is already a mapping from <typeparamref name="TFrom"/> into the <typeparamref name="TExistingTo"/>.
+            </typeparam>
+            <typeparam name="TFrom"><see cref="T:System.Type"/> that will be requested.</typeparam>
+            <typeparam name="TTo"><see cref="T:System.Type"/> that will actually be returned.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.ContainerRegistrationInfo">
+            <summary>
+            The class holds information about the unity container registered type.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationInfo.#ctor(System.Type,System.Type,System.String)">
+            <summary>
+            Create an instance of the container registration information object,
+            </summary>
+            <param name="from">The type from which we map.</param>
+            <param name="to">The type into which we map.</param>
+            <param name="name">Name of the registration</param>
+        </member>
+        <member name="P:Volvo.NVS.Core.Unity.ContainerRegistrationInfo.From">
+            <summary>
+            The type from which we map.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Unity.ContainerRegistrationInfo.To">
+            <summary>
+            The type into which we map.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Core.Unity.ContainerRegistrationInfo.Name">
+            <summary>
+            Name of the registration, mapping.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot">
+            <summary>
+            The class provides a snapshot for the currently registered types in the <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/>.
+            </summary>
+            <remarks>
+            The class give access into registered type mappings in the <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> in a single point in time.
+            <para>
+            Using the snapshot for the registration it is possible to have faster access into the information about registered types.
+            The Unity is normally performing multiple, time consuming operations to provide information about registrations.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.IContainerRegistrationSnapshot">
+            <summary>
+            The interface defines behaviours for the types providing information about the registrations done for the <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            See the <see cref="T:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot"/> class for details.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationSnapshot.IsRegistered``1">
+            <summary>
+            Determines if the type is registered in the container.
+            </summary>
+            <typeparam name="T">Type which should be verified for registration.</typeparam>
+            <returns>True when type has been registered.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationSnapshot.IsRegistered``1(System.String)">
+            <summary>
+            Determines if the type is registered in the container.
+            </summary>
+            <typeparam name="T">Type which should be verified for registration.</typeparam>
+            <param name="name">Name of the mapping.</param>
+            <returns>True when type has been registered.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationSnapshot.IsAnyRegistered">
+            <summary>
+            Determines if any types are registered.
+            </summary>
+            <returns>True if any type is registered.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationSnapshot.IsRegisteredAs``2(System.String)">
+            <summary>
+            Determines if the given source type is registered (mapped) in the container and if mapping is into the given destination type.
+            </summary>
+            <typeparam name="TFrom">Source type which should be verified for registration, the mapping 'from type'.</typeparam>
+            <typeparam name="TTo">Destination type into which we expect the registration to be done, the mapping 'to type'.</typeparam>
+            <param name="name">Name of the mapping.</param>
+            <returns>True when the type has been registered and is mapped into the given, exact destination type.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrationSnapshot.IsRegisteredAs``2">
+            <summary>
+            Determines if the given source type is registered (mapped) in the container and if mapping is into the given destination type.
+            </summary>
+            <typeparam name="TFrom">Source type which should be verified for registration, the mapping 'from type'.</typeparam>
+            <typeparam name="TTo">Destination type into which we expect the registration to be done, the mapping 'to type'.</typeparam>
+            <returns>True when the type has been registered and is mapped into the given, exact destination type.</returns>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.typeNameRegistrations">
+            <summary>
+            Manages information about the current registrations read from the container.
+            Holds all the names for the registered source type. Acts like the index on the type and registration name.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.detailedRegistrations">
+            <summary>
+            Manages information about the current registrations and holds detailed information about all the mappings.
+            It gives only fast access by type and then a full collection of registration information.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.#ctor(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Creates the snapshot of registrations available in the given container.
+            </summary>
+            <param name="container">
+            The container for which the snapshot should be prepared.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.PrepareSnapshot(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Prepare the snapshot of already registered types in the container.
+            </summary>
+            <param name="container">
+            The unity container for which the snapshot should be prepared.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.IsRegistered``1">
+            <summary>
+            Determines if the type is registered in the container.
+            </summary>
+            <typeparam name="T">Type which should be verified for registration.</typeparam>
+            <returns>True when type has been registered.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.IsRegistered(System.Type,System.String)">
+            <summary>
+            Determines if the type is registered in the container.
+            </summary>
+            <param name="from">Type which should be verified for the registration.</param>
+            <param name="name">Name of the mapping.</param>
+            <returns>True when type has been registered.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.IsRegistered``1(System.String)">
+            <summary>
+            Determines if the type is registered in the container.
+            </summary>
+            <typeparam name="T">Type which should be verified for registration.</typeparam>
+            <param name="name">Name of the mapping.</param>
+            <returns>True when type has been registered.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.IsAnyRegistered">
+            <summary>
+            Determines if any types are registered.
+            </summary>
+            <returns>True if any type is registered.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.IsRegisteredAs``2(System.String)">
+            <summary>
+            Determines if the given source type is registered (mapped) in the container and if mapping is into the given destination type.
+            </summary>
+            <typeparam name="TFrom">Source type which should be verified for registration, the mapping 'from type'.</typeparam>
+            <typeparam name="TTo">Destination type into which we expect the registration to be done, the mapping 'to type'.</typeparam>
+            <param name="name">Name of the mapping.</param>
+            <returns>True when the type has been registered and is mapped into the given, exact destination type.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.ContainerRegistrationSnapshot.IsRegisteredAs``2">
+            <summary>
+            Determines if the given source type is registered (mapped) in the container and if mapping is into the given destination type.
+            </summary>
+            <typeparam name="TFrom">Source type which should be verified for registration, the mapping 'from type'.</typeparam>
+            <typeparam name="TTo">Destination type into which we expect the registration to be done, the mapping 'to type'.</typeparam>
+            <returns>True when the type has been registered and is mapped into the given, exact destination type.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Configuration.FileContainerConfigurator">
+            <summary>
+            The <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration class performing initialization of the container according to the specified name of
+            the configuration file.
+            </summary>
+            <remarks>
+            <para>
+            An instance of the <see cref="T:Volvo.NVS.Core.Unity.Configuration.FileContainerConfigurator"/> can be passed into the <see cref="M:Volvo.NVS.Core.Unity.Container.Configure(Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator)"/>
+            method in order to initialize the Unity and be able to fully configure Unity from given file.
+            </para>
+            <para>
+            One may also use the fluent <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration via the common configuration object which is the same and unified
+            for all NVS libraries. See the <see cref="T:Volvo.NVS.Core.Configuration.LibraryConfigurator"/> for details.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator">
+            <summary>
+            Defines a contract for objects providing custom <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration.
+            </summary>
+            <remarks>
+            <para>
+            The class implementing this interface can be used to perform a custom configuration of the Unity
+            Container when the <see cref="T:Volvo.NVS.Core.Unity.Container"/> is initialized. By default the Unity configuration is
+            done according to the application configuration file and the unity section.
+            </para>
+            <para>
+            See <see cref="T:Volvo.NVS.Core.Unity.Container"/> for details.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator.Configure(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Configures the provided unit container.
+            </summary>
+            <param name="container">The unity container to be configured.</param>
+        </member>
+        <member name="F:Volvo.NVS.Core.Unity.Configuration.FileContainerConfigurator.configurationFileName">
+            <summary>
+            Name of the configuration file from which the unity section should be read.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.FileContainerConfigurator.#ctor(System.String)">
+            <summary>
+            Creates a file based <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration object using the given configuration file name.
+            </summary>
+            <param name="configurationFileName">
+            Name of the configuration file holding the unity container configuration.
+            </param>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.FileContainerConfigurator.GetConfigurationSection">
+            <summary>
+            Gets the unity configuration section according to the specified configuration file name.
+            </summary>
+            <returns>The unity configuration section object.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.FileContainerConfigurator.Configure(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Configures the provided unit container.
+            </summary>
+            <param name="container">The unity container to be configured.</param>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.Configuration.ManualContainerConfigurator">
+            <summary>
+            The <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration class forcing manual configuration of the Unity.
+            </summary>
+            <remarks>
+            <para>
+            An instance of the <see cref="T:Volvo.NVS.Core.Unity.Configuration.ManualContainerConfigurator"/> can be passed into the <see cref="M:Volvo.NVS.Core.Unity.Container.Configure(Volvo.NVS.Core.Unity.Configuration.IContainerConfigurator)"/>
+            method in order to initialize the Unity and be able to fully configure Unity manually (e.g. from code).
+            </para>
+            <para>
+            When the <see cref="T:Volvo.NVS.Core.Unity.Configuration.ManualContainerConfigurator"/> is used there is no need for any unity sections in the application configuration
+            file. The application configuration file remains untouched.
+            </para>
+            <para>
+            If you have your Unity configuration in application configuration files never use the <see cref="T:Volvo.NVS.Core.Unity.Configuration.ManualContainerConfigurator"/>.
+            </para>
+            <para>
+            One may also use the fluent <see cref="T:Volvo.NVS.Core.Unity.Container"/> configuration via the common configuration object which is the same and unified
+            for all NVS libraries. See the <see cref="T:Volvo.NVS.Core.Configuration.LibraryConfigurator"/> for details.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.Configuration.ManualContainerConfigurator.Configure(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Configures the provided unit container.
+            </summary>
+            <param name="container">The unity container to be configured.</param>
+        </member>
+        <member name="T:Volvo.NVS.Core.Unity.IContainerRegistrar">
+            <summary>
+            The interface defines behaviours for classes registering type mappings in the <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            </summary>
+            <remarks>
+            <para>
+            It is possible to create a class implementing the IContainerRegistrar interface and then use instance
+            of this class on one of the <see cref="M:Volvo.NVS.Core.Unity.Container.Register(Volvo.NVS.Core.Unity.IContainerRegistrar)"/> methods.
+            </para>
+            <para>
+            Check also the <see cref="T:Volvo.NVS.Core.Unity.Container"/> for more information.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Unity.IContainerRegistrar.RegisterTypes(Volvo.NVS.Core.Unity.IContainerRegistrationBuilder)">
+            <summary>
+            The method registers types within the <see cref="T:Volvo.NVS.Core.Unity.Container"/> via the container registration builder.
+            </summary>
+            <param name="registrar">
+            The container registration builder, helper allowing to add, register types within the <see cref="T:Volvo.NVS.Core.Unity.Container"/>.
+            </param>
+        </member>
+        <member name="T:Volvo.NVS.Core.Diagnostics.Check">
+            <summary>
+            Provides check methods, assertion like methods which can be used to define and verify assumptions about code.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Diagnostics.Check"/> class provides various check methods which throw exceptions when the verification conditions are not
+            fulfilled. The common scenario is that the <see cref="M:Volvo.NVS.Core.Diagnostics.Check.Requires``1(System.Boolean,System.String,System.String)"/> method can be used in place of
+            a standard condition checking if a method argument is null or not. The other, custom conditions are verified using the general
+            <see cref="M:Volvo.NVS.Core.Diagnostics.Check.Requires``1(System.Boolean)"/> method.
+            </para>
+            <para>
+            The <see cref="T:Volvo.NVS.Core.Diagnostics.Check"/> class provides methods similar to the ones available on the <see cref="T:System.Diagnostics.Contracts.Contract"/>.
+            The difference is however that the <see cref="T:Volvo.NVS.Core.Diagnostics.Check"/> class throws known and given by a developer exception types and that no binary 
+            rewriter is needed in order to insert runtime enforcement of the contracts.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Check.Requires``1(System.Boolean)">
+            <summary>
+            Specifies a check such that the expression <paramref name="condition"/> must be true before the enclosing method or property is invoked.
+            </summary>
+            <param name="condition">Boolean expression representing the check.</param>
+            <remarks>
+            In most of the cases this call should happen at the beginning of a method or property before any other code.
+            It can however also be used inside of the method body to perform additional checks.
+            </remarks>
+            <typeparam name="TException">The exception type to be raised when condition is negative.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Check.Requires``1(System.Boolean,System.String)">
+            <summary>
+            Specifies a check such that the expression <paramref name="condition"/> must be true before the enclosing method or property is invoked.
+            </summary>
+            <param name="condition">Boolean expression representing the check.</param>
+            <param name="message">The message to be used on the exception when the condition is not fulfilled.</param>
+            <remarks>
+            In most of the cases this call should happen at the beginning of a method or property before any other code.
+            It can however also be used inside of the method body to perform additional checks.
+            </remarks>
+            <typeparam name="TException">The exception type to be raised when condition is negative.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Check.Requires``1(System.Boolean,System.String,System.String)">
+            <summary>
+            Specifies a check such that the expression <paramref name="condition"/> must be true before the enclosing method or property is invoked.
+            This check is used in order to verify that the given argument is not null.
+            </summary>
+            <param name="condition">Boolean expression representing the check.</param>
+            <param name="paramName">Name of the parameter for which the condition is executed.</param>
+            <param name="message">The message to be used on the exception when the condition is not fulfilled.</param>
+            <remarks>
+            In most of the cases this call should happen at the beginning of a method or property before any other code.
+            It can however also be used inside of the method body to perform additional checks.
+            </remarks>
+            <typeparam name="TException">The exception type to be raised when condition is negative.</typeparam>
+        </member>
+        <member name="M:Volvo.NVS.Core.Diagnostics.Check.Requires``1(System.Boolean,System.Object[])">
+            <summary>
+            Specifies a check such that the expression <paramref name="condition"/> must be true before the enclosing method or property is invoked.
+            </summary>
+            <param name="condition">Boolean expression representing the check.</param>
+            <param name="args">The arguments passed into the exception created when the condition is not true.</param>
+            <remarks>
+            In most of the cases this call should happen at the beginning of a method or property before any other code.
+            It can however also be used inside of the method body to perform additional checks.
+            </remarks>
+            <typeparam name="TException">The exception type to be raised when condition is negative.</typeparam>
+        </member>
+    </members>
+</doc>
