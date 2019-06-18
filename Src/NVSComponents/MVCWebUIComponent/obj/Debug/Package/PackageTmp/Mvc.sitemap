@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Menu" clickable="false">
+    <mvcSiteMapNode controller="Home" title="$resources:Sitemap, Home" action="Index" />
+    <mvcSiteMapNode controller="Order" title="$resources:Sitemap, TrackOrders" action="Index" />
+    <mvcSiteMapNode controller="Part" title="$resources:Sitemap, OrderParts" action="Index" />
+    <mvcSiteMapNode controller="User" title="$resources:Sitemap, MyProfile" action="MyProfile" />
+    <mvcSiteMapNode controller="User" title="$resources:Sitemap, ManageUsers" action="ManageUsers" />
+    <mvcSiteMapNode title="$resources:Sitemap, Utilities" clickable="false">
+      <mvcSiteMapNode title="$resources:Sitemap, RaiseException" controller="Utility" action="RaiseException" />
+      <mvcSiteMapNode title="$resources:Sitemap, RaiseNotAuthorizedException" controller="Utility" action="RaiseNotAuthorizedException" />
+      <mvcSiteMapNode title="$resources:Sitemap, GoToNonexistentPage" controller="Utility" action="GoToNonexistentPage" />
+      <mvcSiteMapNode title="$resources:Sitemap, CssOverview" controller="Utility" action="CssOverview" />
+      <mvcSiteMapNode title="$resources:Sitemap, Bundling_Minification" clickable="false">
+        <mvcSiteMapNode title="$resources:Sitemap, Bundling_Minification_Enable" controller="Utility" action="EnableBundlingAndMinification/true" />
+        <mvcSiteMapNode title="$resources:Sitemap, Bundling_Minification_Disable" controller="Utility" action="EnableBundlingAndMinification/false" />
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Sitemap, SwitchingBrands" clickable="false">
+        <mvcSiteMapNode title="Violin" controller="Utility" action="SetTheme/Violin" />
+        <mvcSiteMapNode title="Mack" controller="Utility" action="SetTheme/Mack" />
+        <mvcSiteMapNode title="Mack Dual" controller="Utility" action="SetTheme/MackDual" />
+        <mvcSiteMapNode title="Renault" controller="Utility" action="SetTheme/Renault"  />
+        <mvcSiteMapNode title="Volvo BA" controller="Utility" action="SetTheme/VolvoBA" />
+        <mvcSiteMapNode title="Volvo Group" controller="Utility" action="SetTheme/VolvoGroup" />
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Sitemap, SwitchingLocalizations" clickable="false">
+        <mvcSiteMapNode title="en-US" controller="Utility" action="SetLocalization/en-US" />
+        <mvcSiteMapNode title="pt-BR" controller="Utility" action="SetLocalization/pt-BR" />
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="$resources:Sitemap, Reports" clickable="false">
+      <mvcSiteMapNode title="$resources:Sitemap, OrderPlacedReport" controller="Reports" action="OrdersPlaced" />
+      <mvcSiteMapNode title="$resources:Sitemap, OrderPlacedReportSql" controller="Reports" action="OrdersPlacedSql" />
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+</mvcSiteMap>

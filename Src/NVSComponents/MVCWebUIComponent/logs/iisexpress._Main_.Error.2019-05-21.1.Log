@@ -1,0 +1,201 @@
+2019-05-20T05:20:06.6607501Z	ErrorId: 81d6d035-5213-49c4-829e-64933be4b953
+
+	Utc:		2019-05-20T05:20:06.6607501Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> not-null property references a null or transient value Volvo.LAT.POLineDomain.DomainLayer.Entities.PurchaseOrder.InvoiceNumber
+
+	   Type: NHibernate.PropertyValueException
+	      at NHibernate.Engine.Nullability.CheckNullability(Object[] values, IEntityPersister persister, Boolean isUpdate)
+	      at NHibernate.Event.Default.DefaultFlushEntityEventListener.ScheduleUpdate(FlushEntityEvent event)
+	      at NHibernate.Event.Default.DefaultFlushEntityEventListener.OnFlushEntity(FlushEntityEvent event)
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.FlushEntities(FlushEvent event)
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.FlushEverythingToExecutions(FlushEvent event)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 119
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 393
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-20T05:20:20.1336045Z	ErrorId: 6ea57f0d-a7dd-4253-9d3d-ad1d76dd24e2
+
+	Utc:		2019-05-20T05:20:20.1336045Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> not-null property references a null or transient value Volvo.LAT.POLineDomain.DomainLayer.Entities.PurchaseOrder.InvoiceNumber
+
+	   Type: NHibernate.PropertyValueException
+	      at NHibernate.Engine.Nullability.CheckNullability(Object[] values, IEntityPersister persister, Boolean isUpdate)
+	      at NHibernate.Event.Default.DefaultFlushEntityEventListener.ScheduleUpdate(FlushEntityEvent event)
+	      at NHibernate.Event.Default.DefaultFlushEntityEventListener.OnFlushEntity(FlushEntityEvent event)
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.FlushEntities(FlushEvent event)
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.FlushEverythingToExecutions(FlushEvent event)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 119
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 393
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-20T05:21:17.6309214Z	ErrorId: c113d553-7162-431c-a9a2-66fdaef395ef
+
+	Utc:		2019-05-20T05:21:17.6309214Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> not-null property references a null or transient value Volvo.LAT.POLineDomain.DomainLayer.Entities.PurchaseOrder.InvoiceNumber
+
+	   Type: NHibernate.PropertyValueException
+	      at NHibernate.Engine.Nullability.CheckNullability(Object[] values, IEntityPersister persister, Boolean isUpdate)
+	      at NHibernate.Event.Default.DefaultFlushEntityEventListener.ScheduleUpdate(FlushEntityEvent event)
+	      at NHibernate.Event.Default.DefaultFlushEntityEventListener.OnFlushEntity(FlushEntityEvent event)
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.FlushEntities(FlushEvent event)
+	      at NHibernate.Event.Default.AbstractFlushingEventListener.FlushEverythingToExecutions(FlushEvent event)
+	      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+	      at NHibernate.Impl.SessionImpl.Flush()
+	      at NHibernate.Transaction.AdoTransaction.Commit()
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.SaveUpdateDetail(POLine pLine, String purchaseOrderComment) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 119
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.SaveUpdateDetail(POLine poLine, String comments) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 292
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.SaveDetail(POLineSaveViewModel pOLineSave) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 393
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+

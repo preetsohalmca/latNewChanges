@@ -1,0 +1,371 @@
+2019-04-04T02:31:22.7397682Z	ErrorId: 84fb3ea0-aae7-4b03-bca6-56a80b3a6327
+
+	Utc:		2019-04-04T02:31:22.7397682Z
+	Machine:	DESKTOP-EJ5OVBG
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The transaction has aborted.
+
+	   Type: System.Transactions.TransactionAbortedException
+	      at System.Transactions.TransactionStateAborted.EndCommit(InternalTransaction tx)
+	      at System.Transactions.CommittableTransaction.Commit()
+	      at System.Transactions.TransactionScope.InternalDispose()
+	      at System.Transactions.TransactionScope.Dispose()
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.UpdateUser(User user) in C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.cs:line 234
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.SaveUserLoginTime() in C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.cs:line 210
+	      at Volvo.LAT.MVCWebUIComponent.MvcApplication.Session_Start(Object sender, EventArgs e) in C:\Users\Bikram Singh\Downloads\Src\NVSComponents\MVCWebUIComponent\Global.asax.cs:line 104
+	      at System.Web.SessionState.SessionStateModule.RaiseOnStart(EventArgs e)
+	      at System.Web.SessionState.SessionStateModule.CompleteAcquireState()
+	      at System.Web.SessionState.SessionStateModule.BeginAcquireState(Object source, EventArgs e, AsyncCallback cb, Object extraData)
+	      at System.Web.HttpApplication.AsyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect): [Volvo.LAT.UserDomain.DomainLayer.Entities.User#202]
+
+		   Type: NHibernate.StaleObjectStateException
+		      at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Object[] oldFields, Object rowId, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+		      at NHibernate.Persister.Entity.AbstractEntityPersister.UpdateOrInsert(Object id, Object[] fields, Object[] oldFields, Object rowId, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+		      at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Int32[] dirtyFields, Boolean hasDirtyCollection, Object[] oldFields, Object oldVersion, Object obj, Object rowId, ISessionImplementor session)
+		      at NHibernate.Action.EntityUpdateAction.Execute()
+		      at NHibernate.Engine.ActionQueue.Execute(IExecutable executable)
+		      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+		      at NHibernate.Engine.ActionQueue.ExecuteActions()
+		      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+		      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+		      at NHibernate.Impl.SessionImpl.Flush()
+		      at NHibernate.Transaction.AdoNetWithDistributedTransactionFactory.DistributedTransactionContext.System.Transactions.IEnlistmentNotification.Prepare(PreparingEnlistment preparingEnlistment)
+		------------------------------------------------------------------------------------------
+
+
+2019-04-04T02:32:43.9419996Z	ErrorId: f0fa231f-b665-4c59-81b8-5e9eb471633e
+
+	Utc:		2019-04-04T02:32:43.9419996Z
+	Machine:	DESKTOP-EJ5OVBG
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+
+	   Type: System.InvalidOperationException
+	      at System.Web.Script.Serialization.JavaScriptSerializer.Serialize(Object obj, StringBuilder output, SerializationFormat serializationFormat)
+	      at System.Web.Script.Serialization.JavaScriptSerializer.Serialize(Object obj, SerializationFormat serializationFormat)
+	      at System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-04-04T02:40:37.4517186Z	ErrorId: fe7d3458-0fd4-415c-abf6-0b2eea343acb
+
+	Utc:		2019-04-04T02:40:37.4517186Z
+	Machine:	DESKTOP-EJ5OVBG
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The transaction has aborted.
+
+	   Type: System.Transactions.TransactionAbortedException
+	      at System.Transactions.TransactionStateAborted.EndCommit(InternalTransaction tx)
+	      at System.Transactions.CommittableTransaction.Commit()
+	      at System.Transactions.TransactionScope.InternalDispose()
+	      at System.Transactions.TransactionScope.Dispose()
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.UpdateUser(User user) in C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.cs:line 234
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.SaveUserLoginTime() in C:\Users\Bikram Singh\Downloads\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.cs:line 210
+	      at Volvo.LAT.MVCWebUIComponent.MvcApplication.Session_Start(Object sender, EventArgs e) in C:\Users\Bikram Singh\Downloads\Src\NVSComponents\MVCWebUIComponent\Global.asax.cs:line 104
+	      at System.Web.SessionState.SessionStateModule.RaiseOnStart(EventArgs e)
+	      at System.Web.SessionState.SessionStateModule.CompleteAcquireState()
+	      at System.Web.SessionState.SessionStateModule.BeginAcquireState(Object source, EventArgs e, AsyncCallback cb, Object extraData)
+	      at System.Web.HttpApplication.AsyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect): [Volvo.LAT.UserDomain.DomainLayer.Entities.User#202]
+
+		   Type: NHibernate.StaleObjectStateException
+		      at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Object[] oldFields, Object rowId, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+		      at NHibernate.Persister.Entity.AbstractEntityPersister.UpdateOrInsert(Object id, Object[] fields, Object[] oldFields, Object rowId, Boolean[] includeProperty, Int32 j, Object oldVersion, Object obj, SqlCommandInfo sql, ISessionImplementor session)
+		      at NHibernate.Persister.Entity.AbstractEntityPersister.Update(Object id, Object[] fields, Int32[] dirtyFields, Boolean hasDirtyCollection, Object[] oldFields, Object oldVersion, Object obj, Object rowId, ISessionImplementor session)
+		      at NHibernate.Action.EntityUpdateAction.Execute()
+		      at NHibernate.Engine.ActionQueue.Execute(IExecutable executable)
+		      at NHibernate.Engine.ActionQueue.ExecuteActions(IList list)
+		      at NHibernate.Engine.ActionQueue.ExecuteActions()
+		      at NHibernate.Event.Default.AbstractFlushingEventListener.PerformExecutions(IEventSource session)
+		      at NHibernate.Event.Default.DefaultFlushEventListener.OnFlush(FlushEvent event)
+		      at NHibernate.Impl.SessionImpl.Flush()
+		      at NHibernate.Transaction.AdoNetWithDistributedTransactionFactory.DistributedTransactionContext.System.Transactions.IEnlistmentNotification.Prepare(PreparingEnlistment preparingEnlistment)
+		------------------------------------------------------------------------------------------
+
+
+2019-04-04T03:19:01.9342914Z	ErrorId: 8055721c-b842-4786-afc2-dc0e3e8339e9
+
+	Utc:		2019-04-04T03:19:01.9342914Z
+	Machine:	DESKTOP-EJ5OVBG
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The parameters dictionary contains a null entry for parameter 'startDate' of non-nullable type 'System.DateTime' for method 'System.Web.Mvc.ActionResult POLineGridRead(Kendo.Mvc.UI.DataSourceRequest, System.String, System.DateTime, System.DateTime)' in 'Volvo.LAT.MVCWebUIComponent.Controllers.POLineController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+	  Parameter name: parameters
+
+	   Type: System.ArgumentException
+	      at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-04-04T03:19:47.9676637Z	ErrorId: d078a734-36b2-48fd-873e-9d310c884d11
+
+	Utc:		2019-04-04T03:19:47.9676637Z
+	Machine:	DESKTOP-EJ5OVBG
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The parameters dictionary contains a null entry for parameter 'startDate' of non-nullable type 'System.DateTime' for method 'System.Web.Mvc.ActionResult POLineGridRead(Kendo.Mvc.UI.DataSourceRequest, System.String, System.DateTime, System.DateTime)' in 'Volvo.LAT.MVCWebUIComponent.Controllers.POLineController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+	  Parameter name: parameters
+
+	   Type: System.ArgumentException
+	      at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-04-04T03:23:38.4656515Z	ErrorId: 2777b70a-35c0-4f0a-902a-c37f17eaaf3e
+
+	Utc:		2019-04-04T03:23:38.4656515Z
+	Machine:	DESKTOP-EJ5OVBG
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The parameters dictionary contains a null entry for parameter 'startDate' of non-nullable type 'System.DateTime' for method 'System.Web.Mvc.ActionResult POLineGridRead(Kendo.Mvc.UI.DataSourceRequest, System.String, System.DateTime, System.DateTime)' in 'Volvo.LAT.MVCWebUIComponent.Controllers.POLineController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+	  Parameter name: parameters
+
+	   Type: System.ArgumentException
+	      at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-04-04T11:16:24.5619357Z	ErrorId: afe7deec-35eb-4b75-ad51-b9ed3ae6a66f
+
+	Utc:		2019-04-04T11:16:24.5619357Z
+	Machine:	DESKTOP-EJ5OVBG
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> Session is closed!
+	  Object name: 'ISession'.
+
+	   Type: System.ObjectDisposedException
+	      at NHibernate.Impl.AbstractSessionImpl.ErrorIfClosed()
+	      at NHibernate.Impl.AbstractSessionImpl.CheckAndUpdateSessionStatus()
+	      at NHibernate.Impl.AbstractSessionImpl.CreateQuery(IQueryExpression queryExpression)
+	      at NHibernate.Linq.DefaultQueryProvider.PrepareQuery(Expression expression, IQuery& query, NhLinqExpression& nhQuery)
+	      at NHibernate.Linq.DefaultQueryProvider.Execute(Expression expression)
+	      at NHibernate.Linq.DefaultQueryProvider.Execute[TResult](Expression expression)
+	      at Remotion.Linq.QueryableBase`1.System.Collections.IEnumerable.GetEnumerator()
+	      at System.Web.Script.Serialization.JavaScriptSerializer.SerializeEnumerable(IEnumerable enumerable, StringBuilder sb, Int32 depth, Hashtable objectsInUse, SerializationFormat serializationFormat)
+	      at System.Web.Script.Serialization.JavaScriptSerializer.SerializeValueInternal(Object o, StringBuilder sb, Int32 depth, Hashtable objectsInUse, SerializationFormat serializationFormat, MemberInfo currentMember)
+	      at System.Web.Script.Serialization.JavaScriptSerializer.SerializeValue(Object o, StringBuilder sb, Int32 depth, Hashtable objectsInUse, SerializationFormat serializationFormat, MemberInfo currentMember)
+	      at System.Web.Script.Serialization.JavaScriptSerializer.Serialize(Object obj, StringBuilder output, SerializationFormat serializationFormat)
+	      at System.Web.Script.Serialization.JavaScriptSerializer.Serialize(Object obj, SerializationFormat serializationFormat)
+	      at System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+

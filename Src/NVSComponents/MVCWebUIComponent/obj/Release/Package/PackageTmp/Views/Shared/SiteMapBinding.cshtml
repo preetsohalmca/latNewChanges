@@ -1,0 +1,14 @@
+﻿@using Kendo.Mvc.UI;
+@using MvcSiteMapProvider
+@using Volvo.LAT.MVCWebUIComponent.Common.Helpers
+
+@{
+    Html.Kendo().Menu()
+        .Name("Menu")
+        .Animation(false)
+        .HighlightPath(false);
+    // Load menu items from the Site Map registered in Global.asax
+    //.BindTo(SiteMaps.Current.RootNode.ChildNodes, mappings => mappings.For<ISiteMapNode>(
+    //        binding => binding.BindAndSelectMenuItems(ViewData[MenuModel.Key] as MenuModel)
+    //            .Children(currentMenuNode => currentMenuNode.ChildNodes))).Render();
+}

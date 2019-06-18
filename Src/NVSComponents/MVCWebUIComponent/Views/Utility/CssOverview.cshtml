@@ -1,0 +1,1043 @@
+﻿@using System.Configuration
+@{
+    ViewBag.Title = UtilityResource.Utilities_CSSOverview;
+}
+
+@{
+    var countries = new[] { "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City" };
+
+    var tempGridData = new List<Tuple<string, int, int>>();
+    var years = new[] { 2013, 2012, 2011, 2010 };
+    var r = new Random();
+    foreach (var country in countries.OrderBy(c => Guid.NewGuid()).Take(8))
+    {
+        foreach (var year in years)
+        {
+            tempGridData.Add(new Tuple<string, int, int>(country, year, r.Next(0, 101)));
+        }
+    }
+    var gridData = tempGridData.OrderBy(d => Guid.NewGuid());
+}
+<div class="k-content">
+    <p>Please note all the controls are from the Kendo UI product (<a class="k-link" href="http://www.telerik.com/aspnet-mvc" target="_blank">http://www.telerik.com/aspnet-mvc</a>), The page itself is copied from the ThemeBuilder and we recommend using ASP.NET MVC server wrappers as much as possible.<br /><br /></p>
+</div>
+<div id="example" class="k-content">
+    <div class="column">
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Button</h2>
+        @Html.Kendo().Button().Name("Button1").Content(UtilityResource.Utilities_CSSOverview_Button)
+        @Html.Kendo().Button().Name("Button2").Content(UtilityResource.Utilities_CSSOverview_AnotherButton)
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Menu</h2>
+        @(Html.Kendo().Menu()
+          .Name("MenuSample")
+          .Animation(false)
+          .Items(items =>
+              {
+                  items.Add()
+                       .Text(UtilityResource.Utilities_CSSOverview_MenuProducts)
+                       .ImageUrl("~/Content/nvs/icons/Open_14x14.png")
+                       .Items(children =>
+                           {
+                               children.Add().Text(UtilityResource.Utilities_CSSOverview_MenuFurniture)
+                                       .ImageUrl("~/Content/nvs/icons/Open_14x14.png")
+                                       .Items(innerChildren =>
+                                           {
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuTables).ImageUrl("~/Content/nvs/icons/Open_14x14.png").Enabled(false);
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuSofas);
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuOccasional);
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuChildren);
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuBeds).Enabled(false);
+                                           });
+                               children.Add().Text(UtilityResource.Utilities_CSSOverview_MenuDecor)
+                                       .Items(innerChildren =>
+                                           {
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuLinen);
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuThrows);
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuCurtains).Enabled(false);
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuRugs);
+                                               innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuCarpets);
+                                           });
+                           });
+                  items.Add().Text(UtilityResource.Utilities_CSSOverview_MenuBlog);
+                  items.Add().Text(UtilityResource.Utilities_CSSOverview_MenuCompany);
+                  items.Add().Text(UtilityResource.Utilities_CSSOverview_MenuNews).Enabled(false);
+              })
+        )
+
+        <div style="width: 120px;">
+            @(Html.Kendo().Menu()
+                  .Name("VerticalMenuSample")
+                  .Animation(false)
+                  .Orientation(MenuOrientation.Vertical)
+                  .Items(items =>
+                      {
+                          items.Add()
+                               .Text(UtilityResource.Utilities_CSSOverview_MenuProducts)
+                               .ImageUrl("~/Content/nvs/icons/Open_14x14.png")
+                               .Items(children =>
+                                   {
+                                       children.Add().Text(UtilityResource.Utilities_CSSOverview_MenuFurniture)
+                                               .ImageUrl("~/Content/nvs/icons/Open_14x14.png")
+                                               .Items(innerChildren =>
+                                                   {
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuTables).ImageUrl("~/Content/nvs/icons/Open_14x14.png").Enabled(false);
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuSofas);
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuOccasional);
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuChildren);
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuBeds).Enabled(false);
+                                                   });
+                                       children.Add().Text(UtilityResource.Utilities_CSSOverview_MenuDecor)
+                                               .Items(innerChildren =>
+                                                   {
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuLinen);
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuThrows);
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuCurtains).Enabled(false);
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuRugs);
+                                                       innerChildren.Add().Text(UtilityResource.Utilities_CSSOverview_MenuCarpets);
+                                                   });
+                                   });
+                          items.Add().Text(UtilityResource.Utilities_CSSOverview_MenuBlog);
+                          items.Add().Text(UtilityResource.Utilities_CSSOverview_MenuCompany);
+                          items.Add().Text(UtilityResource.Utilities_CSSOverview_MenuNews).Enabled(false);
+                      }))
+        </div>
+
+        <hr class="nvs" />
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Grid</h2>
+        @(Html.Kendo().Grid<Tuple<string, int, int>>()
+              .Name("GridSample")
+              .DataSource(ds => ds.Server().PageSize(5).Model(m => m.Id(t => t.Item1)))
+              .BindTo(gridData)
+              .ToolBar(toolbar => toolbar.Template(@<text>
+                <div class="toolbar">
+                    <input type="button" class="icon show" value=@CommonResource.Action_View />
+                    <span class="delimiter"></span>
+                    <input type="button" class="icon add" value=@CommonResource.Action_Add />
+                    <input type="button" class="icon edit disabled" disabled="disabled" value=@CommonResource.Action_Edit />
+                    <input type="button" class="icon delete" value=@CommonResource.Action_Delete />
+                    <span class="delimiter"></span>
+                    <input type="button" class="icon xls" value=@CommonResource.Action_Export />
+                </div>
+            </text>))
+                      .Columns(c =>
+                          {
+                              c.Bound(t => t.Item1).Title(UtilityResource.Utilities_CSSOverview_GridCountry);
+                              c.Bound(t => t.Item2).Title(UtilityResource.Utilities_CSSOverview_GridYear);
+                              c.Bound(t => t.Item3).Title(UtilityResource.Utilities_CSSOverview_GridValue);
+                          })
+                      .Selectable()
+                      .Sortable()
+                      .Filterable()
+                      .Pageable(p => p.Input(true).Refresh(true).PageSizes(new[] { 5, 10, 100 }))
+                      .Groupable()
+                      .Scrollable(s => s.Height(100))
+        )
+
+        @(Html.Kendo().Grid<Tuple<string, int, int>>()
+              .Name("GridSample2")
+              .DataSource(ds => ds.Server().PageSize(5).Model(m => m.Id(t => t.Item1)))
+              .BindTo(gridData)
+              .ToolBar(toolbar => toolbar.Template(@<text>
+                <div class="toolbar">
+                    <input type="button" class="icon show" value=@CommonResource.Action_View />
+                    <span class="delimiter"></span>
+                    <input type="button" class="icon add" value=@CommonResource.Action_Add />
+                    <input type="button" class="icon edit disabled" disabled="disabled" value=@CommonResource.Action_Edit />
+                    <input type="button" class="icon delete" value=@CommonResource.Action_Delete />
+                    <span class="delimiter"></span>
+                    <input type="button" class="icon xls" value=@CommonResource.Action_Export />
+                </div>
+            </text>))
+                      .Columns(c =>
+                          {
+                              c.Bound(t => t.Item1).Title(UtilityResource.Utilities_CSSOverview_GridCountry);
+                              c.Bound(t => t.Item2).Title(UtilityResource.Utilities_CSSOverview_GridYear);
+                              c.Bound(t => t.Item3).Title(UtilityResource.Utilities_CSSOverview_GridValue);
+                          })
+                      .Selectable()
+                      .Scrollable(s => s.Height(100))
+        )
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_TabStrip</h2>
+        @(Html.Kendo().TabStrip()
+              .Name("TabStripSample")
+              .Animation(false)
+              .Items(tabstrip =>
+                  {
+                      tabstrip.Add().Text("Paris")
+                              .Selected(true)
+                              .Content(@<text>
+                                <div>
+                                    <p>@UtilityResource.Utilities_CSSOverview_SampleContent, @UtilityResource.Utilities_CSSOverview_FirstTab</p>
+                                </div>
+                            </text>);
+                      tabstrip.Add().Text("New York")
+                              .Content(@<text>
+                    <div>
+                        <p>@UtilityResource.Utilities_CSSOverview_SampleContent, @UtilityResource.Utilities_CSSOverview_SecondTab</p>
+                    </div>
+                            </text>);
+                      tabstrip.Add().Text("Sydney")
+                              .Enabled(false)
+                              .Content(@<text>
+                                <div>
+                                    <p>@UtilityResource.Utilities_CSSOverview_SampleContent, @UtilityResource.Utilities_CSSOverview_ThirdTab</p>
+                                </div>
+                            </text>);
+                  })
+        )
+
+        <h2 class="nvs">@UtilityResource.Utilites_CSSOverview_PanelBar</h2>
+        @(Html.Kendo().PanelBar()
+              .Name("PanelBarSample")
+              .Items(panelbar =>
+                  {
+                      panelbar.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Projects)
+                              .Items(projects =>
+                                  {
+                                      projects.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_NewPlan);
+                                      projects.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Forecasts)
+                                              .Items(forecasts =>
+                                                  {
+                                                      forecasts.Add().Text("Q1 " + UtilityResource.Utilities_CSSOverview_PanelBar_Forecast);
+                                                      forecasts.Add().Text("Q2 " + UtilityResource.Utilities_CSSOverview_PanelBar_Forecast);
+                                                      forecasts.Add().Text("Q3 " + UtilityResource.Utilities_CSSOverview_PanelBar_Forecast);
+                                                      forecasts.Add().Text("Q4 " + UtilityResource.Utilities_CSSOverview_PanelBar_Forecast);
+                                                  });
+                                      projects.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Reports);
+                                  });
+                      panelbar.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Communication).Enabled(false);
+                      panelbar.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Programs)
+                              .Items(programs =>
+                                  {
+                                      programs.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Monday);
+                                      programs.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Tuesday);
+                                      programs.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Wednesday);
+                                      programs.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Thursday);
+                                      programs.Add().Text(UtilityResource.Utilities_CSSOverview_PanelBar_Friday);
+                                  });
+                  })
+        )
+
+        <h2 class="nvs">@UtilityResource.Utilites_CSSOverview_PanelBar class nvs-collapsible-panel</h2>
+        @(Html.Kendo().PanelBar()
+              .Name("PanelBarNvsSample")
+              .HtmlAttributes(new { @class = "nvs-collapsible-panel" })
+              .Items(panelbar =>
+                  {
+                      panelbar.Add().Text(UtilityResource.Utilities_CSSOverview_FirstPanel)
+                              .Content(@<text>
+                    <div>
+                        <p>@UtilityResource.Utilities_CSSOverview_SampleContent, @UtilityResource.Utilities_CSSOverview_FirstPanel</p>
+                    </div>
+                            </text>);
+                      panelbar.Add().Text(UtilityResource.Utilities_CSSOverview_SecondPanel)
+                              .Content(@<text>
+                    <div>
+                        <p>@UtilityResource.Utilities_CSSOverview_SampleContent, @UtilityResource.Utilities_CSSOverview_SecondPanel</p>
+                    </div>
+                            </text>);
+                      panelbar.Add().Text(UtilityResource.Utilities_CSSOverview_ThirdPanel)
+                              .Content(@<text>
+                    <div>
+                        <p>@UtilityResource.Utilities_CSSOverview_SampleContent, @UtilityResource.Utilities_CSSOverview_ThirdPanel</p>
+                    </div>
+                            </text>);
+                  })
+        )
+    </div>
+
+    <div class="column">
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Pickers</h2>
+        @(Html.Kendo().AutoComplete()
+              .Name("AutoCompleteSample")
+              .Filter("startswith")
+              .Placeholder(UtilityResource.Utilities_CSSOverview_Pickers_SelectCountry)
+              .BindTo(countries)
+        )
+        @(Html.Kendo().DropDownList()
+              .Name("DropDownListSample")
+              .BindTo(countries)
+              .SelectedIndex(8)
+        )
+        @(Html.Kendo().ComboBox()
+              .Name("ComboBoxSample")
+              .Placeholder(UtilityResource.Utilities_CSSOverview_Pickers_SelectCountry)
+              .BindTo(countries)
+        )
+        @(Html.Kendo().DatePicker()
+              .Name("DatePickerSample")
+              .Min(DateTime.Now.AddDays(-88))
+              .Max(DateTime.Now.AddDays(88))
+              .Value(DateTime.Now)
+        )
+        @(Html.Kendo().TimePicker()
+              .Name("TimePickerSample")
+              .Value(DateTime.Now.TimeOfDay)
+        )
+        @(Html.Kendo().DateTimePicker()
+              .Name("DateTimePickerPickerSample")
+              .Value(DateTime.Now)
+        )
+        @(Html.Kendo().IntegerTextBox()
+              .Name("IntegerTextBoxSample")
+              .Placeholder(UtilityResource.Utilities_CSSOverview_Pickers_EnterValue)
+        )
+        @(Html.Kendo().MultiSelect()
+              .Name("MultiSelectSample")
+              .BindTo(countries)
+              .Placeholder(UtilityResource.Utilities_CSSOverview_Pickers_SelectCountries)
+              .HtmlAttributes(new { style = "width: 260px;" })
+        )
+        <div style="width: 70px;">
+            @(Html.Kendo().ColorPicker()
+                  .Name("ColorPickerSample")
+                  .Value("#000000")
+                  .Buttons(false)
+            )
+        </div>
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_CheckboxTitle</h2>
+        <div class="sub-column">
+            <ul>
+                <li>
+                    <input type="checkbox" id="checkbox" class="k-checkbox">
+                    <label class="k-checkbox-label" for="checkbox">@UtilityResource.Utilities_CSSOverview_Checkbox</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="checked-checkbox" class="k-checkbox" checked="checked">
+                    <label class="k-checkbox-label" for="checked-checkbox">@UtilityResource.Utilities_CSSOverview_Checked</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="disabled-checkbox" class="k-checkbox" disabled="">
+                    <label class="k-checkbox-label" for="disabled-checkbox">@UtilityResource.Utilities_CSSOverview_Disabled</label>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <input type="radio" name="radio" id="radio" class="k-radio">
+                    <label class="k-radio-label" for="radio">@UtilityResource.Utilities_CSSOverview_Checkbox</label>
+                </li>
+                <li>
+                    <input type="radio" name="radio" id="checked-radio" class="k-radio" checked="checked">
+                    <label class="k-radio-label" for="checked-radio">@UtilityResource.Utilities_CSSOverview_Checked</label>
+                </li>
+                <li>
+                    <input type="radio" name="radio" id="disabled-radio" class="k-radio" disabled="">
+                    <label class="k-radio-label" for="disabled-radio">@UtilityResource.Utilities_CSSOverview_Disabled</label>
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Slider</h2>
+        @(Html.Kendo().Slider()
+              .Name("SliderSample")
+              .Min(0)
+              .Max(10)
+              .Value(5))
+
+        @(Html.Kendo().RangeSlider()
+              .Name("RangeSliderSample")
+              .Min(0)
+              .Max(10)
+              .Values(2, 6))
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_TreeView</h2>
+        @(Html.Kendo().TreeView()
+              .Name("TreeViewSample")
+              .Items(treeview =>
+                  {
+                      treeview.Add().Text("Item 1")
+                              .Expanded(true)
+                              .Items(root =>
+                                  {
+                                      root.Add().Text("Item 1.1").Enabled(false);
+                                      root.Add().Text("Item 1.2").Selected(true);
+                                      root.Add().Text("Item 1.3");
+                                  });
+                      treeview.Add().Text("Item 2")
+                              .Items(root =>
+                                  {
+                                      root.Add().Text("Item 2.1");
+                                      root.Add().Text("Item 2.2");
+                                      root.Add().Text("Item 2.3");
+                                  });
+                      treeview.Add().Text("Item 3");
+                  })
+        )
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Window</h2>
+        <input id="OpenWindow" type="button" class="k-button" value="@UtilityResource.Utilities_CSSOverview_OpenWindow" />
+        @(Html.Kendo().Window()
+              .Name("WindowSample")
+              .Title("Sample title")
+              .Width(140)
+              .Height(100)
+              .Visible(false)
+              .Modal(true)
+              .Draggable(true)
+              .Resizable()
+              .Content(@<text>
+                @UtilityResource.Utilities_CSSOverview_SampleContent
+                <br />
+                <div class="commandArea inline">
+                    <input type="button" value="Action" />
+                    <input type="button" class="disabled" value="Disabled" disabled="disabled" />
+                </div>
+            </text>)
+        )
+    </div>
+
+    <div class="column">
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Tooltip</h2>
+        <span id="TooltipSample">Hover here...</span>
+        @(Html.Kendo().Tooltip()
+              .For("#TooltipSample")
+              .Position(TooltipPosition.Top)
+              .Content("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sem odio, feugiat nec eleifend a, vulputate porttitor eros.")
+              .Width(200)
+        )
+        <hr class="nvs" />
+        <h2 class="nvs">Upload</h2>
+        @(Html.Kendo().Upload().Name("UploadSample"))
+
+        <h2 class="nvs">Calendar</h2>
+        @(Html.Kendo().Calendar()
+              .Name("CalendarSample")
+              .Min(DateTime.Now.AddDays(-88))
+              .Max(DateTime.Now.AddDays(88)))
+
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Splitter</h2>
+        @(Html.Kendo().Splitter()
+              .Name("SplitterSample")
+              .Orientation(SplitterOrientation.Horizontal)
+              .HtmlAttributes(new { style = "width:200px; height:120px;" })
+              .Panes(panes =>
+              {
+                  panes.Add().Content(@<div>@UtilityResource.Utilities_CSSOverview_LeftPane</div>);
+                  panes.Add().Content(@<div>@UtilityResource.Utilities_CSSOverview_RightPane</div>);
+              })
+        )
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_ProgressBar</h2>
+        @(Html.Kendo().ProgressBar()
+                      .Name("fastAndFurious")
+                      .Type(ProgressBarType.Percent)
+                      .Value(40))
+
+        <h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Notifications</h2>
+        @(Html.Kendo().Notification()
+            .Name("exampleNotification")
+            .AppendTo("#notification")
+            .HideOnClick(false)
+            .AutoHideAfter(0))
+        <div id="notification"></div>
+    </div>
+</div>
+
+<div id="scheduler"></div>
+
+<div class="column">
+    <div id="area-chart">
+
+        @(Html.Kendo().Chart()
+            .Name("areaChart")
+            .Title(@UtilityResource.Utilities_CSSOverview_InternetUsers)
+            .Transitions(false)
+            .Legend(legend => legend
+                .Position(ChartLegendPosition.Bottom)
+            )
+            .ChartArea(chartArea => chartArea
+                .Background("transparent")
+            )
+            .SeriesDefaults(seriesDefaults =>
+                seriesDefaults.Area().Line(line => line.Style(ChartAreaStyle.Smooth))
+            )
+            .Series(series =>
+            {
+                series.Area(new double[] { 67.96, 68.93, 75, 74, 78 }).Name(@UtilityResource.Utilities_CSSOverview_USA);
+                series.Area(new double[] { 15.7, 16.7, 20, 23.5, 26.6 }).Name(@UtilityResource.Utilities_CSSOverview_World);
+            })
+            .CategoryAxis(axis => axis
+                .Categories("2004", "2005", "2006", "2007", "2008")
+                .MajorGridLines(lines => lines.Visible(true))
+            )
+            .ValueAxis(axis => axis
+                .Numeric()
+                .Labels(labels => labels.Format("{0}%"))
+                .AxisCrossingValue(-10)
+                .Line(line => line.Visible(true))
+            )
+            .Tooltip(tooltip => tooltip
+                .Visible(true)
+                .Format("{0}%")
+            )
+        )
+
+    </div>
+
+    <div id="bubble-chart">
+        @(Html.Kendo().Chart()
+            .Name("bubbleChart")
+            .Title(@UtilityResource.Utilities_CSSOverview_CrimeStatistics)
+            .Legend(false)
+            .Transitions(false)
+            .Series(series =>
+            {
+                series.Bubble(new dynamic[] {
+                    new {
+                        x= 408,
+                        y= 622.5,
+                        size= 4412593,
+                        category= "Alaska"
+                    }, new {
+                        x = 350,
+                        y = 270,
+                        size = 556490000,
+                        category = "Starbucks"
+                    }, new {
+                        x= 250,
+                        y= 100.3,
+                        size= 61266600,
+                        category= "California"
+                    }, new {
+                        x= 555,
+                        y= 926.3,
+                        size= 424368340,
+                        category= "Florida"
+                    }, new {
+                        x= 682,
+                        y= 450,
+                        size= 433954744,
+                        category= "Georgia"
+                    }, new {
+                        x= 436,
+                        y= 634,
+                        size= 167554245,
+                        category= "Kentucky"
+                    }, new {
+                        x= 100,
+                        y= 447.1,
+                        size= 265443561,
+                        category= "New Jersey"
+                    }, new {
+                        x= 495,
+                        y= 353.3,
+                        size= 267569397,
+                        category= "New York"
+                    }, new {
+                        x= 652,
+                        y= 961.6,
+                        size= 24326974,
+                        category= "Texas"
+                    }
+                });
+            })
+            .XAxis(axis => axis
+                .Numeric()
+                .Labels(labels => labels
+                    .Format("{0:N0}")
+                )
+                .Title(@UtilityResource.Utilities_CSSOverview_MurdersPerPopulation)
+                .Line(line => line.Visible(true))
+            )
+            .YAxis(axis => axis
+                .Numeric()
+                .Labels(labels => labels
+                    .Format("{0:N0}")
+                )
+                .Title(@UtilityResource.Utilities_CSSOverview_BurglariesPerPopulation)
+                .Line(line => line.Visible(true))
+            )
+            .Tooltip(tooltip => tooltip
+                .Visible(true)
+                .Format("{3}: Population {2:N0}")
+            )
+        )
+    </div>
+</div>
+
+<div class="column middle-column">
+    <div id="mixed-chart">
+        @(Html.Kendo().Chart()
+        .Name("mixedChart")
+        .Title(@UtilityResource.Utilities_CSSOverview_CarReport)
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Bottom)
+        )
+        .Series(series =>
+        {
+            series
+                .Column(new int[] { 20, 40, 45, 30, 50 })
+                .Stack(true)
+                .Name("on battery");
+            series
+                .Column(new int[] { 20, 30, 35, 35, 40 })
+                .Stack(true)
+                .Name("on gas");
+            series
+                .Line(new double[] { 7.8, 6.2, 5.9, 7.4, 5.6 })
+                .Name("l/100 km")
+                .Axis("l100km");
+        })
+        .ValueAxis(axis => axis
+            .Numeric()
+                .Title("miles")
+                .Min(0).Max(100)
+        )
+        .ValueAxis(axis => axis
+            .Numeric("l100km")
+                .Title("liters per 100km")
+         )
+         .CategoryAxis(axis => axis
+            .Categories("Mon", "Tue", "Wed", "Thu", "Fri")
+            .AxisCrossingValue(0, 10)
+        )
+
+        )
+    </div>
+    <div id="linear-gauge"></div>
+</div>
+
+<div class="column">
+    <div id="pie-chart">
+        @(Html.Kendo().Chart()
+            .Name("pieChart")
+            .Title(@UtilityResource.Utilities_CSSOverview_SpainElectricity)
+            .Transitions(false)
+            .Legend(legend => legend
+                .Position(ChartLegendPosition.Bottom)
+                .Labels(label => label
+                    .Template("#= text # (#= value #%)")
+                )
+            )
+            .Series(series =>
+            {
+                series.Pie(new dynamic[] {
+                    new {category = @UtilityResource.Utilities_CSSOverview_Hydro,value = 22},
+                    new {category = @UtilityResource.Utilities_CSSOverview_Solar,value = 2},
+                    new {category = @UtilityResource.Utilities_CSSOverview_Nuclear,value = 49},
+                    new {category = @UtilityResource.Utilities_CSSOverview_Wind,value = 27}
+                })
+                .Labels(labels => labels
+                    .Visible(true)
+                    .Format("{0}")
+                    );
+            })
+            .Tooltip(tooltip => tooltip
+                .Visible(true)
+                .Format("{0}%")
+            )
+        )
+    </div>
+
+    <div id="radial-gauge"></div>
+</div>
+
+<hr class="nvs" />
+
+<h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Editor</h2>
+@(Html.Kendo().Editor()
+      .Name("EditorSample")
+      .HtmlAttributes(new { style = "width: 60%; height:200px;" })
+      .Value(@<text>
+        <h1>Lorem Ipsum</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sem odio, feugiat nec eleifend a, vulputate porttitor eros. In ullamcorper, ligula sed posuere rhoncus, neque lorem dictum lacus, vitae vestibulum tellus metus sit amet tellus. Sed condimentum, lectus at tempus commodo, dolor neque porta turpis, ac suscipit risus dolor eu metus. Aliquam sollicitudin, quam et iaculis placerat, nulla nulla tempus augue, sed eleifend velit eros non ligula. Morbi sollicitudin libero vel risus vehicula tempor. Suspendisse potenti. Praesent sit amet hendrerit velit. Mauris tincidunt nisi nec enim rhoncus ultrices. Sed adipiscing erat quis mi hendrerit eget interdum lectus rhoncus.</p>
+        <p>In hac habitasse platea dictumst. Integer eleifend mi et purus cursus vitae gravida elit adipiscing. Nunc ac sollicitudin nunc. Donec ultricies elit et ante pellentesque gravida. Nulla sapien quam, pretium et mollis vel, imperdiet eget tellus. Aenean sollicitudin tincidunt arcu eu volutpat. Donec quis felis vel lectus viverra interdum eu in urna. Mauris vel odio at lectus lacinia scelerisque. Morbi quis justo est. Praesent ac dolor dolor, in vulputate nisi.</p>
+    </text>)
+)
+
+<hr class="nvs" />
+
+<h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Headers</h2>
+
+<h1 class="nvs">@UtilityResource.Utilities_CSSOverview_Header 1</h1>
+<h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Header 2</h2>
+<h3 class="nvs">@UtilityResource.Utilities_CSSOverview_Header 3</h3>
+<h4 class="nvs">@UtilityResource.Utilities_CSSOverview_Header 4</h4>
+<h5 class="nvs">@UtilityResource.Utilities_CSSOverview_Header 5</h5>
+
+<hr class="nvs" />
+
+<h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Toolbar</h2>
+
+<div class="toolbar">
+    <input type="button" value=@UtilityResource.Utilities_CSSOverview_Enabled />
+    <span class="delimiter"></span>
+    <input type="button" class="disabled" value=@UtilityResource.Utilities_CSSOverview_Disabled />
+</div>
+
+<hr class="nvs" />
+
+<div class="toolbar">
+    <input type="button" class="icon back" value=@UtilityResource.Utilities_CSSOverview_Enabled />
+    <span class="delimiter"></span>
+    <input type="button" class="icon forward disabled" value=@UtilityResource.Utilities_CSSOverview_Disabled />
+</div>
+
+<hr class="nvs" />
+
+<div class="toolbar">
+    <input type="button" class="icon add disabled" />
+    <input type="button" class="icon back" />
+    <input type="button" class="icon calculator" />
+    <input type="button" class="icon calendar" />
+    <input type="button" class="icon close" />
+    <input type="button" class="icon contact" />
+    <input type="button" class="icon contextualmenu" />
+    <input type="button" class="icon copy" />
+    <input type="button" class="icon delete" />
+    <input type="button" class="icon down" />
+    <input type="button" class="icon edit" />
+    <input type="button" class="icon error" />
+    <input type="button" class="icon exit" />
+    <input type="button" class="icon forward" />
+    <input type="button" class="icon gif" />
+    <input type="button" class="icon help" />
+    <input type="button" class="icon hide" />
+    <input type="button" class="icon history" />
+    <input type="button" class="icon information" />
+    <input type="button" class="icon jpg" />
+    <input type="button" class="icon mail" />
+    <input type="button" class="icon new" />
+    <input type="button" class="icon note" />
+    <input type="button" class="icon open" />
+    <input type="button" class="icon pdf" />
+    <input type="button" class="icon picker" />
+    <input type="button" class="icon png" />
+    <input type="button" class="icon print" />
+    <input type="button" class="icon properties" />
+    <input type="button" class="icon refresh" />
+    <input type="button" class="icon save" />
+    <input type="button" class="icon search" />
+    <input type="button" class="icon settings" />
+    <input type="button" class="icon show" />
+    <input type="button" class="icon sort" />
+    @*<input type="button" class="icon sortasc"/>*@
+    @*<input type="button" class="icon sortdesc"/>*@
+    <input type="button" class="icon statusconfirm" />
+    <input type="button" class="icon statusnegative" />
+    <input type="button" class="icon statuspending" />
+    <input type="button" class="icon treecollapse" />
+    <input type="button" class="icon treeexpand" />
+    <input type="button" class="icon treefolderclosed" />
+    <input type="button" class="icon treefolderopen" />
+    <input type="button" class="icon up" />
+    <input type="button" class="icon warning" />
+    <input type="button" class="icon web" />
+    <input type="button" class="icon xls" />
+    <input type="button" class="icon zip" />
+</div>
+
+<hr class="nvs" />
+
+<h2 class="nvs">@UtilityResource.Utilities_CSSOverview_CommandArea</h2>
+
+<div class="commandArea">
+    <input type="button" value=@UtilityResource.Utilities_CSSOverview_Action />
+    <input type="button" class="disabled" value=@UtilityResource.Utilities_CSSOverview_Disabled disabled="disabled" />
+</div>
+
+<hr class="nvs" />
+
+<h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Group</h2>
+
+<div class="group">
+    <h3 class="nvs">@UtilityResource.Utilities_CSSOverview_GroupHeader</h3>
+    <div class="toolbar">
+        <input type="button" class="icon back" value=@UtilityResource.Utilities_CSSOverview_Toolbar />
+    </div>
+    <div>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_TextBox<span class="required">*</span></label>
+            @(Html.TextBox("TextBox", "TextBox", new { @class = "nvs" }))
+        </span>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_Password<span class="required">*</span></label>
+            @(Html.Password("Password", "Password", new { @class = "nvs" }))
+        </span>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_TextBoxDis</label>
+            @(Html.TextBox("DisabledTextBox", "TextBox", new { @class = "nvs", disabled = "disabled" }))
+        </span>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_PasswordDis</label>
+            @(Html.Password("DisabledPassword", "Password", new { @class = "nvs", disabled = "disabled" }))
+        </span>
+    </div>
+    <div>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_TextArea</label>
+            @(Html.TextArea("TextArea", "TextArea", new { @class = "nvs" }))
+        </span>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_TextAreaDis</label>
+            @(Html.TextArea("DisabledTextArea", "TextArea", new { @class = "nvs", disabled = "disabled" }))
+        </span>
+    </div>
+    <div>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_RadioButton</label>
+            @(Html.RadioButton("RadioButton", "RadioButton1", true)) @UtilityResource.Utilities_CSSOverview_RadioButton 1<br />
+            @(Html.RadioButton("RadioButton", "RadioButton2", false)) @UtilityResource.Utilities_CSSOverview_RadioButton 2
+        </span>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_Checkbox</label>
+            @(Html.CheckBox("CheckBox1", true)) @UtilityResource.Utilities_CSSOverview_Checkbox 1<br />
+            @(Html.CheckBox("CheckBox2", false)) @UtilityResource.Utilities_CSSOverview_Checkbox 2
+        </span>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_RadioButtonDis</label>
+            @(Html.RadioButton("DisabledRadioButton", "DisabledRadioButton1", true, new { disabled = "disabled" })) @UtilityResource.Utilities_CSSOverview_RadioButton 1<br />
+            @(Html.RadioButton("DisabledRadioButton", "DisabledRadioButton2", false, new { disabled = "disabled" })) @UtilityResource.Utilities_CSSOverview_RadioButton 2
+        </span>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_CheckboxDis</label>
+            @(Html.CheckBox("DisabledCheckBox1", true, new { disabled = "disabled" })) @UtilityResource.Utilities_CSSOverview_Checkbox 1<br />
+            @(Html.CheckBox("DisabledCheckBox2", false, new { disabled = "disabled" })) @UtilityResource.Utilities_CSSOverview_Checkbox 2
+        </span>
+    </div>
+    <div>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_JustText</label>
+            @UtilityResource.Utilities_CSSOverview_JustText
+        </span>
+    </div>
+    <div>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_Link</label>
+            <a href="#" class="nvs">@UtilityResource.Utilities_CSSOverview_Link</a>
+        </span>
+    </div>
+    <div>
+        <span class="field">
+            <label class="field">@UtilityResource.Utilities_CSSOverview_List</label>
+            <ul class="nvs">
+                <li>@UtilityResource.Utilities_CSSOverview_List_Item 1</li>
+                <li>@UtilityResource.Utilities_CSSOverview_List_Item 2</li>
+            </ul>
+        </span>
+        <span class="field">
+            <label class="field"></label>
+            <ol class="nvs">
+                <li>@UtilityResource.Utilities_CSSOverview_List_Item 1</li>
+                <li>@UtilityResource.Utilities_CSSOverview_List_Item 2</li>
+            </ol>
+        </span>
+    </div>
+</div>
+
+<hr class="nvs" />
+
+<h2 class="nvs">@UtilityResource.Utilities_CSSOverview_Table</h2>
+
+<table class="nvs">
+    <thead>
+        <tr>
+            <th>@UtilityResource.Utilities_CSSOverview_Table_Column 1</th>
+            <th>@UtilityResource.Utilities_CSSOverview_Table_Column 2</th>
+            <th>@UtilityResource.Utilities_CSSOverview_Table_Column 3</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>@UtilityResource.Utilities_CSSOverview_Table_Footer 1</td>
+            <td>@UtilityResource.Utilities_CSSOverview_Table_Footer 2</td>
+            <td>@UtilityResource.Utilities_CSSOverview_Table_Footer 3</td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr>
+            <td>A</td>
+            <td>B</td>
+            <td>C</td>
+        </tr>
+        <tr class="alt">
+            <td>D</td>
+            <td>E</td>
+            <td>F</td>
+        </tr>
+        <tr>
+            <td>G</td>
+            <td>H</td>
+            <td>I</td>
+        </tr>
+        <tr class="alt">
+            <td>J</td>
+            <td>K</td>
+            <td>L</td>
+        </tr>
+        <tr>
+            <td>M</td>
+            <td>N</td>
+            <td>O</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr class="nvs" />
+
+<style scoped>
+    /*#nvsBody
+    {
+        background-color: #ffaaaa;
+    }*/
+
+    .column .k-chart,
+    .column .k-gauge {
+        display: block;
+        margin-bottom: 14px;
+    }
+
+    .column .k-gauge {
+        margin-top: 130px;
+    }
+
+    .column {
+        width: 31%;
+        margin-right: 2%;
+        float: left;
+    }
+
+        .column .k-widget:not(.k-colorpicker) {
+            display: block;
+        }
+
+        .column .k-widget {
+            margin-bottom: 14px;
+        }
+
+    .sub-column ul {
+        width: 49%;
+        display: inline-block;
+        list-style: none;
+    }
+
+    .sub-column li {
+        margin: 10px 0;
+    }
+
+    #scheduler {
+        clear: both;
+        margin: 0 2% 3em;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        var notification = $("#exampleNotification").data("kendoNotification");
+        notification.info("@UtilityResource.Utilities_CSSOverview_Information");
+        notification.success("@UtilityResource.Utilities_CSSOverview_Success");
+        notification.warning("@UtilityResource.Utilities_CSSOverview_Warning");
+        notification.error("@UtilityResource.Utilities_CSSOverview_Error");
+    });
+
+    var serviceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
+    $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/13"),
+        startTime: new Date("2013/6/13 07:00 AM"),
+        endTime: new Date("2013/6/13 08:00 PM"),
+        views: [
+            { type: "day", selected: true },
+            "week",
+            "month"
+        ],
+        editable: false,
+        timezone: "Etc/UTC",
+        dataSource: {
+            batch: true,
+            transport: {
+                read: {
+                    url: serviceBaseUrl + "/meetings",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: serviceBaseUrl + "/meetings/update",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: serviceBaseUrl + "/meetings/create",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: serviceBaseUrl + "/meetings/destroy",
+                    dataType: "jsonp"
+                },
+                parameterMap: function (options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return { models: kendo.stringify(options.models) };
+                    }
+                }
+            },
+            schema: {
+                model: {
+                    id: "meetingID",
+                    fields: {
+                        meetingID: { from: "MeetingID", type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        startTimezone: { from: "StartTimezone" },
+                        endTimezone: { from: "EndTimezone" },
+                        description: { from: "Description" },
+                        recurrenceId: { from: "RecurrenceID" },
+                        recurrenceRule: { from: "RecurrenceRule" },
+                        recurrenceException: { from: "RecurrenceException" },
+                        roomId: { from: "RoomID", nullable: true },
+                        atendees: { from: "Atendees", nullable: true },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            }
+        }
+    });
+
+
+
+</script>
+
+@section Header
+{
+
+    @{
+        var kendoVersion = ConfigurationManager.AppSettings["KendoVersion"];
+    }
+
+    <link href="~/Content/kendo/@(kendoVersion)/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/@(kendoVersion)/kendo.dataviz.default.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#OpenWindow").click(function () {
+                $("#WindowSample").data("kendoWindow").center().open();
+            });
+
+            // to draw treeview lines, add the following code:
+            $(".k-treeview > .k-group").addClass("k-treeview-lines");
+            
+            $("#linear-gauge").kendoLinearGauge({
+                transitions: false,
+                pointer: {
+                    value: 30
+                }
+            });
+
+            $("#radial-gauge").kendoRadialGauge({
+                transitions: false,
+                pointer: {
+                    value: 40
+                },
+                scale: {
+                    max: 180,
+                    ranges: [
+                        { from: 160, to: 180, color: "#ff0000" }
+                    ]
+                }
+            });
+
+
+        });
+    </script>
+}

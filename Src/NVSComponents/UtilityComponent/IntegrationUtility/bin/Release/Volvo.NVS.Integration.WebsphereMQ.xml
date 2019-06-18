@@ -1,0 +1,1855 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Volvo.NVS.Integration.WebsphereMQ</name>
+    </assembly>
+    <members>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.ChannelBase">
+            <summary>
+            WMQ Implementation of the IChannel interface
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.ChannelBase._queueManager">
+            <summary>
+            Queue manager wrapper
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.ChannelBase._ambientTransaction">
+            <summary>
+            Transaction
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.ChannelBase._destination">
+            <summary>
+            Wmq destination
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.ChannelBase._locker">
+            <summary>
+            Locker - object
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.TransactInfo">
+            <summary>
+            Transact info class
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.TransactInfo.DoCommit">
+            <summary>
+            Specifies whether the transaction shall be committed or rolled back
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.TransactInfo.IsHandled">
+            <summary>
+            Indicates whether channel specific transact has taken all necessary measures.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.ChannelBase._isCancelOpenRequested">
+            <summary>
+            If true, EnsureChannelOpen will stop any further attempts to reconnect.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.ChannelBase._logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.#ctor(System.Uri)">
+            <summary>
+            Constructor used by the ChannelFactory to create a WMQ channel.
+            </summary>
+            <param name="uri">The URI defining the channel to create</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.EnlistInTransaction">
+            <summary>
+            Enlist the channel in the current transaction.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.OnCommunicationStatusChanged(Volvo.NVS.Integration.Events.CommunicationStatus)">
+            <summary>
+            OnCommunicationStatusChanged
+            </summary>
+            <param name="status"></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.DisconnectQueueManager(System.Boolean)">
+            <summary>
+            Disconnect queue manager
+            </summary>
+            <param name="hasProblems"></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.EnsureChannelOpen(System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Ensures channes is open
+            </summary>
+            <param name="retries"></param>
+            <param name="pooled"></param>
+            <param name="updateStatus"></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.SetProperty(Volvo.NVS.Integration.IPropertyKey,System.Int32)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.Int32" /></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.SetProperty(Volvo.NVS.Integration.IPropertyKey,System.String)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.String" /></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.SetProperty(Volvo.NVS.Integration.IPropertyKey,System.Boolean)">
+            <summary>
+            Sets a channel property.
+            </summary>
+            <param name="key">The key of the property to set</param>
+            <param name="value">The new value of the property as <see cref="T:System.Boolean" /></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.EnlistmentTransact(System.Boolean)">
+            <summary>
+            EnlistmentTransact
+            </summary>
+            <param name="doCommit"></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.ChannelSpecificTransact(Volvo.NVS.Integration.WebsphereMQ.ChannelBase.TransactInfo)">
+            <summary>
+            Overrride to impement channel specific transact behavior
+            </summary>
+            <param name="transactInfo"></param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.DestinationName">
+            <summary>
+            The name of the destination (regardless of queue/topic/expediter/partner)
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.Dispose">
+            <summary>
+            Disposes the WmqChannel object and release all resources.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.DisposeDestination">
+            <summary>
+            Dispse destination
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.Dispose(System.Boolean)">
+            <summary>
+            Disposes the WmqChannel object.
+            </summary>
+            <param name="disposing">Pass true only if calling this method from the <see cref="M:System.IDisposable.Dispose"/> method.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.Close">
+            <summary>
+            Closes the channel by releasing all of its resources and stopping all of its activities.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.Finalize">
+            <summary>
+            WmqChannel destructor
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.Uri">
+            <summary>
+            The Uri defining the queue.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.IsolationLevel">
+            <summary>
+            The isolation level to use in transactions when subscribing to messages.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ChannelBase.WaitForRetry(System.Int32)">
+            <summary>
+            Waits for retry
+            </summary>
+            <param name="retry"></param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Channels.Output.SendMode">
+            <summary>
+            SendMode enum
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Channels.Output.SendMode.PublishFire">
+            <summary>
+            PublishFire
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Channels.Output.SendMode.Request">
+            <summary>
+            Request
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Channels.Output.SendMode.Reply">
+            <summary>
+            Reply
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.InputChannel">
+            <summary>
+            Input channel class
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.#ctor(System.Uri)">
+            <summary>
+            InputChannel constructor
+            </summary>
+            <param name="uri"></param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.InputChannel.TransactionTimeout">
+            <summary>
+            The transaction timeout to use when subscribing to messages (in seconds).
+            </summary>
+        </member>
+        <member name="E:Volvo.NVS.Integration.WebsphereMQ.InputChannel.ErrorOccurred">
+            <summary>
+            Error event handler
+            </summary>
+        </member>
+        <member name="E:Volvo.NVS.Integration.WebsphereMQ.InputChannel.PostProcessMessageHandler">
+            <summary>
+            Event handler for post processing
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.CanPeek">
+            <summary>
+            Is peek supported?
+            </summary>
+            <returns><b>true</b> if supported.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.Peek">
+            <summary>
+            Read the first message if available without consuming.
+            </summary>
+            <returns>
+            The next message on the queue. <b>null</b> if queue is empty.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.Receive">
+            <summary>
+            Reads the first message if available
+            </summary>
+            <returns><b>null</b> if no message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.Receive(System.Action{Volvo.NVS.Integration.Messages.IInputMessage})">
+            <summary>
+            Read the first message. If available, call action and return true. If not available return false.
+            </summary>
+            <param name="action">The method to be called if message is available</param>
+            <returns><b>true</b> if message is available</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.ReceiveWithSelector(System.String)">
+            <summary>
+            Reads the first message available matching the selector
+            </summary>
+            <param name="selector">Defines selection pattern that message has to meet</param>
+            <returns><b>null</b> if no message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.ReceiveWithSelector(System.Action{Volvo.NVS.Integration.Messages.IInputMessage},System.String)">
+            <summary>
+            Read the first message matching the selector. If available, call action and return true. If not available return false.
+            </summary>
+            <param name="action">The method to be called if message is available</param>
+            <param name="selector">Defines selection pattern that message has to meet</param>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IInputMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}},System.Transactions.IsolationLevel)">
+            <summary>
+            Subscribe
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+            <param name="isolationLevel">The Isolation Level to use in the transaction started when the message is received</param>
+            <exception cref="T:System.ArgumentNullException">Provided action is null.</exception>
+            <exception cref="T:Volvo.NVS.Integration.Exceptions.IntegrationException">Problems with communication to queue manager.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IInputMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}})">
+            <summary>
+            Subscribe on channel using background thread
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IInputMessage},System.Transactions.IsolationLevel)">
+            <summary>
+            Subscribe on channel using background thread
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="isolationLevel">Transaction isolation level to be used for handler transaction.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.Subscribe(System.Action{Volvo.NVS.Integration.Messages.IInputMessage})">
+            <summary>
+            Subscribe on channel using background thread
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.SubscribeWithSelector(System.Action{Volvo.NVS.Integration.Messages.IInputMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}},System.Transactions.IsolationLevel,System.String)">
+            <summary>
+            Subscribe on channel using the selector
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+            <param name="isolationLevel">The Isolation Level to use in the transaction started when the message is received</param>
+            <param name="selector">Defines selection pattern that message has to meet</param>
+            <exception cref="T:System.ArgumentNullException">Provided action is null.</exception>
+            <exception cref="T:Volvo.NVS.Integration.Exceptions.IntegrationException">Problems with communication to queue manager.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.SubscribeWithSelector(System.Action{Volvo.NVS.Integration.Messages.IInputMessage},System.EventHandler{Volvo.NVS.Integration.Events.CommunicationEventArgs{System.String}},System.String)">
+            <summary>
+            Subscribe on channel using the selector
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="errorHandler">Error event handler</param>
+            <param name="selector">Defines selection pattern that message has to meet</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.SubscribeWithSelector(System.Action{Volvo.NVS.Integration.Messages.IInputMessage},System.Transactions.IsolationLevel,System.String)">
+            <summary>
+            Subscribe on channel using the selector
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="isolationLevel">Transaction isolation level to be used for handler transaction.</param>
+            <param name="selector">Defines selection pattern that message has to meet</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.SubscribeWithSelector(System.Action{Volvo.NVS.Integration.Messages.IInputMessage},System.String)">
+            <summary>
+            Subscribe on channel using the selector
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <param name="selector">Defines selection pattern that message has to meet</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.PeekSubscribe(System.Action)">
+            <summary>
+            Subscribe and get a notification when a message is available.
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+            <exception cref="T:Volvo.NVS.Integration.Exceptions.IntegrationException">Problems with communication to queue manager.</exception>
+            <remarks>
+            <para>
+            In case when application needs to be informed about incoming messages without "touching" them
+            or custom message handling is needed use PeekSubscribe method instead of Subscribe.
+            </para>
+            <para>
+            PeekSubscribe starts new thread and call registered callback (action) each time when new message arrive.
+            Callback method receives only message info (without content) defined by IMessageFilter interface to
+            distinguish them from normal Subscribe.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.AsynchReceiveForRequestReply(System.Action{Volvo.NVS.Integration.Messages.IInputMessage})">
+            <summary>
+            Receive messages for Request Reply asynchronously for WMQ Only
+            </summary>
+            <param name="action">The method to be called when message arrives</param>
+        </member>
+        <member name="E:Volvo.NVS.Integration.WebsphereMQ.InputChannel.StatusChanged">
+            <summary>
+            Communication status change event handler
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.OnCommunicationStatusChanged(Volvo.NVS.Integration.Events.CommunicationStatus)">
+            <summary>
+            OnCommunicationStatusChanged
+            </summary>
+            <param name="status"></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.Close">
+            <summary>
+            Closes the channel by releasing all of its resources and stopping all of its activities.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.ChannelSpecificTransact(Volvo.NVS.Integration.WebsphereMQ.ChannelBase.TransactInfo)">
+            <summary>
+            ChannelSpecificTransact
+            </summary>
+            <param name="transactInfo"></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.InputChannel.CombineWithMessageTransactionBehavior(System.Boolean)">
+            <summary>
+            CombineWithMessageTransactionBehavior
+            </summary>
+            <param name="doCommit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.OutputChannel">
+            <summary>
+            OutputChannel class
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.OutputChannel._replytoQueue">
+            <summary>
+            Reply to Queue
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.MessageIsNotWmqMessage">
+            <summary>
+            MessageIsNotWmqMessage
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.#ctor(System.Uri)">
+            <summary>
+            OutputChannel constructor
+            </summary>
+            <param name="uri"></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.CreateMessage">
+            <summary>
+            Create a message for usage with the channel
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.CreateMessage(System.String,System.String,System.String,System.String)">
+            <summary>
+            Create a new message for usage with the channel filled with GimR informations.
+            </summary>
+            <param name="gimSenderId">GimR sender identification.</param>
+            <param name="gimMessageVersion">GimR message version.</param>
+            <param name="gimMessageType">GimR message type.</param>
+            <param name="gimMessageExchangePattern">GimR message exchange pattern.</param>
+            <remarks>
+            GimR works only with Websphere MQ and that method is not implemented for VCom channel
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.CreateMqMessage">
+            <summary>
+            Creates a WmqMessage.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Publish(System.String)">
+            <summary>
+            Publish message using channel with UTF8 encoding
+            </summary>
+            <param name="message">Message content as string</param>
+            <exception cref="T:System.ArgumentNullException">Message is <b>null</b></exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Publish(System.String,System.String)">
+            <summary>
+            Publish message using channel with UTF8 encoding
+            </summary>
+            <param name="message">Message content as string</param>
+            <param name="topic">Overrides the topic specified in URI</param>
+            <exception cref="T:System.ArgumentNullException">Message is <b>null</b></exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Send(System.String)">
+            <summary>
+            Send a message. The message will be UTF8 encoded.
+            </summary>
+            <param name="message">Message content as string.</param>
+            <exception cref="T:System.ArgumentNullException">Message is <b>null</b></exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Send(Volvo.NVS.Integration.Messages.IOutputMessage)">
+            <summary>
+            Send a message
+            </summary>
+            <param name="message">Message to be send.</param>
+            <exception cref="T:System.ArgumentNullException">Message is <b>null</b></exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Publish(Volvo.NVS.Integration.Messages.IOutputMessage)">
+            <summary>
+            Publish a message
+            </summary>
+            <param name="message">Message to be send.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Publish(Volvo.NVS.Integration.Messages.IOutputMessage,System.String)">
+            <summary>
+            Publishes the specified message to send.
+            </summary>
+            <param name="messageToSend">The message to send.</param>
+            <param name="topic">The topic.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.SendMessage(Volvo.NVS.Integration.WebsphereMQ.WmqMessage,System.String,System.Nullable{System.TimeSpan},Volvo.NVS.Integration.WebsphereMQ.Channels.Output.SendMode)">
+            <summary>
+            Publishes the specified message to send.
+            </summary>
+            <param name="wmqMessage">The message to send.</param>
+            <param name="topic">The topic.</param>
+            <param name="expiry">The expiry.</param>
+            <param name="sendMode">Specifies whether the send is PublishFire, Request or Reply</param>
+            <exception cref="T:System.ArgumentNullException">Message is <b>null</b></exception>
+            <exception cref="T:System.ArgumentException">Message was not created by <see cref="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.CreateMessage"/> method.</exception>
+            <exception cref="T:System.Exception">Message size behaves unexpected.</exception>
+            <exception cref="T:Volvo.NVS.Integration.Exceptions.IntegrationException">Problems with communication to queue manager.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Request(System.String)">
+            <summary>
+            Sends a request and waits for a reply
+            </summary>
+            <param name="message">The request content as string to be sent.</param>
+            <returns>
+            The reply message. <b>null</b> on time out.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Request message is <b>null</b></exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Request(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Sends a request and waits for a reply
+            </summary>
+            <param name="message">The request content as string to be sent.</param>
+            <param name="timeout">Override the default time out.</param>
+            <returns>
+            The reply message. <b>null</b> on time out.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Request message is <b>null</b></exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Request(Volvo.NVS.Integration.Messages.IOutputMessage)">
+            <summary>
+            Sends a request and waits for a reply
+            </summary>
+            <param name="message">The request message to be sent.</param>
+            <returns>
+            The reply message. <b>null</b> on time out.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.Request(Volvo.NVS.Integration.Messages.IOutputMessage,System.Nullable{System.TimeSpan})">
+            <summary>
+            Sends a request and waits for a reply
+            </summary>
+            <param name="message">The request message to be sent.</param>
+            <param name="timeout">Override the default time out.</param>
+            <returns>
+            The reply message. <b>null</b> on time out.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Request message is <b>null</b></exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.AsyncRequest(System.String)">
+            <summary>
+            Asynchronous request (WMQ Only)
+            </summary>
+            <param name="message">The request content as string to be sent.</param>
+            <returns>
+            The <see cref="P:Volvo.NVS.Integration.Messages.IMessage.MessageId" /> of request message. Reply will have <see cref="P:Volvo.NVS.Integration.Messages.IInputMessage.CorrelationObject" /> set to the same value.
+            </returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.OutputChannel.AsyncRequest(Volvo.NVS.Integration.Messages.IOutputMessage)">
+            <summary>
+            Asynchronous request (WMQ Only)
+            </summary>
+            <param name="message">The request message to be sent.</param>
+            <returns>
+            The <see cref="P:Volvo.NVS.Integration.Messages.IMessage.MessageId" /> of request message. Reply will have <see cref="P:Volvo.NVS.Integration.Messages.IInputMessage.CorrelationObject" /> set to the same value.
+            </returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.ReplyChannel">
+            <summary>
+            ReplyChannel class
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ReplyChannel.#ctor(System.Uri)">
+            <summary>
+            ReplyChannel constructor
+            </summary>
+            <param name="uri"></param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ReplyChannel.CreateReply(Volvo.NVS.Integration.Messages.IInputMessage)">
+            <summary>
+            Creates a reply message for the given request message
+            </summary>
+            <returns>The created <see cref="T:Volvo.NVS.Integration.Messages.IReplyMessage"/> message</returns>public static  
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ReplyChannel.CreateReply(System.Byte[],System.String,System.String)">
+            <summary>
+            Creates a reply message with correlation
+            </summary>
+            <param name="correlationId">The correlation id to set on the reply message</param>
+            <param name="replyToQueue">The queue that the reply shall be sent to</param>
+            <param name="replyToQueueManager">The queue manager that hosts the replyTo queue</param>
+            <returns>The created <see cref="T:Volvo.NVS.Integration.Messages.IReplyMessage"/> message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ReplyChannel.CreateReply(System.Byte[],System.String,System.String,System.Int32)">
+            <summary>
+            Creates a reply message with a correlation id.
+            </summary>
+            <param name="correlationId">The correlation id to set on the reply message</param>
+            <param name="replyToQueue">The queue that the reply shall be sent to</param>
+            <param name="replyToQueueManager">The queue manager that hosts the replyTo queue</param>
+            <param name="expiry">Time in seconds before the reply expires.</param>
+            <returns>The created <see cref="T:Volvo.NVS.Integration.Messages.IReplyMessage"/> message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.ReplyChannel.Send(Volvo.NVS.Integration.Messages.IReplyMessage)">
+            <summary>
+            Sends the reply
+            </summary>
+            <param name="reply">The reply message to be sent.</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader">
+            <summary>
+            Contains names of the fields on the Gim metadata Header.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.HeaderVersion">
+            <summary>
+            The name of the GIMHeaderVersion field - [Deprecated] The version of GIM Metadata Model
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.ImplementationId">
+            <summary>
+            The name of the GIMImplementationId field - The unique implementation identifier in Volvo Group Integration Registry (VGIR)
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.MessageExchangePattern">
+            <summary>
+            The name of the GIMMessageExchangePattern field - Describes what type of message exchange pattern used.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.MsgSeq">
+            <summary>
+            The name of the GIMMsgSeq field - Is the message sequence dependent or not. 
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.MsgType">
+            <summary>
+            The name of the GIMMsgType field - The message type/name as in Volvo Group Integration Registry.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.MsgTypeVersion">
+            <summary>
+            The name of the GIMMsgTypeVersion field - The version of message type.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.SendTime">
+            <summary>
+            The name of the GIMSendTime field - The time when message was sent.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.SenderId">
+            <summary>
+            The name of the GIMSenderId field - The sending system as in MISP
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.ServiceId">
+            <summary>
+            The name of the GIMServiceId field - The unique service identifier in Volvo Group Integration Registry (VGIR) of the service internal Volvo.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.ServiceName">
+            <summary>
+            The name of the GIMServiceName field - The name of the service.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.TrackingId">
+            <summary>
+            The name of the GIMTrackingId field - Globally Unique Identifier used to track transactions.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.ContractId">
+            <summary>
+            The name of the GIMContractId field - The unique contract identifier in Volvo Group Integration Registry (VGIR). 
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.DestinationId">
+            <summary>
+            The name of the GIMDestinationId field - The logical identification of the destination.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.GIMMessageExchangePattern">
+            <summary>
+            Contains the valid values available for the GIM Message Exchange patterns. 
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.GIMMessageExchangePattern.RequestReply">
+            <summary>
+            The RequestReply message exchange pattern
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.GIMMessageExchangePattern.FireAndForget">
+            <summary>
+            The FireAndForget message exchange pattern
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.GIMHeader.GIMMessageExchangePattern.PublishSubscribe">
+            <summary>
+            The PublishSubscribe message exchange pattern
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty">
+            <summary>
+            Represents the key of a channel property.
+            Use public members to access valid keys.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Key">
+            <summary>
+            Key of the property this instance represents.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Queue">
+            <summary>
+            Identifies the MQ channel Queue property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Replyto">
+            <summary>
+            Identifies the MQ channel ReplyTo property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.ReplytoQmgr">
+            <summary>
+            Identifies the MQ channel ReplytoQmgr property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Backout">
+            <summary>
+            Identifies the MQ channel Backout property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.BackoutThreshold">
+            <summary>
+            Identifies the MQ channel BackoutThreshold property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Managed">
+            <summary>
+            Identifies the MQ channel Managed property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Durable">
+            <summary>
+            Identifies the MQ channel Durable property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Topic">
+            <summary>
+            Identifies the MQ channel Topic property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Subscription">
+            <summary>
+            Identifies the MQ channel Subscription property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.MsgMaxLength">
+            <summary>
+            Identifies the MQ channel MsgMaxLength property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.SslCipherSpecs">
+            <summary>
+            Identifies the MQ channel SslCipherSpecs property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.SslRepository">
+            <summary>
+            Identifies the MQ channel SslKeyRepository property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.SslPeerName">
+            <summary>
+            Identifies the MQ channel SslPeerName property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.UseRecords">
+            <summary>
+            Identifies the MQ channel UseRecords property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.TargetClient">
+            <summary>
+            Identifies the MQ channel TargetClient property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.PriorityMessage">
+            <summary>
+            Identifies the MQ channel PriorityMessage property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Priority">
+            <summary>
+            Identifies the MQ channel Priority property. 
+            Value can be either boolean or int. true sets high priority message (7) and false sets normal priority (4).
+            Integer value can be 0-9.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Timeout">
+            <summary>
+            Identifies the MQ channel Timeout property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.NoSyncpoint">
+            <summary>
+            Identifies the MQ channel NoSyncpoint property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.ApplicationId">
+            <summary>
+            Identifies the MQ channel ApplicationId property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.SplitNewLineRecord">
+            <summary>
+            Identifies the MQ channel SplitNewLineRecord property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.UserId">
+            <summary>
+            Identifies the MQ channel UserId property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.TempFiles">
+            <summary>
+            Identifies the MQ channel TempFiles property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Binary">
+            <summary>
+            Identifies the MQ channel Binary property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Compress">
+            <summary>
+            Identifies the MQ channel Compress property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Expiry">
+            <summary>
+            Identifies the MQ channel Expiry property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Persistent">
+            <summary>
+            Identifies the MQ channel Persistent property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.PollInterval">
+            <summary>
+            Identifies the MQ channel PollInterval property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Encoding">
+            <summary>
+            Identifies the MQ channel Encoding property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.ForceGroup">
+            <summary>
+            Identifies the MQ channel ForceGroup property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.AlternateHosts">
+            <summary>
+            Identifies the MQ channel AlternateHosts property
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.ChannelProperty.Selector">
+            <summary>
+            Identifies the MQ channel Selector property
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants">
+            <summary>
+            Contains constants for WMQ
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.MessagePriority">
+            <summary>
+            Default values for message priorities.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.MessagePriority.High">
+            <summary>
+            High priority
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.MessagePriority.Normal">
+            <summary>
+            Normal priority
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.DefaultBackoutTreshold">
+            <summary>
+            Defines the default backout treshold
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.QueueWaitTimeoutForListenerThread">
+            <summary>
+            The wait timeout for the listener thread to end (for Queues)
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.TopicWaitTimeoutForListenerThread">
+            <summary>
+            The wait timeout for the listener thread to end (for Topics)
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.DefaultTransactionTimeout">
+            <summary>
+            The default transaction timeout
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.DefaultRequestTimeout">
+            <summary>
+            The default request timeout
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.DefaultMessageMaxLength">
+            <summary>
+            The default message maximum length
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.DefaultEncodingName">
+            <summary>
+            The default encoding string to be used.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.UriName">
+            <summary>
+            A name of the uri associated with the WMQ channel.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Content.MqMdPassThroughWriter">
+            <summary>
+            Setups MQMD integration message header properties on the <see cref="T:IBM.WMQ.MQMessage"/>.
+            </summary>
+            <remarks>
+            A special type of the MQMD header writer is needed for the WMQ based channels as for the WMQ we do not have to write the MQMD header
+            itself. This is done by the <see cref="T:IBM.WMQ.MQMessage"/> implementation. We need to however correctly set properties related to the IBM
+            message class and the MQMD header so we correctly point at the next message part being written.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Content.MqMdPassThroughWriter.Write(Volvo.NVS.Integration.IUri,Volvo.NVS.Integration.Utilities.IMessageStreamWriter,Volvo.NVS.Integration.Messages.Message,System.Byte[],Volvo.NVS.Integration.Content.Writers.MessageWriterFormatInfo)">
+            <summary>
+            Writes a message header or content.
+            </summary>
+            <param name="uri">A current uri for which the write operation is performed.</param>
+            <param name="target">A target giving access into the message stream into which we should write.</param>
+            <param name="source">A source message from which we should take properties and write them.</param>
+            <param name="sourceContent">A current source message content which should be added into the target.</param>
+            <param name="nextFormat">A name of the format supported by a writer being next in the queue (a next writer format).</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Content.MqMdPassThroughWriter.GetFormatInfo(Volvo.NVS.Integration.Messages.Message)">
+            <summary>
+            Provides information about a format supported by the writer.
+            </summary>
+            <param name="source">A source message from which we should take properties and write them.</param>
+            <returns>An object describing a format of the message being supported by the writer.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Content.MqMdPassThroughWriter.WriterType">
+            <summary>
+            Determines a type of the message writer.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageParser">
+            <summary>
+            A WMQ message parser.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageParser.Default">
+            <summary>
+            A current instance of the WMQ message parser.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageParser.#ctor">
+            <summary>
+            Creates an instance of the WMQ message parser.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageParserProvider">
+            <summary>
+            A default provider giving instances of the <see cref="T:Volvo.NVS.Integration.Content.Parsers.IMessageParser"/> for WMQ based channels.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageParserProvider.Create(Volvo.NVS.Integration.IUri)">
+            <summary>
+            Provides a message parser to be used by a channel.
+            </summary>
+            <param name="uri">An uri for which a parser should be provided.</param>
+            <returns>A message parser used by the channel.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageWriter">
+            <summary>
+            A message writer used by the WMQ integration infrastructure.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageWriter.Default">
+            <summary>
+            A default instance of the WMQ message writer where MqMd, Rfh2 and Content writer is involved.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageWriter.Content">
+            <summary>
+            A WMQ message writer where only message content is included and no headers other than MQMD are used.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageWriter.#ctor(System.Boolean)">
+            <summary>
+            Creates an instance of the files message writer.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageWriterProvider">
+            <summary>
+            Provides default <see cref="T:Volvo.NVS.Integration.Content.Writers.IMessageWriter"/> instances to be used by the WMQ channel.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Content.WmqMessageWriterProvider.Create(Volvo.NVS.Integration.IUri)">
+            <summary>
+            Provides a message writer to be used by a channel.
+            </summary>
+            <param name="uri">An uri for which a writer should be provided.</param>
+            <returns>A message writer used by the channel.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Content.MQMessageExtensions">
+            <summary>
+            Provides extension methods into the <see cref="T:IBM.WMQ.MQMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Content.MQMessageExtensions.WriteHeadersAndContent(IBM.WMQ.MQMessage,Volvo.NVS.Integration.WebsphereMQ.WmqMessage,Volvo.NVS.Integration.WebsphereMQ.WmqUri,System.Byte[])">
+            <summary>
+            Writes a message headers and content.
+            </summary>
+            <param name="target">A WMQ message into which we should write.</param>
+            <param name="source">A source message from which we should read.</param>
+            <param name="uri">A current uri.</param>
+            <param name="data">A message content data.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Content.MQMessageExtensions.Parse(IBM.WMQ.MQMessage,Volvo.NVS.Integration.WebsphereMQ.WmqUri,Volvo.NVS.Integration.IInputChannel,System.Boolean,System.Boolean)">
+            <summary>
+            Parses the incoming WMQ message reading all the headers and the message content.
+            </summary>
+            <param name="source">A source message to be parsed.</param>
+            <param name="uri">A current uri.</param>
+            <param name="channel">A current input channel.</param>
+            <param name="useTempFiles">A flag telling if temporary files should be used.</param>
+            <param name="splitNewLineRecord">A flag telling if new message records should be created based on the source content and new line characters.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Overrides.MQQueue">
+            <summary>
+            This class extends functionality to the base <see cref="T:IBM.WMQ.MQQueue"/> to handle selector
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Overrides.MQQueue.#ctor(Volvo.NVS.Integration.WebsphereMQ.Overrides.MQQueueManager,System.String,System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            This is a copy of the base constructor we want to leave unchanged.
+            </summary>
+            <param name="qMgr">Queue manager</param>
+            <param name="queueName">Name of the queue</param>
+            <param name="openOptions">Queue open options</param>
+            <param name="queueManagerName">Queue manager name</param>
+            <param name="dynamicQueueName">Dynamic queue name</param>
+            <param name="alternateUserId">Alternate user Id</param>
+            <param name="selector">Message selector expression</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Overrides.MQQueueManager">
+            <summary>
+            This class extends functionality to the base <see cref="T:IBM.WMQ.MQQueueManager"/> to handle selector
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Resources.IntegrationWmqResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Resources.IntegrationWmqResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Resources.IntegrationWmqResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Resources.IntegrationWmqResources.MqMdNoFormatInformation">
+            <summary>
+              Looks up a localized string similar to MQMD writers does not provide format information as they must be in the character set and encoding of the local queue manager. Make sure MQMD is the first writer and it correctly used..
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Resources.IntegrationWmqResources.WriterMustProvideServices">
+            <summary>
+              Looks up a localized string similar to The current {0} message writer must provide the {1}.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Extensions.StreamExtensions">
+            <summary>
+            Extension methods for the Stream class
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Extensions.StreamExtensions.ReadAllBytes(System.IO.Stream)">
+            <summary>
+            Reads the contents of the stream into a byte array.
+            Sata is returned as a byte array. An IOException is
+            thrown if any of the underlying IO calls fail.
+            </summary>
+            <param name="source">Stream to be read.</param>
+            <returns>A byte array containing the contents of the stream.</returns>
+            <exception cref="T:System.Exception">All exception should be handled in the caller program since this class is an extension method of Stream class</exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support reading.</exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Extensions.StreamExtensions.ReadNextChunk(System.IO.Stream,System.Int32)">
+            <summary>
+            Reads the contents of the stream into a byte array.
+            data is returned as a byte array. An IOException is
+            thrown if any of the underlying IO calls fail.
+            </summary>
+            <returns>A byte array containing the contents of the stream.</returns>
+            <exception cref="T:System.Exception">All exception should be handled in the caller program since this class is an extension method of Stream class</exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support reading.</exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Extensions.StreamExtensions.ReadNextBytes(System.IO.Stream,System.Int32)">
+            <summary>
+            Reads the contents of the stream into a byte array.
+            data is returned as a byte array. An IOException is
+            thrown if any of the underlying IO calls fail.
+            </summary>
+            <returns>A byte array containing the contents of the stream.</returns>
+            <exception cref="T:System.Exception">All exception should be handled in the caller program since this class is an extension method of Stream class</exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support reading.</exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Extensions.ValidationResultsExtension">
+            <summary>
+            Extension methods for the ValidationResults class
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Extensions.ValidationResultsExtension.GetAllValidatedAndFormattedMessage(Volvo.NVS.Integration.Validation.ValidationResults)">
+            <summary>
+            Get all validated and formatted message
+            </summary>
+            <param name="self">Validation results.</param>
+            <returns>String containing each validation error in new line.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader">
+            <summary>
+            A wrapper class for IBM.WMQ.MQMessage
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader.#ctor(IBM.WMQ.MQMessage)">
+            <summary>
+            Creates an instance of the WMQ message writer.
+            </summary>
+            <param name="mqMessage">A message into which we should write.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader.Seek(System.Int32)">
+            <summary>
+            Moves current position by provided offset in the stream.
+            </summary>
+            <param name="offset">Number of bytes to skip.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader.SkipBytes(System.Int32)">
+            <summary>
+            Moves current position by provided number of bytes from current position.
+            </summary>
+            <param name="n">Number of bytes to skip.</param>
+            <returns>Number of bytes skipped.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader.ReadInt">
+            <summary>
+            Reads integer value from the message (4 bytes).
+            </summary>
+            <remarks>Order of bytes depends on message encoding and sometimes need to be reversed.</remarks>
+            <returns>Integer value from the message.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader.ReadString(System.Int32)">
+            <summary>
+            Reads string with particular length.
+            </summary>
+            <remarks>ReadString should perform encoding from message CCSID to 1200. 
+            For files we will accept only CCSID mapped to .Net encodings.</remarks>
+            <param name="length">Number of characters to be read.</param>
+            <returns>String encoded to Unicode.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader.ReadBytes(System.Int32)">
+            <summary>
+            Reads specific number of bytes from the message.
+            </summary>
+            <param name="count">Number of bytes to be read.</param>
+            <returns>Bytes from message</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader.ReadFully(System.Byte[]@)">
+            <summary>
+            Reads all remaining bytes from the message.
+            </summary>
+            <param name="b">Buffer to store message content.</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamReader.MessageLength">
+            <summary>
+            Gets Length of the message
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamWriter">
+            <summary>
+            Provides a writer into the WMQ message.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamWriter.#ctor(IBM.WMQ.MQMessage)">
+            <summary>
+            Creates an instance of the WMQ message writer.
+            </summary>
+            <param name="mqMessage">A message into which we should write.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamWriter.Seek(System.Int32)">
+            <summary>
+            Sets a position within the current stream.
+            </summary>
+            <param name="offset">A position to be set in reference to the start of the stream.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamWriter.WriteInt4(System.Int32)">
+            <summary>
+            Writes an integer value into the message (4 bytes).
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamWriter.WriteString(System.String)">
+            <summary>
+            Writes a string using a current encoding given on the info object.
+            </summary>
+            <param name="value">A value to be written.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamWriter.Write(System.Byte[])">
+            <summary>
+            Writes specified bytes.
+            </summary>
+            <param name="bytes">A collection of bytes to be written.</param>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamWriter.Format">
+            <summary>
+            A message format.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.Utility.MQMessageStreamWriter.CharacterSet">
+            <summary>
+            A message character set id.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Exceptions.WmqException">
+            <summary>
+            Description of GimException.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.Exceptions.WmqTransactionException">
+            <summary>
+            Description of GimTransactionException.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper">
+            <summary>
+            Wrapper of <see cref="T:Volvo.NVS.Integration.WebsphereMQ.Overrides.MQQueueManager"/> object. Responsible of keeping track of transaction state and <see cref="T:IBM.WMQ.MQDestination"/> pooling.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.QueueManager">
+            <summary>
+            The wrapped queue manager
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.#ctor(Volvo.NVS.Integration.WebsphereMQ.Overrides.MQQueueManager)">
+            <summary>
+            Constructs wrapper class on <see cref="T:Volvo.NVS.Integration.WebsphereMQ.Overrides.MQQueueManager"/> instance.
+            </summary>
+            <param name="qmgr">Queue manager instance.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.Connect">
+            <summary>
+            Connect to WMQ server
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.Begin">
+            <summary>
+            Sets transaction in progress.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.Backout">
+            <summary>
+            Rollback queue manager transaction.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.Commit">
+            <summary>
+            Commit queue manager transaction
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.Disconnect">
+            <summary>
+            Disconnect queue manager from WMQ server.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.Close">
+            <summary>
+            Close queue manager
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.IsConnected">
+            <summary>
+            Indicated the queue manager is already connected.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.InTransaction">
+            <summary>
+            Indicates transaction is in progress.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.CreateDestination(System.Boolean,Volvo.NVS.Integration.WebsphereMQ.WmqUri,System.Boolean,System.Boolean,System.String,Volvo.NVS.Core.Logging.ILogger,System.Boolean,System.String)">
+            <summary>
+            Creates a <see cref="T:Volvo.NVS.Integration.WebsphereMQ.WmqDestination"/> object based on the given parameters or takes existing one from the pool.
+            </summary>
+            <param name="usePool">True to use pool.</param>
+            <param name="uri">The <see cref="T:Volvo.NVS.Integration.WebsphereMQ.WmqUri"/> containing connection parameters.</param>
+            <param name="forOutput">Is this destination used for output?</param>
+            <param name="forInput">Is this destination used for input?</param>
+            <param name="remoteQmgr">The name of the remote queue manager if is not the same as currently used.</param>
+            <param name="logger">Logger implementation used for logging</param>
+            <param name="usingBrowse">Will destination use browse to get messages (Peek)?</param>
+            <param name="selector">Selector string to filter messages</param>
+            <returns>A new or existing instance of <see cref="T:Volvo.NVS.Integration.WebsphereMQ.WmqDestination"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.ReleaseDestination(Volvo.NVS.Integration.WebsphereMQ.WmqDestination)">
+            <summary>
+            Decrease number of usages in the pooled <see cref="T:Volvo.NVS.Integration.WebsphereMQ.WmqDestination"/> and dispose them if not used.
+            </summary>
+            <param name="destination">The <see cref="T:Volvo.NVS.Integration.WebsphereMQ.WmqDestination"/> object to release.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.ReleaseAllDestinations">
+            <summary>
+            Release all destinations from the pool for that queue manager.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.SetInBadState">
+            <summary>
+            Set the queue manager in bad state.
+            </summary>
+            <remarks>Bad state means no more operations are allowed on that queue manager.</remarks>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.InBadState">
+            <summary>
+            Indicates if queue manager is in bad state and should be not reused.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper.Dispose">
+            <summary>
+            Disposes the QueueManagerWrapper object and release all <see cref="T:IBM.WMQ.MQDestination"/> instances used by this queue manager.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.WmqDestination">
+            <summary>
+            WmqDestination encapsulates topics and queues to a common object.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.#ctor(Volvo.NVS.Integration.WebsphereMQ.WmqUri,Volvo.NVS.Core.Logging.ILogger,System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="uri">Connection configuration.</param>
+            <param name="logger">Logger implementation to be used for logging.</param>
+            <param name="selector">Selector string to filter messages.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.GetBackoutQueue">
+            <summary>
+            Get the back out queue name
+            </summary>
+            <returns>Backout queue defined in Uri. If not defined then tries to read that name from queue definition on the server. Empty string if not backout is not defined.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.GetBackoutThreshold">
+            <summary>
+            Gets the back out threshold. I.e. how many times a message may be rolled back before handed over to the backout queue.
+            </summary>
+            <returns>Backout threshold defined in Uri. If not defined then tries to read that value from queue definition on the server. <see cref="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.DefaultBackoutTreshold"/> if not able to read.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.Dispose">
+            <summary>
+            Disposes the WmqDestination object.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.Dispose(System.Boolean)">
+            <summary>
+            Disposes the WmqDestination object.
+            </summary>
+            <param name="disposing">Pass true only if calling this method from the <see cref="M:System.IDisposable.Dispose"/> method.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.Finalize">
+            <summary>
+            Destructor of the WmqDestination object
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.Queue">
+            <summary>
+            The WmqDestination Queue
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.Topic">
+            <summary>
+            The WmqDestination Topic.
+            </summary>
+            <remarks>
+            <para>
+            Use Topic to publish or subscribe messages on a topic, or to query or set attributes of a topic
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.BackoutThreshold">
+            <summary>
+            The backout threshold. I.e. how many times a message may be rolled back before handed over to the backout queue.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.BackoutQueue">
+            <summary>
+            The backout queue name
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.GetMaxMessageLength">
+            <summary>
+            Gets the maximum message length
+            </summary>
+            <returns>The maximum message length, extracted from the MQQueue. If queue is not defined, then 
+            <see cref="F:Volvo.NVS.Integration.WebsphereMQ.Constants.WmqConstants.DefaultMessageMaxLength"/>.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqDestination.Selector">
+            <summary>
+            Selector string used for that destination
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.WmqDestinationFactory">
+            <summary>
+            Factory for creating WmqDestinations.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqDestinationFactory.CreateDestination(Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper,Volvo.NVS.Integration.WebsphereMQ.WmqUri,System.Boolean,System.Boolean,System.String,Volvo.NVS.Core.Logging.ILogger,System.Boolean,System.String)">
+            <summary>
+            Create browsable/non-browsable destinations
+            </summary>
+            <param name="manager">Queue manager wrapper.</param>
+            <param name="uri">The <see cref="T:Volvo.NVS.Integration.WebsphereMQ.WmqUri"/> containing connection parameters.</param>
+            <param name="forOutput">Is this destination used for output?</param>
+            <param name="forInput">Is this destination used for input?</param>
+            <param name="remoteQmgr">The name of the remote queue manager if is not the same as currently used.</param>
+            <param name="logger">Logger implementation used for logging</param>
+            <param name="usingBrowse">Will destination use browse to get messages (Peek)?</param>
+            <param name="selector">Selector string to filter messages</param>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.WmqMessage">
+            <summary>
+            WMQ specialization of the common NVS Integration message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqMessage.MqMessage">
+            <summary>
+            The WMQ message 
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqMessage.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqMessage.#ctor(System.Boolean,System.Int32,System.Int32,System.Int32,System.Byte[],System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Text.Encoding,System.Int32,System.String,System.String,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="targetClient">WMQ only: If true, no header information is added to the message</param>
+            <param name="priority">The priority of the message</param>
+            <param name="retries">The number of retries done on this message</param>
+            <param name="timeout">The time out used when handling this message. (Currently unused)</param>
+            <param name="messageId">The message id</param>
+            <param name="correlationObject">WMQ only: The correlation id</param>
+            <param name="header">WMQ only: The headears to be added to tbe message</param>
+            <param name="replyTo">WMQ only: The queue to reply to</param>
+            <param name="replyToQMgr">WMQ only: The reply to queue manager</param>
+            <param name="requiresReply">Indicates if this message requires a reply</param>
+            <param name="useRecords">True if records are used in this message.</param>
+            <param name="tempFiles">True if message should be stored in temporary files</param>
+            <param name="compress">WMQ only: If true, the message will be compressed before sending.</param>
+            <param name="binary">WMQ only: If true, the message will be sent as a binary message.</param>
+            <param name="encoding">The encoding used when sending the message.</param>
+            <param name="expiry">WMQ only: The expiry time of the message in seconds.</param>
+            <param name="applicationId">WMQ only: The application identity</param>
+            <param name="userId">WMQ only: The user identifier</param>
+            <param name="persistent">True if message is persistent</param>
+            <param name="forceGroup">Specifies that a message must be in a group</param>
+            <param name="splitNewLineRecord">If Enabled, splits records based on new line(\t or \n) while sending or receiving messages from both WMQ and VCOM.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqMessage.Clone">
+            <summary>
+            Clones the message.
+            </summary>
+            <returns>A new cloned instance of this <see cref="T:Volvo.NVS.Integration.Messages.IInputMessage"/> object.</returns>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqMessage.Persistent">
+            <summary>
+            True if message is persistent
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqMessage.ForceGroup">
+            <summary>
+            Specifies that a message must be in a group.
+            </summary>
+            <remarks>
+            <para>
+            If ForceGroup is true, then the message flags (MessageFlags property) will be set to MQC.MQMF_MSG_IN_GROUP or
+            MQC.MQMF_LAST_MSG_IN_GROUP (if last in the group)
+            </para>
+            </remarks>
+            <seealso cref="P:IBM.WMQ.MQMessage.MessageFlags"/>
+            <seealso cref="T:IBM.WMQ.MQC"/>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqMessage.GetPropertyKeys">
+            <summary>
+            Gets a list of all property keys for all properties on the message.
+            </summary>
+            <returns>The keys to all properties set on the message</returns>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory">
+            <summary>
+            Creates WmqQueueManager object from URIs.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.Create(Volvo.NVS.Integration.WebsphereMQ.WmqUri,System.Boolean)">
+            <summary>
+            Creates queue manager wrapper.
+            </summary>
+            <param name="uri">The <see cref="T:Volvo.NVS.Integration.WebsphereMQ.WmqUri"/> containing connection parameters.</param>
+            <param name="pooled">Use pooling.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.Create(System.String,System.Collections.Hashtable,System.Boolean)">
+            <summary>
+            Create a WmqQueueManager from properties hashtable.
+            </summary>
+            <param name="queueManager">Queue manager name.</param>
+            <param name="properties">See Websphere MQ documentation for available properties.</param>
+            <param name="pooled">Use pooling.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.Release(Volvo.NVS.Integration.WebsphereMQ.QueueManagerWrapper,System.Boolean)">
+            <summary>
+            Release a queue manager.
+            </summary>
+            <param name="manager">Queue manager wrapper to be released.</param>
+            <param name="hasProblems">It is released because of problems?</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.Reset">
+            <summary>
+            Resets the connection pool
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.Count">
+            <summary>
+            The number of connections in the pool
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.FreeCount">
+            <summary>
+            The number of unused connections in the pool
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.MaxCount">
+            <summary>
+            The maximum number of connections in the pool
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.Gets">
+            <summary>
+            The number of get operations
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.OldCount">
+            <summary>
+            Number of channel that has been removed due to age
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.MaxInactiveTime">
+            <summary>
+            The maximum age of the connections in the pool (since last usage)
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.PublishRetryCount">
+            <summary>
+            Count by which publish will do retries on failure 
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.MaxLife">
+            <summary>
+            The maximum life time of a connection in the pool (from first usage)
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqQueueManagerFactory.ShareBlocked">
+            <summary>
+            If true then MQQueueManager will be created using MQC.MQCNO_HANDLE_SHARE_BLOCK
+            If false (or not set in configuration) then will use MQC.MQCNO_HANDLE_SHARE_NO_BLOCK
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Integration.WebsphereMQ.WmqUri">
+            <summary>
+            Handles the WMQ interpretation of the connection URI.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqUri.#ctor">
+            <summary>
+            Creates an instance of the WMQ uri.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqUri.#ctor(System.Uri)">
+            <summary>
+            Creates a WMQ URI from a standard URI.
+            </summary>
+            <param name="uri">Uri with connection specification.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqUri.#ctor(Volvo.NVS.Integration.WebsphereMQ.WmqUri)">
+            <summary>
+            Copy constructor
+            </summary>
+            <param name="other">The original</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqUri.ParseUrIandSetValues(System.Uri)">
+            <summary>
+            Parses the uri string and sets properties
+            </summary>
+            <param name="stringUri">Connection specification.</param>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqUri.SelfValidation">
+            <summary>
+            Perform validation logic. All validation problems need to be added to <see cref="P:Volvo.NVS.Integration.Validation.ValidationBase.ValidationResults"/> property. 
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Name">
+            <summary>
+            A unique integration uri name.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Port">
+            <summary>
+            The URI Port
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Scheme">
+            <summary>
+            The URI Scheme
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Host">
+            <summary>
+            The URI Host
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.AltHosts">
+            <summary>
+            The alternative hosts (multi instance queue managers).
+            Format: address1(port1),address2(port2)...
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Queue">
+            <summary>
+            The URI Queue
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.MsgMaxLength">
+            <summary>
+            The Message Max length for Queue
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.ApplicationIdData">
+            <summary>
+            MQMD Header : Application Id 
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.SplitNewLineRecord">
+            <summary>
+            For Splitting records in to new line
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.UserIdentifier">
+            <summary>
+            MQMD Header : UserId
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.TempFiles">
+            <summary>
+            Use temp files for streams in message groups
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Compress">
+            <summary>
+            Compress messages when sending
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.ReplyToQueue">
+            <summary>
+            The name of the reply queue in case of request/reply.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.ReplyToQueueMgr">
+            <summary>
+            The name of the queue manager in case of request/reply.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.BackOutQueue">
+            <summary>
+            The queue to use when backing out messages. Overrides any setting in the QM.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.BackOutThreshold">
+            <summary>
+            Number of times a message should be rolled back before being backed out. Overrides any setting in the QM.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.QueueManager">
+            <summary>
+            The name of the QM
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.IsManaged">
+            <summary>
+            Is managed. Default false.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Priority">
+            <summary>
+            The priority of messages sent using the channel;
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.IsDurable">
+            <summary>
+            Is durable. Default false.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Channel">
+            <summary>
+            The Channel Name
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Topic">
+            <summary>
+            A topic into which messages should be send or from which messages should be read.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.UsesTopic">
+            <summary>
+            A flag telling if topics should be used.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.ExecutingHost">
+            <summary>
+            A host on which a given queue or topic is expected to be hosted. It is the same as the <see cref="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.QueueManager"/>.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Subscription">
+            <summary>
+            The subscription defined by the uri
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.SslCipherSpec">
+            <summary>
+            Setting for secure connection
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.SslKeyRepository">
+            <summary>
+            Setting for secure connection
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.SslPeerName">
+            <summary>
+            Setting for secure connection
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.UsesQueue">
+            <summary>
+            True if the URI is using a queue
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.UseRecords">
+            <summary>
+            True if the channel handles messages with records
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.TargetClient">
+            <summary>
+            True if the channel handles messages to "Target clients" - sending messages without headers.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.RequestTimeout">
+            <summary>
+            The request time out in seconds.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.NoSyncpoint">
+            <summary>
+            True is WMQ should work with no syncpoint (non transactional)
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.IsBinary">
+            <summary>
+            True if jms_bytes should be used.
+            Default false -> jms_text
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Persistent">
+            <summary>
+            True is messages sould be persistent
+            False if messages should not be persistent
+            null if use q def
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqUri.ToJmsDestination">
+            <summary>
+            Get the JmsDestination
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.PollInterval">
+            <summary>
+            Gets and sets the poll interval.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Encoding">
+            <summary>
+            The encoding used when sending the message.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Expiry">
+            <summary>
+            The Time To Live of the message
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.ForceGroup">
+            <summary>
+            Specifies that a message must be in a group
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.NativeEncoding">
+            <summary>
+            Native encoding
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.Selector">
+            <summary>
+            Specifies selector expression for message filtering
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Integration.WebsphereMQ.WmqUri.UseHeaders">
+            <summary>
+            A flag telling if headers are supported for the messages and if headers should be written or read.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Integration.WebsphereMQ.WmqUri.ToString">
+            <summary>
+            Returns the string representation (wmq://...) of this WmqUri object.
+            </summary>
+            <returns>The WmqUri string representation</returns>
+        </member>
+        <member name="T:Volvo.NVS.Core.Configuration.IntegrationLibraryWebsphereMQConfigurator">
+            <summary>
+            Extends the common <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/> configuration interface with the NVS Integration library
+            configuration methods specific to WebsphereMQ.
+            </summary>
+            <remarks>
+            <para>
+            You never use this type directly. You use extensions methods provided by this class via types implementing the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/>
+            which is extended by the <see cref="T:Volvo.NVS.Core.Configuration.IntegrationLibraryWebsphereMQConfigurator"/>.
+            </para>
+            <para>
+            Check the <see cref="T:Volvo.NVS.Core.Configuration.LibraryConfigurator"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.IntegrationLibraryWebsphereMQConfigurator.ConfigureIntegrationMQChannels(Volvo.NVS.Core.Configuration.ILibraryConfigurator,System.Action{Volvo.NVS.Integration.Configuration.IIntegrationBackendConfigurationBuilder})">
+            <summary>
+            Applies settings to integration configuration specific to WebsphereMQ.
+            </summary>
+            <param name="configurator">The configurator</param>
+            <param name="builder">The builder that will apply settings to the Configuration.</param>
+            <returns>The fluent interface enabling further configuration of other libraries.</returns>
+        </member>
+    </members>
+</doc>

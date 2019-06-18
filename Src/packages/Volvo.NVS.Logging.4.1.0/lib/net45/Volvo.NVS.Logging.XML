@@ -1,0 +1,2337 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Volvo.NVS.Logging</name>
+    </assembly>
+    <members>
+        <member name="T:Volvo.NVS.Signing.NVSLibrarySigning">
+            <summary>
+            Providing information about the current NVS Library signing (e.g. signing public key).
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Signing.NVSLibrarySigning.PublickKey">
+            <summary>
+            The public key used by all the library assemblies.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Loggers.BaseLogger">
+            <summary>
+            A base and abstract logger.
+            </summary>
+            <remarks>
+            One must override the <see cref="M:Volvo.NVS.Logging.Loggers.BaseLogger.CreateLogWriter"/> method in the specific logger implementation. 
+            This method provides the wrapped <see cref="T:Microsoft.Practices.EnterpriseLibrary.Logging.LogWriter"/> instance which is used by this base logger.
+            </remarks>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Loggers.BaseLogger.Name">
+            <summary>
+            A name of the current logger.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Loggers.BaseLogger.writer">
+            <summary>
+            A writer used by the logger.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Loggers.BaseLogger.DefaultPriority">
+            <summary>
+            A default <see cref="T:Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry"/> priority.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Loggers.BaseLogger.onDisposed">
+            <summary>
+            A callback executed when the logger is disposed.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.#ctor(System.Action{Volvo.NVS.Logging.IDomainLogger})">
+            <summary>
+            Creates an instance of the base logger.
+            </summary>
+            <param name="onDisposed">A callback executed when the logger is disposed.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.#ctor(System.Action{Volvo.NVS.Logging.IDomainLogger},Volvo.NVS.Logging.Writer.IWriterWrapper)">
+            <summary>
+            Creates an instance of the base logger.
+            </summary>
+            <param name="onDisposed">A callback executed when the logger is disposed.</param>
+            <param name="writer">A writer to be used by the logger.</param>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Loggers.BaseLogger.categoryPriorityMap">
+            <summary>
+            Maps NVS categories into <see cref="T:Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry"/> priorities.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.CreateLogWriter">
+            <summary>
+            Creates a log writer to be used by the logger.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Loggers.BaseLogger.Writer">
+            <summary>
+            Gives access into the current writer used by the logger. Creates the writer if not already created.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.CreateAndCheckLogWriter">
+            <summary>
+            Creates a log writer to be used by the logger and checks that is has been created.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.WriteToLog``1(System.String,System.Diagnostics.TraceEventType,System.Func{``0},System.Action{Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry})">
+            <summary>
+            Logs message provided by the message function to the given category with the given severity.
+            Category and severity is used to determine whether anything shall be written to the log or not.
+            Customize log entry function gives caller the opportunity to set additional properties on the log entry.
+            Message and customize log entry functions will only be executed if message shall be logged.
+            </summary>
+            <typeparam name="T">Return type of create message function.</typeparam>
+            <param name="category">Category to log to.</param>
+            <param name="severity">Severity of message.</param>
+            <param name="createMessage">Function that returns the message to be logged.</param>
+            <param name="customizeLogEntry">Function that sets additional properties on log entry.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.WriteToLog(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Logs the provided log entry.
+            Any transaction is suppressed when writing to make logging
+            independent of transactions when logging to database.
+            </summary>
+            <param name="logEntry">The <see cref="T:Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry"/> to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.ShallLogToCategory(System.String,System.Diagnostics.TraceEventType)">
+            <summary>
+            Determines whether a message with given category and severity shall be logged or not.
+            </summary>
+            <param name="category">The category to log to.</param>
+            <param name="severity">Severity of the message.</param>
+            <returns>true if logging is enabled for the given combination of category and severity. false otherwise.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.WriteToLog(System.String,System.Diagnostics.TraceEventType,System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture specific formatted message to the provided category with the specified severity.
+            </summary>
+            <param name="category">Category to log to.</param>
+            <param name="severity">Severity of the message.</param>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.WriteToLog(System.String,System.Diagnostics.TraceEventType,System.String,System.Object[])">
+            <summary>
+            Logs a formatted message to the provided category with the specified severity.
+            </summary>
+            <param name="category">Category to log to.</param>
+            <param name="severity">Severity of the message.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.WriteToLog(System.String,System.Diagnostics.TraceEventType,System.String)">
+            <summary>
+            Logs the message to the provided category with the specified severity.
+            </summary>
+            <param name="category">Category to log to.</param>
+            <param name="severity">Severity of the message.</param>
+            <param name="message">Message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Trace``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the trace category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Trace``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the trace category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Trace(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the trace category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Trace(System.String)">
+            <summary>
+            Logs the string message to the trace category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Trace(System.String,System.Object[])">
+            <summary>
+            Logs a formatted string to the trace category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Debug``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the debug category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Debug``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the debug category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Debug(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the debug category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Debug(System.String)">
+            <summary>
+            Logs the string message to the debug category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the debug category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Info``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the information category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Info``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the information category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Info(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the information category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Info(System.String)">
+            <summary>
+            Logs the string message to the information category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Info(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the information category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.BusinessTask``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the business task category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.BusinessTask``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the business task category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.BusinessTask(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the business task category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.BusinessTask(System.String)">
+            <summary>
+            Logs the string message to the business task category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.BusinessTask(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the business task category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.GetMessageForEventLog(System.String)">
+            <summary>
+            Extension point to provide message that gets written to the windows event log.
+            </summary>
+            <param name="errorMessage">The original error message.</param>
+            <returns>The extended error message to be written to the event log.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Error(System.Exception)">
+            <summary>
+            Logs the exception to the error category.
+            </summary>
+            <param name="exception">The exception that will be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Error(System.String,System.Exception)">
+            <summary>
+            Logs the message and exception to the error category.
+            </summary>
+            <param name="message">A message describing in what context an exception is logged.</param>
+            <param name="exception">The <see cref="T:System.Exception"/> instance to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Error``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the error category.
+            </summary>
+            <typeparam name="T">The type of the message parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Error``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the error category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Error(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the error category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Error(System.String)">
+            <summary>
+            Logs the string message to the error category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Error(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the error category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Notify(System.Exception)">
+            <summary>
+            Logs the exception to the notification category.
+            </summary>
+            <param name="exception">The exception that will be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Notify(System.String,System.Exception)">
+            <summary>
+            Logs the message and exception to the notification category.
+            </summary>
+            <param name="message">A message describing in what context an exception is logged.</param>
+            <param name="exception">The <see cref="T:System.Exception"/> instance to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Notify``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the notification category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Notify``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the notification category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Notify(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the notification category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Notify(System.String,System.Object[])">
+            <summary>
+            Logs a formatted string to the notification category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Any(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Logs according to the defined log entry parameter.
+            </summary>
+            <param name="logEntry">Log entry object to write.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Any(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry,System.Exception)">
+            <summary>
+            Logs according to the defined log entry parameter, including exception details.
+            </summary>
+            <param name="logEntry">Log entry object to write.</param>
+            <param name="exception">Exception to be logged</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Any(System.String,System.String,System.Diagnostics.TraceEventType)">
+            <summary>
+            Logs a string message based on category and severity.
+            </summary>
+            <param name="message">The string message to log.</param>
+            <param name="category">The category to log to.</param>
+            <param name="severity">The trace event type to use.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Any(System.String,System.String,System.Diagnostics.TraceEventType,System.Exception)">
+            <summary>
+            Logs a string message and exception details, based on category and severity.
+            </summary>
+            <param name="message">The string message to log.</param>
+            <param name="category">The category to log to.</param>
+            <param name="severity">The trace event type to use.</param>
+            <param name="exception">Exception to be logged</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.PopulateLoggerSpecificProperties(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Extension point to do custom additions to a log entry.
+            </summary>
+            <param name="logEntry">The <see cref="T:Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry"/> to be customized.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Dispose">
+            <summary>
+            Dispose managed resources.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.BaseLogger.Dispose(System.Boolean)">
+            <summary>
+            Dispose managed resources.
+            </summary>
+            <param name="disposing">Indicate whether currently disposing.</param>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Loggers.NVSLogger">
+            <summary>
+            Provides an NVS configuration based logger (Otd/Prd logger).
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Loggers.NVSLogger.builtLoggerName">
+            <summary>
+            A cache for the already built logger name including additional attributes such as process name.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Loggers.NVSLogger.folderName">
+            <summary>
+            A folder name under which the log files should be put.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Loggers.NVSLogger.IsNamedLogger">
+            <summary>
+            Determines if we have a named logger or a default (not named) logger.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.NVSLogger.#ctor(System.String,System.Action{Volvo.NVS.Logging.IDomainLogger},Volvo.NVS.Logging.Writer.IWriterWrapper)">
+            <summary>
+            Creates an NVS Logger instance.
+            </summary>
+            <param name="name">A logger name.</param>
+            <param name="onDisposed">A handler called when a logger is disposed.</param>
+            <param name="writerWrapper">A writer used by the logger.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.NVSLogger.GetMessageForEventLog(System.String)">
+            <summary>
+            Extends error message with customized information for NVS logger.
+            </summary>
+            <param name="errorMessage">The error message to extend.</param>
+            <returns>The error message to write to the event log.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.NVSLogger.Notify(System.Exception)">
+            <summary>
+            Notify to the configured sources.
+            </summary>
+            <param name="exception">An exception object.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.NVSLogger.Notify(System.String,System.Exception)">
+            <summary>
+            Notify to the configured sources.
+            </summary>
+            <param name="message">A message which needs to be notified to other sources.</param>
+            <param name="ex">An exception object.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.NVSLogger.Notify(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Notify to the configured sources.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.NVSLogger.CreateLogWriter">
+            <summary>
+            Creates a log writer object using the default
+            values from component.config/logging custom section.
+            </summary>
+            <returns>The configured log writer.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.NVSLogger.BuildLoggerName(System.String)">
+            <summary>
+            Gets the Named Logger file name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.NVSLogger.PopulateLoggerSpecificProperties(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Adds extended properties to a log entry specific to the Nvs logger.
+            </summary>
+            <param name="logEntry">The log entry to add properties to.</param>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Loggers.EntLibLogger">
+            <summary>
+            Provides a pure Enterprise Library configuration based logger.
+            </summary>
+            <remarks>
+            The <see cref="T:Volvo.NVS.Logging.Loggers.EntLibLogger"/> uses the already configured EntLib configuration source in order to establish log writers.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.EntLibLogger.#ctor(System.Action{Volvo.NVS.Logging.IDomainLogger})">
+            <summary>
+            Creates an instance of the pure EntLib configuration based logger.
+            </summary>
+            <param name="onDisposed"></param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.EntLibLogger.CreateLogWriter">
+            <summary>
+            Creates a log writer from the EntLib configuration.
+            </summary>
+            <returns>A wrapped log writer.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Loggers.EntLibLogger.PopulateLoggerSpecificProperties(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Adds extended properties to a log entry specific to the common NVS logger.
+            </summary>
+            <param name="logEntry">The log entry to add properties to.</param>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder">
+            <summary>
+            Provides configuration of the Logging library with help of the NVS predefined logging scenarios and setups.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetLevel(System.String)">
+            <summary>
+            Sets the logging level
+            </summary>
+            <param name="level">Logging level to use.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetMaxFileSize(System.Int32)">
+            <summary>
+            Sets the maximum file size of log files.
+            When size is reached a new file is created.
+            </summary>
+            <param name="maxFileSize">Max file size to use.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetMaxArchivedFiles(System.Int32)">
+            <summary>
+            Sets the maximum number of log files to keep.
+            When the number of log files equals the max achieved files,
+            the oldest one will be deleted when a new one is created.
+            </summary>
+            <param name="maxArchivedFiles">Max number of log files to keep.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetIsLogfileCleanupEnabled(System.Boolean)">
+            <summary>
+            Sets whether log file cleanup is enabled or not.
+            If false the max archived files value will not be regarded.
+            </summary>
+            <param name="isLogfileCleanupEnabled">True if log file cleanup is enabled; otherwise, false.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetFolderName(System.String)">
+            <summary>
+            Sets the path to the folder where the log files are written.
+            </summary>
+            <param name="folderName">The folder to write log files in.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetSystem(System.String)">
+            <summary>
+            Sets the system Id.
+            </summary>
+            <param name="id">The system id</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetDatabase(System.String,System.String)">
+            <summary>
+            Configures database settings.
+            </summary>
+            <param name="connectionString">Connection string to the Db where log items shall be written.</param>
+            <param name="categories">The categories that shall be logged in database.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.AddListener(System.String,System.String,System.Type)">
+            <summary>
+            Adds a trace listener.
+            </summary>
+            <param name="name">Name of the trace listener.</param>
+            <param name="category">Category that the listener listens to.</param>
+            <param name="listenerType">The type that implements the trace listener.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.AddCategoryMapping(System.String,System.String)">
+            <summary>
+            Adds a category mapping.
+            </summary>
+            <param name="category">Category that shall be mapped.</param>
+            <param name="mapTo">The category to map to.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetEventLogMinimumSeverity(System.String)">
+            <summary>
+            Sets the minimum severity level which the log entry must have to be logged to the Event Log
+            </summary>
+            <param name="severity">The severity string.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetTimestampMode(System.DateTimeKind)">
+            <summary>
+            Sets the mode (local or UTC) for timestamp in log files.
+            </summary>
+            <param name="timestampMode">Timestamp kind to use.</param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder.SetIsTroubleshootingEnabled(System.Boolean)">
+            <summary>
+            Specifies whether log files to catch logging errors shall be enabled or not.
+            </summary>
+            <param name="isTroubleshootingEnabled"></param>
+            <returns>Fluent interface that can be used to further configure logging.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.LoggingSection">
+            <summary>
+            Represents an NVS logging section in the config file.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingSection.Logging">
+            <summary>
+            Gets or sets the logging element
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingSection.System">
+            <summary>
+            Gets or sets the system element
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingSection.ListenerCollection">
+            <summary>
+            Gets the trace listener collection
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingSection.Database">
+            <summary>
+            Gets the database element
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingSection.CategoryMappingCollection">
+            <summary>
+            Gets the Category mapping collection
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.CategoryMappingCollections">
+            <summary>
+            Represents a collection of category mappings in the Nvs section of the log file.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.CategoryMappingCollections.CreateNewElement">
+            <summary>
+            Creates a new instance of a Category element.
+            </summary>
+            <returns>The new category element</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.CategoryMappingCollections.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the key of a category element.
+            </summary>
+            <param name="element">The element to get the key from.</param>
+            <returns>Key of the category element.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.CategoryMappingCollections.GetEnumerator">
+            <summary>
+            Gets an enumerator for the category mappings.
+            </summary>
+            <returns>An IEnumerator that can be used to iterate through the collection</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.CategoryMappingCollections.ToList">
+            <summary>
+            Gets the list of category mappings.
+            </summary>
+            <returns>The list of category mappings.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.CategoryElement">
+            <summary>
+            Represents a category mapping element of NVS section in config file.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.CategoryElement.Category">
+            <summary>
+            Original category that shall be mapped.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.CategoryElement.MapTo">
+            <summary>
+            Target category to map to.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.DatabaseElement">
+            <summary>
+            Represents a database configuration in NVS section of the config file.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.DatabaseElement.ConnectionString">
+            <summary>
+            Specifies the connection string to the database where log entries shall be written.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.DatabaseElement.Categories">
+            <summary>
+            Lists all categories that shall be logged to database.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.ILoggingConfigurationData.Source">
+            <summary>
+            An already established EntLib configuration source.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.ILoggingConfigurationData.Configuration">
+            <summary>
+            An already established EntLib configuration.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder">
+            <summary>
+            Fluent interface used to configure prd logging.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetLevel(System.String)">
+            <summary>
+            Sets the logging level
+            </summary>
+            <param name="level">Logging level to use.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetMaxFileSize(System.Int32)">
+            <summary>
+            Sets the maximum file size of log log files.
+            When size is reached a new file is created.
+            </summary>
+            <param name="maxFileSize">Max file size to use.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetMaxArchivedFiles(System.Int32)">
+            <summary>
+            Sets the maximum number of log files to keep.
+            When the number of log files equals the max achieved files,
+            the oldest one will be deleted when a new one is created.
+            </summary>
+            <param name="maxArchivedFiles">Max number of log files to keep.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetIsLogfileCleanupEnabled(System.Boolean)">
+            <summary>
+            Sets whether log file cleanup is enabled or not.
+            If false the max archived files value will not be regarded.
+            </summary>
+            <param name="isLogfileCleanupEnabled">True if log file cleanup is enabled; otherwise, false.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetFolderName(System.String)">
+            <summary>
+            Sets the path to the folder where the log files are written.
+            </summary>
+            <param name="folderName">The folder to write log files in.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetSystem(System.String)">
+            <summary>
+            Sets the system Id.
+            </summary>
+            <param name="id">The system id</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetDatabase(System.String,System.String)">
+            <summary>
+            Configures database settings.
+            </summary>
+            <param name="connectionString">Connection string to the Db where log items shall be written.</param>
+            <param name="categories">The categories that shall be logged in database.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.AddListener(System.String,System.String,System.Type)">
+            <summary>
+            Adds a trace listener.
+            </summary>
+            <param name="name">Name of the trace listener.</param>
+            <param name="category">Category that the listener listens to.</param>
+            <param name="listenerType">The type that implements the trace listener.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.AddCategoryMapping(System.String,System.String)">
+            <summary>
+            Adds a category mapping.
+            </summary>
+            <param name="category">Category that shall be mapped.</param>
+            <param name="mapTo">The category to map to.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetEventLogMinimumSeverity(System.String)">
+            <summary>
+            Sets the minimum severity level which the log entry must have to be logged to the Event Log
+            </summary>
+            <param name="severity">The severity string.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetTimestampMode(System.DateTimeKind)">
+            <summary>
+            Sets the mode (local or UTC) for timestamp in log files.
+            </summary>
+            <param name="timestampMode">Timestamp kind to use.</param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder.SetIsTroubleshootingEnabled(System.Boolean)">
+            <summary>
+            Specifies whether log files to catch logging errors shall be enabled or not.
+            </summary>
+            <param name="isTroubleshootingEnabled"></param>
+            <returns>Fluent interface that can be used to further configure Prd logging.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext">
+            <summary>
+            Provides a configuration context for the NVS Logging library.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext"/> is used by the common, fluent library configuration. See the <see cref="T:Volvo.NVS.Core.Configuration.LoggingLibraryConfigurator"/>
+            and the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/> interface for details.
+            </para>
+            <para>
+            When the <see cref="P:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Current"/> is available then it can be used as a default configuration by various loggers for example: by the <see cref="T:Volvo.NVS.Logging.Loggers.NVSLogger"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.sync">
+            <summary>
+            The synchronization object and memory barrier.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.current">
+            <summary>
+            The currently configured data.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Current">
+            <summary>
+            Returns a current configuration data or null when no data has been configured.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Create(System.Boolean)">
+            <summary>
+            Creates a new configuration which is NVS or EntLib based configuration.
+            </summary>
+            <param name="nvs">A flag telling if a configuration should be NVS based or pure EntLib based.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Create(Volvo.NVS.Logging.Configuration.LoggingSection)">
+            <summary>
+            Creates a configuration from the logging configuration section (NVS).
+            </summary>
+            <param name="configSection">An logging configuration section.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Create(Volvo.NVS.Logging.Configuration.OtdLoggingSection)">
+            <summary>
+            Creates a configuration from the Otd configuration section.
+            </summary>
+            <param name="otdConfigSection">An Otd configuration section.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Create(Microsoft.Practices.EnterpriseLibrary.Logging.LoggingConfiguration)">
+            <summary>
+            Creates a new configuration which is the EntLib based configuration.
+            </summary>
+            <param name="configuration">An EntLib configuration to be used.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Create(Microsoft.Practices.EnterpriseLibrary.Common.Configuration.IConfigurationSource)">
+            <summary>
+            Creates a new configuration which is the EntLib based configuration.
+            </summary>
+            <param name="source">An EntLib configuration source to be used.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Create(Volvo.NVS.Logging.Configuration.LoggingConfigurationData)">
+            <summary>
+            Sets a current instance of the logging configuration.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Reset">
+            <summary>
+            Resets the current logging configuration.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.Configure">
+            <summary>
+            Configures the NVS Logging library setting the current configuration context.
+            </summary>
+            <returns>The logging configuration data describing the current setup.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.ConfigureFromLoggingSection">
+            <summary>
+            Configures the NVS Logging library from the logging configuration section.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.ConfigureFromOtdLoggingSection">
+            <summary>
+            Configures the NVS Logging library from the Otd logging configuration section.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.ConfigureFromEntLibConfigurationFile">
+            <summary>
+            Configures the NVS Logging library from the Enterprise Library configuration file.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationContext.ConfigureWithDefaults">
+            <summary>
+            Configures the NVS Logging library using default NVS configuration.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingConfigurationData.Source">
+            <summary>
+            An already established EntLib configuration source.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingConfigurationData.Configuration">
+            <summary>
+            An already established EntLib configuration.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingConfigurationData.IsTraceEnabled">
+            <summary>
+            Returns true if trace is enabled in the logging configuration.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingConfigurationData.IsDebugEnabled">
+            <summary>
+            Returns true if debug is enabled in the logging configuration.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationData.GetLogFolder">
+            <summary>
+            Gets the log folder to place the applications log files.
+            </summary>
+            <returns>The folder represented as string, when to place the application log files.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.LoggingConfigurationData.GetCompleteLogFileName(System.String)">
+            <summary>
+            Gets the applications log folder and log filename.
+            </summary>
+            <returns>The complete path for the application log file, including folder.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.OtdLoggingSection">
+            <summary>
+            Represents the Prd logging section in the config file. This file is old one used for backward compatibility. We advise to use Logging section instead.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.TraceListenerElement">
+            <summary>
+            Represents a trace listener element in the NVS section of the config file.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.TraceListenerElement.Name">
+            <summary>
+            Gets the name of the trace listener.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.TraceListenerElement.Category">
+            <summary>
+            Gets the category for the trace listener.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.TraceListenerElement.Type">
+            <summary>
+            Gets the type of the trace listener.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.LoggingElement">
+            <summary>
+            Represents a logging element of the NVS section in the config file.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingElement.Level">
+            <summary>
+            Specifies logging level.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingElement.MaxFileSize">
+            <summary>
+            Specifies the maximum size for log files.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingElement.MaxArchivedFiles">
+            <summary>
+            Specifies the number of log files to keep before cleaning up.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingElement.IsLogfileCleanupEnabled">
+            <summary>
+            Specifies whether cleaning up of log files is enabled or not.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingElement.FolderName">
+            <summary>
+            Specifies the directory where log files are written.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingElement.EventLogMinimumSeverity">
+            <summary>
+            Specifies the minimum severity level which a log entry must have for be logged in the Event Log
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingElement.TimestampMode">
+            <summary>
+            Specifies whether the timestamp in logs shall be expressed in local time or UTC.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.LoggingElement.IsTroubleshootingEnabled">
+            <summary>
+            Specifies whether to turn on log files to troubleshoot the logging itself.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.SystemElement">
+            <summary>
+            Represents a system element in the NVS section of the config file.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Configuration.SystemElement.Id">
+            <summary>
+            Specifies the system Id.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Configuration.TraceListenerElementCollection">
+            <summary>
+            Represents a collection of trace listener elements in the NVS section of the config file.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.TraceListenerElementCollection.CreateNewElement">
+            <summary>
+            Creates a new instance of a trace listener element.
+            </summary>
+            <returns>The new trace listener element</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.TraceListenerElementCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the key of a trace listener element.
+            </summary>
+            <param name="element">The element to get the key from.</param>
+            <returns>Key of the trace listener element.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.TraceListenerElementCollection.GetEnumerator">
+            <summary>
+            Gets an enumerator for the trace listeners.
+            </summary>
+            <returns>An IEnumerator of <see cref="T:Volvo.NVS.Logging.Configuration.TraceListenerElement"/>.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Configuration.TraceListenerElementCollection.ToList">
+            <summary>
+            Gets the list of trace listeners.
+            </summary>
+            <returns>The list of trace listeners.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener">
+            <summary>
+            Performs logging to a file and rolls the output file when either time or size thresholds are 
+            exceeded.
+            </summary>
+            <remarks>
+            Logging always occurs to the configured file name, and when roll occurs a new rolled file name is calculated
+            by adding the timestamp pattern to the configured file name.
+            <para/>
+            The need of rolling is calculated before performing a logging operation, so even if the thresholds are exceeded
+            roll will not occur until a new entry is logged.
+            <para/>
+            Both time and size thresholds can be configured, and when the first threshold is reached, both will be reset.
+            <para/>
+            The elapsed time is calculated from the creation date of the logging file.
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.DefaultSeparator">
+            <summary>
+            Represents the default separator used for headers and footers.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.#ctor(System.String,System.String,System.String,Microsoft.Practices.EnterpriseLibrary.Logging.Formatters.ILogFormatter,System.Int32,System.String,Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.RollFileExistsBehavior,Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners.RollInterval,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener"/> class.
+            </summary>
+            <param name="fileName">The filename where the entries will be logged.</param>
+            <param name="header">The header to add before logging an entry.</param>
+            <param name="footer">The footer to add after logging an entry.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="rollSizeKB">The maxium file size (KB) before rolling.</param>
+            <param name="timeStampPattern">The date format that will be appended to the new roll file.</param>
+            <param name="rollFileExistsBehavior">Expected behavior that will be used when the roll file has to be created.</param>
+            <param name="rollInterval">The time interval that makes the file rolles.</param>
+            <param name="maxArchivedFiles">The maximum number of archived files to keep.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.TraceData(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.Object)">
+            <summary>
+            Writes trace information, a data object and event information to the file, performing a roll if necessary.
+            </summary>
+            <param name="eventCache">A <see cref="T:System.Diagnostics.TraceEventCache"/> object that contains the current process ID, thread ID, and stack trace information.</param>
+            <param name="source">A name used to identify the output, typically the name of the application that generated the trace event.</param>
+            <param name="eventType">One of the <see cref="T:System.Diagnostics.TraceEventType"/> values specifying the type of event that has caused the trace.</param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="data">The trace data to emit.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.Dispose(System.Boolean)">
+            <summary>
+            Releases managed resources.
+            </summary>
+            <param name="disposing"><see langword="true"/> to release both managed and unmanaged resources; 
+            <see langword="false"/> to release only unmanaged resources. </param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener"/> class.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.DateTimeProvider">
+            <summary>
+            A data time provider.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.DateTimeProvider.CurrentDateTime">
+            <summary>
+            Gets the current data time.
+            </summary>
+            <value>
+            The current data time.
+            </value>
+        </member>
+        <member name="T:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper">
+            <summary>
+            Encapsulates the logic to perform rolls.
+            </summary>
+            <remarks>
+            If no rolling behavior has been configured no further processing will be performed.
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper._managedWriter">
+            <summary>
+            A tally keeping writer used when file size rolling is configured.<para/>
+            The original stream writer from the base trace listener will be replaced with
+            this listener.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper._owner">
+            <summary>
+            The trace listener for which rolling is being managed.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper._performsRolling">
+            <summary>
+            A flag indicating whether at least one rolling criteria has been configured.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.#ctor(Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper"/>.
+            </summary>
+            <param name="owner">The <see cref="T:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener"/> to use.</param>
+        </member>
+        <member name="P:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.DateTimeProvider">
+            <summary>
+            Gets the provider for the current date. Necessary for unit testing.
+            </summary>
+            <value>
+            The provider for the current date. Necessary for unit testing.
+            </value>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.CalculateNextRollDate(System.DateTime)">
+            <summary>
+            Calculates the next roll date for the file.
+            </summary>
+            <param name="dateTime">The new date.</param>
+            <returns>The new date time to use.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.CheckIsRollNecessary">
+            <summary>
+            Checks whether rolling should be performed, and returns the date to use when performing the roll.
+            </summary>
+            <returns>The date roll to use if performing a roll, or <see langword="null"/> if no rolling should occur.</returns>
+            <remarks>
+            Defer request for the roll date until it is necessary to avoid overhead.<para/>
+            Information used for rolling checks should be set by now.
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.ComputeArchiveFileName(System.String,System.DateTime)">
+            <summary>
+            Gets the file name to use for archiving the file.
+            </summary>
+            <param name="actualFileName">The actual file name.</param>
+            <param name="currentDateTime">The current date and time.</param>
+            <returns>The new file name.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.FindMaxSequenceNumber(System.String,System.String,System.String)">
+            <summary>
+            Finds the max sequence number for a log file.
+            </summary>
+            <param name="directoryName">The directory to scan.</param>
+            <param name="fileName">The file name.</param>
+            <param name="extension">The extension to use.</param>
+            <returns>The next sequence number.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.PerformRoll(System.DateTime)">
+            <summary>
+            Perform the roll for the next date.
+            </summary>
+            <param name="rollDateTime">The roll date.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.RollIfNecessary">
+            <summary>
+            Rolls the file if necessary.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.TraceListeners.NvsRollingFlatFileTraceListener.NvsStreamWriterRollingHelper.UpdateRollingInformationIfNecessary">
+            <summary>
+            Updates book keeping information necessary for rolling, as required by the specified rolling configuration.
+            </summary>
+            <returns>true if update was successful, false if an error occurred.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Utilities.LogSeverityHelper">
+            <summary>
+            Contains helper methods for converting log entry Severity strings to SourceLevels enum value.
+            </summary>
+            <remarks>
+            <para>Also take a look at <see cref="T:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity"/> and <see cref="T:System.Diagnostics.SourceLevels"/> classes.</para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Utilities.LogSeverityHelper.DefaultSeverity">
+            <summary>
+            The default severity level to be used. This allows all log entries to pass through the filter (no filtering).
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Utilities.LogSeverityHelper.FromSeverityString(System.String)">
+            <summary>
+            Converts a severity string to its corresponding <see cref="T:System.Diagnostics.SourceLevels"/> enum value.
+            </summary>
+            <remarks>
+            <para>
+            For the list of the severity constants, see the <see cref="T:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity"/> class members.
+            </para>
+            </remarks>
+            <param name="severity">The severity to be converted.</param>
+            <returns>Returns the SourceLevels enum value corresponding to the severity passed as parameter. If the conversion fails for
+            any reason, it returns the default specified in the <see cref="F:Volvo.NVS.Logging.Utilities.LogSeverityHelper.DefaultSeverity"/> property</returns>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Utilities.AssemblyHelper.ProcessName">
+            <summary>
+            Gets the application/process name from assembly entry point
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Utilities.AssemblyHelper.FormattedCreationDate">
+            <summary>
+            Gets the formated version date.
+            </summary>
+            <value>The formated version date.</value>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Utilities.AssemblyHelper.BuildVersion">
+            <summary>
+            Gets the build version.
+            </summary>
+            <value>The build version.</value>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Utilities.AssemblyHelper.ApplicationInformation">
+            <summary>
+            Gets the application information including build version and when an assembly was build.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Utilities.IEnvironmentWrapper">
+            <summary>
+            Interface environment wrappers.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Utilities.IEnvironmentWrapper.GetLogPathVariable">
+            <summary>
+            Gets log path variable from the system environment.
+            </summary>
+            <returns>Value of the log path variable.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Utilities.TransactionNumber.SubscribeToTransactionCompletedEvent(System.String)">
+            <summary>
+            Subscribes to TransactionCompleted event for current transaction.
+            </summary>
+            <param name="transactionId"></param>
+            <returns>True if successfully subscribed. False otherwise.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Factories.EnvironmentWrapperFactory">
+            <summary>
+            Responsible for providing environment wrapper instance.
+            </summary>
+        </member>
+        <member name="P:Volvo.NVS.Logging.Factories.EnvironmentWrapperFactory.Instance">
+            <summary>
+            Provides a singleton instance of an IEnvironmentWrapper.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Factories.EnvironmentWrapperFactory.SetInstance(Volvo.NVS.Logging.Utilities.IEnvironmentWrapper)">
+            <summary>
+            Allows caller to provide a specific implementation of IEnvironmentWrapper.
+            Intended for unit testing purposes only.
+            </summary>
+            <param name="newInstance">Instance of IEnvironmentWrapper to use.</param>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Factories.WriterWrapperFactory">
+            <summary>
+            Creates log writer wrappers from the given configurations.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Factories.WriterWrapperFactory.Create(Microsoft.Practices.EnterpriseLibrary.Common.Configuration.IConfigurationSource)">
+            <summary>
+            Creates a wrapped writer using the supplied EntLib configuration source.
+            </summary>
+            <param name="configurationSource">An EntLib configuration to be used.</param>
+            <returns>A wrapped writer.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Factories.WriterWrapperFactory.Create(Microsoft.Practices.EnterpriseLibrary.Logging.LoggingConfiguration)">
+            <summary>
+            Creates a wrapped writer using the supplied EntLib configuration.
+            </summary>
+            <param name="loggingConfiguration">An EntLib logging configuration to be used.</param>
+            <returns>A wrapped writer.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Constants.NvsLogConstants">
+            <summary>
+            Provides all constants for logging.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.RollingFileTimeStamp">
+            <summary>
+            Format for rolling file time stamp.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.LogpathEnviromentVariable">
+            <summary>
+            Environment variable name set
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.DomainNameForMainDomain">
+            <summary>
+            Normal log extension
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.DatabaseInstanceName">
+            <summary>
+            Database instance name for database tracelistener
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.NvsIntegrationLibrary">
+            <summary>
+            Category for NVS Integration.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.NvsMonitoringLibrary">
+            <summary>
+            Category for NVS Monitoring.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.NoValue">
+            <summary>
+            String indicating no/missing value.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.MaxFileSizeUpperLimit">
+            <summary>
+            File size in KB that logs may not exceed when using nvs config.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Constants.NvsLogConstants.Category">
+            <summary>
+            Provides access to NVS Logging predefined categories
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Category.BusinessTask">
+            <summary>
+            Business Task log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Category.Database">
+            <summary>
+            Database log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Category.Debug">
+            <summary>
+             Debug log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Category.Error">
+            <summary>
+             Error log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Category.Event">
+            <summary>
+             Event viewer log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Category.Information">
+            <summary>
+             Info log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Category.Notify">
+            <summary>
+             Notify log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Category.Trace">
+            <summary>
+             Trace log category name
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity">
+            <summary>
+            Severity constants used for configuring the filtering of log entries. 
+            A minimum severity level is needed for the log entry to be logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity.Off">
+            <summary>
+            Specifies that no log entries should pass the filter, consequently not being logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity.All">
+            <summary>
+            Specifies that any (all) log entries should pass the filter, consequently being logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity.Critical">
+            <summary>
+            Specifies that only log entries with "Critical" or higher severity should pass the filter, being logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity.Error">
+            <summary>
+            Specifies that only log entries with "Error" or higher severity should pass the filter, being logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity.Warning">
+            <summary>
+            Specifies that only log entries with "Warning" or higher severity should pass the filter, being logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity.Information">
+            <summary>
+            Specifies that only log entries with "Information" or higher severity should pass the filter, being logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity.Verbose">
+            <summary>
+            Specifies that only log entries with "Verbose" or higher severity should pass the filter, being logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.Severity.ActivityTracing">
+            <summary>
+            Specifies that only log entries with "Start", "Stop", "Suspend", "Resume" and "Transfer" TraceEventType (severity) should pass the filter, being logged to the Event Log.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.DebugCategory">
+            <summary>
+             Debug log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.ErrorCategory">
+            <summary>
+             Error log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.InformationCategory">
+            <summary>
+             Info log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.NotifyCategory">
+            <summary>
+             Notify log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.TraceCategory">
+            <summary>
+             Trace log category name
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.ExtPropForOneLinerErrorMessageForInfoLog">
+            <summary>
+            One liner error message extended properties key name required inside info log 
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.ExtPropForOneLinerErrorMessageForEventview">
+            <summary>
+            One liner error message extended properties key name required inside event viewer. 
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.ExtPropForForExceptionObject">
+            <summary>
+            Exception object extended properties key name required for single line formatter
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Constants.NvsLogConstants.ExtPropForForNamedLoggerNameKey">
+            <summary>
+            Namedlogger extended properties key name required by external custom trace listener
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Exceptions.InvalidConfigurationException">
+            <summary>
+            Exception to indicate invalid configuration.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Exceptions.InvalidConfigurationException.#ctor">
+            <summary>
+            Constructs an InvalidConfigurationException without message.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Exceptions.InvalidConfigurationException.#ctor(System.String)">
+            <summary>
+            Constructs an InvalidConfigurationException with a message.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Exceptions.InvalidConfigurationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Constructs an InvalidConfigurationException with a message and wraps the inner exception.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Exceptions.InvalidConfigurationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructs an InvalidConfigurationException with a serialization info and streaming context.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Formatters.ErrorLogFormatter">
+            <summary>
+            Custom formatter for errors.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Formatters.ErrorLogFormatter.#ctor(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Constructs an ErrorLogFormatter.
+            </summary>
+            <param name="attributes">Not used.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Formatters.ErrorLogFormatter.Format(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Formats an error log entry.
+            </summary>
+            <param name="log">The log entry to format</param>
+            <returns>The formatted log entry.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Formatters.EventLogFormatter">
+            <summary>
+            Custom formatter for logs that can be used for logging to the Event Log
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Formatters.EventLogFormatter.#ctor(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Constructors an Event Log formatter
+            </summary>
+            <param name="attributes">Not Used</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Formatters.EventLogFormatter.Format(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Formats an error log entry.
+            </summary>
+            <param name="log">The log entry to format</param>
+            <returns>The formatted log entry.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Formatters.SingleLineLogFormatter">
+            <summary>
+            Custom formatter for logs that can be used for logging to a source in a single line
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Formatters.SingleLineLogFormatter.#ctor(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Constructors an Single Line Formatter
+            </summary>
+            <param name="attributes">Not Used</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Formatters.SingleLineLogFormatter.Format(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Formats an error log entry.
+            </summary>
+            <param name="logEntry">The log entry to format</param>
+            <returns>The formatted log entry.</returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.IDomainLogger">
+            <summary>
+            Defines a contract for loggers provided by the NVS Logging Library.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Trace``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the trace category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Trace``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the trace category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Trace(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the trace category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Trace(System.String)">
+            <summary>
+            Logs the string message to the trace category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Trace(System.String,System.Object[])">
+            <summary>
+            Logs a formatted string to the trace category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Debug``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the debug category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Debug``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the debug category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Debug(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the debug category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Debug(System.String)">
+            <summary>
+            Logs the string message to the debug category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the debug category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Info``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the information category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Info``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the information category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Info(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the information category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Info(System.String)">
+            <summary>
+            Logs the string message to the information category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Info(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the information category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.BusinessTask``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the business task category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.BusinessTask``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the business task category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.BusinessTask(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the business task category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.BusinessTask(System.String)">
+            <summary>
+            Logs the string message to the business task category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.BusinessTask(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the business task category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Error(System.Exception)">
+            <summary>
+            Logs the exception to the error category.
+            </summary>
+            <param name="exception">The exception that will be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Error(System.String,System.Exception)">
+            <summary>
+            Logs the message and exception to the error category.
+            </summary>
+            <param name="message">A message describing in what context an exception is logged.</param>
+            <param name="exception">The <see cref="T:System.Exception"/> instance to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Error``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the error category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Error``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the error category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Error(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the error category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Error(System.String)">
+            <summary>
+            Logs the string message to the error category.
+            </summary>
+            <param name="message">The string message to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Error(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the error category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Notify(System.Exception)">
+            <summary>
+            Logs the exception to the notification category.
+            </summary>
+            <param name="exception">The exception that will be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Notify(System.String,System.Exception)">
+            <summary>
+            Logs the message and exception to the notification category.
+            </summary>
+            <param name="message">A message describing in what context an exception is logged.</param>
+            <param name="exception">The <see cref="T:System.Exception"/> instance to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Notify``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the notification category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="message">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Notify``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the notification category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Notify(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the notification category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Notify(System.String,System.Object[])">
+            <summary>
+            Logs a formatted string to the notification category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Any(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Logs according to the defined log entry parameter.
+            </summary>
+            <param name="logEntry">Log entry object to write.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Any(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry,System.Exception)">
+            <summary>
+            Logs according to the defined log entry parameter, including exception details.
+            </summary>
+            <param name="logEntry">Log entry object to write.</param>
+            <param name="exception">Exception to be logged</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Any(System.String,System.String,System.Diagnostics.TraceEventType)">
+            <summary>
+            Logs a string message based on category and trace event type.
+            </summary>
+            <param name="message">The string message to log.</param>
+            <param name="category">The category to log to.</param>
+            <param name="severity">The trace event type to use.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.IDomainLogger.Any(System.String,System.String,System.Diagnostics.TraceEventType,System.Exception)">
+            <summary>
+            Logs a string message and exception details, based on category and severity.
+            </summary>
+            <param name="message">The string message to log.</param>
+            <param name="category">The category to log to.</param>
+            <param name="severity">The trace event type to use.</param>
+            <param name="exception">Exception to be logged</param>
+        </member>
+        <member name="P:Volvo.NVS.Logging.IDomainLogger.Name">
+            <summary>
+            Gets the name of the logger when using a named logger.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Log">
+            <summary>
+            Provides logging with a default (main) name.
+            </summary>
+            <remarks>
+            <para>
+            Usage of the static <see cref="T:Volvo.NVS.Logging.Log"/> class is the same as using a logger created with help of the <see cref="M:Volvo.NVS.Logging.DomainLoggerFactory.Create"/>.
+            If you need to test any logging (e.g. for critical business scenarios) use the <see cref="T:Volvo.NVS.Logging.DomainLoggerFactory"/> where mocking is possible.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Log.logger">
+            <summary>
+            A wrapped default logger.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Trace``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the trace category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="value">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Trace``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the trace category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Trace(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the trace category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Trace(System.String,System.Object[])">
+            <summary>
+            Logs a formatted string to the trace category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Debug``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the debug category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="value">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Debug``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the debug category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Debug(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the debug category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Debug(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the debug category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Info``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the information category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="value">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Info``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the information category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Info(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the information category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Info(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the information category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.BusinessTask``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the business task category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="value">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.BusinessTask``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the business task category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.BusinessTask(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the business task category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.BusinessTask(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the business task category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Error(System.Exception)">
+            <summary>
+            Logs the exception to the error category.
+            </summary>
+            <param name="exception">The exception that will be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Error(System.String,System.Exception)">
+            <summary>
+            Logs the message and exception to the error category.
+            </summary>
+            <param name="message">A message describing in what context an exception is logged.</param>
+            <param name="exception">The <see cref="T:System.Exception"/> instance to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Error``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the error category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="value">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Error``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the error category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Error(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the error category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Error(System.String,System.Object[])">
+            <summary>
+            Logs s formatted string to the error category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Notify(System.Exception)">
+            <summary>
+            Logs the exception to the notification category.
+            </summary>
+            <param name="exception">The exception that will be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Notify(System.String,System.Exception)">
+            <summary>
+            Logs the message and exception to the notification category.
+            </summary>
+            <param name="message">A message describing in what context an exception is logged.</param>
+            <param name="exception">The <see cref="T:System.Exception"/> instance to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Notify``1(``0)">
+            <summary>
+            Logs the value of the parameter of type T to the notification category.
+            </summary>
+            <typeparam name="T">The type of the value parameter.</typeparam>
+            <param name="value">The parameter to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Notify``1(System.Func{``0})">
+            <summary>
+            Logs the returned value from the passed function to the notification category.
+            </summary>
+            <param name="messageFunction">A function returning value of T.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Notify(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a culture-specific formatted string to the notification category.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Notify(System.String,System.Object[])">
+            <summary>
+            Logs a formatted string to the notification category.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Any(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Logs according to the defined log entry parameter.
+            </summary>
+            <param name="logEntry">Log entry object to write.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Any(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry,System.Exception)">
+            <summary>
+            Logs according to the defined log entry parameter, including exception details.
+            </summary>
+            <param name="logEntry">Log entry object to write.</param>
+            <param name="exception">Exception to be logged</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Any(System.String,System.String,System.Diagnostics.TraceEventType)">
+            <summary>
+            Logs a string message based on category and trace event type.
+            </summary>
+            <param name="message">The string message to log.</param>
+            <param name="category">The category to log to.</param>
+            <param name="severity">The trace event type to use.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Log.Any(System.String,System.String,System.Diagnostics.TraceEventType,System.Exception)">
+            <summary>
+            Logs a string message and exception details, based on category and severity.
+            </summary>
+            <param name="message">The string message to log.</param>
+            <param name="category">The category to log to.</param>
+            <param name="severity">The trace event type to use.</param>
+            <param name="exception">Exception to be logged</param>
+        </member>
+        <member name="T:Volvo.NVS.Logging.DomainLoggerFactory">
+            <summary>
+            Provides loggers to be used from your application.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:Volvo.NVS.Logging.DomainLoggerFactory"/> can be used from your application in order to create instances of loggers.
+            The <see cref="M:Volvo.NVS.Logging.DomainLoggerFactory.Create(System.String)"/> or <see cref="M:Volvo.NVS.Logging.DomainLoggerFactory.Create"/> method can be executed in order to obtain a desired logger instance.
+            </para>
+            <para>
+            The <see cref="M:Volvo.NVS.Logging.DomainLoggerFactory.Create"/> method will establish a default logger with its default name. An alternative way to use a default logger
+            is to perform logging via the <see cref="T:Volvo.NVS.Logging.Log"/> static class.
+            </para>
+            <para>
+            Loggers are cached. Once a logger with a requested name is created it will be provided from cache in all the subsequent calls.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Volvo.NVS.Logging.DomainLoggerFactory.cache">
+            <summary>
+            A collection of already created and cached loggers.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.DomainLoggerFactory.GetCompleteLogFileName(System.String)">
+            <summary>
+            Gets the applications log folder and log filename based on the current NVS configuration.
+            </summary>
+            <param name="name">Logger name</param>
+            <returns>Complete path and file name use by logger</returns>
+            <exception cref="T:Volvo.NVS.Logging.Exceptions.InvalidConfigurationException">When logging is not configured</exception>
+        </member>
+        <member name="M:Volvo.NVS.Logging.DomainLoggerFactory.GetOtdCompleteLogFileName(System.String)">
+            <summary>
+            Gets the applications log folder and log filename based on Otd configuration.
+            </summary>
+            <param name="name">Logger name</param>
+            <returns>Complete path and file name use by logger</returns>
+            <exception cref="T:Volvo.NVS.Logging.Exceptions.InvalidConfigurationException">When logging is not configured for Otd</exception>
+        </member>
+        <member name="M:Volvo.NVS.Logging.DomainLoggerFactory.Create">
+            <summary>
+            Creates a default (main) logger. 
+            </summary>
+            <returns>A main logger instance.</returns>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException">In case of faulty NVS or EntLib configuration.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Logging.DomainLoggerFactory.Create(System.String)">
+            <summary>
+            Creates a named logger. When no name is given a default (main) name will be used.
+            </summary>
+            <param name="name">A name of the logger. When empty a default (main) name is used.</param>
+            <returns>A named logger instance.</returns>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException">In case of faulty NVS or EntLib configuration.</exception>
+        </member>
+        <member name="M:Volvo.NVS.Logging.DomainLoggerFactory.GetLoggerCacheKey(System.String)">
+            <summary>
+            Gets a name of the key which should be used for the logger.
+            </summary>
+            <param name="name">A name of the logger.</param>
+            <returns>A key name.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.DomainLoggerFactory.CreateLogger(System.String)">
+            <summary>
+            Creates a logger with a given name.
+            </summary>
+            <param name="name">A name of the logger to be created.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.DomainLoggerFactory.RemoveLoggerFromCache(Volvo.NVS.Logging.IDomainLogger)">
+            <summary>
+            Removes the given logger from cache. 
+            </summary>
+            <param name="logger">A logger to be removed from cache.</param>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Logger">
+            <summary>
+            Provides implementation of the <see cref="T:Volvo.NVS.Core.Logging.ILogger"/> from the NVS Utilities using a default (main) <see cref="T:Volvo.NVS.Logging.IDomainLogger"/>.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Logger.logger">
+            <summary>
+            A logger to be used.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Volvo.NVS.Logging.Logger"/> class.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogDebug(System.String)">
+            <summary>
+            Log the debug message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogInfo(System.String)">
+            <summary>
+            Log the information message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogTrace(System.String)">
+            <summary>
+            Log the trace message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogError(System.String)">
+            <summary>
+            Log the error message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogError(System.String,System.Exception)">
+            <summary>
+            Log the error message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="ex">An exception related into the error message.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogError(System.Exception)">
+            <summary>
+            Log the error exception.
+            </summary>
+            <param name="ex">An exception related into the error.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogNotify(System.String)">
+            <summary>
+            Log the notification message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogNotify(System.String,System.Exception)">
+            <summary>
+            Log the notification message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+            <param name="ex">An exception related into the notification message.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogNotify(System.Exception)">
+            <summary>
+            Log the notification exception.
+            </summary>
+            <param name="ex">The exception to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.LogBusinessTask(System.String)">
+            <summary>
+            Log the business message.
+            </summary>
+            <param name="message">The message to be logged.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.Dispose">
+            <summary>
+            Disposes managed resources.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Logger.Dispose(System.Boolean)">
+            <summary>
+            Disposes the current instance.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Properties.CommonAssemblyInfoConstants">
+            <summary>
+            Public constants related into the assembly information and assembly signing.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Properties.CommonAssemblyInfoConstants.PublickKeyAttribute">
+            <summary>
+            The Utility library public key attribute string which can be applied directly on the InternalsVisibleTo.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Properties.CommonAssemblyInfoConstants.ToDynamicProxyGenAssembly2">
+            <summary>
+            Enables the castle dynamic proxy to generate proxies for internal types during the unit testing.
+            The Moq itself is using the castle internally in order to generate proxies.
+            </summary>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Writer.IWriterWrapper">
+            <summary>
+            Interface for writer wrappers
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Writer.IWriterWrapper.Write(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Write log entry to the log.
+            </summary>
+            <param name="logEntry">Entry to be written to log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Writer.IWriterWrapper.ShallLog(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Determine whether a log entry will be written to log or not.
+            </summary>
+            <param name="logEntry">Log entry to check.</param>
+            <returns>true if entry will be written to log. false if not. </returns>
+        </member>
+        <member name="T:Volvo.NVS.Logging.Writer.WriterWrapper">
+            <summary>
+            Wraps the log writer to be able to mock it.
+            </summary>
+        </member>
+        <member name="F:Volvo.NVS.Logging.Writer.WriterWrapper.writer">
+            <summary>
+            A wrapped writer to be used.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Writer.WriterWrapper.#ctor(Microsoft.Practices.EnterpriseLibrary.Logging.LogWriter)">
+            <summary>
+            Constructs writer wrapper
+            </summary>
+            <param name="writer">The <see cref="T:Microsoft.Practices.EnterpriseLibrary.Logging.LogWriter"/> to be wrapped by this <see cref="T:Volvo.NVS.Logging.Writer.WriterWrapper"/> instance</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Writer.WriterWrapper.Write(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Writes the log entry using the wrapped LogWriter
+            </summary>
+            <param name="logEntry">The <see cref="T:Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry"/> to be written to the log.</param>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Writer.WriterWrapper.ShallLog(Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry)">
+            <summary>
+            Determine whether a log entry will be written to log or not.
+            </summary>
+            <param name="logEntry">Log entry to check.</param>
+            <returns>true if entry will be written to log. false if not. </returns>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Writer.WriterWrapper.Dispose">
+            <summary>
+            Dispose managed resources.
+            </summary>
+        </member>
+        <member name="M:Volvo.NVS.Logging.Writer.WriterWrapper.Dispose(System.Boolean)">
+            <summary>
+            Dispose managed resources.
+            </summary>
+            <param name="disposing">Indicate whether currently disposing.</param>
+        </member>
+        <member name="T:Volvo.NVS.Core.Configuration.LoggingLibraryConfigurator">
+            <summary>
+            Extends the common <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/> configuration interface with the NVS Logging library configuration methods.
+            </summary>
+            <remarks>
+            <para>
+            You never use this type directly. You use extensions methods on the <see cref="T:Volvo.NVS.Core.Configuration.ILibraryConfigurator"/> which is extended by the <see cref="T:Volvo.NVS.Core.Configuration.LoggingLibraryConfigurator"/>.
+            </para>
+            <para>
+            Check the <see cref="T:Volvo.NVS.Core.Configuration.LibraryConfigurator"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.LoggingLibraryConfigurator.ConfigureLogging(Volvo.NVS.Core.Configuration.ILibraryConfigurator,System.Action{Volvo.NVS.Logging.Configuration.IOtdLoggingConfigurationBuilder})">
+            <summary>
+            Applies settings to Prd logging configuration.
+            </summary>
+            <param name="configurator">The configurator</param>
+            <param name="builder">The builder that will apply settings to the Prd Configuration.</param>
+            <returns>The fluent interface enabling further configuration of other libraries.</returns>
+        </member>
+        <member name="M:Volvo.NVS.Core.Configuration.LoggingLibraryConfigurator.ConfigureNvsLogging(Volvo.NVS.Core.Configuration.ILibraryConfigurator,System.Action{Volvo.NVS.Logging.Configuration.INvsLoggingConfigurationBuilder})">
+            <summary>
+            Applies settings to logging configuration.
+            </summary>
+            <param name="configurator">The configurator</param>
+            <param name="builder">The builder that will apply settings to the Configuration.</param>
+            <returns>The fluent interface enabling further configuration of other libraries.</returns>
+        </member>
+    </members>
+</doc>

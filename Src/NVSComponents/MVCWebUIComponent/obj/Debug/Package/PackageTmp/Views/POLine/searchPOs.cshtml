@@ -1,0 +1,193 @@
+﻿@using Volvo.LAT.POLineDomain.DomainLayer.Entities;
+@model dynamic
+@{
+    ViewBag.Title = "POLineSearch";
+}
+  
+ <div class="group">
+    <h3 class="nvs">Search Bar</h3>
+     
+    <div style="margin: 5px;">
+        <span class="field">
+            <label class="field" for="SearchInput">@*POLine:*@</label>
+            <input type="text" id="SearchInput" style="width:400px"/>
+            <input type="button" id="SearchButton"   title="POSearch" value="Search">
+            <input type="button" id="AdvancedSearchButton" title="POSearch" value="Search" style="display:none;">
+            <a href="#" id="Advance">Advance Search</a>
+        </span>
+    </div>
+    <div id="DivAdvancesearch" style="visibility:hidden" >
+        <table>
+            <tr>
+                <td colspan="4">
+                    StartDate:    @(Html.Kendo().DatePicker()
+              .Name("StartDate")
+              .Min(DateTime.Now.AddDays(-88))
+              .Max(DateTime.Now.AddDays(88))
+              .Value(DateTime.Now)
+                    )
+                    </td>
+                <td>
+                    EndDate:   @(Html.Kendo().DatePicker()
+              .Name("EndDate")
+              .Min(DateTime.Now.AddDays(-88))
+              .Max(DateTime.Now.AddDays(88))
+              .Value(DateTime.Now)
+                    )
+                </td>
+                <td>
+                    <hr class="nvs">
+                    @(Html.Kendo().DropDownList()
+              .Name("EBS")
+              .DataSource(source => source.Read(read => read.Action("GetOwnerName", "POLine")))
+              .SelectedIndex(8)
+                    )
+                </td>
+                <td>
+                    <hr class="nvs">
+                    @(Html.Kendo().DropDownList()
+              .Name("Requestor")
+
+              .SelectedIndex(8)
+                    )
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    EndDate:   @(Html.Kendo().DatePicker()
+              .Name("EndDate")
+              .Min(DateTime.Now.AddDays(-88))
+              .Max(DateTime.Now.AddDays(88))
+              .Value(DateTime.Now)
+                    )
+                </td>
+                <td>
+                    <hr class="nvs">
+                    @(Html.Kendo().DropDownList()
+              .Name("Applicationname")
+
+              .SelectedIndex(8)
+                    )
+                </td>
+
+
+
+
+
+                <td>
+
+                    <hr class="nvs">
+                    @(Html.Kendo().DropDownList()
+              .Name("WBS")
+
+              .SelectedIndex(8)
+                    )
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td>
+                    <hr class="nvs">
+                    @(Html.Kendo().DropDownList()
+              .Name("ContractType")
+
+              .SelectedIndex(8)
+                    )
+                </td>
+
+                <td>
+                    <hr class="nvs">
+                    @(Html.Kendo().DropDownList()
+              .Name("AssignmentCode")
+
+              .SelectedIndex(8)
+                    )
+                </td>
+                <td>
+                    <input type="reset" value="clear"   id="btnClear" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@(Html.Kendo().Grid<POLine>()
+        .Name("grida")
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Model(model => model.Id(p => p.Id))
+            .Read(read => read.Action("POLineGridRead", "POLine")) 
+            .PageSize(10)
+        )        
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.PoLine).Title("POLine");
+            columns.Bound(o => o.StartDate).Title("StartDate");
+            columns.Bound(o => o.EndDate).Title("EndDate");
+            //columns.Bound(o => o.contractType).Title("contractType");
+        })
+        .Selectable()
+        .Sortable()
+        .Pageable(p => p.Input(true).Refresh(true).PageSizes(new[] { 2, 5, 10, 100 }))
+        .AutoBind(false)
+        .Scrollable(x => x.Enabled(false))
+         
+)
+
+@*@(Html.Kendo().Grid<POLine>()
+        .Name("grid")
+        .Columns(columns =>
+        { 
+            columns.Bound(c => c.PoLine); 
+            columns.Bound(c => c.StartDate);
+            columns.Bound(c => c.EndDate);  
+
+        })
+        .HtmlAttributes(new { style = "height: 550px;" })
+        .Scrollable()
+        .Groupable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("POLineGridRead", "POLine"))
+            .PageSize(20)
+        )
+)*@
+  
+<script type="text/javascript">
+        $(document).ready(function() {
+        $('#Advance').click(function() {
+        var text = $('#Advance').text();
+        if (text == 'Advance Search') {
+            //$("#SearchButton").css('display', 'none');
+            //$("#AdvancedSearchButton").css('display', 'inline');
+        $(this).text('Hide Advance Search');
+
+        $('#DivAdvancesearch').css('visibility', 'visible');
+        $('#DivAdvancesearch').show();
+        }
+        else if(text == 'Hide Advance Search') {
+        $(this).text('Advance Search');
+        $('#DivAdvancesearch').css('visibility', 'hidden');
+        $('#DivAdvancesearch').hide();
+        //$("#SearchButton").css('display', 'inline');
+        //$("#AdvancedSearchButton").css('display', 'none');
+        }
+       
+        });
+
+      
+        });
+ 
+</script>
+<style type="text/css">
+    .k-grid-header .k-header
+    {
+           background-color: black;
+    }
+</style>
+    

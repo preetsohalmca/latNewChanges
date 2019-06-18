@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+
+  <!--Find information and tutorials in https://teamplace.volvo.com/sites/volvoit-dotNET/DeveloperTools/Windows%20installer%20XML.aspx-->
+  
+  <?define PRODUCTNAME="POS.Service.Setup"?>
+  <?define PRODUCTCODE="*"?>
+  <?define UPGRADECODE="{15FEAED0-A49E-4F40-895F-0C845AA0A8E0}"?>
+  <?define MANUFACTURER="VolvoIT"?>
+  <?define DESCRIPTION = "Setup project for POS.Listener" ?>
+
+  <!--Initial value for installation location in Directory.wxs-->
+  <?define DEFAULTROOTDIR = "C:\Apps" ?>
+  <?define CONFIGTRANSFORM = "DEV" ?>
+
+
+</Include>

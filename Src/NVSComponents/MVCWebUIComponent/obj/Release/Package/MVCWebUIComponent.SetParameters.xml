@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/MVCWebUIComponent_deploy" />
+  <setParameter name="Environment" value="__Environment__" />
+  <setParameter name="WMSQueue" value="__WMSQueue__" />
+  <setParameter name="WMSRequestQueue" value="__WMSRequestQueue__" />
+  <setParameter name="UsePing" value="__UsePing__" />
+  <setParameter name="AuthenticationMode" value="__AuthenticationMode__" />
+  <setParameter name="LATDbConnectionString-Web.config Connection String" value="__ConnectionString__" />
+  <setParameter name="NVSInfoListener" value="__NVSInfoListener__" />
+  <setParameter name="NVSErrorListener" value="__NVSErrorListener__" />
+</parameters>

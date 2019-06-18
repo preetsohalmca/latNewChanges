@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="LATDbConnectionString-Web.config Connection String" description="LATDbConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=LAT_Test_new;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Bikram\ Data\\15June19\\Src\\Src\\NVSComponents\\MVCWebUIComponent\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LATDbConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,80 @@
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\POLineDomain.Infrastructure.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\POLineDomain.Infrastructure.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Iesi.Collections.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\NHibernate.Caches.SysCache2.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\NHibernate.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\POLineDomain.Model.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\POLineDomain.Model.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Iesi.Collections.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\NHibernate.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.xml
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\obj\Debug\POLineDomain.Infrastructure.csprojResolveAssemblyReference.cache
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\obj\Debug\POLineDomain.Infrastructure.dll
+C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\obj\Debug\POLineDomain.Infrastructure.pdb
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\POLineDomain.Infrastructure.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\POLineDomain.Infrastructure.pdb
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Iesi.Collections.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\NHibernate.Caches.SysCache2.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\NHibernate.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\POLineDomain.Model.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\POLineDomain.Model.pdb
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Iesi.Collections.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.pdb
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\NHibernate.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Core.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Persistence.NHibernate.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\obj\Debug\POLineDomain.Infrastructure.csprojResolveAssemblyReference.cache
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\obj\Debug\POLineDomain.Infrastructure.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\obj\Debug\POLineDomain.Infrastructure.pdb
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\UserDomain.Model.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\AutoMapper.dll
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\UserDomain.Model.pdb
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\Volvo.NVS.Utilities.xml
+D:\Bikram Data\15June19\Src\Src\NVSComponents\POLineDomain\Infrastructure\bin\Debug\AutoMapper.xml

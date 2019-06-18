@@ -1,0 +1,261 @@
+2019-05-30T13:48:20.7198066Z	ErrorId: ad830af6-c583-4ae2-99c7-e3f4a54d9eec
+
+	Utc:		2019-05-30T13:48:20.7198066Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> Exception has been thrown by the target of an invocation.
+
+	   Type: System.Reflection.TargetInvocationException
+	      at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+	      at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+	      at System.Delegate.DynamicInvokeImpl(Object[] args)
+	      at NHibernate.Impl.ExpressionProcessor.FindValue(Expression expression)
+	      at NHibernate.Impl.ExpressionProcessor.ProcessSimpleExpression(Expression left, Expression right, ExpressionType nodeType)
+	      at NHibernate.Impl.ExpressionProcessor.ProcessSimpleExpression(BinaryExpression be)
+	      at NHibernate.Impl.ExpressionProcessor.ProcessBinaryExpression(BinaryExpression expression)
+	      at NHibernate.Impl.ExpressionProcessor.ProcessExpression(Expression expression)
+	      at NHibernate.Criterion.QueryOver`2.Add(Expression`1 expression)
+	      at NHibernate.Criterion.QueryOver`2.NHibernate.IQueryOver<TRoot,TSubType>.Where(Expression`1 expression)
+	      at Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories.POLineRepository.RetrieveDetailInnerGridData(String poLineId) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Infrastructure\InfrastructureLayer\Repositories\POLineRepository.cs:line 218
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.GetCustomModelSecondGridData(String poLineId) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 378
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.GetSecondGridData(String poLineId) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 1232
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.GetCostListData(String poLineNumber, Boolean ignoreSecondGridData) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 888
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.FillCostList(String poLineNumber) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 1010
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> Input string was not in a correct format.
+
+		   Type: System.FormatException
+		      at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+		      at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+		      at System.Convert.ToInt32(String value)
+		      at lambda_method(Closure )
+		------------------------------------------------------------------------------------------
+
+
+2019-05-30T14:15:21.7786377Z	ErrorId: 180053a0-da96-468d-ae48-4157c44022e5
+
+	Utc:		2019-05-30T14:15:21.7786377Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute query
+	  [ select poline0_.PurchaseOrderLine_ID as Purchase8_5_, poline0_.TimeStamp as TimeStamp5_, poline0_.EbdNumber as EbdNumber5_, poline0_.PoLine as PoLine5_, poline0_.ReplacedWithPo as Replace11_5_, poline0_.Software as Software5_, poline0_.Remark as Remark5_, poline0_.StartDate as StartDate5_, poline0_.EndDate as EndDate5_, poline0_.DelayedDate as Delayed14_5_, poline0_.ContactPerson as Contact15_5_, poline0_.AcOrWbs as AcOrWbs5_, poline0_.SplitLineItemAmount as SplitLi17_5_, poline0_.ApprovedBy as ApprovedBy5_, poline0_.UnApprovedBy as UnAppro19_5_, poline0_.ApprovedDate as Approve20_5_, poline0_.UnApprovedDate as UnAppro21_5_, poline0_.OwnerName as OwnerName5_, poline0_.LastChangeBy as LastCha22_5_, poline0_.LastChangeDate as LastCha23_5_, poline0_.IsSplitted as IsSplitted5_, poline0_.RequestorName as Request25_5_, poline0_.EarlierPaymentDate as Earlier26_5_, poline0_.Renewal as Renewal5_, poline0_.ExchangeRateYear as Exchang28_5_, poline0_.ProductNumber as Product29_5_, poline0_.InvoiceNumber as Invoice30_5_, poline0_.IsNewOrder as IsNewOrder5_, poline0_.ContractType_ID as Contrac32_5_, poline0_.App_ID as App33_5_, poline0_.StatusPo_ID as StatusPo34_5_, poline0_.ActivityType_ID as Activit35_5_, poline0_.CostType_ID as CostType36_5_, poline0_.Product_ID as Product37_5_, poline0_.PurchaseOrderLineFromEbd_ID as Purchas38_5_, poline0_.WbsElement_ID as WbsElement39_5_, poline0_.Currency_ID as Currency40_5_, poline0_.RenewalOrderPurchaseLine as Renewal41_5_, poline0_.CostCenter_ID as CostCenter42_5_, poline0_.MonthlyRate as Monthly43_5_ from dbo.PurchaseOrderLine poline0_ where (poline0_.StartDate is not null) and datepart(year, poline0_.StartDate)>=@p0 and datepart(month, poline0_.StartDate)>=@p1 ]
+	    Name:p2 - Value:2019  Name:p3 - Value:5
+	  [SQL: select poline0_.PurchaseOrderLine_ID as Purchase8_5_, poline0_.TimeStamp as TimeStamp5_, poline0_.EbdNumber as EbdNumber5_, poline0_.PoLine as PoLine5_, poline0_.ReplacedWithPo as Replace11_5_, poline0_.Software as Software5_, poline0_.Remark as Remark5_, poline0_.StartDate as StartDate5_, poline0_.EndDate as EndDate5_, poline0_.DelayedDate as Delayed14_5_, poline0_.ContactPerson as Contact15_5_, poline0_.AcOrWbs as AcOrWbs5_, poline0_.SplitLineItemAmount as SplitLi17_5_, poline0_.ApprovedBy as ApprovedBy5_, poline0_.UnApprovedBy as UnAppro19_5_, poline0_.ApprovedDate as Approve20_5_, poline0_.UnApprovedDate as UnAppro21_5_, poline0_.OwnerName as OwnerName5_, poline0_.LastChangeBy as LastCha22_5_, poline0_.LastChangeDate as LastCha23_5_, poline0_.IsSplitted as IsSplitted5_, poline0_.RequestorName as Request25_5_, poline0_.EarlierPaymentDate as Earlier26_5_, poline0_.Renewal as Renewal5_, poline0_.ExchangeRateYear as Exchang28_5_, poline0_.ProductNumber as Product29_5_, poline0_.InvoiceNumber as Invoice30_5_, poline0_.IsNewOrder as IsNewOrder5_, poline0_.ContractType_ID as Contrac32_5_, poline0_.App_ID as App33_5_, poline0_.StatusPo_ID as StatusPo34_5_, poline0_.ActivityType_ID as Activit35_5_, poline0_.CostType_ID as CostType36_5_, poline0_.Product_ID as Product37_5_, poline0_.PurchaseOrderLineFromEbd_ID as Purchas38_5_, poline0_.WbsElement_ID as WbsElement39_5_, poline0_.Currency_ID as Currency40_5_, poline0_.RenewalOrderPurchaseLine as Renewal41_5_, poline0_.CostCenter_ID as CostCenter42_5_, poline0_.MonthlyRate as Monthly43_5_ from dbo.PurchaseOrderLine poline0_ where (poline0_.StartDate is not null) and datepart(year, poline0_.StartDate)>=@p0 and datepart(month, poline0_.StartDate)>=@p1]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters, IResultTransformer forcedResultTransformer)
+	      at NHibernate.Loader.Loader.ListIgnoreQueryCache(ISessionImplementor session, QueryParameters queryParameters)
+	      at NHibernate.Loader.Loader.List(ISessionImplementor session, QueryParameters queryParameters, ISet`1 querySpaces, IType[] resultTypes)
+	      at NHibernate.Loader.Hql.QueryLoader.List(ISessionImplementor session, QueryParameters queryParameters)
+	      at NHibernate.Hql.Ast.ANTLR.QueryTranslatorImpl.List(ISessionImplementor session, QueryParameters queryParameters)
+	      at NHibernate.Engine.Query.HQLQueryPlan.PerformList(QueryParameters queryParameters, ISessionImplementor session, IList results)
+	      at NHibernate.Impl.SessionImpl.List(IQueryExpression queryExpression, QueryParameters queryParameters, IList results)
+	      at NHibernate.Impl.AbstractSessionImpl.List(IQueryExpression queryExpression, QueryParameters parameters)
+	      at NHibernate.Impl.AbstractQueryImpl2.List()
+	      at NHibernate.Linq.DefaultQueryProvider.ExecuteQuery(NhLinqExpression nhLinqExpression, IQuery query, NhLinqExpression nhQuery)
+	      at NHibernate.Linq.DefaultQueryProvider.Execute(Expression expression)
+	      at NHibernate.Linq.DefaultQueryProvider.Execute[TResult](Expression expression)
+	      at Remotion.Linq.QueryableBase`1.GetEnumerator()
+	      at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
+	      at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+	      at Volvo.LAT.POLineDomain.DomainLayer.POLineService.FindPOLineAsQueryable1(String search, Boolean isAdvancedSearch, DateTime startDate, DateTime endDate, String applicationId, String ownerName, String requesterName, String wbs, String assignmentCode, String contractTypeId, Boolean isRenewalYes, Boolean isRenewalNo, Boolean isRenewalAll, Int32 pagesize, Int32 pageNumber, Int32& totalRecords) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\POLineDomain\Services\DomainLayer\POLineService.cs:line 256
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.POLineGridRead(DataSourceRequest request, String searchText, Boolean isAdvancedSearch, Nullable`1 startDate, Nullable`1 endDate, String applicationId, String ownerName, String requesterName, String wbs, String assignmentCode, String contractTypeId, Boolean isRenewalYes, Boolean isRenewalNo, Boolean isRenewalAll) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 290
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> ExecuteReader requires an open and available Connection. The connection's current state is closed.
+
+		   Type: System.InvalidOperationException
+		      at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+		      at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+		      at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+		      at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+		      at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+		      at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, Boolean autoDiscoverTypes, Boolean callable, RowSelection selection, ISessionImplementor session)
+		      at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies, IResultTransformer forcedResultTransformer)
+		      at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies, IResultTransformer forcedResultTransformer)
+		      at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters, IResultTransformer forcedResultTransformer)
+		------------------------------------------------------------------------------------------
+
+
+2019-05-30T16:40:17.9137324Z	ErrorId: f5008038-691e-4e25-b9e1-a14acdc2920e
+
+	Utc:		2019-05-30T16:40:17.9137324Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 2 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> could not execute query
+	  [ select poline0_.PurchaseOrderLine_ID as Purchase8_5_, poline0_.TimeStamp as TimeStamp5_, poline0_.EbdNumber as EbdNumber5_, poline0_.PoLine as PoLine5_, poline0_.ReplacedWithPo as Replace11_5_, poline0_.Software as Software5_, poline0_.Remark as Remark5_, poline0_.StartDate as StartDate5_, poline0_.EndDate as EndDate5_, poline0_.DelayedDate as Delayed14_5_, poline0_.ContactPerson as Contact15_5_, poline0_.AcOrWbs as AcOrWbs5_, poline0_.SplitLineItemAmount as SplitLi17_5_, poline0_.ApprovedBy as ApprovedBy5_, poline0_.UnApprovedBy as UnAppro19_5_, poline0_.ApprovedDate as Approve20_5_, poline0_.UnApprovedDate as UnAppro21_5_, poline0_.OwnerName as OwnerName5_, poline0_.LastChangeBy as LastCha22_5_, poline0_.LastChangeDate as LastCha23_5_, poline0_.IsSplitted as IsSplitted5_, poline0_.RequestorName as Request25_5_, poline0_.EarlierPaymentDate as Earlier26_5_, poline0_.Renewal as Renewal5_, poline0_.ExchangeRateYear as Exchang28_5_, poline0_.ProductNumber as Product29_5_, poline0_.InvoiceNumber as Invoice30_5_, poline0_.IsNewOrder as IsNewOrder5_, poline0_.ContractType_ID as Contrac32_5_, poline0_.App_ID as App33_5_, poline0_.StatusPo_ID as StatusPo34_5_, poline0_.ActivityType_ID as Activit35_5_, poline0_.CostType_ID as CostType36_5_, poline0_.Product_ID as Product37_5_, poline0_.PurchaseOrderLineFromEbd_ID as Purchas38_5_, poline0_.WbsElement_ID as WbsElement39_5_, poline0_.Currency_ID as Currency40_5_, poline0_.RenewalOrderPurchaseLine as Renewal41_5_, poline0_.CostCenter_ID as CostCenter42_5_, poline0_.MonthlyRate as Monthly43_5_ from dbo.PurchaseOrderLine poline0_ ]
+	  [SQL: select poline0_.PurchaseOrderLine_ID as Purchase8_5_, poline0_.TimeStamp as TimeStamp5_, poline0_.EbdNumber as EbdNumber5_, poline0_.PoLine as PoLine5_, poline0_.ReplacedWithPo as Replace11_5_, poline0_.Software as Software5_, poline0_.Remark as Remark5_, poline0_.StartDate as StartDate5_, poline0_.EndDate as EndDate5_, poline0_.DelayedDate as Delayed14_5_, poline0_.ContactPerson as Contact15_5_, poline0_.AcOrWbs as AcOrWbs5_, poline0_.SplitLineItemAmount as SplitLi17_5_, poline0_.ApprovedBy as ApprovedBy5_, poline0_.UnApprovedBy as UnAppro19_5_, poline0_.ApprovedDate as Approve20_5_, poline0_.UnApprovedDate as UnAppro21_5_, poline0_.OwnerName as OwnerName5_, poline0_.LastChangeBy as LastCha22_5_, poline0_.LastChangeDate as LastCha23_5_, poline0_.IsSplitted as IsSplitted5_, poline0_.RequestorName as Request25_5_, poline0_.EarlierPaymentDate as Earlier26_5_, poline0_.Renewal as Renewal5_, poline0_.ExchangeRateYear as Exchang28_5_, poline0_.ProductNumber as Product29_5_, poline0_.InvoiceNumber as Invoice30_5_, poline0_.IsNewOrder as IsNewOrder5_, poline0_.ContractType_ID as Contrac32_5_, poline0_.App_ID as App33_5_, poline0_.StatusPo_ID as StatusPo34_5_, poline0_.ActivityType_ID as Activit35_5_, poline0_.CostType_ID as CostType36_5_, poline0_.Product_ID as Product37_5_, poline0_.PurchaseOrderLineFromEbd_ID as Purchas38_5_, poline0_.WbsElement_ID as WbsElement39_5_, poline0_.Currency_ID as Currency40_5_, poline0_.RenewalOrderPurchaseLine as Renewal41_5_, poline0_.CostCenter_ID as CostCenter42_5_, poline0_.MonthlyRate as Monthly43_5_ from dbo.PurchaseOrderLine poline0_]
+
+	   Type: NHibernate.Exceptions.GenericADOException
+	      at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters, IResultTransformer forcedResultTransformer)
+	      at NHibernate.Loader.Loader.ListIgnoreQueryCache(ISessionImplementor session, QueryParameters queryParameters)
+	      at NHibernate.Loader.Loader.List(ISessionImplementor session, QueryParameters queryParameters, ISet`1 querySpaces, IType[] resultTypes)
+	      at NHibernate.Loader.Hql.QueryLoader.List(ISessionImplementor session, QueryParameters queryParameters)
+	      at NHibernate.Hql.Ast.ANTLR.QueryTranslatorImpl.List(ISessionImplementor session, QueryParameters queryParameters)
+	      at NHibernate.Engine.Query.HQLQueryPlan.PerformList(QueryParameters queryParameters, ISessionImplementor session, IList results)
+	      at NHibernate.Impl.SessionImpl.List(IQueryExpression queryExpression, QueryParameters queryParameters, IList results)
+	      at NHibernate.Impl.AbstractSessionImpl.List(IQueryExpression queryExpression, QueryParameters parameters)
+	      at NHibernate.Impl.AbstractQueryImpl2.List()
+	      at NHibernate.Linq.DefaultQueryProvider.ExecuteQuery(NhLinqExpression nhLinqExpression, IQuery query, NhLinqExpression nhQuery)
+	      at NHibernate.Linq.DefaultQueryProvider.Execute(Expression expression)
+	      at NHibernate.Linq.DefaultQueryProvider.Execute[TResult](Expression expression)
+	      at Remotion.Linq.QueryableBase`1.GetEnumerator()
+	      at Volvo.LAT.MVCWebUIComponent.Controllers.POLineController.CostListOneTimeJob() in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\MVCWebUIComponent\Controllers\POLineController.cs:line 2013
+	      at lambda_method(Closure , ControllerBase , Object[] )
+	      at System.Web.Mvc.ActionMethodDispatcher.<>c__DisplayClass1.<WrapVoidAction>b__0(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+	      at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+	      at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+	      at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+	      at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+	      at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+	      at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+		>> ExecuteReader requires an open and available Connection. The connection's current state is closed.
+
+		   Type: System.InvalidOperationException
+		      at System.Data.SqlClient.SqlCommand.ValidateCommand(String method, Boolean async)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+		      at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+		      at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+		      at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+		      at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+		      at NHibernate.AdoNet.AbstractBatcher.ExecuteReader(IDbCommand cmd)
+		      at NHibernate.Loader.Loader.GetResultSet(IDbCommand st, Boolean autoDiscoverTypes, Boolean callable, RowSelection selection, ISessionImplementor session)
+		      at NHibernate.Loader.Loader.DoQuery(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies, IResultTransformer forcedResultTransformer)
+		      at NHibernate.Loader.Loader.DoQueryAndInitializeNonLazyCollections(ISessionImplementor session, QueryParameters queryParameters, Boolean returnProxies, IResultTransformer forcedResultTransformer)
+		      at NHibernate.Loader.Loader.DoList(ISessionImplementor session, QueryParameters queryParameters, IResultTransformer forcedResultTransformer)
+		------------------------------------------------------------------------------------------
+
+

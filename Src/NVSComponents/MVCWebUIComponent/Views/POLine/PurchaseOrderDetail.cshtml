@@ -1,0 +1,1673 @@
+﻿@using Volvo.LAT.POLineDomain.DomainLayer.Entities;
+@*@model Volvo.LAT.POLineDomain.DomainLayer.Entities.POLine*@
+@model IList<Volvo.LAT.POLineDomain.DomainLayer.Entities.CustomModel>
+@using Volvo.LAT.MVCWebUIComponent.Common.ActionFilter
+@{
+    ViewBag.Title = "Purchase order Detail";
+}
+<style type="text/css">
+    table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        /* border-top: 1px solid #ddd; */
+    }
+
+    .tb-2 {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        /*background-color: #eef2f3;*/
+        color: white;
+    }
+
+    .tb-1, .tb-3 {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        /*background-color: #7ab3c1;*/
+        color: white;
+    }
+
+        .tb-1, .tb-2, .tb-3 td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        /*.tb-1, .tb-2, .tb-3 tr:nth-child(even) {
+    background-color: #f2f2f2;
+    }*/
+        .tb-1, .tb-2, .tb-3 tr:hover {
+            background-color: #ddd;
+        }
+
+        .tb-1, .tb-3 th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            /*background-color: #eef2f3;*/
+            color: white;
+        }
+
+    .tb-2 {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        /*background-color: #7ab3c1;*/
+        color: white;
+    }
+
+    .renewalDaysLeft {
+        border: 1px solid red;
+        background: pink;
+    }
+
+    .purchaseOrderDetail .sendmail-icon {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-family: "Glyphicons Halflings";
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        float: right;
+        margin-right: 10px;
+    }
+
+    .error-in-empty {
+        background-color: pink;
+        border: 1px solid red;
+    }
+</style>
+
+@Html.Partial("_SearchPO",Model.FirstOrDefault().SearchModelDetail)
+
+
+<div id="otherContent">
+    @{var i = 1;}
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+
+            <div class="purchaseOrderDetail" id="purchaseOrderDetail_@item.PurchaseOrderLineId" style="margin-bottom:25px;margin-bottom: 25px;border: solid 1px #ccc;">
+                @Html.HiddenFor(m => item.PurchaseOrderLineId, new { @class = "send -email cls-PurchaseOrderLineId", Name = "PurchaseOrderLineId", id = "PurchaseOrderLineId" })
+                @Html.HiddenFor(m => item.RenewalTotalDaysLeft, new { @class = "cls-RenewalTotalDaysLeft", Name = "RenewalTotalDaysLeft", id = "RenewalTotalDaysLeft" })
+                @Html.HiddenFor(m => item.Owner_ID, new { @class = "cls-hdnOwnerSelectedId", Name = "hdnOwnerSelectedId", id = "hdnOwnerSelectedId" })
+                @Html.HiddenFor(m => item.StatusPo, new { @class = "cls-hdnStatusPoSelectedId", Name = "hdnStatusPoSelectedId", id = "hdnStatusPoSelectedId" })
+                @if (i == 1)
+                {
+                    <table class="tb-1" style="background-color: #eef2f3;">
+                        <tr>
+                            <td colspan="5" style="text-align: center;font-size: 18px;">
+                                @Html.HiddenFor(m => item.PoNumber, new { Name = "PurchaseOrderLine_Number", id = "PurchaseOrderLine_Number" })
+                                <span style="font-weight:bold;font-size: 18px;"> Purchase Order: #</span>@item.PoNumber
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: left;padding-left:100px;">
+
+                                <span style="font-weight:bold;">Owner:</span>
+                                @(Html.Kendo().DropDownList()
+                                .Name("OwnerId")
+                                .DataTextField("Name")
+                                .DataValueField("OwnerId")
+                                .BindTo(item.Owners)                            
+                               
+                                .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                                )
+                            </td>
+                            <td style="text-align: left;">
+                                <span style="font-weight:bold;">Currency:</span>
+                                @item.Currency
+                            </td>
+                            <td style="text-align: left;">
+                                <span style="font-weight:bold;">Vendor Name:</span> @item.VendorName
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: left;padding-left:100px;">
+                                <span style="font-weight:bold;">Status: </span> @(Html.Kendo().DropDownList()
+                                    .Name("StatusPoId")
+                                    .DataTextField("Name")
+                                    .DataValueField("StatusPoId")
+                                    //.DataSource(source =>
+                                    //{
+                                    //source.Read(read =>
+                                    //                                                                                                                {
+                                    //                                                            read.Action("GellAllStatus", "POLine");
+                                    //                                                        });
+                                    //})
+                                    .BindTo(item.StatusPo)
+                                   
+                                    .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+                                )
+                            </td>
+                            <td style="text-align: left;">
+                                <span style="font-weight:bold;">Total Order Amount:</span> @item.OrderamountAmount
+                            </td>
+                            <td style="text-align: left;">
+                                <span style="font-weight:bold;">Purchaser Name:</span>
+                                @Html.TextBoxFor(m => item.PurchaserName, new { @class = "save-detail cls-PurchaserName", maxlength = "99", Name = "PurchaserName_" + i, id = "PurchaserName_" + i })
+                                <span id="@("PurchaserNameErrorMessage" + i)" style="display:none" class="alert-danger">Requestor should should no be empty.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: left;padding-left:100px;">
+                                <span style="font-weight:bold;">Purchase Order Name:</span> @item.PurchaserOrderName
+                            </td>
+                            <td style="text-align: left;">
+                                <span style="font-weight:bold;">Total Order Amount(SEK):</span> @Math.Round(Convert.ToDecimal(item.OrderamountinSEK), 2)
+                            </td>
+                            <td style="text-align: left;">
+                                <span style="font-weight:bold;">Invoice No:</span> @Html.TextBoxFor(m => item.InvoiceNumberHeader, new { @class = "save-detail", maxlength = "100", Name = "InvoiceNumberHeader_" + i, id = "InvoiceNumberHeader_" + i })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: left;padding-left:100px;">
+                                <span style="font-weight:bold;">Order Date:</span> @string.Format("{0:yyyy-MM}", item.OrderDate)
+                            </td>
+                            <td style="text-align: left;">
+                                <span style="font-weight:bold;">Left Total Order Amount:</span>
+                                @{
+                                    decimal leftAmountTotal = Convert.ToDecimal(item.OrderamountAmount) - Convert.ToDecimal(item.LeftTotalPoAmount);
+
+                                }
+                                @Math.Round(leftAmountTotal, 2)
+                            </td>
+                            @*<td style="text-align: left;">Comments:@Html.TextAreaFor(m => item.Remark, new { @class = "save-detail", id = "TxtAreaRemark_" + i })</td>*@
+                            <td style="text-align: left;">
+                                <span style="font-weight:bold;">Comments:</span> @Html.TextAreaFor(m => item.Comments, new { @class = "save-detail cls-Comments", Name = "Comments", id = "Comments", @maxlength = "500" })
+                               @*<br /> <span id="@("commentsErrorMessage")" style="display:none;" class="alert-danger">maximum 500 charactors.</span>*@
+                                <a href="#" id="sendEmaillinkButton"> <span class="glyphicon glyphicon-envelope sendmail-icon " style="font-size:30px; width:20px;"></span></a>
+
+
+                            </td>
+                        </tr>
+                    </table>
+                }
+                <table class="tb-2" style="height: 75px;background-color: #7ab3c1;">
+                    <tr>
+                        <td style="text-align: left;width:30%;padding: 0 0 0 20px;">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;margin-top:9px;">
+                                            Purchase Order Line:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:9px;">
+                                        <div class="row">
+                                            <label class="save-detail cls-Po_LineNumber" Name="Po_LineNumber_" @i id="Po_LineNumber_" @i>@item.PoLine</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;width:25%">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Contract Start Date:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            @Html.HiddenFor(m => item.StartDate, new { @class = "cls-StartDate", Name = "hdnContractStartDate_" + i, id = "hdnContractStartDate_" + i })
+                                            @(Html.Kendo().DatePicker()
+                                                                        .Name("ContractStartDate_" + i)
+                                                                        .Value(item.StartDate)
+                                                                        //.Events(e =>
+                                                                        //{
+                                                                        //    e.Change("onVaueChangeOrUpdate");
+                                                                        //})
+                                                                        .Format("yyyy-MM")
+
+                                                                        .HtmlAttributes(new { @class = "cls-ContractStartDate save-detail", @onkeypress = "return isNumberKey(event);" })
+                                            )
+                                            <span id="@("startDateErrorMessage" + i)" class="alert-danger" style="display:none;padding: 0 !important;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;width:25%">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Contract Type:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            @(Html.Kendo().DropDownList()
+                                                        .Name("ContractTypeId_" + i)
+                                                        .DataTextField("Name")
+                                                        .DataValueField("ContractTypeId")
+                                                        //.DataSource(source =>
+                                                        //{
+                                                        //    source.Read(read => { read.Action("GetAllContractTypes", "POLine"); });
+                                                        //})
+                                                        .BindTo(item.ContractTypes)
+                                                        .Value(Convert.ToString(item.ContractTypeId))
+                                                        .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-ContractTypeId" })
+                                            )
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;width:20%">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Left Po Line Amount:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <label id="lblLeftPoLineAmount">
+                                                @{
+                                                    decimal leftAmount = Convert.ToDecimal(item.OrderAmount) - (Convert.ToDecimal(item.SplitLineItemAmount));
+
+                                                }
+                                                @Math.Round(leftAmount,2)
+                                                  </label>
+      
+                                              </div>
+      
+                                          </div>
+      
+                                      </div>
+      
+                                  </div>
+      
+                              </td>
+      
+                          </tr>
+      
+                          <tr>
+      
+                              <td style="text-align: left;width:30%;padding: 0 0 0 20px;">
+      
+                                  <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Assignment Code / WBS:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            @*@Html.TextBoxFor(m => item.AcOrWbs, new { @class = "save-detail form-control", id = "AssignmentCodeWBS" + i })*@
+                                            @Html.TextBoxFor(m => item.AcOrWbs, new { @class = "save-detail cls-AcOrWbs", Name = "AcOrWbs_" + i, id = "AcOrWbs_" + i })
+                                            @*@if (string.IsNullOrEmpty(item.AcOrWbs))
+                                            {*@
+                                            <span id="@("wbsErrorMessage" + i)" class="alert-danger" style="display:none;padding: 0 !important;"></span>
+                                               
+                                           @* }*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;width:25%">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Contract End Date:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            @Html.HiddenFor(m => item.EndDate, new { @class = "cls-EndDate", Name = "hdnContractEndDate_" + i, id = "hdnContractEndDate_" + i })
+                                            @(Html.Kendo().DatePicker()
+                                                                                                             .Name("ContractEndDate_" + i)
+                                                                                                             .Value(item.EndDate).HtmlAttributes(new { @class = "save-detail cls-ContractEndDate", @onkeypress = "return isNumberKey(event);" })
+                                                                                                             .Format("yyyy-MM")
+                                            )
+
+                                            <span id="@("endDateErrorMessage" + i)" class="alert-danger" style="display:none;padding: 0 !important;"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;width:25%">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Requestor:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            @*@Html.TextBoxFor(m => item.RequestorName, new { @class = "save-detail form-control", id = "TxtBoxRequestor_" + i })*@
+                                            @Html.TextBoxFor(m => item.RequestorName, new { @class = "save-detail cls-RequestorName", Name = "RequestorName_" + i, id = "RequestorName_" + i, @maxlength = "200" })
+
+                                            <span id="@("RequestorNameErrorMessage" + i)" style="display:none" class="alert-danger">Requestor should should no be empty.</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;width:20%"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;width:30%;padding: 0 0 0 20px;">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Application Name:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            @(Html.Kendo().DropDownList()
+                                                                                                                        .Name("AppId_" + i)
+                                                                                                                        .DataTextField("Name")
+                                                                                                                        .DataValueField("AppId")
+                                                                                                                         //.DataSource(source =>
+                                                                                                                         //{
+                                                                                                                         //    source.Read(read => { read.Action("GetAllApplications", "POLine"); });
+                                                                                                                         //})
+                                                                                                                         .BindTo(item.Applications)
+                                                                                                                        .Value(Convert.ToString(item.App_ID))
+                                                                                                                        .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-AppId" })
+                                            )
+                                            @if (string.IsNullOrEmpty(item.App_ID))
+                                            {
+                                                <span id="@("ApplicationNameErrorMessage" + i)" class="alert-danger">Application Name should should no be empty.</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;width:25%">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Recharge Amount:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            @*@Html.TextBoxFor(m => item., new { @class = "save-detail form-control", id = "TxtBoxRechargeAmount_" + i })*@
+                                            @*<input id="@("TxtBoxRechargeAmount_" + i)" type="text"  class="form-control" />*@
+                                            <input id="@("RechargeAmount_" + i)" type="number" value="@Math.Round(Convert.ToDecimal(item.SplitLineItemAmount),2)" name="RechargeAmount_@i" class="save-detail cls-RechargeAmount" />
+                                           <span id="@("RechargeAmountErrorMessage" + i)" style="display:none;" class="alert-danger">Recharge Amount is required.</span>
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: left;width:25%">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="col-md-6">
+                                        <div class="row" style="font-weight:bold;">
+                                            Monthly Rate:
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <label id="@("LblMonthlyRate_" + i)">@item.MonthlyRate</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="text-align: right;width:20%;padding-right: 15px;">
+                            <a href="#" onclick="collapseMe('@item.PurchaseOrderLineId',@i)">
+                                <img src="~/Content/Images/caret-down.png" alt="Expand" id="@("iconCaretDown_" + item.PurchaseOrderLineId)" style="height:15px;" />
+                                <img src="~/Content/Images/caret-up.png" alt="Collapse" id="@("iconCaretUp_" + item.PurchaseOrderLineId)" style="display:none;height:15px;" />
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <div id="div_Collapse_detail_@item.PurchaseOrderLineId" style="display:none;">
+                    <table class="tb-3" style="background-color: #eef2f3;">
+                        <tr>
+                            <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Earlier Payment Date:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @*@Html.TextBoxFor(m => item.EarlierPaymentDate, new { @class = "save-detail form-control", id = "TxtBoxEarlierPaymentDate_" + i })*@
+                                                @*@(Html.Kendo().DatePicker()
+                                                    .Name("DatePickerEarlierPaymentDate_" + i)
+                                                    .Value(item.EarlierPaymentDate).HtmlAttributes(new { @class = "save-detail" })
+                                                    )*@
+
+                                                @*@Html.TextBoxFor(m => item.EarlierPaymentDate, new { @class = "save-detail cls-EarlierPaymentDate", Name = "EarlierPaymentDate_" + i, id = "EarlierPaymentDate_" + i })*@
+                                                @(Html.Kendo().DatePicker()
+                                                                                                                    .Name("EarlierPaymentDate_" + i)
+                                                                                                                    .Format("yyyy-MM")
+                                                                                                                    .Value(item.EarlierPaymentDate).HtmlAttributes(new { @class = "save-detail cls-EarlierPaymentDate", Name = "EarlierPaymentDate_" + i, id = "EarlierPaymentDate_" + i, @onkeypress = "return isNumberKey(event);" })
+                                                )
+
+                                                @Html.HiddenFor(m => item.EarlierPaymentDate, new { @class = "cls-EarlierPaymentDate", Name = "hdnEarlierPaymentDate_" + i, id = "hdnEarlierPaymentDate_" + i })
+
+                                                <input type="hidden" id="@("hdnCurrentIndex" + @i)" value="@i" class="cls-hdnIndex" />
+                                                <span id="@("earlierPaymentDateErrorMessage" + i)" class="alert-danger" style="display:none;padding: 0 !important;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Renewal Purchase Order Line:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @*<input id="@("RenewalOrderPurchaseLine_"+ i)" class="save-detail cls-RenewalOrderPurchaseLine" type="text"
+                                                    value="" name="RenewalOrderPurchaseLine" />*@
+                                                @Html.TextBoxFor(m => item.RenewalOrderPurchaseLine, new
+                                           {
+                                               @class = "save-detail cls-RenewalOrderPurchaseLine",
+                                               Name = "RenewalOrderPurchaseLine_" + i,
+                                               id = "RenewalOrderPurchaseLine_" + i,
+                                               @maxlength = "250"
+                                           })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Exchange Rate Year:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @*@Html.TextBoxFor(m => item.ExchangeRateYear, new { @class = "save-detail form-control", id = "TxtBoxExchangeRateYear_" + i })*@
+                                                @Html.TextBoxFor(m => item.ExchangeRateYear, new { @class = "save-detail cls-ExchangeRateYear", Name = "ExchangeRateYear_" + i, id = "ExchangeRateYear_" + i })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td rowspan="8" style="text-align: left;width:16%;">
+                                <div id="@("costListgrid" + i)"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Delayed Payment Date:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @*@(Html.Kendo().DatePicker()
+                                                    .Name("DatePickerDelayedPaymentDate_" + i)
+                                                    .Value(item.DelayedDate).HtmlAttributes(new { @class = "save-detail" })
+                                                    )*@
+                                                @*@Html.TextBoxFor(m => item.DelayedDate, new { @class = "save-detail cls-DelayedDate", Name = "DelayedDate_" + i, id = "DelayedDate_" + i })*@
+                                                @(Html.Kendo().DatePicker()
+                                                                                                                                                    .Name("DelayedDate_" + i)
+                                                                                                                                                    .Format("yyyy-MM")
+                                                                                                                                                    .Value(item.DelayedDate).HtmlAttributes(new { @class = "save-detail cls-DelayedPaymentDate", Name = "DelayedDate_" + i, id = "DelayedDate_" + i })
+                                                )
+                                                <span id="@("delayedPaymentDateErrorMessage" + i)" class="alert-danger" style="display:none;padding: 0 !important;"></span>
+                                                @Html.HiddenFor(m => item.DelayedDate, new { @class = "cls-DelayedDate", Name = "hdnDelayedDate_" + i, id = "hdnDelayedDate_" + i })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Renewal:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @*@Html.CheckBoxFor(m => item.Renewal, new { @class = "save-detail", id = "ChkBoxRenewal_" + i })*@
+                                                @Html.CheckBoxFor(m => item.Renewal, new { @class = "save-detail cls-Renewal", Name = "Renewal_" + i, id = "Renewal_" + i })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Comments:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+
+                                                @*@Html.TextAreaFor(m => item.Remark, new { @class = "save-detail", id = "TxtBoxCommnets_" + i })*@
+                                                @Html.TextAreaFor(m => item.Remark, new { @class = "save-detail cls-Remark", Name = "Remark_" + i, id = "Remark_" + i, @maxlength = "200" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:16%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Activity Type:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @(Html.Kendo().DropDownList()
+                                                                                                                            .Name("ActivityTypeId_" + i)
+                                                                                                                            .DataTextField("Name")
+                                                                                                                            .DataValueField("ActivityTypeId")
+                                                                                                                            //.DataSource(source =>
+                                                                                                                            //{
+                                                                                                                            //    source.Read(read => { read.Action("GetActivityTypes", "POLine"); });
+                                                                                                                            //})
+                                                                                                                            .BindTo(item.ActivityTypes)
+                                                                                                                            .Value(Convert.ToString(item.ActivityTypeId))
+                                                                                                                            .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-ActivityTypeId" })
+                                                )
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                SDU:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @item.SDU
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Invoice Number:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @*@Html.TextBoxFor(m => item.InvoiceNumber, new { @class = "save-detail form-control", id = "TxtBoxSDU_" + i })*@
+                                                @Html.TextBoxFor(m => item.InvoiceNumber, new { @class = "save-detail cls-InvoiceNumber", Name = "InvoiceNumber_" + i, id = "InvoiceNumber_" + i, @maxlength = "100" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:16%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                WBS:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @item.WBS
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Contact Person:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @*@Html.TextBoxFor(m => item.ContactPerson, new { @class = "save-detail form-control", id = "TxtBoxContactPerson_" + i })*@
+                                                @Html.TextBoxFor(m => item.ContactPerson, new { @class = "save-detail cls-ContactPerson", Name = "ContactPerson_" + i, id = "ContactPerson_" + i, @maxlength = "100" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                APM ID:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @item.APMID
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:16%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Software Name:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @item.Software
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                PO Line Amount:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @item.OrderAmount
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                           
+                            <td style="text-align: left;width:28%;">
+                            @if (System.Configuration.ConfigurationManager.AppSettings["MicrosoftAccourtNumber"] == item.CostCenterName)
+                            {
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Product Number:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @*@Html.TextBoxFor(m => item.ProductNumber, new { @class = "save-detail form-control", id = "TxtBoxProductNumber_" + i })*@
+                                                @Html.TextBoxFor(m => item.ProductNumber, new { @class = "save-detail cls-ProductNumber", Name = "ProductNumber_" + i, id = "ProductNumber_" + i, @maxlength = "100" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            </td>
+                            <td style="text-align: left;width:16%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Last Modified by:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">                                               
+
+                                                <span id="@("lastModifiedBy" + i)" >@item.LastChangeByName</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                PO Line Amount (SEK):
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @{
+                                                    var tt = item.ExchangeRateYear.HasValue ? Convert.ToDecimal(item.OrderAmount) * item.ExchangeRateCurrencyRate : Convert.ToDecimal(item.OrderAmount) * item.SekRate;
+                                                }
+                                                @Math.Round(Convert.ToDecimal(tt), 2)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                       
+                            <td style="text-align: left;width:28%;">
+                                @if (System.Configuration.ConfigurationManager.AppSettings["MicrosoftAccourtNumber"] == item.CostCenterName)
+                                {
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Product:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @(Html.Kendo().DropDownList()
+                                                                                                                                    .Name("ProductId_" + i)
+                                                                                                                                    .DataTextField("Name")
+                                                                                                                                    .DataValueField("ProductId")
+                                                                                                                                    .DataSource(source =>
+                                                                                                                                    {
+                                                                                                                                        source.Read(read =>
+                                                                                                                                        {
+                                                                                                                                            read.Action("GellAllProducts", "POLine");
+                                                                                                                                        });
+                                                                                                                                    }).Value(Convert.ToString(item.ProductId))
+                                                                                                                                    .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-ProductId" })
+                                                )
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </td>
+                            <td style="text-align: left;width:16%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Last Modified Date:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <span id="@("lastModifiedByDate" + i)" >@String.Format("{0:MM/dd/yyyy hh:mm tt}", item.LastChangeDate)</span>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Number Of Charge Months:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                 
+                                                <span id="@("totalChangesMonths" + i)" >@item.Numberofchargableamount</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <td style="text-align: left;width:28%;">
+                                @if (System.Configuration.ConfigurationManager.AppSettings["MicrosoftAccourtNumber"] == item.CostCenterName)
+                                {
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Cost Type:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @(Html.Kendo().DropDownList()
+                                                                                                                                    .Name("CostTypeId_" + i)
+                                                                                                                                    .DataTextField("Name")
+                                                                                                                                    .DataValueField("CostTypeId")
+                                                                                                                                    .DataSource(source =>
+                                                                                                                                    {
+                                                                                                                                        source.Read(read =>
+                                                                                                                                        {
+                                                                                                                                            read.Action("GellAllCostTypes", "POLine");
+                                                                                                                                        });
+                                                                                                                                    }).Value(Convert.ToString(item.CostTypeId))
+                                                                                                                                    .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-CostTypeId" })
+                                                )
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </td>                            
+                            <td style="text-align: left;width:16%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Cost Center:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @item.CostCenterName
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <div class="row" style="font-weight:bold;">
+                                                Line Item Description:
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                @item.LineItemDescription
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="text-align: left;width:28%;"></td>
+                            <td style="text-align: left;width:16%;"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4">
+                                <div id="@("secondGrid" + i)"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            i++;
+        }
+    }
+</div>
+
+@*///Pop up window for email *@
+<div id="sendEmailPopup" class="form">
+
+</div>
+<script>
+    var collapseId = '';
+    function collapseMe(id, index) {
+        $('#div_Collapse_detail_' + id).toggle();
+        $('#iconCaretDown_' + id).toggle();
+        $('#iconCaretUp_' + id).toggle();
+        fillGridOnExpanding(index, id);
+        collapseId = id;
+    }
+
+    function fillGridOnExpanding(index, poLineId) {
+        //var poNumber = $('#PurchaseOrderLine_Number').val();
+        $("#costListgrid" + index).kendoGrid({
+            dataSource: new kendo.data.DataSource({
+                //type: "odata",
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: "/POLine/FillCostList",
+                            dataType: "json", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                            data: { poLineNumber: poLineId },
+                            success: function (result) {
+                                // notify the data source that the request succeeded
+                                options.success(result.Costlist);
+                                if (result.MonthlyDividedAmount) {
+                                    $('#LblMonthlyRate_' + index).html(result.MonthlyDividedAmount);
+                                }
+                                if (result.SecondGridData && result.SecondGridData.length > 0) {
+                                    $("#secondGrid" + index).kendoGrid({
+                                        dataSource: new kendo.data.DataSource({
+                                            //type: "odata",
+                                            transport: {
+                                                read: function (options) {
+                                                    options.success(result.SecondGridData);
+                                                }
+                                            },
+                                            pageSize: 25
+                                        }),
+                                        height: 100,
+                                        //groupable: true,
+                                        //sortable: true,
+                                        pageable: {
+                                            refresh: true,
+                                            pageSizes: true,
+                                            buttonCount: 5
+                                        },
+                                        columns: [
+                                            {
+                                                field: "Wbs",
+                                                title: "Wbs"
+                                            }, {
+                                                field: "ApplicationAPM1",
+                                                title: "Application/APM1"
+                                            }, {
+                                                field: "RechargeAmount",
+                                                title: "Recharge Amount"
+                                            }, {
+                                                field: "ContractStartDate",
+                                                title: "Contract Start Date"
+                                            }, {
+                                                field: "ContractEndDate",
+                                                title: "Contract End Date"
+                                            }, {
+                                                field: "EarlierPaymentDate",
+                                                title: "Earlier Payment Date"
+                                            }, {
+                                                field: "DelayedPaymentDate",
+                                                title: "Delayed Payment Date"
+                                            }, {
+                                                field: "MonthlyRate",
+                                                title: "Monthly Rate"
+                                            }, {
+                                                field: "RequesterName",
+                                                title: "Requester Name"
+                                            }
+                                        ]
+                                    });
+                                }
+                            },
+                            error: function (result) {
+                                // notify the data source that the request failed
+                                options.error(result);
+                            }
+                        });
+                    }
+                },
+                pageSize: 25
+            }),
+            height: 350,
+            //groupable: true,
+            //sortable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
+                {
+                    field: "DateAndYear",
+                    title: "Month"
+                }, {
+                    field: "Cost",
+                    title: "Cost"
+                }
+            ]
+        });
+    }
+
+    $(function () {
+
+        var myWindowPopup = $("#sendEmailPopup").kendoWindow({
+            title: "Email",
+            visible: false,
+            width: "600px",
+            height: "400px"
+        }).data("kendoWindow");
+        var sendWindow = $("#sendEmailPopup"),
+
+            sendEmailButton = $("#sendEmaillinkButton");
+
+        sendEmailButton.click(function (e) {
+
+            e.preventDefault();
+
+            myWindowPopup.refresh({
+                url: "/poline/GetPurchaseOrderLineRecipents?ebdNumber=" + $('#PurchaseOrderLine_Number').val(),
+                data: { productId: $(this).attr('data-product-Id') },
+            });
+            if (myWindowPopup.content().trim()) {
+
+                myWindowPopup.open().center();
+            }
+
+        });
+        $('#cancelSendEmailButton').on('click', function () {
+            sendWindow.data("kendoWindow").close();
+        });
+
+        var isAdmin = '@AuthorizationFilter.IsAdmin()';
+        var dropdownlist = $("#StatusPoId").data("kendoDropDownList");
+       
+        if (isAdmin=='False') {
+            dropdownlist.enable(false);
+        }
+        else {
+            dropdownlist.enable(true);
+        }
+        var $parentDivv = $(this).closest('div.purchaseOrderDetail');
+        var ownerHdn = $($parentDivv).find('cls-hdnOwnerSelectedId').val();
+        var stausHdn = $($parentDivv).find('cls-hdnStatusPoSelectedId').val();
+        
+        $("#Owner").data('kendoDropDownList').text(ownerHdn);
+        $("#StatusPoId").data('kendoDropDownList').text(stausHdn);
+
+        MakeError();
+
+        var isCalled = false;
+        var renewalTotalDaysLeft = 0;
+        $('.save-detail').on('change', function () {
+            
+            var isOuterInvoiceNo = false;
+            var validationStatusOK = true;
+            if (isCalled)
+                return
+            else isCalled = true;
+            var $parentDiv = $(this).closest('div.purchaseOrderDetail');
+
+            var selectedIndex = $($parentDiv).find('input.cls-hdnIndex').val();
+
+            var renewalTotalDaysLeft1 = $($parentDiv).find('.cls-RenewalTotalDaysLeft').val();
+            MakeError();
+            var invoiceNumberHeader = "InvoiceNumberHeader_" + selectedIndex;
+            if ($(this).attr('name') == invoiceNumberHeader) {
+                isOuterInvoiceNo = true;
+            }
+            if ($(this).attr('name') == 'Comments') {
+                if ($(this).val().length > 500) {
+                    $('#commentsErrorMessage').show();
+                    isCalled = false;
+                    return;
+                }
+                else {
+                    $('#commentsErrorMessage').hide();
+                }
+            }
+
+            var model = {
+                'PurchaseOrderLineId': $($parentDiv).find('input.cls-PurchaseOrderLineId').val(),
+                'OwnerId': $($parentDiv).find('input#OwnerId').val(),
+                'StatusPoId': $($parentDiv).find('input#StatusPoId').val(),
+                'Remark': $($parentDiv).find('textarea.cls-Remark').val(),
+                'Comments': $($parentDiv).find('textarea#Comments').val(),
+                'ContractStartDate': $($parentDiv).find('input.cls-ContractStartDate').val() == '' ? null : $($parentDiv).find('input.cls-ContractStartDate').val(),
+                'AcOrWbs': $($parentDiv).find('input.cls-AcOrWbs').val(),
+                'ContractEndDate': $($parentDiv).find('input.cls-ContractEndDate').val() == '' ? null : $($parentDiv).find('input.cls-ContractEndDate').val(),
+                'DelayedPaymentDate': $($parentDiv).find('input.cls-DelayedPaymentDate').val() == '' ? null : $($parentDiv).find('input.cls-DelayedPaymentDate').val(),
+                'AppId': $($parentDiv).find('input.cls-AppId').val(),
+                //'EarlierPaymentDate': $($parentDiv).find('input.cls-EarlierPaymentDate').val(),
+                'ExchangeRateYear': $($parentDiv).find('input.cls-ExchangeRateYear').val(),
+                'Renewal': ($parentDiv).find('input.cls-Renewal').is(":checked"), //$($parentDiv).find('input.cls-Renewal').val(),
+                'ActivityTypeId': $($parentDiv).find('input.cls-ActivityTypeId').val(),
+                'InvoiceNumber': $($parentDiv).find('input.cls-InvoiceNumber').val(),
+                'InvoiceNumberHeader': $('#' + invoiceNumberHeader).val(),
+                'ContactPerson': $($parentDiv).find('input.cls-ContactPerson').val(),
+                'ProductNumber': $($parentDiv).find('input.cls-ProductNumber').val(),
+                'PurchaserName': $('input#PurchaserName_1').val(),
+
+                'ProductId': $($parentDiv).find('input.cls-ProductId').val(),
+                'CostTypeId': $($parentDiv).find('input.cls-CostTypeId').val(),
+                'ContractTypeId': $($parentDiv).find('input.cls-ContractTypeId').val(),
+                'ContactPerson': $($parentDiv).find('input.cls-ContactPerson').val(),
+                'EarlierPaymentDate': $($parentDiv).find('input.cls-EarlierPaymentDate').val() == '' ? null : $($parentDiv).find('input.cls-EarlierPaymentDate').val(),
+                'ExchangeRateYear': $($parentDiv).find('input.cls-ExchangeRateYear').val(),
+                'RechargeAmount': $($parentDiv).find('input.cls-RechargeAmount').val(),
+                'RenewalOrderPurchaseLine': $($parentDiv).find('input.cls-RenewalOrderPurchaseLine').val(),
+                'RequestorName': $($parentDiv).find('input.cls-RequestorName').val()
+
+
+            }
+
+            var utc1 = new Date(model.ContractEndDate);
+            var utc2 = new Date;
+            const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+            var resultDiff = Math.floor((utc2 - utc1) / _MS_PER_DAY)
+
+            
+
+            var oldSelectedValue = kendo.toString(kendo.parseDate($('#hdn' + this.id).val()), 'yyyy-MM');
+            //var CSDT = 'ContractStartDate_' + selectedIndex;
+            //var CEDT = 'ContractEndDate_' + selectedIndex;
+            //var DPDT = 'DelayedDate_' + selectedIndex;
+            //var EPDT = 'EarlierPaymentDate_' + selectedIndex;
+            //var inputID = $(this).attr('id');
+            //debugger;
+            //if (CSDT == inputID || CEDT == inputID || DPDT == inputID || EPDT == inputID) {
+            //    if (!isNumberKey(this)){
+            //        return;
+            //    }
+            //}
+
+            //if (!$($parentDiv).find('input.cls-ContractStartDate').val()) {
+            //    $('#startDateErrorMessage' + parseInt(selectedIndex)).show();
+            //    $('#startDateErrorMessage' + parseInt(selectedIndex)).text("Contract start date is required.");
+            //    var isCalled = false;
+            //    validationStatusOK = false;
+            //    return;
+            //}
+            //else {
+            //    $('#startDateErrorMessage' + parseInt(selectedIndex)).hide();
+            //}
+            //if (!$($parentDiv).find('input.cls-AcOrWbs').val()) {
+            //    $('#wbsErrorMessage' + parseInt(selectedIndex)).show();
+            //    $('#wbsErrorMessage' + parseInt(selectedIndex)).text("AC / WBS should not be empty.");
+            //    var isCalled = false;
+            //    validationStatusOK = false;
+            //    //return;
+            //}
+            //else {
+            //    $('#wbsErrorMessage' + parseInt(selectedIndex)).hide();
+            //}
+
+            //if (!$($parentDiv).find('input.cls-ContractEndDate').val()) {
+            //    $('#endDateErrorMessage' + parseInt(selectedIndex)).show();
+            //    $('#endDateErrorMessage' + parseInt(selectedIndex)).text("Contract end date is required.");
+            //    var isCalled = false;
+            //    validationStatusOK = false;
+            //    return;
+            //}
+            //else {
+            //    $('#endDateErrorMessage' + parseInt(selectedIndex)).hide();
+            //}
+
+            //if (!$($parentDiv).find('input.cls-RechargeAmount').val()) {
+            //    $('#RechargeAmountErrorMessage' + parseInt(selectedIndex)).show();
+            //    var isCalled = false;
+            //    validationStatusOK = false;
+            //    //return;
+            //}
+            //else {
+            //    $('#RechargeAmountErrorMessage' + parseInt(selectedIndex)).hide();
+
+            //}
+
+            //if (!$($parentDiv).find('input.cls-RequestorName').val()) {
+            //    $('#RequestorNameErrorMessage' + parseInt(selectedIndex)).show();
+            //    $('#RequestorNameErrorMessage' + parseInt(selectedIndex)).text("Requestor Name should not be empty.");
+            //    var isCalled = false;
+            //    validationStatusOK = false;
+            //    //return;
+            //}
+            //else {
+            //    $('#RequestorNameErrorMessage' + parseInt(selectedIndex)).hide();
+            //}
+
+            //if (!$('input#PurchaserName_1').val()) {
+            //    $('#PurchaserNameErrorMessage' + parseInt(selectedIndex)).show();
+            //    $('#PurchaserNameErrorMessage' + parseInt(selectedIndex)).text("Purchaser Name should not be empty.");
+            //    var isCalled = false;
+            //    validationStatusOK = false;
+            //    //return;
+            //}
+            //else {
+            //    $('#PurchaserNameErrorMessage' + parseInt(selectedIndex)).hide();
+            //}
+
+            if (!ValidateDateFormat(model.ContractStartDate) && model.ContractStartDate) {
+                $('#startDateErrorMessage' + parseInt(selectedIndex)).show();
+                $('#startDateErrorMessage' + parseInt(selectedIndex)).text("Please enter the valid date (YYYY-MM) format.");
+                var isCalled = false;
+                validationStatusOK = false;
+                return;
+            }
+            else {
+                $('#startDateErrorMessage' + parseInt(selectedIndex)).hide();
+            }
+
+
+            if (!ValidateDateFormat(model.ContractEndDate) && model.ContractEndDate) {
+                $('#endDateErrorMessage' + parseInt(selectedIndex)).show();
+                $('#endDateErrorMessage' + parseInt(selectedIndex)).text("Please enter the valid date (YYYY-MM) format.");
+                var isCalled = false;
+                validationStatusOK = false;
+                return;
+            }
+            else {
+                $('#endDateErrorMessage' + parseInt(selectedIndex)).hide();
+            }
+
+            if (model.EarlierPaymentDate) {
+                if (!ValidateDateFormat(model.EarlierPaymentDate)) {
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).show();
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).text("Please enter the valid date (YYYY-MM) format.");
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    return;
+                }
+            }
+            else {
+                $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).hide();
+            }
+
+            if (model.DelayedPaymentDate) {
+                if (!ValidateDateFormat(model.DelayedPaymentDate)) {
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).show();
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).text("Please enter the valid date (YYYY-MM) format.");
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    return;
+                }
+            }
+            else {
+                $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).hide();
+            }
+
+            if (model && model.ContractStartDate && (this.id.toLowerCase().indexOf("contractstartdate") != -1)) {
+                if (model.ContractEndDate && (model.ContractStartDate > model.ContractEndDate)) {
+                    //alert("Contract start date should be less than equal to contract end date.");
+                    $('#startDateErrorMessage' + parseInt(selectedIndex)).show();
+                    $('#startDateErrorMessage' + parseInt(selectedIndex)).text("Contract start date should be less than equal to contract end date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+
+                else if (model.EarlierPaymentDate && (model.ContractStartDate > model.EarlierPaymentDate)) {
+                    //alert("Contract start date should be less than equal to earlier payment date.");
+                    $('#startDateErrorMessage' + parseInt(selectedIndex)).show();
+                    $('#startDateErrorMessage' + parseInt(selectedIndex)).text("Contract start date should be less than equal to earlier payment date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+
+                else if (model.DelayedPaymentDate && (model.ContractStartDate > model.DelayedPaymentDate)) {
+                    //alert("Contract start date should be less than equal to delayed payment date.");
+                    $('#startDateErrorMessage' + parseInt(selectedIndex)).show();
+                    $('#startDateErrorMessage' + parseInt(selectedIndex)).text("Contract start date should be less than equal to delayed payment date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+            }
+
+            
+            if (model && model.ContractEndDate && (this.id.toLowerCase().indexOf("contractenddate") != -1)) {
+                if (model.ContractStartDate && (model.ContractEndDate < model.ContractStartDate)) {
+
+                    $('#endDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Contract end date should be greater than or equal to contract start date.");
+                    $('#endDateErrorMessage' + parseInt(selectedIndex)).text("Contract end date should be greater than or equal to contract start date.");
+                    var isCalled = false;
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    validationStatusOK = false;
+                    //return false;
+                }
+
+                else if (model.EarlierPaymentDate && (model.ContractEndDate < model.EarlierPaymentDate)) {
+                    $('#endDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Contract end date should be greater than or equal to earlier payment date.");
+                    $('#endDateErrorMessage' + parseInt(selectedIndex)).text("Contract end date should be greater than or equal to earlier payment date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+
+                else if (model.DelayedPaymentDate && (model.ContractEndDate < model.DelayedPaymentDate)) {
+                    $('#endDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Contract end date should be greater than or equal to delayed payment date.");
+                    $('#endDateErrorMessage' + parseInt(selectedIndex)).text("Contract end date should be greater than or equal to delayed payment date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+            }
+
+            if (model && model.EarlierPaymentDate && (this.id.toLowerCase().indexOf("earlierpaymentdate") != -1)) {
+                if (model.ContractStartDate && (model.EarlierPaymentDate < model.ContractStartDate)) {
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Earlier payment date should be greater than equal to contract start date.");
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).text("Earlier payment date should be greater than equal to contract start date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+
+                else if (model.ContractEndDate && (model.EarlierPaymentDate > model.ContractEndDate)) {
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Earlier payment date should be less than or equal to contract end date.");
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).text("Earlier payment date should be less than or equal to contract end date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+
+                else if (model.DelayedPaymentDate && (model.EarlierPaymentDate < model.DelayedPaymentDate)) {
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Earlier payment date should be greater than or equal to delayed payment date.");
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).text("Earlier payment date should be greater than or equal to delayed payment date.");
+                    //$('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+            }
+
+            if (model && model.DelayedPaymentDate && (this.id.toLowerCase().indexOf("delayeddate") != -1)) {
+                if (model.ContractStartDate && (model.DelayedPaymentDate < model.ContractStartDate)) {
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Delayed payment date should be greater than or equal to contract start date.");
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).text("Delayed payment date should be greater than or equal to contract start date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+
+                else if (model.ContractEndDate && (model.DelayedPaymentDate > model.ContractEndDate)) {
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Delayed payment date should be less than or equal to earlier payment date.");
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).text("Delayed payment date should be less than or equal to contract end date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+
+                else if (model.EarlierPaymentDate && (model.EarlierPaymentDate < model.DelayedPaymentDate)) {
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).show();
+                    //alert("Delayed payment date should be greater than or equal to delayed payment date.");
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).text("Delayed payment date should be less than or equal to earlier payment date.");
+                    $('#' + this.id).data("kendoDatePicker").value(oldSelectedValue);
+                    var isCalled = false;
+                    validationStatusOK = false;
+                    //return false;
+                }
+            }
+
+            if (!validationStatusOK) {
+
+                return false;
+            }
+
+            CalculateRenewalFields($parentDiv, model.ContractEndDate);
+            
+            var preventCostGridRefresh = ['Comments', 'RenewalOrderPurchaseLine', 'ContactPerson', 'ExchangeRateYear', 'Remark', 'InvoiceNumber', 'ProductNumber', 'ProductId', 'CostTypeId', 'PurchaserName'];
+
+            var isInputExist = false;
+            var controlName = $(this).attr('name');
+            $.each(preventCostGridRefresh, function (index, value) {
+                if (value + '_' + selectedIndex == controlName) {
+                    isInputExist = true;
+                }
+                else if (value == controlName) { isInputExist = true; }
+            });
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/poline/SaveDetail',
+                data: JSON.stringify(model),
+                contentType: "application/json",
+                success: function (msg) {
+                    debugger;
+                    isCalled = false;
+                    if (!isInputExist) {
+                        fillGridOnExpanding(selectedIndex, model.PurchaseOrderLineId);
+                        //window.location.reload();
+                    }
+                    if(model.Renewal){
+                        $($parentDiv).find('.cls-Renewal').prop('checked', true);
+                    }
+                    else {
+                        $($parentDiv).find('.cls-Renewal').prop('checked', false);
+                    }
+
+                    if (msg.renewaDaysLeft) //&& parseInt(msg.renewaDaysLeft) > 0)
+                    {
+                        $($parentDiv).find('.cls-RenewalTotalDaysLeft').val(parseInt(msg.renewaDaysLeft));
+                    }
+
+                    $('#startDateErrorMessage' + parseInt(selectedIndex)).hide();
+                    $('#RequestorNameErrorMessage' + parseInt(selectedIndex)).hide(); 
+                    $('#endDateErrorMessage' + parseInt(selectedIndex)).hide();
+                    $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).hide();
+                    $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).hide();
+                    $('#wbsErrorMessage' + parseInt(selectedIndex)).hide();
+
+                    $('#lastModifiedByDate' + parseInt(selectedIndex)).text(msg.lastUpdatedDate);
+                    $('#lastModifiedBy' + parseInt(selectedIndex)).text(msg.lastChangedBy);
+                    $('#totalChangesMonths' + parseInt(selectedIndex)).text(msg.TotalMonths);
+                }
+            });
+
+        });
+    });
+
+    function MakeError() {
+
+        $.each($('.purchaseOrderDetail'), function (index, element) {
+
+            var enddate = $(this).find('input.cls-ContractEndDate').val();
+            if ($('#PurchaserName_1').val() == '') {
+                $('#PurchaserName_1').addClass('error-in-empty');
+            }
+            else {
+                $('#PurchaserName_1').removeClass('error-in-empty');
+            }
+
+            if ($(this).find('input.cls-ContractEndDate').val() == '') {
+                $(this).find('input.cls-ContractEndDate').addClass('error-in-empty');
+            }
+            else {
+                $(this).find('input.cls-ContractEndDate').removeClass('error-in-empty');
+            }
+            if ($(this).find('input.cls-ContractStartDate').val() == '') {
+                $(this).find('input.cls-ContractStartDate').addClass('error-in-empty');
+            }
+            else {
+                $(this).find('input.cls-ContractStartDate').removeClass('error-in-empty');
+            }
+            if ($(this).find('input.cls-RechargeAmount').val() == '') {
+                $(this).find('input.cls-RechargeAmount').addClass('error-in-empty');
+            }
+            else {
+                $(this).find('input.cls-RechargeAmount').removeClass('error-in-empty');
+            }
+            if ($(this).find('input.cls-RequestorName').val() == '') {
+                $(this).find('input.cls-RequestorName').addClass('error-in-empty');
+            }
+            else {
+                $(this).find('input.cls-RequestorName').removeClass('error-in-empty');
+            }
+            if ($(this).find('input.cls-AcOrWbs').val() == '') {
+                $(this).find('input.cls-AcOrWbs').addClass('error-in-empty');
+            }
+            else {
+                $(this).find('input.cls-AcOrWbs').removeClass('error-in-empty');
+            }
+
+
+            CalculateRenewalFields(this, enddate);
+
+        });
+    }
+
+    function CalculateRenewalFields($parentDiv, enddate) {
+        var renewalPurchaseLine = $($parentDiv).find('.cls-RenewalOrderPurchaseLine').val();
+        var renewalPurchaseLineInput = $($parentDiv).find('.cls-RenewalOrderPurchaseLine');
+          var renewalTotalDaysLeft = $(this).find('.cls-RenewalTotalDaysLeft').val();
+        var renewalorderlineSplit = renewalPurchaseLine.split('_');
+        if ($($parentDiv).find('.cls-Renewal').is(':checked')) { 
+             
+                if (renewalPurchaseLine == '') {
+                    $($parentDiv).find('.cls-RenewalOrderPurchaseLine').addClass('renewalDaysLeft');
+                    
+                }
+
+            $.ajax({
+                type: 'Get',
+                url: '/poline/GetRenewalDaysLeft?endDate=' + enddate + "&renewalOrderLine=" + renewalPurchaseLine,
+                dataType: 'json',
+                success: function (renewalTotalDaysLeft) {
+
+                    if (renewalTotalDaysLeft.DaysLeft >= -90) {
+                        if (!renewalTotalDaysLeft.IsRenewalValid) {                            
+                                $($parentDiv).find('.cls-RenewalOrderPurchaseLine').addClass('renewalDaysLeft');
+                                $($parentDiv).find('#renewalOrderLineAnchor_' + renewalorderlineSplit[0]).remove();
+                                $(renewalPurchaseLineInput).show();
+                            
+                        }
+                        else if (renewalTotalDaysLeft.IsRenewalValid) {
+                            $($parentDiv).find('#renewalOrderLineAnchor_' + renewalorderlineSplit[0]).remove();
+
+                            $($parentDiv).find('.cls-RenewalOrderPurchaseLine').removeClass('renewalDaysLeft');
+                            $('<a></a>', {
+                                href: "/PoLine/GetPurchaseOrderDetail?purchaseOrderId=" + renewalorderlineSplit[0],
+                                text: renewalPurchaseLine,
+                                id: "renewalOrderLineAnchor_" + renewalorderlineSplit[0]
+                            }).insertAfter(renewalPurchaseLineInput);
+                            $(renewalPurchaseLineInput).hide();
+                        }
+                    }
+                    else if (!renewalTotalDaysLeft.IsRenewalValid) {
+                       if (renewalTotalDaysLeft <= -90)
+                       { $($parentDiv).find('.cls-RenewalOrderPurchaseLine').removeClass('renewalDaysLeft'); }
+                        else
+                        $($parentDiv).find('.cls-RenewalOrderPurchaseLine').addClass('renewalDaysLeft');
+                    }
+                    else if (renewalTotalDaysLeft.IsRenewalValid) {
+                        $($parentDiv).find('#renewalOrderLineAnchor_' + renewalorderlineSplit[0]).remove();
+
+                        $($parentDiv).find('.cls-RenewalOrderPurchaseLine').removeClass('renewalDaysLeft');
+                        $('<a></a>', {
+                            href: "/PoLine/GetPurchaseOrderDetail?purchaseOrderId=" + renewalorderlineSplit[0],
+                            text: renewalPurchaseLine,
+                            id: "renewalOrderLineAnchor_" + renewalorderlineSplit[0]
+                        }).insertAfter(renewalPurchaseLineInput);
+                        $(renewalPurchaseLineInput).hide();
+                    }
+                    
+                }
+            });
+            return true;
+        }
+        else {
+            $($parentDiv).find('.cls-RenewalOrderPurchaseLine').removeClass('renewalDaysLeft');
+            $($parentDiv).find('#renewalOrderLineAnchor_' + renewalorderlineSplit[0]).remove();
+            $(renewalPurchaseLineInput).show();
+            return false;
+        }
+    }
+
+    function isNumberKey(evt) {
+       
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode != 45 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        
+
+        return true;
+
+    }
+    function ValidateDateFormat(date, id) {
+        if (validateDate(date)) {
+
+            return true;
+
+        }
+
+        else {
+
+
+            return false;
+        }
+
+    }
+
+    function validateDate(date) {
+        var txtVal = date;
+        var filter = new RegExp("([1-2][0-9][0-9][0-9])([-])(0[123456789]|10|11|12)");
+        
+        if (filter.test(txtVal)) {
+            var dateSplit = txtVal.split('-');
+            if (dateSplit[0].length > 4 || dateSplit[0] < 1900 || dateSplit[0] > 2050)
+                return false;
+            else
+                return true;
+        }
+        else
+            return false;
+    }
+   
+    
+       
+        
+
+
+</script>
+
+
+<style type="text/css">
+    .k-grid-header, .k-header {
+        background-color: grey;
+        color: white;
+    }
+
+    .k-grid-pager {
+        background-color: grey;
+        color: white;
+    }
+    .k-grid-content {
+    min-height: 48px;
+}
+</style>

@@ -1,0 +1,17 @@
+Calendar Icon 
+------------------------------------------
+** Note this is only a exampel zip, Images is not correct**
+
+Created: 2007-06-25
+By: Design & Usability, Volvo Information Technology, dept 9615
+
+
+Description of usage:
+Indicates that a date could be selected form a calendar. The date is set in the field when selected from the calendar.
+	
+Action:
+Open a calendar picker.
+
+Action mandatory:
+Yes
+------------------------------------------

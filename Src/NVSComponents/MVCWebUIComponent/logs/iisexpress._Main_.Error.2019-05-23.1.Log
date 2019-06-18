@@ -1,0 +1,320 @@
+2019-05-22T00:50:10.0024049Z	ErrorId: 10c16f25-aaa8-4ca1-b3f5-0e4b03b70e5e
+
+	Utc:		2019-05-22T00:50:10.0024049Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T00:51:58.5697373Z	ErrorId: b88d6e94-09b6-4b03-b708-cb37195e5389
+
+	Utc:		2019-05-22T00:51:58.5697373Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T00:52:16.8344091Z	ErrorId: 58283f32-20cd-41fc-9097-893713ff2e3a
+
+	Utc:		2019-05-22T00:52:16.8344091Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T02:51:10.2565849Z	ErrorId: bd2652df-b4cf-44dd-9cc2-1ce178418c76
+
+	Utc:		2019-05-22T02:51:10.2565849Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T02:51:10.270623Z	ErrorId: d345121f-4294-46c5-b49a-77c8ee486db2
+
+	Utc:		2019-05-22T02:51:10.270623Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T02:51:10.2696199Z	ErrorId: d6278183-ab2d-4a3c-87e9-849c3a570823
+
+	Utc:		2019-05-22T02:51:10.2696199Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T02:51:10.2640967Z	ErrorId: 10bc3623-04a0-4337-9c3b-bd8eb38f5d66
+
+	Utc:		2019-05-22T02:51:10.2640967Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T02:51:10.2640967Z	ErrorId: 998a5b89-bca2-4c65-9628-70cc05dda4a2
+
+	Utc:		2019-05-22T02:51:10.2640967Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T02:51:10.2640967Z	ErrorId: 7f44486c-b26d-4c3f-b6b9-0f04dab60d10
+
+	Utc:		2019-05-22T02:51:10.2640967Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+
+2019-05-22T02:51:16.1765834Z	ErrorId: 1a483ed8-43a7-466d-b3e3-c6ddb975e411
+
+	Utc:		2019-05-22T02:51:16.1765834Z
+	Machine:	INBLRWIT043838B
+	Application:	C:\Program Files (x86)\IIS Express\iisexpress.exe
+	System:		Volvo/NVS/POS
+	Version:	Vunknown. Build date is unknown
+	Description:	-
+	Transaction:	-
+
+	Exception stack: 1 level(s)
+	------------------------------------------------------------------------------------------
+
+	>> The trust relationship between this workstation and the primary domain failed.
+
+	   Type: System.SystemException
+	      at System.Security.Principal.NTAccount.TranslateToSids(IdentityReferenceCollection sourceAccounts, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean& someFailed)
+	      at System.Security.Principal.NTAccount.Translate(IdentityReferenceCollection sourceAccounts, Type targetType, Boolean forceSuccess)
+	      at System.Security.Principal.WindowsPrincipal.IsInRole(String role)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(String value)
+	      at Volvo.NVS.Security.Claims.ClaimsService.AddRole(IEnumerable`1 values)
+	      at Volvo.LAT.UserDomain.DomainLayer.UserService.CompleteClaims(IClaimsService service, DateTime contextTimestamp) in C:\TFS\BA-LAT-IT-P2\Src\NVSComponents\UserDomain\Services\DomainLayer\UserService.Claims.cs:line 74
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.CompleteClaims(IClaimsService service)
+	      at Volvo.NVS.Security.Handlers.AuthenticationHandler.PostAuthenticate()
+	      at Volvo.NVS.Security.SystemWeb.Modules.AuthenticationHttpModule`1.PostAuthenticateRequest(Object sender, EventArgs e)
+	      at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+	      at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+	      at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+	------------------------------------------------------------------------------------------
+
+

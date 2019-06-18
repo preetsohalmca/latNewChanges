@@ -1,0 +1,19 @@
+﻿@model HandleErrorInfo
+@{
+    ViewBag.Title = CommonResource.Error_ErrorImportantResourceTitle;
+}
+
+@{
+    Layout = "~/Views/Shared/_LayoutErrorImportant.cshtml";
+}
+
+
+<div class="group">
+    <span class="field">
+        <label class="field">@CommonResource.Error_ImportantResource</label>
+    </span>
+    <p>
+        @Html.Raw(Model.Exception.Message)
+    </p>
+    <hr class="nvs" />
+</div>

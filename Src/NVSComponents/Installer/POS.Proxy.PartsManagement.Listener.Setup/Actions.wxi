@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!--Find information and tutorials in https://teamplace.volvo.com/sites/volvoit-dotNET/DeveloperTools/Windows%20installer%20XML.aspx-->
+
+  <!--Storing the install information within the registry-->
+  <Property Id="CONFIGTRANSFORM" Value="$(var.CONFIGTRANSFORM)" />
+  <Property Id="SAVEDCONFIGTRANSFORM" Secure="yes">
+    <RegistrySearch Id="FindSavedCONFIGTRANSFORM"
+                    Root="HKLM"
+                    Key="SOFTWARE\VolvoIT\POSListener"
+                    Name="POSListener.ConfigTransform"
+                    Type="raw"
+                    Win64="no" />
+  </Property>
+
+  <SetProperty Id="CONFIGTRANSFORM" After="AppSearch" Value="[SAVEDCONFIGTRANSFORM]">
+    Installed
+  </SetProperty>
+
+  <CustomAction Id="SetDEFAULTROOTDIR" Return="check" Execute="immediate" BinaryKey="ActionsVbs" VBScriptCall="SetDefaultRootDir"/>
+  <Binary Id="ActionsVbs" SourceFile="actions.vbs"/>
+
+  <CustomAction Id="SetPathToCmd" Property="Cmd" Value="[SystemFolder]cmd.exe"/>
+  <CustomAction Id="ExecConfigTransformations" Return="check" Property="Cmd" ExeCommand="/c &quot;[#ConfigTransformations.cmd]&quot; [#ctt.exe] [INSTALLFOLDER] [CONFIGTRANSFORM] "  />
+  <CustomAction Id="DelConfigTransformations" Return="check" Property="Cmd" ExeCommand="/c if exist &quot;[#ConfigTransformations.cmd]&quot; del &quot;[#ConfigTransformations.cmd]&quot;"  />
+
+  <InstallUISequence>
+    <Custom Action="SetDEFAULTROOTDIR" Before="FindRelatedProducts"/>
+  </InstallUISequence>
+
+  <InstallExecuteSequence>
+    <Custom Action="SetDEFAULTROOTDIR" Before="FindRelatedProducts"/>
+    <Custom Action="SetPathToCmd" After="InstallFinalize">NOT Cmd</Custom>
+    <Custom Action="ExecConfigTransformations" After="SetPathToCmd">NOT Installed AND NOT CONFIGTRANSFORM=""</Custom>
+    <Custom Action="DelConfigTransformations" After="ExecConfigTransformations">NOT Installed AND NOT CONFIGTRANSFORM=""</Custom>
+  </InstallExecuteSequence>
+
+</Include>

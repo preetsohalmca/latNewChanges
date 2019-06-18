@@ -1,0 +1,585 @@
+﻿/*
+general css
+*/
+
+*
+{
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000000;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+html
+{
+    height: 100%;
+    overflow: hidden;
+}
+
+body
+{
+    height: 100%;
+    overflow: hidden;
+    min-width: 780px;
+}
+
+#nvsMainWindow
+{
+    height: 100%;
+    overflow: hidden;
+    min-width: 780px;
+    border: none;
+}
+
+/*
+header, body and footer
+*/
+
+#nvsSurroundingArea hr
+{
+    clear: both;
+    visibility: hidden;
+}
+
+#nvsApplicationId
+{
+    float: left;
+}
+
+#nvsApplicationId h1 a
+{
+    text-decoration: none;
+}
+
+#nvsSupportingFunctions
+{
+    float: right;
+}
+
+#nvsSupportingFunctions a
+{
+    text-decoration: none;
+}
+
+#nvsUserId
+{
+    clear: right;
+    float: right;
+}
+
+#nvsVersion
+{
+    float: right;
+}
+
+/*
+header tags
+*/
+
+/*
+command area
+*/
+
+.commandArea
+{
+    padding: 4px 10px;
+    clear: both;
+    right: 0;
+    left: 0;
+    text-align: right;
+    font-size: 0;
+}
+
+.commandArea.inline
+{
+    bottom: 0;
+    position: absolute;
+}
+
+.commandArea input[type="button"],
+.commandArea input[type="submit"]
+{
+    padding: 2px 4px;
+    margin-left: 10px;
+    min-width: 75px;
+    font-size: 11px;
+    text-align: center;
+    border: 1px outset;
+    font-family: "Arial";
+}
+
+/*
+toolbar
+*/
+
+.toolbar
+{
+    clear: both;
+    right: 0;
+    left: 0;
+    border: 1px solid;
+    font-size: 0;
+}
+
+.toolbar .delimiter
+{
+    margin: 0 5px;
+    border-left: 1px solid;
+}
+
+.toolbar input[type="button"],
+.toolbar input[type="submit"]
+{
+    font-size: 9px;
+    font-family: "Tahoma";
+    border: 1px solid transparent;
+    background-color: transparent;
+    height: 21px;
+    padding: 0 3px;
+}
+
+.toolbar input[type="button"].disabled,
+.toolbar input[type="button"].disabled:hover,
+.toolbar input[type="submit"].disabled,
+.toolbar input[type="submit"].disabled:hover
+{
+    background-color: transparent;
+    border-color: transparent;
+    cursor: not-allowed;
+}
+
+.toolbar input[type="button"].icon,
+.toolbar input[type="submit"].icon
+{
+    background-position: 4px 50%;
+    background-repeat: no-repeat;
+    padding-left: 19px;
+}
+
+.toolbar input[type="button"].icon:not([value]),
+.toolbar input[type="submit"].icon:not([value])
+{
+    padding-left: 0;
+    padding-right: 0;
+    width: 23px;
+}
+
+/*
+form
+*/
+
+span.field
+{
+    display: inline-block;
+    padding: 4px 6px;
+}
+
+label.field
+{
+    display: block;
+    font-weight: bold;
+    font-size: 11px;
+    padding-bottom: 4px;
+}
+
+label.field span.required
+{
+    font-weight: bold;
+    font-size: 11px;
+    padding-left: 6px;
+    color: #c92b2f;
+}
+
+input[type="text"].nvs,
+input[type="text"].nvs:hover,
+input[type="password"].nvs,
+input[type="password"].nvs:hover,
+textarea.nvs,
+textarea.nvs:hover
+{
+    border: 1px solid #D0D0D0;
+    height: 20px;
+    line-height: 18px;
+    text-indent: 4px;
+    background-color: #FFFFFF;
+    color: #000000;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-sizing: border-box;
+    outline: 0 none;
+    vertical-align: middle;
+    overflow: visible;
+    width: 12.4em;
+}
+
+input[type="text"][disabled="disabled"].nvs,
+input[type="text"][disabled="disabled"].nvs:hover,
+input[type="password"][disabled="disabled"].nvs,
+input[type="password"][disabled="disabled"].nvs:hover,
+textarea.nvs[disabled="disabled"],
+textarea.nvs[disabled="disabled"]:hover
+{
+    color: #9F9E9E;
+}
+
+textarea.nvs,
+textarea.nvs:hover
+{
+    height: 60px;
+    width: 24.8em;
+}
+
+input.input-validation-error
+{
+    border-color: #c92b2f !important;
+    border-width: 1px;
+    border-style: solid;
+}
+
+span.field-validation-error
+{
+    position: absolute;
+    padding: 17px 6px 6px;
+    background: transparent url('icons/validation-error-message.png') no-repeat 0 0;
+    max-width: 250px;
+    display: block;
+    font-weight: bold;
+    color: #c92b2f;
+}
+
+span.field-validation-error span
+{
+    color: #c92b2f;
+}
+
+ul.nvs,
+ol.nvs
+{
+    padding-left: 40px;
+}
+
+hr.nvs
+{
+    clear: both;
+    visibility: hidden;
+    height: 15px;
+}
+
+/*
+icons
+*/
+
+.icon.add
+{
+    background-image: url("icons/Add_14x14.png");
+}
+
+.icon.back
+{
+    background-image: url("icons/Back_14x14.png");
+}
+
+.icon.calculator
+{
+    background-image: url("icons/Calculator_14x14.png");
+}
+
+.icon.calendar
+{
+    background-image: url("icons/Calendar_14x14.png");
+}
+
+.icon.close
+{
+    background-image: url("icons/Close_14x14.png");
+}
+
+.icon.contact
+{
+    background-image: url("icons/Contact_14x14.png");
+}
+
+.icon.contextualmenu
+{
+    background-image: url("icons/ContextualMenu_14x14.png");
+}
+
+.icon.copy
+{
+    background-image: url("icons/Copy_14x14.png");
+}
+
+.icon.delete
+{
+    background-image: url("icons/Delete_14x14.png");
+}
+
+.icon.down
+{
+    background-image: url("icons/Down_14x14.png");
+}
+
+.icon.edit
+{
+    background-image: url("icons/Edit_14x14.png");
+}
+
+.icon.error
+{
+    background-image: url("icons/Error_14x14.png");
+}
+
+.icon.exit
+{
+    background-image: url("icons/Exit_14x14.png");
+}
+
+.icon.forward
+{
+    background-image: url("icons/Forward_14x14.png");
+}
+
+.icon.gif
+{
+    background-image: url("icons/GIF_14x14.png");
+}
+
+.icon.help
+{
+    background-image: url("icons/Help_14x14.png");
+}
+
+.icon.hide
+{
+    background-image: url("icons/Hide_14x14.png");
+}
+
+.icon.history
+{
+    background-image: url("icons/History_14x14.png");
+}
+
+.icon.information
+{
+    background-image: url("icons/Information_14x14.png");
+}
+
+.icon.jpg
+{
+    background-image: url("icons/JPG_14x14.png");
+}
+
+.icon.mail
+{
+    background-image: url("icons/Mail_14x14.png");
+}
+
+.icon.new
+{
+    background-image: url("icons/New_14x14.png");
+}
+
+.icon.note
+{
+    background-image: url("icons/Note_14x14.png");
+}
+
+.icon.open
+{
+    background-image: url("icons/Open_14x14.png");
+}
+
+.icon.pdf
+{
+    background-image: url("icons/PDF_14x14.png");
+}
+
+.icon.picker
+{
+    background-image: url("icons/picker_14x14.png");
+}
+
+.icon.png
+{
+    background-image: url("icons/PNG_14x14.png");
+}
+
+.icon.print
+{
+    background-image: url("icons/Print_14x14.png");
+}
+
+.icon.properties
+{
+    background-image: url("icons/Properties_14x14.png");
+}
+
+.icon.refresh
+{
+    background-image: url("icons/Refresh_14x14.png");
+}
+
+.icon.save
+{
+    background-image: url("icons/Save_14x14.png");
+}
+
+.icon.search
+{
+    background-image: url("icons/Search_14x14.png");
+}
+
+.icon.settings
+{
+    background-image: url("icons/Settings_14x14.png");
+}
+
+.icon.show
+{
+    background-image: url("icons/Show_14x14.png");
+}
+
+.icon.sort
+{
+    background-image: url("icons/Sort_14x14.png");
+}
+
+.icon.sortasc
+{
+    background-image: url("icons/Sort_Asc14x14.png");
+}
+
+.icon.sortdesc
+{
+    background-image: url("icons/Sort_Desc14x14.png");
+}
+
+.icon.statusconfirm
+{
+    background-image: url("icons/Status_Confirm_14x14.png");
+}
+
+.icon.statusnegative
+{
+    background-image: url("icons/Status_Negative_14x14.png");
+}
+
+.icon.statuspending
+{
+    background-image: url("icons/Status_Pending_14x14.png");
+}
+
+.icon.treecollapse
+{
+    background-image: url("icons/Tree_Collapse_14x14.png");
+}
+
+.icon.treeexpand
+{
+    background-image: url("icons/Tree_Expand_14x14.png");
+}
+
+.icon.treefolderclosed
+{
+    background-image: url("icons/Tree_FolderClosed_14x14.png");
+}
+
+.icon.treefolderopen
+{
+    background-image: url("icons/Tree_FolderOpen_14x14.png");
+}
+
+.icon.up
+{
+    background-image: url("icons/Up_14x14.png");
+}
+
+.icon.warning
+{
+    background-image: url("icons/Warning_14x14.png");
+}
+
+.icon.web
+{
+    background-image: url("icons/WEB_14x14.png");
+}
+
+.icon.xls
+{
+    background-image: url("icons/XLS_14x14.png");
+}
+
+.icon.zip
+{
+    background-image: url("icons/ZIP_14x14.png");
+}
+
+/*
+table
+*/
+
+table.nvs
+{
+    background-color: #ffffff;
+    empty-cells: show;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table.nvs > thead > tr > th,
+table.nvs > tfoot > tr > td
+{
+    padding: 4px;
+    font-weight: bold;
+}
+
+table.nvs > tbody > tr > td
+{
+    padding: 4px;
+}
+
+/*
+flash messages
+*/
+
+#nvsFlashMessagesContainer > div.info
+{
+    background: url("icons/Information_32x32.png") no-repeat scroll 16px center #FFFFEE;
+    border: 1px solid #0018FF;
+    padding: 20px 20px 20px 80px;
+}
+
+#nvsFlashMessagesContainer > div.warning
+{
+    background: url("icons/Warning_32x32.png") no-repeat scroll 16px center #FFFFEE;
+    border: 1px solid #990000;
+    padding: 20px 20px 20px 80px;
+}
+
+#nvsFlashMessagesContainer > div.error
+{
+    background: url("icons/Error_32x32.png") no-repeat scroll 16px center #FFFFEE;
+    border: 1px solid #990000;
+    padding: 20px 20px 20px 80px;
+}
+
+/*
+standard mvc validation summary
+*/
+
+div.validation-summary-errors
+{
+    background: url("icons/Error_32x32.png") no-repeat scroll 16px center #FFFFEE;
+    border: 1px solid #990000;
+    padding: 20px 20px 20px 80px;
+}
+
+.kendo-validation-error {
+    border-color: #c92b2f !important;
+    border-width: 1px;
+    border-style: solid;
+}

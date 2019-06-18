@@ -1,0 +1,30 @@
+﻿ @using Volvo.LAT.POLineDomain.DomainLayer.Entities
+@model Volvo.LAT.PartDomain.DomainLayer.Entities.SearchModel
+@{
+    ViewBag.Title = HomeResource.Home_Index_Title;
+}
+ 
+<div class="group"> 
+    
+    
+    <hr class="nvs">
+</div>
+@Html.Partial("_SearchPO",Model)
+ @*@Html.ActionLink("Button name", "Index", "POLine") 
+
+ 
+<h1 class="nvs">Page is under construction</h1>*@
+<script>
+    $(function () { 
+        $('#commonSearch').show();
+
+
+        var grid = $("#grida").data("kendoGrid");
+        onDataBound();
+       grid.dataSource.read();
+        grid.refresh();
+
+    });
+</script> 
+     
+      

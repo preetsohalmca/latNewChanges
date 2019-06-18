@@ -1,0 +1,39 @@
+﻿@model Volvo.LAT.MVCWebUIComponent.Models.Views.UserPresentationModel
+@{
+    ViewBag.Title = UserResource.User_ManageUsers_Title;
+}
+<script type="text/javascript">
+    $(function() {
+        new Volvo.LAT.Views.ManageUsers('@Url.Action("EditUser")', '@Url.Action("AddUser")', '@Url.Action("DeleteUser")', '@Url.Action("NotAuthorized")', $('#EditUser'), $('#AddUser'), $('#DeleteUser'), $('#UsersGrid'));
+    });
+</script>
+<h1 class="nvs">@UserResource.User_ManageUsers_Title</h1>
+<div class="toolbar">
+    <input type="button" id="EditUser" class="icon edit disabled" value="@UserResource.User_ManageUsers_EditUser" />
+    <input type="button" id="AddUser" class="icon add" value="@UserResource.User_ManageUsers_AddUser" />
+    <span class="delimiter"></span>
+    <input type="button" id="DeleteUser" class="icon delete disabled" value="@UserResource.User_ManageUsers_DeleteUser" />
+</div>
+@(Html.Kendo().Grid<UserModel>()
+    .Name("UsersGrid")
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Model(model => model.Id(p => p.UserName))
+        .Read(read => read.Action("UserGridRead", "User"))
+        .Events(e => e.Error("Volvo.LAT.Views.ManageUsers.onGridError"))
+        .PageSize(10)
+    )
+    .EnableCustomBinding(true)
+    .Columns(columns =>
+    {
+        columns.Bound(o => o.UserName).Title(@UserResource.User_UserName);
+        columns.Bound(o => o.FirstName).Title(@UserResource.User_FirstName);
+        columns.Bound(o => o.LastName).Title(@UserResource.User_LastName);
+        columns.Bound(o => o.LatestLogin).ClientTemplate("#= data.LatestLogin == null?'" + @UserResource.User_ManageUsers_NeverLogin + "': kendo.toString(data.LatestLogin, 'd') #").Title(@UserResource.User_ManageUsers_LatestLogin);
+        columns.Bound(o => o.Role.Name).Title(@UserResource.User_Role);
+    })
+    .Selectable()
+    .Pageable(p => p.Input(true).Refresh(true).PageSizes(new[] { 2, 5, 10, 100 }))
+    .Scrollable(x => x.Enabled(false))
+    .Events(x => x.Change("Volvo.LAT.Views.ManageUsers.onGridRowSelected"))
+)

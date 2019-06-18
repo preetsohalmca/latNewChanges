@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+
+  <!--Find information and tutorials in https://teamplace.volvo.com/sites/volvoit-dotNET/DeveloperTools/Windows%20installer%20XML.aspx-->
+  
+  <?define PRODUCTNAME="POSWeb.Setup"?>
+  <?define PRODUCTCODE="*"?>
+  <?define UPGRADECODE="f5fc0746-3ba8-41a9-a2c7-3381cd19a605"?>
+  <?define MANUFACTURER="VolvoIT"?>
+  <?define DESCRIPTION = "Installer for POS Application" ?>
+
+  <?define WEBDEPLOYPROJECTNAME = "MVCWebUIComponent" ?>
+  <?define WEBSITENAME = "TEST" ?>
+</Include>

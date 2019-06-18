@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Utilites_CSSOverview_PanelBar" xml:space="preserve">
+    <value>PanelBar</value>
+  </data>
+  <data name="Utilities_CSSOverview" xml:space="preserve">
+    <value>CSS Overview</value>
+  </data>
+  <data name="Utilities_CSSOverview_AnotherButton" xml:space="preserve">
+    <value>Another one</value>
+  </data>
+  <data name="Utilities_CSSOverview_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="Utilities_CSSOverview_Checkbox" xml:space="preserve">
+    <value>Checkbox</value>
+  </data>
+  <data name="Utilities_CSSOverview_CheckboxTitle" xml:space="preserve">
+    <value>Checkboxes and Radio buttons</value>
+  </data>
+  <data name="Utilities_CSSOverview_Checked" xml:space="preserve">
+    <value>Checked</value>
+  </data>
+  <data name="Utilities_CSSOverview_Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Utilities_CSSOverview_FirstPanel" xml:space="preserve">
+    <value>first panel</value>
+  </data>
+  <data name="Utilities_CSSOverview_FirstTab" xml:space="preserve">
+    <value>first tab</value>
+  </data>
+  <data name="Utilities_CSSOverview_Grid" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="Utilities_CSSOverview_GridCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Utilities_CSSOverview_GridValue" xml:space="preserve">
+    <value>Some value</value>
+  </data>
+  <data name="Utilities_CSSOverview_GridYear" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Utilities_CSSOverview_Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuBeds" xml:space="preserve">
+    <value>Beds</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuBlog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuCarpets" xml:space="preserve">
+    <value>Carpets</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuChildren" xml:space="preserve">
+    <value>Children's Furniture</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuCompany" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuCurtains" xml:space="preserve">
+    <value>Curtains &amp; Blinds</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuDecor" xml:space="preserve">
+    <value>Decor</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuFurniture" xml:space="preserve">
+    <value>Furniture</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuLinen" xml:space="preserve">
+    <value>Bed Linen</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuNews" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuOccasional" xml:space="preserve">
+    <value>Occasional Furniture</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuProducts" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuRugs" xml:space="preserve">
+    <value>Rugs</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuSofas" xml:space="preserve">
+    <value>Sofas</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuTables" xml:space="preserve">
+    <value>Tables &amp; Chairs</value>
+  </data>
+  <data name="Utilities_CSSOverview_MenuThrows" xml:space="preserve">
+    <value>Throws</value>
+  </data>
+  <data name="Utilities_CSSOverview_MultiSelectPlaceHolder" xml:space="preserve">
+    <value>Click to select a country.</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Communication" xml:space="preserve">
+    <value>Communication</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Forecast" xml:space="preserve">
+    <value>Forecast</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Forecasts" xml:space="preserve">
+    <value>Sales Forecasts</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Friday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Monday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_NewPlan" xml:space="preserve">
+    <value>New Business Plan</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Programs" xml:space="preserve">
+    <value>Programs</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Projects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Reports" xml:space="preserve">
+    <value>Sales Reports</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Utilities_CSSOverview_PanelBar_Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="Utilities_CSSOverview_Pickers" xml:space="preserve">
+    <value>Pickers</value>
+  </data>
+  <data name="Utilities_CSSOverview_Pickers_EnterValue" xml:space="preserve">
+    <value>Enter value...</value>
+  </data>
+  <data name="Utilities_CSSOverview_Pickers_SelectCountries" xml:space="preserve">
+    <value>Select countries...</value>
+  </data>
+  <data name="Utilities_CSSOverview_Pickers_SelectCountry" xml:space="preserve">
+    <value>Select country...</value>
+  </data>
+  <data name="Utilities_CSSOverview_ProgressBar" xml:space="preserve">
+    <value>Progress bar</value>
+  </data>
+  <data name="Utilities_CSSOverview_SampleContent" xml:space="preserve">
+    <value>sample content</value>
+  </data>
+  <data name="Utilities_CSSOverview_SecondPanel" xml:space="preserve">
+    <value>second panel</value>
+  </data>
+  <data name="Utilities_CSSOverview_SecondTab" xml:space="preserve">
+    <value>second tab</value>
+  </data>
+  <data name="Utilities_CSSOverview_Slider" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="Utilities_CSSOverview_Splitter" xml:space="preserve">
+    <value>Splitter</value>
+  </data>
+  <data name="Utilities_CSSOverview_TabStrip" xml:space="preserve">
+    <value>TabStrip</value>
+  </data>
+  <data name="Utilities_CSSOverview_ThirdPanel" xml:space="preserve">
+    <value>third panel</value>
+  </data>
+  <data name="Utilities_CSSOverview_ThirdTab" xml:space="preserve">
+    <value>third tab</value>
+  </data>
+  <data name="Utilities_CSSOverview_Tooltip" xml:space="preserve">
+    <value>Tooltip</value>
+  </data>
+  <data name="Utilities_CSSOverview_ToolTipTitle" xml:space="preserve">
+    <value>Hover me</value>
+  </data>
+  <data name="Utilities_CSSOverview_TreeView" xml:space="preserve">
+    <value>TreeView</value>
+  </data>
+  <data name="Utilities_CSSOverview_Window" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="Utilities_EnableBundlingAndMinification_Disabled" xml:space="preserve">
+    <value>Bundling and Minification has been disabled.</value>
+  </data>
+  <data name="Utilities_EnableBundlingAndMinification_Enabled" xml:space="preserve">
+    <value>Bundling and Minification has been enabled.</value>
+  </data>
+  <data name="Utilities_JavascriptUnitTests_Title" xml:space="preserve">
+    <value>Unit Tests for POS Javascript Code</value>
+  </data>
+  <data name="Utilities_SetLocalization_LocalizationHasBeenChanged" xml:space="preserve">
+    <value>Localization has been changed to {0}.</value>
+  </data>
+  <data name="Utilities_SetTheme_BrandHasBeenChanged" xml:space="preserve">
+    <value>Brand has been changed to {0}.</value>
+  </data>
+  <data name="Utilities_CSSOverview_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Utilities_CSSOverview_CheckboxDis" xml:space="preserve">
+    <value>Disabled checkbox</value>
+  </data>
+  <data name="Utilities_CSSOverview_CommandArea" xml:space="preserve">
+    <value>Command Area</value>
+  </data>
+  <data name="Utilities_CSSOverview_Editor" xml:space="preserve">
+    <value>Editor</value>
+  </data>
+  <data name="Utilities_CSSOverview_Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Utilities_CSSOverview_Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="Utilities_CSSOverview_GroupHeader" xml:space="preserve">
+    <value>Group Header</value>
+  </data>
+  <data name="Utilities_CSSOverview_Header" xml:space="preserve">
+    <value>Header</value>
+  </data>
+  <data name="Utilities_CSSOverview_Headers" xml:space="preserve">
+    <value>Headers</value>
+  </data>
+  <data name="Utilities_CSSOverview_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Utilities_CSSOverview_JustText" xml:space="preserve">
+    <value>Just text</value>
+  </data>
+  <data name="Utilities_CSSOverview_Link" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="Utilities_CSSOverview_List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="Utilities_CSSOverview_List_Item" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="Utilities_CSSOverview_Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Utilities_CSSOverview_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Utilities_CSSOverview_PasswordDis" xml:space="preserve">
+    <value>Disabled password</value>
+  </data>
+  <data name="Utilities_CSSOverview_RadioButton" xml:space="preserve">
+    <value>RadioButton</value>
+  </data>
+  <data name="Utilities_CSSOverview_RadioButtonDis" xml:space="preserve">
+    <value>Disabled radioButton</value>
+  </data>
+  <data name="Utilities_CSSOverview_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Utilities_CSSOverview_Table" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="Utilities_CSSOverview_Table_Column" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="Utilities_CSSOverview_Table_Footer" xml:space="preserve">
+    <value>Footer</value>
+  </data>
+  <data name="Utilities_CSSOverview_TextArea" xml:space="preserve">
+    <value>TextArea</value>
+  </data>
+  <data name="Utilities_CSSOverview_TextAreaDis" xml:space="preserve">
+    <value>Disabled textArea</value>
+  </data>
+  <data name="Utilities_CSSOverview_TextBox" xml:space="preserve">
+    <value>TextBox</value>
+  </data>
+  <data name="Utilities_CSSOverview_TextBoxDis" xml:space="preserve">
+    <value>Disabled textBox</value>
+  </data>
+  <data name="Utilities_CSSOverview_Toolbar" xml:space="preserve">
+    <value>Toolbar</value>
+  </data>
+  <data name="Utilities_CSSOverview_BurglariesPerPopulation" xml:space="preserve">
+    <value>Burglaries per 100,000 population</value>
+  </data>
+  <data name="Utilities_CSSOverview_CarReport" xml:space="preserve">
+    <value>Hybrid car mileage report</value>
+  </data>
+  <data name="Utilities_CSSOverview_CrimeStatistics" xml:space="preserve">
+    <value>Crime statistics</value>
+  </data>
+  <data name="Utilities_CSSOverview_Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="Utilities_CSSOverview_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Utilities_CSSOverview_HoverHere" xml:space="preserve">
+    <value>Hover here...</value>
+  </data>
+  <data name="Utilities_CSSOverview_Hydro" xml:space="preserve">
+    <value>Hydro</value>
+  </data>
+  <data name="Utilities_CSSOverview_InternetUsers" xml:space="preserve">
+    <value>Internet Users</value>
+  </data>
+  <data name="Utilities_CSSOverview_LeftPane" xml:space="preserve">
+    <value>Left pane</value>
+  </data>
+  <data name="Utilities_CSSOverview_MurdersPerPopulation" xml:space="preserve">
+    <value>Murders per 100,000 population</value>
+  </data>
+  <data name="Utilities_CSSOverview_Nuclear" xml:space="preserve">
+    <value>Nuclear</value>
+  </data>
+  <data name="Utilities_CSSOverview_OpenWindow" xml:space="preserve">
+    <value>Open window</value>
+  </data>
+  <data name="Utilities_CSSOverview_RightPane" xml:space="preserve">
+    <value>Right pane</value>
+  </data>
+  <data name="Utilities_CSSOverview_Solar" xml:space="preserve">
+    <value>Solar</value>
+  </data>
+  <data name="Utilities_CSSOverview_SpainElectricity" xml:space="preserve">
+    <value>Break-up of Spain Electricity Production for 2008</value>
+  </data>
+  <data name="Utilities_CSSOverview_USA" xml:space="preserve">
+    <value>United states</value>
+  </data>
+  <data name="Utilities_CSSOverview_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Utilities_CSSOverview_Wind" xml:space="preserve">
+    <value>Wind</value>
+  </data>
+  <data name="Utilities_CSSOverview_World" xml:space="preserve">
+    <value>World</value>
+  </data>
+</root>

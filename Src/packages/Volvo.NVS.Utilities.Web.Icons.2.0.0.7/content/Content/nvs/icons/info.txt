@@ -1,0 +1,21 @@
+Volvo Group Icon Library
+------------------------------------------
+
+The Icon Library is available on Violin at http://violin.volvo.net/volvogroup/corporate/en/communities/WebCommunications/cwp/guidelines/design/design.htm.
+
+The library contains all existing icons for web interfaces and is continuously updated as new icons are created.
+Each icon has a description of usage that explains in which context the icon is used in and the action connected to the icon.
+
+To submit a new icon or for questions please contact:
+
+Support Volvo Group Web Application Design Manual
+Phone: +46 31 3226677
+E-mail: support.design.manual@volvo.com
+
+------------------------------------------
+History:
+------------------------------------------
+2007-06-29	Save added
+2007-06-29	Mail added
+2007-06-29	Calendar added
+2007-06-29	Tree expand/collapse added

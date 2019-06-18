@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!--Find information and tutorials in https://teamplace.volvo.com/sites/volvoit-dotNET/DeveloperTools/Windows%20installer%20XML.aspx-->
+
+  <Property Id="WEBSITENAME" Value="$(var.WEBSITENAME)" />
+  
+  <CustomAction Id="IISExistsOnTarget" Return="check" Execute="immediate" BinaryKey="VITCustomActions" DllEntry="caIISExistsOnTarget"/>
+  <CustomAction Id="WebSiteExists" Return="check" Execute="immediate" BinaryKey="VITCustomActions" DllEntry="caWebSiteExists"/>
+  <CustomAction Id="GetParentWebInstallDir" Return="check" Execute="immediate" BinaryKey="VITCustomActions" DllEntry="caGetWebInstallDirParent"/>
+  <Binary Id="VITCustomActions" SourceFile="VITCustomActions.CA.dll"/>
+
+  <CustomAction Id="SetPathToCmd" Property="Cmd" Value="[SystemFolder]cmd.exe"/>
+  <CustomAction Id="ExecCmdFile" Return="check" Property="Cmd" ExeCommand="/c &quot;[#CmdFile]&quot; /y"  />
+  <CustomAction Id="ExecConfigTransformations" Return="check" Property="Cmd" ExeCommand="/c &quot;[#ConfigTransformations.cmd]&quot; [#ctt.exe] [WEBSITEINSTALLDIR] [CONFIGTRANSFORM] "  />
+  <CustomAction Id="DelConfigTransformations" Return="check" Property="Cmd" ExeCommand="/c if exist &quot;[#ConfigTransformations.cmd]&quot; del &quot;[#ConfigTransformations.cmd]&quot;"  />
+
+  <!--Set the proper InstallFolder to the websiteinstalldir-->
+  <SetProperty Id="INSTALLFOLDER" Value="[INSTALLDIR]" Before="FindRelatedProducts" />
+
+  <InstallUISequence>
+    <Custom Action="IISExistsOnTarget" Before="FindRelatedProducts"></Custom>
+    <!--If it is not running in silent mode-->
+    <Custom Action="WebSiteExists" After="IISExistsOnTarget">NOT UILevel=2</Custom>
+    <!--If website exists then it gets the correct directory-->
+    <Custom Action="GetParentWebInstallDir" After="WebSiteExists" >WEBSITEEXISTS="true"</Custom>
+  </InstallUISequence>
+
+  <InstallExecuteSequence>
+    <Custom Action="IISExistsOnTarget" Before="FindRelatedProducts"></Custom>
+    <!--If it's running in silent mode-->
+    <Custom Action="WebSiteExists" After="IISExistsOnTarget">UILevel=2</Custom>
+
+    <!--If website exists then it gets the correct directory-->
+    <Custom Action="GetParentWebInstallDir" After="WebSiteExists" >WEBSITEEXISTS="true"</Custom>
+
+    <Custom Action="SetPathToCmd" After="InstallFinalize">(NOT Cmd) AND (WEBSITEEXISTS="true")</Custom>
+    <Custom Action="ExecCmdFile" After="SetPathToCmd">(NOT Installed) AND (WEBSITEEXISTS="true")</Custom>
+
+    <Custom Action="ExecConfigTransformations" After="ExecCmdFile">(NOT Installed) AND (WEBSITEEXISTS="true") AND (NOT CONFIGTRANSFORM="")</Custom>
+    <Custom Action="DelConfigTransformations" After="ExecConfigTransformations">(NOT Installed) AND (WEBSITEEXISTS="true") AND (NOT CONFIGTRANSFORM="")</Custom>
+  </InstallExecuteSequence>
+
+</Include>

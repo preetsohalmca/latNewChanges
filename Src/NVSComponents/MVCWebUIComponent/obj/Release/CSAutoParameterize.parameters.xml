@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="LATDbConnectionString-Web.config Connection String" description="LATDbConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=segotn14365.rds.volvo.com\SQL1;Initial Catalog=LAT_IT_Phase_II_qa;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\TFS\\BA-LAT-IT-P2\\Src\\NVSComponents\\MVCWebUIComponent\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LATDbConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

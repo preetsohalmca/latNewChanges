@@ -1,0 +1,637 @@
+﻿@using Volvo.LAT.POLineDomain.DomainLayer.Entities
+@model Volvo.LAT.PartDomain.DomainLayer.Entities.SearchModel
+@{
+    ViewBag.Title = "POLineSearch";
+}
+
+<div class="group">
+    <h3 class="nvs">Search Bar</h3>
+
+    <div style="margin-top: 5px;height:50px;">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6" style="padding-top: 1px;">
+                    <input type="text" id="SearchInput" style="width:90%;" class="form-control" />
+                </div>
+                <div class="col-md-4" style="padding-top: 1px;">
+                    <div class="row">
+                        <input type="button" id="SearchButton" title="POSearch" class="btn btn-primary" value="Search">
+                        <input type="button" class="btn btn-primary" id="AdvancedSearchButton" title="POSearch" value="Search" style="display:none;">
+                        <a href="#" id="Advance">Advance Search</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="DivAdvancesearch" style="display:none;padding: 0 0 0 11px;display:none;">
+        <table style="width:70%;">
+            <tr>
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    Start Date:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DatePicker()
+                                              .Name("StartDate")
+                                              //.Min(DateTime.Now.AddDays(-88))
+                                              //.Max(DateTime.Now.AddDays(88))
+                                              .Value("")
+                                              .Format("yyyy-MM")
+                                              .HtmlAttributes(new { @class = "form-control" })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    Owner:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownList()
+                                              .Name("Owner")
+                                              //.DataSource(source => source.Read(read => read.Action("GellAllOwners", "POLine")))
+                                              .SelectedIndex(0)
+                                              .DataTextField("Name")
+                                              .DataValueField("OwnerId")
+                                              .BindTo(Model.Owners)
+                                              .OptionLabel("Please Select...")
+                                              .HtmlAttributes(new { @class = "form-control", @id = "Owner" })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                @*<td>
+                        <hr class="nvs">
+
+                                    @(Html.Kendo().DropDownListFor(model => model.TestRequestId)
+                                          .DataTextField("Name")
+                                          .DataValueField("Id")
+                                          .DataSource(source => source.Read(read => read.Action("GetTestRequestList", "Shared")))
+                                          .HtmlAttributes(new { style = "width:250px;" })
+                                    )
+                                    @(Html.Kendo().DropDownListFor(m => m.Order.ShippingAddress.Country)
+                            .Name("Order.ShippingAddress.Country.CountryCode")
+                            .DataSource(ds => ds
+                                .Read(c => c.Action("GetAllCountries", "Order"))
+                                .ServerFiltering(false)
+                             )
+                            .DataValueField("CountryCode")
+                            .DataTextField("Name")
+                            .Filter(FilterType.StartsWith)
+                                    )
+
+                    </td>*@
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    WBS:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownList()
+                                              .Name("WBS")
+                                              //.DataSource(source => source.Read(read => read.Action("GetAllWbsItems", "POLine")))
+                                              .SelectedIndex(0)
+                                              .DataTextField("text")
+                                              //.DataValueField("value")
+                                              .DataValueField("value").BindTo(Model.WBS)
+                                              .HtmlAttributes(new { @class = "form-control", @id = "WBS" })
+                                              .OptionLabel("Please Select...")
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    End Date:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DatePicker()
+                                                  .Name("EndDate")
+                                                  //.Min(DateTime.Now.AddDays(-88))
+                                                  //.Max(DateTime.Now.AddDays(88))
+                                                  .Value("")
+                                                  .Format("yyyy-MM")
+                                                  .HtmlAttributes(new { @class = "form-control" })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    Application:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownList()
+                                            .Name("Applicationname")
+                                           // .DataSource(source => source.Read(read => read.Action("GetApplicationName", "POLine")))
+                                            .SelectedIndex(0).
+                                            BindTo(Model.Applications)
+                                            .DataTextField("Name")
+                                            .DataValueField("AppId")
+                                            .OptionLabel("Please Select...")
+                                            .HtmlAttributes(new { @class = "form-control", @id = "Applicationname" })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    Requester:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownList()
+                                                .Name("RequesterName")
+                                               // .DataSource(source => source.Read(read => read.Action("FindAllRequesterName", "POLine")))
+                                                .SelectedIndex(0).
+                                                BindTo(Model.Requestores)
+                                                .DataTextField("text")
+                                                .DataValueField("value")
+                                                .OptionLabel("Please Select...")
+                                                .HtmlAttributes(new { @class = "form-control", @id = "RequesterName" })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    Contract Type:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownList()
+                                                .Name("ContractType")
+                                               // .DataSource(source => source.Read(read => read.Action("GetAllContractType", "POLine")))
+                                                .SelectedIndex(0)
+                                                .DataTextField("Name")
+                                                .DataValueField("ContractTypeId")
+                                                .BindTo(Model.ContractTypes)
+                                                .OptionLabel("Please Select...")
+                                                .HtmlAttributes(new { @class = "form-control", @id = "ContractType" })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    Assignment Code:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                @(Html.Kendo().DropDownList()
+                                                .Name("AssignmentCode")
+                                              //  .DataSource(source => source.Read(read => read.Action("GetWBSORAssignmentCodeFromPOLine", "POLine")))
+                                                .SelectedIndex(0)
+                                                .DataTextField("text")
+                                                .DataValueField("value").
+                                                BindTo(Model.AssignmentCodes)
+                                                .OptionLabel("Please Select...")
+                                                .HtmlAttributes(new { @class = "form-control", @id = "AssignmentCode" })
+                                )
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    To be renewed:
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="checkbox" value="Yes" id="chkToBeRenewedYes" />Yes &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" value="No" id="chkToBeRenewedNo" />No
+                                @*&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"  value="All"  id="chkToBeRenewedAll" /> All*@
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="text-align: right;margin-bottom: 5px;font-weight: bold;">
+                    <a href="#" id="btnClearFilter">Clear filters</a>
+                    @*<input type="reset" class="btn btn-primary" value="Clear" id="btnClearFilter" />*@
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="target" class="loading" style="display:none;z-index:5000;">
+    <div class="loading-overlay">
+        <p class="loading-spinner">
+            <span class="loading-icon"></span>
+            <span class="loading-text">Loading. Please wait</span>
+        </p>
+    </div>
+</div>
+@{
+    bool isPurchaseOrder = false, renewal = false;
+    string user = User.Identity.Name;
+    
+
+    if (Request.QueryString["purchaseorder"] != null)
+    {
+        isPurchaseOrder = Convert.ToBoolean(Request.QueryString["purchaseorder"]);
+    }
+    if (Request.QueryString["renewals"] != null)
+    {
+        renewal = Convert.ToBoolean(Request.QueryString["renewals"]);
+    }
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#SearchButton').on('click', function () {
+            var value = $('#SearchInput').val();
+            if (value) {
+                var regx = new RegExp("^([0-9]{6,7})+(-[a-zA-Z0-9]{3})+$");
+                if (regx.test(value.trim())) {
+                    window.location.href = "/PoLine/GetPurchaseOrderDetail?purchaseOrderId=" + value;
+                }
+                else {
+                    RefreshKendoGrid();
+                }
+            }
+            else {
+                RefreshKendoGrid();
+            }
+        });
+
+        $('#btnClearFilter').on('click', function () {
+            ResetFilters();
+            //location.reload(true);
+        });
+        $("#AdvancedSearchButton").on('click', function () {
+            $('#commonSearch').show();
+            $('#otherContent').hide();
+            $('#divContainer').hide();
+            var grid = $('#grida').data('kendoGrid');
+            kendo.ui.progress(grid.element, true);
+            grid.dataSource.read();
+            grid.refresh();
+        });
+
+        $('#Advance').click(function () {
+            var text = $('#Advance').text();
+            if (text == 'Advance Search') {
+                $(this).text('Hide Advance Search');
+                $("#SearchButton").hide();
+                $("#AdvancedSearchButton").show()
+                //$('#DivAdvancesearch').css('visibility', 'visible');
+                $('#DivAdvancesearch').show();
+            }
+            else if (text == 'Hide Advance Search') {
+                $(this).text('Advance Search');
+                //$('#DivAdvancesearch').css('visibility', 'hidden');
+                $('#DivAdvancesearch').hide();
+                $("#SearchButton").show();
+                $("#AdvancedSearchButton").hide();
+            }
+
+        });
+        //$('#grida').kendoGrid();
+
+    });
+    function onDataBound() {
+            var isPurchaseOrder = '@isPurchaseOrder';
+            var IsrenewalYes = '@renewal';
+        var _user = '@user';
+        if (isPurchaseOrder == 'True' || IsrenewalYes == 'True') {
+            $.ajax({
+                type: 'GET',
+                url: '/home/CurrentUserName',
+                dataType: 'json',
+                success: function (result) {//function (usernam) {
+                    if (isPurchaseOrder == 'True' && IsrenewalYes == 'True') {
+                        $('#Advance').click();
+                        $('#chkToBeRenewedYes').prop('checked', true);
+                        $("#Owner").data('kendoDropDownList').text(result.userName);//.text(usernam);
+                    }
+                    else if (isPurchaseOrder == 'True') {
+                        $('#Advance').click();
+                        $("#Owner").data('kendoDropDownList').value(result.userName);//.text(result.userName);
+                    }
+                },
+                error: function (error) {
+                    alert('error while getting currentuser');
+                }
+            });
+        }
+
+        }
+    function ResetFilters() {
+        //$('#StartDate').val('');
+        //$('#EndDate').val('');
+        $("#StartDate").data("kendoDatePicker").value(null);
+        $("#EndDate").data("kendoDatePicker").value(null);
+        isAdvancedSearch = false;
+        $("#Applicationname").data('kendoDropDownList').search("Please Select...");
+        $("#Owner").data('kendoDropDownList').search("Please Select...");
+        $("#AssignmentCode").data('kendoDropDownList').search("Please Select...");
+        $("#ContractType").data('kendoDropDownList').search("Please Select...");
+        $("#RequesterName").data('kendoDropDownList').search("Please Select...");
+        $("#WBS").data('kendoDropDownList').search("Please Select...");
+        $("#chkToBeRenewedYes").prop("checked", false);
+        $("#chkToBeRenewedNo").prop("checked", false);
+        // $("#Advance").text('Advance Search');
+        // $('#DivAdvancesearch').hide();
+        //RefreshKendoGrid();
+    }
+
+</script>
+
+<div id="commonSearch" style="display:none;">
+    @(Html.Kendo().Grid<POLine>()
+                                                        .Name("grida")
+                                                        .Columns(columns =>
+                                                        {
+                                                            columns.Bound(o => o.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name).ClientTemplate(" #= PurchaseOrderLineFromEbd.PurchaseOrder ? PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name : '' # ").Title("Owner");
+                                                            //columns.Bound(o => o.EbdNumber).Title("PO Number").ClientTemplate("<a href='" + Url.Action("GetPurchaseOrderDetail", "PoLine", new { purchaseOrderId = "#= PurchaseOrderLineId #'" }) + ">#= EbdNumber #</a>");
+                                                            columns.Bound(o => o.EbdNumber).Title("PO Number").ClientTemplate("<a href='" + Url.Action("GetPurchaseOrderDetail", "PoLine", new { purchaseOrderId = "#= EbdNumber #'" }) + ">#= EbdNumber #</a>");
+                                                            columns.Bound(o => o.PoLine).Title("PO Line");
+                                                            columns.Bound(o => o.AcOrWbs).Title("Assignment Code");
+                                                            columns.Bound(o => o.App.ApmId).Title("APM ID");
+                                                            columns.Bound(o => o.App.Name).Title("Application Name");
+                                                            columns.Bound(o => o.StartDate).Format("{0:dd-MMM-yyyy}").Title("Contract Start Date");
+                                                            columns.Bound(o => o.EndDate).Format("{0:dd-MMM-yyyy}").Title("Contract End Date"); 
+                                                            columns.Bound(o => o.WbsElement.Name ).ClientTemplate(" #= WbsElement ? WbsElement.Name : '' # ").Title("WBS");
+                                                            columns.Bound(o => o.RequestorName).Title("Requestor");
+                                                            columns.Bound(o => o.PurchaseOrderLineFromEbd.PurchaseOrder.VendorName).Title("Vendor Name");
+                                                            columns.Bound(o => o.ContractType.Name).Title("Contract Type");
+                                                            columns.Bound(o => o.CostCenter.FullName).ClientTemplate(" #= CostCenter ? CostCenter.FullName : '' # ").Title("Cost Center");
+                                                        }).NoRecords(x => x.Template("<div class='empty-grid'>No Record Found</div>"))
+                                                        .Selectable()
+                                                        .Sortable()
+                                                        .Pageable(p => p.Input(true).Refresh(true).PageSizes(new[] { 10, 20, 50, 100 }))
+                                                        .AutoBind(false)
+                                                        .Scrollable(x => x.Enabled(false))
+                                                        .DataSource(dataSource => dataSource
+                                                            .Ajax()
+                                                            .Read(read => read.Action("POLineGridRead", "POLine").Data("getSearchText"))
+                                                            .PageSize(10)
+                                                            .Events(e => e.RequestStart("requestStart").RequestEnd("requestEnd"))
+                                                        ).Events(e =>
+                                                        {
+                                                            e.DataBound("onDataBound");
+                                                        })
+
+    )
+</div>
+<script>
+
+    function requestStart() {
+        $("#target").show();
+    }
+
+    function requestEnd() {
+        $("#target").hide();
+    }
+
+    function getSearchText() {
+        var value = $('#SearchInput').val();
+        var isAdvancedSearch = false;
+        var startDate = null;
+        var endDate = null;
+        var owner = null;
+        var applicationId = null;
+        var contractTypeId = null;
+        var assignmentCode = null;
+        var wbs = null;
+        var requester = null;
+        //if (renewal!=null)
+        //    var isRenewalYes = renewal;
+        //else
+           var isRenewalYes = false;
+        var isRenewalNo = false;
+        var isRenewalAll = false;
+
+        if ($('#Advance').text() == "Hide Advance Search") {
+            startDate = $('#StartDate').val();
+            endDate = $('#EndDate').val();
+            isAdvancedSearch = true;
+            if ($("#Applicationname").val()) {
+                //applicationName = $("#Applicationname").data("kendoDropDownList").text();
+                applicationId = $("#Applicationname").val();
+            }
+            if ($("#Owner").val()) {
+                owner = $("#Owner").data("kendoDropDownList").text(); //$("#Owner").val(); //$("#owner").data("kendoDropDownList").text();
+            }
+            if ($("#AssignmentCode").val()) {
+                assignmentCode = $("#AssignmentCode").data("kendoDropDownList").text();
+            }
+            if ($("#ContractType").val()) {
+                //contractType = $("#ContractType").data("kendoDropDownList").text();
+                contractTypeId = $("#ContractType").val();
+            }
+            if ($("#RequesterName").val()) {
+                requester = $("#RequesterName").data("kendoDropDownList").text();
+            }
+            if ($("#WBS").val()) {
+                wbs = $("#WBS").data("kendoDropDownList").text();
+            }
+
+            if ($('#chkToBeRenewedYes').prop("checked")) {
+                isRenewalYes = true;
+            }
+            if ($('#chkToBeRenewedNo').prop("checked")) {
+                isRenewalNo = true;
+            }
+            //if ($('#chkToBeRenewedAll').prop("checked")) {
+            //    isRenewalAll = true;
+            //}
+        }
+
+        //var startDate = $("#StartDate").kendoDatePicker({ format: "dd/MM/yyyy" });
+        //var startDate = $("#EndDate").kendoDatePicker({ format: "dd/MM/yyyy" });
+
+        //if (value) {
+        //    if (value) {
+        //        return {
+        //            searchText: value, isAdvancedSearch: isAdvancedSearch,
+        //            startDate: startDate, endDate: endDate, applicationId: applicationId, ownerName: owner,
+        //            assignmentCode: assignmentCode, contractTypeId: contractTypeId, requesterName: requester, wbs: wbs
+        //        };//, startDate: startDate, endDate: endDate };
+        //    }
+        //}
+        //else {
+        //    return { searchText: "" };
+        //}
+
+        if (value) {
+            return {
+                searchText: value,
+                isAdvancedSearch: isAdvancedSearch,
+                startDate: startDate,
+                endDate: endDate,
+                applicationId: applicationId,
+                ownerName: owner,
+                assignmentCode: assignmentCode,
+                contractTypeId: contractTypeId,
+                requesterName: requester,
+                wbs: wbs,
+                isRenewalYes: isRenewalYes,
+                isRenewalNo: isRenewalNo,
+                isRenewalAll: isRenewalAll
+            };
+        }
+        else {
+            if (value || isAdvancedSearch || startDate || endDate || applicationId || owner || assignmentCode || contractTypeId || requester || wbs) {
+                return {
+                    searchText: value,
+                    isAdvancedSearch: isAdvancedSearch,
+                    startDate: startDate,
+                    endDate: endDate,
+                    applicationId: applicationId,
+                    ownerName: owner,
+                    assignmentCode: assignmentCode,
+                    contractTypeId: contractTypeId,
+                    requesterName: requester,
+                    wbs: wbs,
+                    isRenewalYes: isRenewalYes,
+                    isRenewalNo: isRenewalNo,
+                    isRenewalAll: isRenewalAll
+                };
+            }
+            else {
+                return { searchText: "" };
+            }
+        }
+    }
+
+
+    function RefreshKendoGrid() {
+        let startDate = $('#StartDate').val();
+        let endDate = $('#EndDate').val();
+        if (startDate && endDate && startDate > endDate) {
+            alert("Start date must be less than end date.");
+            return false;
+        }
+
+        var grid = $('#grida').data('kendoGrid');
+        kendo.ui.progress(grid.element, true);
+        grid.dataSource.read();
+        grid.refresh();
+        $('#commonSearch').show();
+        $('#otherContent').hide();
+        $('#divContainer').hide();
+    }
+</script>
+
+<style type="text/css">
+
+    .k-grid-header, .k-header {
+        background-color: grey;
+        color: white;
+    }
+
+    .k-grid-pager {
+        background-color: grey;
+        color: white;
+    }
+    .k-grid-content {
+        min-height: 100px;
+    }
+    .empty-grid {
+        height:50px;
+        text-align:center;
+        padding:5px;
+        font-size:16px;
+    }
+    .loading .loading-spinner {
+        position: absolute;
+        top: 50%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: -3.9375rem auto 0;
+        color: #1a1d1d;
+        text-align: center;
+        z-index:5000;
+    }
+
+    .loading .loading-overlay {
+        z-index:5000;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        -webkit-animation: loadingStart 3s 300ms linear 1 both;
+        -moz-animation: loadingStart 3s 300ms linear 1 both;
+        -o-animation: loadingStart 3s 300ms linear 1 both;
+        animation: loadingStart 3s 300ms linear 1 both;
+        background: rgba(255, 255, 255, 0.25);
+        text-align: center;
+    }
+    .loading .loading-icon {
+        font-size: 4.8125rem;
+        line-height: 5.25rem;
+        text-shadow: rgba(255, 255, 255, 0.75) 0 0 0.5em;
+        -webkit-animation: loading 1s steps(4) infinite;
+        -moz-animation: loading 1s steps(4) infinite;
+        -o-animation: loading 1s steps(4) infinite;
+        animation: loading 1s steps(4) infinite;
+        display: block;
+        vertical-align: middle;
+        z-index:5000;
+    }
+    .loading-text {
+        font-size: 15px;
+        line-height: 1.3125rem;
+        text-shadow: white 0 0 1em, white 0 0 0.5em, white 0 0 0.25em;
+        position: relative;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    .loading .loading-text:after {
+        content: "...";
+    }
+</style>

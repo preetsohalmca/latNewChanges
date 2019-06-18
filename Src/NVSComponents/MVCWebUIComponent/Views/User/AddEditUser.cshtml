@@ -1,0 +1,60 @@
+﻿@using System.Web.Optimization
+@model  Volvo.LAT.MVCWebUIComponent.Models.Views.UserPresentationModel
+@section Header {
+    @Scripts.Render("~/Scripts/Js/ValidationJsBundle")
+}
+@{
+    var title = Model.IsNewUser ? UserResource.User_AddUser_Title : Model.IsMyProfile ? UserResource.User_MyProfile_Title : UserResource.User_EditUser_Title;
+    ViewBag.Title = title;
+}
+<script type="text/javascript">
+    $(function() {
+        new Volvo.LAT.Views.AddEditUsers('@Url.Action("Index", "Home")', '@Url.Action("ManageUsers")', @Model.IsUserAdmin.ToString().ToLowerInvariant(), $('#CancelUser'));
+    });
+</script>
+<h1 class="nvs">@title</h1>
+@using (Html.BeginForm(string.Empty, "User"))
+{
+    <div class="toolbar">
+        <input type="submit" name="UpdateUser" class="icon save" value="@UserResource.User_AddEditUser_Save"/>
+        <span class="delimiter"></span>
+        <input type="button" id="CancelUser" class="icon close" value="@UserResource.User_AddEditUser_Cancel"/>
+    </div>
+    @Html.HiddenFor(x => x.IsNewUser);
+    <span class="field">
+        <label class="field">@UserResource.User_UserName:</label>
+        @if (Model.IsNewUser)
+        {
+            @Html.TextBoxFor(x => x.User.UserName)
+            @Html.ValidationMessageFor(x => x.User.UserName)
+        }
+        else
+        {
+            @Html.DisplayFor(x => x.User.UserName)
+            @Html.HiddenFor(x => x.User.UserName) // this is because disabled <input> element does not send data to the server
+        }
+    </span>
+    <hr class="nvs" />
+    <span class="field">
+        <label class="field">@UserResource.User_FirstName:</label>
+        @Html.TextBoxFor(x => x.User.FirstName)
+    </span>
+    <hr class="nvs" />
+    <span class="field">
+        <label class="field">@UserResource.User_LastName:</label>
+        @Html.TextBoxFor(x => x.User.LastName)
+    </span>
+    <hr class="nvs" />
+    <span class="field">
+        <label class="field" for="roles">@UserResource.User_Role:</label>
+        @(Html.Kendo().DropDownList()
+                          .Name("User.Role.Number")
+                          .DataTextField("Name")
+                          .DataValueField("Number")
+                          .DataSource(datasource => datasource
+                              .Read(read => read.Action("GetRoles", "User"))
+                              .ServerFiltering(false)
+                          )
+        )
+    </span>
+}
