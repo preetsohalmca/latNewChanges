@@ -9,75 +9,64 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Mappings
     {
         public POLineMap()
         {
-            Table("PurchaseOrderLine");
-
-            Schema("dbo");
-
-            Lazy(true);
-            Id(x => x.PurchaseOrderLineId, map => { map.Column("PurchaseOrderLine_ID"); map.Generator(Generators.Assigned); });
-            Property(x => x.TimeStamp, map => map.NotNullable(true));
-            Property(x => x.EbdNumber, map => map.NotNullable(true));
-            Property(x => x.PoLine, map => map.NotNullable(true));
-            Property(x => x.ReplacedWithPo);
-            Property(x => x.Software);
-            Property(x => x.Remark);
-            Property(x => x.StartDate);
-            Property(x => x.EndDate);
-            Property(x => x.DelayedDate);
-            Property(x => x.ContactPerson);
-            Property(x => x.AcOrWbs);
-            Property(x => x.SplitLineItemAmount);
-            Property(x => x.ApprovedBy);
-            Property(x => x.UnApprovedBy);
-            Property(x => x.ApprovedDate);
-            Property(x => x.UnApprovedDate);
-            Property(x => x.OwnerName);
-            Property(x => x.LastChangeBy, map => map.NotNullable(true));
-            Property(x => x.LastChangeDate, map => map.NotNullable(true));
-            Property(x => x.IsSplitted, map => map.NotNullable(true));
-            //Property(x => x.PurchaserName);
-            Property(x => x.RequestorName);
-            Property(x => x.EarlierPaymentDate);
-            Property(x => x.Renewal, map => map.NotNullable(true));
-            Property(x => x.ExchangeRateYear);
-            Property(x => x.ProductNumber);
-            Property(x => x.InvoiceNumber);
-            Property(x => x.RenewalOrderPurchaseLine);
-            Property(x => x.MonthlyRate);
-
-            //Property(x => x.Comments);
-
-            /// Property(x => x.ActivityTypeId);
-            Property(x => x.IsNewOrder, map => map.NotNullable(true));
-            //ManyToOne(x => x.StatusPo_ID);
-
-            //ManyToOne(x => x.contractType,
-            //    map =>
-            //    {
-            //        map.Column("ContractType_ID");
-            //        map.Cascade(Cascade.None);
-            //    });
-            //ManyToOne(x => x.OwnerName,
-            //    map =>
-            //    {
-            //        map.Column("Owner_ID");
-            //        map.Cascade(Cascade.None);
-            //        map.Class(typeof(Owner));
-            //    });
-
-           ManyToOne(x => x.App, map => { map.Column("App_ID"); map.Lazy(LazyRelation.NoLazy); map.Cascade(Cascade.None);});
-
-           ManyToOne(x => x.ActivityType, map => { map.Column("ActivityType_ID"); map.Lazy(LazyRelation.NoLazy); map.Cascade(Cascade.None); });
-
-            ManyToOne(x => x.CostType, map =>
+            this.Table("PurchaseOrderLine");
+            this.Schema("dbo");
+            this.Lazy(true);
+            this.Id(x => x.PurchaseOrderLineId, map =>
             {
-                map.Column("CostType_ID");
-                map.Lazy(LazyRelation.NoLazy); map.Cascade(Cascade.None); map.ForeignKey("CostType_ID");
+                map.Column("PurchaseOrderLine_ID");
+                map.Generator(Generators.Assigned);
+            });
+            this.Property(x => x.TimeStamp, map => map.NotNullable(true));
+            this.Property(x => x.EbdNumber, map => map.NotNullable(true));
+            this.Property(x => x.PoLine, map => map.NotNullable(true));
+            this.Property(x => x.ReplacedWithPo);
+            this.Property(x => x.Software);
+            this.Property(x => x.Remark);
+            this.Property(x => x.AcOrWbs);
+            this.Property(x => x.ApprovedBy);
+            this.Property(x => x.UnApprovedBy);
+            this.Property(x => x.ApprovedDate);
+            this.Property(x => x.UnApprovedDate);
+            this.Property(x => x.OwnerName);
+            this.Property(x => x.LastChangeBy, map => map.NotNullable(true));
+            this.Property(x => x.LastChangeDate, map => map.NotNullable(true));
+            this.Property(x => x.IsSplitted, map => map.NotNullable(true));
+            this.Property(x => x.Renewal, map => map.NotNullable(true));
+            this.Property(x => x.ProductNumber);
+            this.Property(x => x.InvoiceNumber);
+            this.Property(x => x.RenewalOrderPurchaseLine);
+            this.Property(x => x.IsNewOrder, map => map.NotNullable(true));
+            this.ManyToOne(x => x.App, map =>
+            {
+                map.Column("App_ID");
+                map.Lazy(LazyRelation.NoLazy);
+                map.Cascade(Cascade.None);
             });
 
-           ManyToOne(x => x.Product, map => { map.Column("Product_ID"); map.Lazy(LazyRelation.NoLazy); map.Cascade(Cascade.None);  });
+            this.ManyToOne(x => x.ActivityType, map =>
+            {
+                map.Column("ActivityType_ID");
+                map.Lazy(LazyRelation.NoLazy);
+                map.Cascade(Cascade.None);
+            });
 
-            ManyToOne(x => x.ContractType, map =>
+            this.ManyToOne(x => x.CostType, map =>
+            {
+                map.Column("CostType_ID");
+                map.Lazy(LazyRelation.NoLazy);
+                map.Cascade(Cascade.None);
+                map.ForeignKey("CostType_ID");
+            });
+
+            this.ManyToOne(x => x.Product, map =>
+            {
+                map.Column("Product_ID");
+                map.Lazy(LazyRelation.NoLazy);
+                map.Cascade(Cascade.None);
+            });
+
+            this.ManyToOne(x => x.ContractType, map =>
             {
                 map.Column("ContractType_ID");
                 map.Lazy(LazyRelation.NoLazy);
@@ -85,19 +74,13 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Mappings
                 map.ForeignKey("ContractType_ID");
             });
 
-            ManyToOne(x => x.StatusPo, map =>
+            this.ManyToOne(x => x.StatusPo, map =>
             {
                 map.Column("StatusPo_ID");
                 map.Lazy(LazyRelation.NoLazy);
                 map.Cascade(Cascade.None);
                 map.ForeignKey("StatusPo_ID");
             });
-
-            //ManyToOne(x => x.CostType, map =>
-            //{
-            //    map.Column("CostType_ID");
-            //    map.Lazy(LazyRelation.NoLazy);
-            //});
 
             this.ManyToOne(x => x.PurchaseOrderLineFromEbd, map =>
             {
@@ -131,7 +114,13 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Mappings
                 map.Cascade(Cascade.None);
                 map.ForeignKey("WbsElement_ID");
             });
-
+            this.ManyToOne(x => x.AssignmentCode, map =>
+            {
+                map.Column("AssignmentCode_ID");
+                map.Lazy(LazyRelation.NoLazy);
+                map.Cascade(Cascade.None);
+                map.ForeignKey("AssignmentCode_ID");
+            });
         }
     }
 }

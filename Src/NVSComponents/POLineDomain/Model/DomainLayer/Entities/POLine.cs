@@ -6,6 +6,8 @@
     using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
     using Volvo.NVS.Persistence.NHibernate.Entities;
     using System.ComponentModel.DataAnnotations;
+    using Volvo.LAT.PartDomain.DomainLayer.Entities;
+
     public class POLine : GenericEntity
     {
         public virtual System.Guid PurchaseOrderLineId { get; set; }
@@ -19,12 +21,10 @@
         public virtual string ReplacedWithPo { get; set; }
         public virtual string Software { get; set; }
         public virtual string Remark { get; set; }
-        public virtual DateTime? StartDate { get; set; }
-        public virtual DateTime? EndDate { get; set; }
-        public virtual DateTime? DelayedDate { get; set; }
-        public virtual string ContactPerson { get; set; }
+
+        
         public virtual string AcOrWbs { get; set; }
-        public virtual decimal? SplitLineItemAmount { get; set; }
+        
         public virtual System.Nullable<System.Guid> ApprovedBy { get; set; }
         public virtual System.Nullable<System.Guid> UnApprovedBy { get; set; }
         public virtual DateTime? ApprovedDate { get; set; }
@@ -37,11 +37,11 @@
         [Required]
         public virtual bool IsSplitted { get; set; }
         public virtual string PurchaserName { get; set; }
-        public virtual string RequestorName { get; set; }
-        public virtual DateTime? EarlierPaymentDate { get; set; }
+      
+       
         [Required]
         public virtual bool Renewal { get; set; }
-        public virtual int? ExchangeRateYear { get; set; }
+        
         public virtual string ProductNumber { get; set; }
         public virtual string InvoiceNumber { get; set; }
         [Required]
@@ -62,12 +62,13 @@
         public virtual Product Product { get; set; }
         public virtual PurchaseOrderLineFromEbd PurchaseOrderLineFromEbd { get; set; }
         public virtual WbsElement WbsElement { get; set; }
+        public virtual AssignmentCode AssignmentCode { get; set; }
         public virtual Currency Currency { get; set; }
         //public virtual string Comments { get; set; }
         public virtual string RenewalOrderPurchaseLine { get; set; }
         public virtual string CostCenterId { get; set; }
         public virtual CostCenter CostCenter { get; set; }
-        public virtual decimal MonthlyRate { get; set; }
+       
     }
     public class DashboardNewOrders
     {
