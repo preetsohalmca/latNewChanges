@@ -12,6 +12,7 @@ namespace Volvo.LAT.POLineDomain.DomainLayer
     using Volvo.LAT.POLineDomain.DomainLayer.RepositoryInterfaces;
     using Volvo.LAT.POLineDomain.ServiceLayer;
     using NHibernate;
+    using Volvo.LAT.PartDomain.DomainLayer.Entities;
 
     public class PurchaseOrderService : IPurchaseOrderService
     {
@@ -36,7 +37,11 @@ namespace Volvo.LAT.POLineDomain.DomainLayer
 
         public PurchaseOrder GetPurchaseOrderByEBDNumber(string EBDNumber) => this.PurchaseOrderRepository.GetPurchaseOrderByEBDNumber(EBDNumber);
 
-        public PurchaseOrderLineFromEbd GetPurchaseOrderLineEBD(Guid PurchaseOrderId) => this.PurchaseOrderRepository.GetPurchaseOrderLineEBD(PurchaseOrderId);
+        public List<PurchaseOrderLineFromEbd> GetPurchaseOrderLineEBD(Guid PurchaseOrderId) => this.PurchaseOrderRepository.GetPurchaseOrderLineEBD(PurchaseOrderId);
+
+        public bool SaveAssignmentCodeDetails(AssignmentCode assignmentCode) => this.PurchaseOrderRepository.SaveAssignmentCodeDetails(assignmentCode);
+
+        public AssignmentCode GetAssignmentCode(string purchaseorderlineid) => this.PurchaseOrderRepository.GetAssignmentCode(purchaseorderlineid);
     }
 }
 

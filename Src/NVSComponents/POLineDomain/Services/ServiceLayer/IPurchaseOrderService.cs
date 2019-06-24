@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using Volvo.LAT.PartDomain.DomainLayer.Entities;
 using Volvo.LAT.POLineDomain.DomainLayer.Entities;
 using Volvo.LAT.POLineDomain.DomainLayer.Projections;
 using Volvo.LAT.POLineDomain.ServiceLayer.Contracts;
@@ -19,7 +20,10 @@ namespace Volvo.LAT.POLineDomain.ServiceLayer
 
         List<CustomModel> GetPurchaseOrderDetail(string purchaseOrderId);
         PurchaseOrder GetPurchaseOrderByEBDNumber(string EBDNumber);
-        PurchaseOrderLineFromEbd GetPurchaseOrderLineEBD(Guid PurchaseOrderId);
+        List<PurchaseOrderLineFromEbd> GetPurchaseOrderLineEBD(Guid PurchaseOrderId);
         bool SavePurchaserName(string purchaserName, string poEbd_Id);
+
+        bool SaveAssignmentCodeDetails(AssignmentCode assignmentCode);
+        AssignmentCode GetAssignmentCode(string purchaseorderlineid);
     }
 }

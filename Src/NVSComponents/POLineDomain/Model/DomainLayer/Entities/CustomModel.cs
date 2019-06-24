@@ -76,8 +76,8 @@ namespace Volvo.LAT.POLineDomain.DomainLayer.Entities
         public string ActivityTypeId { get; set; }
         public string PurchaserOrderName { get; set; }
         public int RenewalTotalDaysLeft { get; set; }
-
-        public string RenewalOrderPurchaseLine { get; set; }
+        public List<AssignmentCode> AssignmentCode { get; set; }
+    public string RenewalOrderPurchaseLine { get; set; }
         public string CostCenterName { get; set; }
         public string CostCenterId { get; set; }
         public string MonthlyRate { get; set; }

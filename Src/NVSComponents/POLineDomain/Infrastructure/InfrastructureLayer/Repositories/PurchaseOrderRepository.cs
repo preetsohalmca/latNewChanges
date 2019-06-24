@@ -5,7 +5,7 @@ using Volvo.LAT.POLineDomain.DomainLayer.RepositoryInterfaces;
 using System.Collections.Generic;
 using System;
 using NHibernate.Transform;
-
+using Volvo.LAT.PartDomain.DomainLayer.Entities;
 
 namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories
 {
@@ -14,9 +14,21 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories
     /// </summary>
     public class PurchaseOrderRepository : GenericRepository<POLine>, IPurchaseOrderRepository
     {
+        public AssignmentCode GetAssignmentCode(string purchaseorderlineid)
+        {
+            var pid = new Guid(purchaseorderlineid);
+            var POrder = this.Session.QueryOver<AssignmentCode>().Where(x => x.PurchaseOrderLineId == pid).List<AssignmentCode>();
+            if(POrder!=null && POrder.Any())
+            {
+                return POrder.FirstOrDefault();
+            }
+            return new AssignmentCode();
+        }
+
         public PurchaseOrder GetPurchaseOrderByEBDNumber(string EBDNumber)
         {
             var POrder= this.Session.QueryOver<PurchaseOrder>().Where(x => x.PoNumber == EBDNumber).List<PurchaseOrder>();
+
             if (POrder.Count() > 0)
             {
                 return POrder.FirstOrDefault();
@@ -57,160 +69,199 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories
             string purchaserName = string.Empty;
             int numberofchargableamount = 0;
             string monthlyRate = string.Empty;
-            var purchaseOrder = this.Session.CreateSQLQuery("exec GetTopPurchaseOrderDetail :purchaseOrderId")
-                                .AddEntity(typeof(POLine))
-                                .SetParameter("purchaseOrderId", purchaseOrderId)
-                                .List<POLine>();
-            foreach (var item in purchaseOrder)
+         
+            //var purchaseOrder = this.Session.CreateSQLQuery("exec GetTopPurchaseOrderDetail :purchaseOrderId")
+            //                    .AddEntity(typeof(POLine))
+            //                    .SetParameter("purchaseOrderId", purchaseOrderId)
+            //                    .List<POLine>();
+            var splitOrder = this.Session.QueryOver<POLine>().Where(i => i.EbdNumber == purchaseOrderId).List();
+            var polines = new List<POLine>();
+            var groupResult = splitOrder.GroupBy(x => x.PoLine).ToList();
+            
+            foreach (var itemGp in groupResult)
             {
-                if (item != null)
+               var item = itemGp.FirstOrDefault();
+                var assignmentCodes = this.Session.CreateSQLQuery("exec GetAssignmentCodes :ponumber, :poline")
+                                .AddEntity(typeof(AssignmentCode))
+                                .SetParameter("ponumber", item.EbdNumber)
+                                .SetParameter("poline", item.PoLine)
+                                .List<AssignmentCode>().ToList();
+                assignmentCodes.ForEach(x => {
+                    var poli = this.Session.QueryOver<POLine>().Where(c => c.PurchaseOrderLineId == x.PurchaseOrderLineId).List().FirstOrDefault();
+                    x.AcOrWBS = poli.AcOrWbs;
+                    var amp = Session.QueryOver<WbsElement>().Where(w => w.AssignmentCode == poli.AcOrWbs).List().FirstOrDefault();
+                    x.AmpId = amp!=null? amp.ApmId:string.Empty;
+                    x.Applcation = poli.App.Name;
+                });
+                var assignmentFirst = assignmentCodes.FirstOrDefault(x=>x.PurchaseOrderLineId== item.PurchaseOrderLineId);
+                //foreach (var item in itemGp)
                 {
-                    CustomModel obj = null;
-                    if (item.PurchaseOrderLineFromEbd != null)
+                    if (item != null)
                     {
-                        ebdOrderAmount = Convert.ToString(item.PurchaseOrderLineFromEbd.OrderAmount);
-                        ebdOrderamountinSEK = Convert.ToString(item.PurchaseOrderLineFromEbd.OrderAmount);
-                        ebdLineItemDescription = item.PurchaseOrderLineFromEbd.LineItemDescription;
-                        ebdShortDescription = item.PurchaseOrderLineFromEbd.ShortDescription;
-                        ebdPoLine = Convert.ToString(item.PurchaseOrderLineFromEbd.PoLine);
-                        ebdContractStartDate = Convert.ToString(item.PurchaseOrderLineFromEbd.ContractStartDate);
-                        ebdContractEndDate = Convert.ToString(item.PurchaseOrderLineFromEbd.ContractEndDate);
-
-                        if (item.PurchaseOrderLineFromEbd.PurchaseOrder != null)
+                        CustomModel obj = null;
+                        if (item.PurchaseOrderLineFromEbd != null)
                         {
-                            owner_ID = Convert.ToString(item.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.OwnerId);
-                            poNumber = item.PurchaseOrderLineFromEbd.PurchaseOrder.PoNumber;
-                            currency = item.PurchaseOrderLineFromEbd.PurchaseOrder.Currency;
-                            ebdVendorName = item.PurchaseOrderLineFromEbd.PurchaseOrder.VendorName;
-                            orderDate = item.PurchaseOrderLineFromEbd.PurchaseOrder.OrderDate;
-                            purchaseOrderComment = item.PurchaseOrderLineFromEbd.PurchaseOrder.Comments;
-                            purchaseOrderName = item.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderName;
+                            ebdOrderAmount = Convert.ToString(item.PurchaseOrderLineFromEbd.OrderAmount);
+                            ebdOrderamountinSEK = Convert.ToString(item.PurchaseOrderLineFromEbd.OrderAmount);
+                            ebdLineItemDescription = item.PurchaseOrderLineFromEbd.LineItemDescription;
+                            ebdShortDescription = item.PurchaseOrderLineFromEbd.ShortDescription;
+                            ebdPoLine = Convert.ToString(item.PurchaseOrderLineFromEbd.PoLine);
+                            ebdContractStartDate = Convert.ToString(item.PurchaseOrderLineFromEbd.ContractStartDate);
+                            ebdContractEndDate = Convert.ToString(item.PurchaseOrderLineFromEbd.ContractEndDate);
 
-                            if (item.PurchaseOrderLineFromEbd.PurchaseOrder.Owner != null)
+                            if (item.PurchaseOrderLineFromEbd.PurchaseOrder != null)
                             {
-                                ownerName = item.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name;
+                                owner_ID = Convert.ToString(item.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.OwnerId);
+                                poNumber = item.PurchaseOrderLineFromEbd.PurchaseOrder.PoNumber;
+                                currency = item.PurchaseOrderLineFromEbd.PurchaseOrder.Currency;
+                                ebdVendorName = item.PurchaseOrderLineFromEbd.PurchaseOrder.VendorName;
+                                orderDate = item.PurchaseOrderLineFromEbd.PurchaseOrder.OrderDate;
+                                purchaseOrderComment = item.PurchaseOrderLineFromEbd.PurchaseOrder.Comments;
+                                purchaseOrderName = item.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderName;
+
+                                if (item.PurchaseOrderLineFromEbd.PurchaseOrder.Owner != null)
+                                {
+                                    ownerName = item.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name;
+                                }
                             }
                         }
+
+                        //monthlyRate = (item.MonthlyRate > 0) ? Convert.ToString(item.MonthlyRate) : string.Empty;
+                        
+                        if (item.App != null)
+                        {
+                            aPMID = item.App.Name;
+                            sDU = item.App.DeliveryUnit;
+                        }
+
+                        if (item.CostType != null)
+                        {
+                            costTypeId = Convert.ToString(item.CostType.CostTypeId);
+                            costType = item.CostType.Name;
+                        }
+
+                        if (item.Product != null)
+                        {
+                            productId = Convert.ToString(item.Product.ProductId);
+                        }
+
+                        if (item.ActivityType != null)
+                        {
+                            activityTypeId = Convert.ToString(item.ActivityType.ActivityTypeId);
+                        }
+
+                        if (item.StatusPo != null)
+                        {
+                            statusPoId = Convert.ToString(item.StatusPo.StatusPoId);
+                        }
+
+                        if (item.ContractType != null)
+                        {
+                            contractTypeId = Convert.ToString(item.ContractType.ContractTypeId);
+                        }
+
+                        if (item != null && item.CostCenter != null && item.CostCenter.CostCenterId != null)
+                        {
+                            costCenterID = Convert.ToString(item.CostCenter.CostCenterId);
+                            costCenterName = item.CostCenter.FullName;
+                        }
+                        var wbs = Session.QueryOver<WbsElement>().Where(w => w.AssignmentCode == item.AcOrWbs).List().FirstOrDefault();
+                       if(assignmentFirst==null)
+                        {
+                            assignmentFirst = new AssignmentCode();
+                        }
+                        obj = new CustomModel
+                        {
+                            AssignmentCode= assignmentCodes != null && assignmentCodes.Any()? assignmentCodes.ToList():new List<AssignmentCode>(),
+                            AcOrWbs = assignmentFirst.AcOrWBS,
+                            APMID = assignmentFirst.AmpId,
+                            ApprovedDate = item.ApprovedDate,
+                            App_ID = Convert.ToString(item.App.AppId),
+                            Software = item.Software,
+                            SoftwareName = item.Software,
+                             ContactPerson = assignmentFirst.ContactPerson,
+                            ContractEndDate = assignmentFirst.StartDate.HasValue? assignmentFirst.StartDate.ToString():string.Empty,
+                            ContractStartDate = assignmentFirst.EndDate.HasValue ? assignmentFirst.EndDate.ToString() : string.Empty,
+                            StartDate = assignmentFirst.StartDate.HasValue ? assignmentFirst.StartDate : null,
+                            EndDate = assignmentFirst.EndDate.HasValue ? assignmentFirst.EndDate : null,
+                            CostType = item.CostType.Name,
+                            CostTypeId = Convert.ToString(item.CostType.CostTypeId),
+                            Numberofchargableamount = numberofchargableamount,
+                            OrderAmount = ebdOrderAmount,
+                            OrderamountinSEK = ebdOrderAmount,
+                            OwnerName = ownerName,
+                            Owner_ID = owner_ID,
+                            PoLine = Convert.ToInt32(ebdPoLine),
+                            PoNumber = poNumber,
+                            Remark = item.Remark,
+                            Renewal = item.Renewal,
+                            RequestorName = assignmentFirst.RequestorName,
+                            ShortDescription = ebdShortDescription,
+                            LineItemDescription = ebdLineItemDescription,
+                            PurchaserName = item.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaserName,
+                            PurchaserOrderName = purchaseOrderName,
+                            SDU = sDU,
+                              
+                            Comments = purchaseOrderComment,
+                            TimeStamp = item.TimeStamp,
+                            WBS = wbs != null ? wbs.WbsElementId.ToString() : string.Empty,
+                              DelayedDate = assignmentFirst.DelayedDate,
+                            SplitLineItemAmount = assignmentFirst.SplitLineItemAmount.HasValue ? Math.Round(assignmentFirst.SplitLineItemAmount.Value, 2, MidpointRounding.AwayFromZero) : 0,
+                            PurchaseOrderLineId = item.PurchaseOrderLineId,
+                            UnApprovedDate = item.UnApprovedDate,
+                            ReplacedWithPo = item.ReplacedWithPo,
+                            IsSplitted = item.IsSplitted,
+                            EbdNumber = item.EbdNumber,
+                            ProductId = productId,
+                            VendorName = ebdVendorName,
+                            Currency = currency,
+                            StatusPoid = statusPoId,
+                            OrderDate = orderDate,
+                            ContractTypeId = contractTypeId,
+                            ActivityTypeId = Convert.ToString(item.ActivityType.ActivityTypeId),
+                             ExchangeRateYear = Convert.ToInt32(assignmentFirst.MonthlyRate),
+                             EarlierPaymentDate = assignmentFirst.EarlierPaymentDate,
+                            LastChangeBy = item.LastChangeBy,
+                            InvoiceNumber = item.InvoiceNumber,
+                            InvoiceNumberHeader = item.PurchaseOrderLineFromEbd.PurchaseOrder.InvoiceNumber,
+                            ProductNumber = item.ProductNumber,
+                            LastChangeDate = item.LastChangeDate,
+                            Lastmodifydate = item.LastChangeDate,
+                            Lastmodifyname = Convert.ToString(item.LastChangeBy),
+                            RenewalOrderPurchaseLine = item.RenewalOrderPurchaseLine,
+                            CostCenterId = costCenterID,
+                            CostCenterName = costCenterName,
+                            MonthlyRate = monthlyRate
+                        };
+                        customModelList.Add(obj);
                     }
-
-                    monthlyRate = (item.MonthlyRate > 0) ? Convert.ToString(item.MonthlyRate) : string.Empty;
-
-                    if (item.App != null)
-                    {
-                        aPMID = item.App.Name;
-                        sDU = item.App.DeliveryUnit;
-                    }
-
-                    if (item.CostType != null)
-                    {
-                        costTypeId = Convert.ToString(item.CostType.CostTypeId);
-                        costType = item.CostType.Name;
-                    }
-
-                    if (item.Product != null)
-                    {
-                        productId = Convert.ToString(item.Product.ProductId);
-                    }
-
-                    if (item.ActivityType != null)
-                    {
-                        activityTypeId = Convert.ToString(item.ActivityType.ActivityTypeId);
-                    }
-
-                    if (item.StatusPo != null)
-                    {
-                        statusPoId = Convert.ToString(item.StatusPo.StatusPoId);
-                    }
-
-                    if (item.ContractType != null)
-                    {
-                        contractTypeId = Convert.ToString(item.ContractType.ContractTypeId);
-                    }
-
-                    if (item != null && item.CostCenter != null && item.CostCenter.CostCenterId != null)
-                    {
-                        costCenterID = Convert.ToString(item.CostCenter.CostCenterId);
-                        costCenterName = item.CostCenter.FullName;
-                    }
-                    var wbs = Session.QueryOver<WbsElement>().Where(w => w.AssignmentCode == item.AcOrWbs).List().FirstOrDefault();
-
-                    obj = new CustomModel
-                    {
-                        AcOrWbs = item.AcOrWbs,
-                        APMID = wbs != null ? wbs.ApmId : string.Empty,
-                        ApprovedDate = item.ApprovedDate,
-                        App_ID = Convert.ToString(item.App.AppId),
-                        Software = item.Software,
-                        SoftwareName = item.Software,
-                        ContactPerson = item.ContactPerson,
-                        ContractEndDate = ebdContractEndDate,
-                        ContractStartDate = ebdContractStartDate,
-                        CostType = item.CostType.Name,
-                        CostTypeId = Convert.ToString(item.CostType.CostTypeId),
-                        Numberofchargableamount = numberofchargableamount,
-                        OrderAmount = ebdOrderAmount,
-                        OrderamountinSEK = ebdOrderAmount,
-                        OwnerName = ownerName,
-                        Owner_ID = owner_ID,
-                        PoLine = Convert.ToInt32(ebdPoLine),
-                        PoNumber = poNumber,
-                        Remark = item.Remark,
-                        Renewal = item.Renewal,
-                        RequestorName = item.RequestorName,
-                        ShortDescription = ebdShortDescription,
-                        LineItemDescription = ebdLineItemDescription,
-                        PurchaserName = item.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaserName,
-                        PurchaserOrderName = purchaseOrderName,
-                        SDU = sDU,
-                        EndDate = item.EndDate,
-                        StartDate = item.StartDate,
-                        Comments = purchaseOrderComment,
-                        TimeStamp = item.TimeStamp,
-                        WBS = wbs != null ? wbs.WbsElementId.ToString() : string.Empty,
-                        DelayedDate = item.DelayedDate,
-                        SplitLineItemAmount = item.SplitLineItemAmount.HasValue ? Math.Round(item.SplitLineItemAmount.Value, 2, MidpointRounding.AwayFromZero) : 0,
-                        PurchaseOrderLineId = item.PurchaseOrderLineId,
-                        UnApprovedDate = item.UnApprovedDate,
-                        ReplacedWithPo = item.ReplacedWithPo,
-                        IsSplitted = item.IsSplitted,
-                        EbdNumber = item.EbdNumber,
-                        ProductId = productId,
-                        VendorName = ebdVendorName,
-                        Currency = currency,
-                        StatusPoid = statusPoId,
-                        OrderDate = orderDate,
-                        ContractTypeId = contractTypeId,
-                        ActivityTypeId = Convert.ToString(item.ActivityType.ActivityTypeId),
-                        ExchangeRateYear = item.ExchangeRateYear,
-                        EarlierPaymentDate = item.EarlierPaymentDate,
-                        LastChangeBy = item.LastChangeBy,
-                        InvoiceNumber = item.InvoiceNumber,
-                        InvoiceNumberHeader = item.PurchaseOrderLineFromEbd.PurchaseOrder.InvoiceNumber,
-                        ProductNumber = item.ProductNumber,
-                        LastChangeDate = item.LastChangeDate,
-                        Lastmodifydate = item.LastChangeDate,
-                        Lastmodifyname = Convert.ToString(item.LastChangeBy),
-                        RenewalOrderPurchaseLine = item.RenewalOrderPurchaseLine,
-                        CostCenterId = costCenterID,
-                        CostCenterName = costCenterName,
-                        MonthlyRate = monthlyRate
-                    };
-                    customModelList.Add(obj);
                 }
+               
             }
-
+            //return new List<CustomModel>();
             return customModelList.OrderBy(x => x.PoLine).ToList();
         }
 
-        public PurchaseOrderLineFromEbd GetPurchaseOrderLineEBD(Guid PurchaseOrderId)
+        public List<PurchaseOrderLineFromEbd> GetPurchaseOrderLineEBD(Guid PurchaseOrderId)
         {
             var POrder = this.Session.QueryOver<PurchaseOrderLineFromEbd>().Where(x => x.PurchaseOrder.PurchaseOrderId == PurchaseOrderId).List<PurchaseOrderLineFromEbd>();
             if (POrder.Count() > 0)
             {
-                return POrder.FirstOrDefault();
+                return POrder.ToList();
             }
             else
-                return new PurchaseOrderLineFromEbd();
+                return new List<PurchaseOrderLineFromEbd>();
+        }
+
+        public bool SaveAssignmentCodeDetails(AssignmentCode assignmentCode)
+        {
+            using (var transaction = this.Session.BeginTransaction())
+            {
+               
+                this.Session.SaveOrUpdate("AssignmentCode", assignmentCode);
+                transaction.Commit();
+            }
+            return true;
         }
 
         //////public POLine GetPurchaseOrderDetail(Guid purchaseOrderId)

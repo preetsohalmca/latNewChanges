@@ -81,8 +81,8 @@
     }
 </style>
 
-@Html.Partial("_SearchPO",Model.FirstOrDefault().SearchModelDetail)
 
+@Html.Partial("_SearchPO", Model.FirstOrDefault().SearchModelDetail)
 
 <div id="otherContent">
     @{var i = 1;}
@@ -113,8 +113,8 @@
                                 .Name("OwnerId")
                                 .DataTextField("Name")
                                 .DataValueField("OwnerId")
-                                .BindTo(item.Owners)                            
-                               
+                                .BindTo(item.Owners)
+
                                 .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
                                 )
                             </td>
@@ -129,19 +129,19 @@
                         <tr>
                             <td colspan="3" style="text-align: left;padding-left:100px;">
                                 <span style="font-weight:bold;">Status: </span> @(Html.Kendo().DropDownList()
-                                    .Name("StatusPoId")
-                                    .DataTextField("Name")
-                                    .DataValueField("StatusPoId")
-                                    //.DataSource(source =>
-                                    //{
-                                    //source.Read(read =>
-                                    //                                                                                                                {
-                                    //                                                            read.Action("GellAllStatus", "POLine");
-                                    //                                                        });
-                                    //})
-                                    .BindTo(item.StatusPo)
-                                   
-                                    .HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
+.Name("StatusPoId")
+.DataTextField("Name")
+.DataValueField("StatusPoId")
+//.DataSource(source =>
+//{
+//source.Read(read =>
+//                                                                                                                {
+//                                                            read.Action("GellAllStatus", "POLine");
+//                                                        });
+//})
+.BindTo(item.StatusPo)
+
+.HtmlAttributes(new { style = "width: 50%", @class = "save-detail" })
                                 )
                             </td>
                             <td style="text-align: left;">
@@ -179,7 +179,7 @@
                             @*<td style="text-align: left;">Comments:@Html.TextAreaFor(m => item.Remark, new { @class = "save-detail", id = "TxtAreaRemark_" + i })</td>*@
                             <td style="text-align: left;">
                                 <span style="font-weight:bold;">Comments:</span> @Html.TextAreaFor(m => item.Comments, new { @class = "save-detail cls-Comments", Name = "Comments", id = "Comments", @maxlength = "500" })
-                               @*<br /> <span id="@("commentsErrorMessage")" style="display:none;" class="alert-danger">maximum 500 charactors.</span>*@
+                                @*<br /> <span id="@("commentsErrorMessage")" style="display:none;" class="alert-danger">maximum 500 charactors.</span>*@
                                 <a href="#" id="sendEmaillinkButton"> <span class="glyphicon glyphicon-envelope sendmail-icon " style="font-size:30px; width:20px;"></span></a>
 
 
@@ -275,26 +275,26 @@
                                                     decimal leftAmount = Convert.ToDecimal(item.OrderAmount) - (Convert.ToDecimal(item.SplitLineItemAmount));
 
                                                 }
-                                                @Math.Round(leftAmount,2)
-                                                  </label>
-      
-                                              </div>
-      
-                                          </div>
-      
-                                      </div>
-      
-                                  </div>
-      
-                              </td>
-      
-                          </tr>
-      
-                          <tr>
-      
-                              <td style="text-align: left;width:30%;padding: 0 0 0 20px;">
-      
-                                  <div class="col-md-12">
+                                                @Math.Round(leftAmount, 2)
+                                            </label>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="text-align: left;width:30%;padding: 0 0 0 20px;">
+
+                            <div class="col-md-12">
                                 <div>
                                     <div class="col-md-6">
                                         <div class="row" style="font-weight:bold;">
@@ -306,10 +306,10 @@
                                             @*@Html.TextBoxFor(m => item.AcOrWbs, new { @class = "save-detail form-control", id = "AssignmentCodeWBS" + i })*@
                                             @Html.TextBoxFor(m => item.AcOrWbs, new { @class = "save-detail cls-AcOrWbs", Name = "AcOrWbs_" + i, id = "AcOrWbs_" + i })
                                             @*@if (string.IsNullOrEmpty(item.AcOrWbs))
-                                            {*@
+                                                {*@
                                             <span id="@("wbsErrorMessage" + i)" class="alert-danger" style="display:none;padding: 0 !important;"></span>
-                                               
-                                           @* }*@
+
+                                            @* }*@
                                         </div>
                                     </div>
                                 </div>
@@ -405,8 +405,8 @@
                                             @*@Html.TextBoxFor(m => item., new { @class = "save-detail form-control", id = "TxtBoxRechargeAmount_" + i })*@
                                             @*<input id="@("TxtBoxRechargeAmount_" + i)" type="text"  class="form-control" />*@
                                             <input id="@("RechargeAmount_" + i)" type="number" value="@Math.Round(Convert.ToDecimal(item.SplitLineItemAmount),2)" name="RechargeAmount_@i" class="save-detail cls-RechargeAmount" />
-                                           <span id="@("RechargeAmountErrorMessage" + i)" style="display:none;" class="alert-danger">Recharge Amount is required.</span>
-                                                
+                                            <span id="@("RechargeAmountErrorMessage" + i)" style="display:none;" class="alert-danger">Recharge Amount is required.</span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -438,6 +438,46 @@
                 </table>
                 <div id="div_Collapse_detail_@item.PurchaseOrderLineId" style="display:none;">
                     <table class="tb-3" style="background-color: #eef2f3;">
+                        @if (item.AssignmentCode.Count > 1)
+                        {
+                            <tr>
+                                <td colspan="10">
+
+
+
+                                    @(Html.Kendo().Grid(item.AssignmentCode)
+            .Name("gridAssignment")
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.AcOrWBS).Title("AC");
+                columns.Bound(c => c.Applcation).Title("WBS");
+                columns.Bound(c => c.AmpId).Title("AMP ID");
+                columns.Bound(c => c.SplitLineItemAmount).Title("Recharge Amount");
+                columns.Bound(c => c.StartDate).Title("Start Date").Format("{0:MM-yyyy}").EditorTemplateName("DateTime");
+                columns.Bound(c => c.EndDate).Title("End Date").Format("{0:MM-yyyy}").EditorTemplateName("DateTime");
+                columns.Bound(c => c.EarlierPaymentDate).Title("Earliers Date").EditorTemplateName("DateTime").Format("{0:MM-yyyy}");
+                columns.Bound(c => c.MonthlyRate).Title("Monthly Rate");
+                columns.Bound(c => c.RequestorName).Title("Requestor");
+                columns.Bound(c => c.ContactPerson).Title("Contact");
+
+            }).Editable(editable => editable.Mode(GridEditMode.InCell))
+            .Scrollable()
+            .Groupable()
+            .Sortable()
+
+            .DataSource(dataSource => dataSource
+                .Ajax()
+
+
+                .Model(model => model.Id(p => p.AssignmentCodeID))
+                .Model(model => { model.Field(p => p.Applcation).Editable(false);model.Field(p => p.AmpId).Editable(false); })
+                .Read(read => read.Action("EditingInline_Read", "Grid"))
+                .Update(update => update.Action("UpdateAssignment", "poline")).AutoSync(true)
+            )
+             )
+                                </td>
+                            </tr>
+                        }
                         <tr>
                             <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
                                 <div class="col-md-12">
@@ -451,9 +491,9 @@
                                             <div class="row">
                                                 @*@Html.TextBoxFor(m => item.EarlierPaymentDate, new { @class = "save-detail form-control", id = "TxtBoxEarlierPaymentDate_" + i })*@
                                                 @*@(Html.Kendo().DatePicker()
-                                                    .Name("DatePickerEarlierPaymentDate_" + i)
-                                                    .Value(item.EarlierPaymentDate).HtmlAttributes(new { @class = "save-detail" })
-                                                    )*@
+                                .Name("DatePickerEarlierPaymentDate_" + i)
+                                .Value(item.EarlierPaymentDate).HtmlAttributes(new { @class = "save-detail" })
+                                )*@
 
                                                 @*@Html.TextBoxFor(m => item.EarlierPaymentDate, new { @class = "save-detail cls-EarlierPaymentDate", Name = "EarlierPaymentDate_" + i, id = "EarlierPaymentDate_" + i })*@
                                                 @(Html.Kendo().DatePicker()
@@ -482,7 +522,7 @@
                                         <div class="col-md-6">
                                             <div class="row">
                                                 @*<input id="@("RenewalOrderPurchaseLine_"+ i)" class="save-detail cls-RenewalOrderPurchaseLine" type="text"
-                                                    value="" name="RenewalOrderPurchaseLine" />*@
+                                value="" name="RenewalOrderPurchaseLine" />*@
                                                 @Html.TextBoxFor(m => item.RenewalOrderPurchaseLine, new
                                            {
                                                @class = "save-detail cls-RenewalOrderPurchaseLine",
@@ -528,9 +568,9 @@
                                         <div class="col-md-6">
                                             <div class="row">
                                                 @*@(Html.Kendo().DatePicker()
-                                                    .Name("DatePickerDelayedPaymentDate_" + i)
-                                                    .Value(item.DelayedDate).HtmlAttributes(new { @class = "save-detail" })
-                                                    )*@
+                                .Name("DatePickerDelayedPaymentDate_" + i)
+                                .Value(item.DelayedDate).HtmlAttributes(new { @class = "save-detail" })
+                                )*@
                                                 @*@Html.TextBoxFor(m => item.DelayedDate, new { @class = "save-detail cls-DelayedDate", Name = "DelayedDate_" + i, id = "DelayedDate_" + i })*@
                                                 @(Html.Kendo().DatePicker()
                                                                                                                                                     .Name("DelayedDate_" + i)
@@ -729,29 +769,30 @@
                                     </div>
                                 </div>
                             </td>
-                           
+
                             <td style="text-align: left;width:28%;">
-                            @if (System.Configuration.ConfigurationManager.AppSettings["MicrosoftAccourtNumber"] == item.CostCenterName)
-                            {
-                                <div class="col-md-12">
-                                    <div>
-                                        <div class="col-md-6">
-                                            <div class="row" style="font-weight:bold;">
-                                                Product Number:
+                                @if (System.Configuration.ConfigurationManager.AppSettings["MicrosoftAccourtNumber"] == item.CostCenterName)
+                                {
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="col-md-6">
+                                                <div class="row" style="font-weight:bold;">
+                                                    Product Number:
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                @*@Html.TextBoxFor(m => item.ProductNumber, new { @class = "save-detail form-control", id = "TxtBoxProductNumber_" + i })*@
-                                                @Html.TextBoxFor(m => item.ProductNumber, new { @class = "save-detail cls-ProductNumber", Name = "ProductNumber_" + i, id = "ProductNumber_" + i, @maxlength = "100" })
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    @*@Html.TextBoxFor(m => item.ProductNumber, new { @class = "save-detail form-control", id = "TxtBoxProductNumber_" + i })*@
+                                                    @Html.TextBoxFor(m => item.ProductNumber, new { @class = "save-detail cls-ProductNumber", Name = "ProductNumber_" + i, id = "ProductNumber_" + i, @maxlength = "100" })
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            }
+                                }
                             </td>
                             <td style="text-align: left;width:16%;"></td>
                         </tr>
+
                         <tr>
                             <td style="text-align: left;width:28%;padding: 0 0 0 20px;">
                                 <div class="col-md-12">
@@ -762,9 +803,9 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="row">                                               
+                                            <div class="row">
 
-                                                <span id="@("lastModifiedBy" + i)" >@item.LastChangeByName</span>
+                                                <span id="@("lastModifiedBy" + i)">@item.LastChangeByName</span>
 
                                             </div>
                                         </div>
@@ -790,36 +831,36 @@
                                     </div>
                                 </div>
                             </td>
-                       
+
                             <td style="text-align: left;width:28%;">
                                 @if (System.Configuration.ConfigurationManager.AppSettings["MicrosoftAccourtNumber"] == item.CostCenterName)
                                 {
-                                <div class="col-md-12">
-                                    <div>
-                                        <div class="col-md-6">
-                                            <div class="row" style="font-weight:bold;">
-                                                Product:
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="col-md-6">
+                                                <div class="row" style="font-weight:bold;">
+                                                    Product:
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                @(Html.Kendo().DropDownList()
-                                                                                                                                    .Name("ProductId_" + i)
-                                                                                                                                    .DataTextField("Name")
-                                                                                                                                    .DataValueField("ProductId")
-                                                                                                                                    .DataSource(source =>
-                                                                                                                                    {
-                                                                                                                                        source.Read(read =>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    @(Html.Kendo().DropDownList()
+                                                                                                                                        .Name("ProductId_" + i)
+                                                                                                                                        .DataTextField("Name")
+                                                                                                                                        .DataValueField("ProductId")
+                                                                                                                                        .DataSource(source =>
                                                                                                                                         {
-                                                                                                                                            read.Action("GellAllProducts", "POLine");
-                                                                                                                                        });
-                                                                                                                                    }).Value(Convert.ToString(item.ProductId))
-                                                                                                                                    .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-ProductId" })
-                                                )
+                                                                                                                                            source.Read(read =>
+                                                                                                                                            {
+                                                                                                                                                read.Action("GellAllProducts", "POLine");
+                                                                                                                                            });
+                                                                                                                                        }).Value(Convert.ToString(item.ProductId))
+                                                                                                                                        .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-ProductId" })
+                                                    )
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 }
                             </td>
                             <td style="text-align: left;width:16%;"></td>
@@ -835,8 +876,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <span id="@("lastModifiedByDate" + i)" >@String.Format("{0:MM/dd/yyyy hh:mm tt}", item.LastChangeDate)</span>
-                                                
+                                                <span id="@("lastModifiedByDate" + i)">@String.Format("{0:MM/dd/yyyy hh:mm tt}", item.LastChangeDate)</span>
+
                                             </div>
                                         </div>
                                     </div>
@@ -852,45 +893,45 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                 
-                                                <span id="@("totalChangesMonths" + i)" >@item.Numberofchargableamount</span>
+
+                                                <span id="@("totalChangesMonths" + i)">@item.Numberofchargableamount</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            
+
                             <td style="text-align: left;width:28%;">
                                 @if (System.Configuration.ConfigurationManager.AppSettings["MicrosoftAccourtNumber"] == item.CostCenterName)
                                 {
-                                <div class="col-md-12">
-                                    <div>
-                                        <div class="col-md-6">
-                                            <div class="row" style="font-weight:bold;">
-                                                Cost Type:
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="col-md-6">
+                                                <div class="row" style="font-weight:bold;">
+                                                    Cost Type:
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                @(Html.Kendo().DropDownList()
-                                                                                                                                    .Name("CostTypeId_" + i)
-                                                                                                                                    .DataTextField("Name")
-                                                                                                                                    .DataValueField("CostTypeId")
-                                                                                                                                    .DataSource(source =>
-                                                                                                                                    {
-                                                                                                                                        source.Read(read =>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    @(Html.Kendo().DropDownList()
+                                                                                                                                        .Name("CostTypeId_" + i)
+                                                                                                                                        .DataTextField("Name")
+                                                                                                                                        .DataValueField("CostTypeId")
+                                                                                                                                        .DataSource(source =>
                                                                                                                                         {
-                                                                                                                                            read.Action("GellAllCostTypes", "POLine");
-                                                                                                                                        });
-                                                                                                                                    }).Value(Convert.ToString(item.CostTypeId))
-                                                                                                                                    .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-CostTypeId" })
-                                                )
+                                                                                                                                            source.Read(read =>
+                                                                                                                                            {
+                                                                                                                                                read.Action("GellAllCostTypes", "POLine");
+                                                                                                                                            });
+                                                                                                                                        }).Value(Convert.ToString(item.CostTypeId))
+                                                                                                                                        .HtmlAttributes(new { style = "width: 50%", @class = "save-detail cls-CostTypeId" })
+                                                    )
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 }
-                            </td>                            
+                            </td>
                             <td style="text-align: left;width:16%;"></td>
                         </tr>
                         <tr>
@@ -1088,7 +1129,7 @@
 
         var isAdmin = '@AuthorizationFilter.IsAdmin()';
         var dropdownlist = $("#StatusPoId").data("kendoDropDownList");
-       
+
         if (isAdmin=='False') {
             dropdownlist.enable(false);
         }
@@ -1098,7 +1139,7 @@
         var $parentDivv = $(this).closest('div.purchaseOrderDetail');
         var ownerHdn = $($parentDivv).find('cls-hdnOwnerSelectedId').val();
         var stausHdn = $($parentDivv).find('cls-hdnStatusPoSelectedId').val();
-        
+
         $("#Owner").data('kendoDropDownList').text(ownerHdn);
         $("#StatusPoId").data('kendoDropDownList').text(stausHdn);
 
@@ -1107,7 +1148,7 @@
         var isCalled = false;
         var renewalTotalDaysLeft = 0;
         $('.save-detail').on('change', function () {
-            
+
             var isOuterInvoiceNo = false;
             var validationStatusOK = true;
             if (isCalled)
@@ -1173,7 +1214,7 @@
             const _MS_PER_DAY = 1000 * 60 * 60 * 24;
             var resultDiff = Math.floor((utc2 - utc1) / _MS_PER_DAY)
 
-            
+
 
             var oldSelectedValue = kendo.toString(kendo.parseDate($('#hdn' + this.id).val()), 'yyyy-MM');
             //var CSDT = 'ContractStartDate_' + selectedIndex;
@@ -1334,7 +1375,7 @@
                 }
             }
 
-            
+
             if (model && model.ContractEndDate && (this.id.toLowerCase().indexOf("contractenddate") != -1)) {
                 if (model.ContractStartDate && (model.ContractEndDate < model.ContractStartDate)) {
 
@@ -1438,7 +1479,7 @@
             }
 
             CalculateRenewalFields($parentDiv, model.ContractEndDate);
-            
+
             var preventCostGridRefresh = ['Comments', 'RenewalOrderPurchaseLine', 'ContactPerson', 'ExchangeRateYear', 'Remark', 'InvoiceNumber', 'ProductNumber', 'ProductId', 'CostTypeId', 'PurchaserName'];
 
             var isInputExist = false;
@@ -1476,7 +1517,7 @@
                     }
 
                     $('#startDateErrorMessage' + parseInt(selectedIndex)).hide();
-                    $('#RequestorNameErrorMessage' + parseInt(selectedIndex)).hide(); 
+                    $('#RequestorNameErrorMessage' + parseInt(selectedIndex)).hide();
                     $('#endDateErrorMessage' + parseInt(selectedIndex)).hide();
                     $('#earlierPaymentDateErrorMessage' + parseInt(selectedIndex)).hide();
                     $('#delayedPaymentDateErrorMessage' + parseInt(selectedIndex)).hide();
@@ -1545,11 +1586,11 @@
         var renewalPurchaseLineInput = $($parentDiv).find('.cls-RenewalOrderPurchaseLine');
           var renewalTotalDaysLeft = $(this).find('.cls-RenewalTotalDaysLeft').val();
         var renewalorderlineSplit = renewalPurchaseLine.split('_');
-        if ($($parentDiv).find('.cls-Renewal').is(':checked')) { 
-             
+        if ($($parentDiv).find('.cls-Renewal').is(':checked')) {
+
                 if (renewalPurchaseLine == '') {
                     $($parentDiv).find('.cls-RenewalOrderPurchaseLine').addClass('renewalDaysLeft');
-                    
+
                 }
 
             $.ajax({
@@ -1559,11 +1600,11 @@
                 success: function (renewalTotalDaysLeft) {
 
                     if (renewalTotalDaysLeft.DaysLeft >= -90) {
-                        if (!renewalTotalDaysLeft.IsRenewalValid) {                            
+                        if (!renewalTotalDaysLeft.IsRenewalValid) {
                                 $($parentDiv).find('.cls-RenewalOrderPurchaseLine').addClass('renewalDaysLeft');
                                 $($parentDiv).find('#renewalOrderLineAnchor_' + renewalorderlineSplit[0]).remove();
                                 $(renewalPurchaseLineInput).show();
-                            
+
                         }
                         else if (renewalTotalDaysLeft.IsRenewalValid) {
                             $($parentDiv).find('#renewalOrderLineAnchor_' + renewalorderlineSplit[0]).remove();
@@ -1594,7 +1635,7 @@
                         }).insertAfter(renewalPurchaseLineInput);
                         $(renewalPurchaseLineInput).hide();
                     }
-                    
+
                 }
             });
             return true;
@@ -1608,13 +1649,13 @@
     }
 
     function isNumberKey(evt) {
-       
+
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode != 45 && charCode > 31
             && (charCode < 48 || charCode > 57))
             return false;
 
-        
+
 
         return true;
 
@@ -1637,7 +1678,7 @@
     function validateDate(date) {
         var txtVal = date;
         var filter = new RegExp("([1-2][0-9][0-9][0-9])([-])(0[123456789]|10|11|12)");
-        
+
         if (filter.test(txtVal)) {
             var dateSplit = txtVal.split('-');
             if (dateSplit[0].length > 4 || dateSplit[0] < 1900 || dateSplit[0] > 2050)
@@ -1648,10 +1689,10 @@
         else
             return false;
     }
-   
-    
-       
-        
+
+
+
+
 
 
 </script>
@@ -1667,7 +1708,8 @@
         background-color: grey;
         color: white;
     }
+
     .k-grid-content {
-    min-height: 48px;
-}
+        min-height: 48px;
+    }
 </style>

@@ -18,6 +18,7 @@
         /// </summary>
         /// <param name="number">A part number to be located.</param>
         /// <returns>A part number or null when not found.</returns>
+        IEnumerable<AssignmentCode> GetAssignmentCode(string ponumber, int poline);
         POLine FindByNumber(long number);
         POLine GetById(Guid purchaseOrderLineId);
         StatusPo InserStatusPo(StatusPo status);

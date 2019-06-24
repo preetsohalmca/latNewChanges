@@ -425,10 +425,10 @@
                                                             columns.Bound(o => o.AcOrWbs).Title("Assignment Code");
                                                             columns.Bound(o => o.App.ApmId).Title("APM ID");
                                                             columns.Bound(o => o.App.Name).Title("Application Name");
-                                                            columns.Bound(o => o.StartDate).Format("{0:dd-MMM-yyyy}").Title("Contract Start Date");
-                                                            columns.Bound(o => o.EndDate).Format("{0:dd-MMM-yyyy}").Title("Contract End Date");
+                                                          //  columns.Bound(o => o.StartDate).Format("{0:dd-MMM-yyyy}").Title("Contract Start Date");
+                                                          //  columns.Bound(o => o.EndDate).Format("{0:dd-MMM-yyyy}").Title("Contract End Date");
                                                             columns.Bound(o => o.WbsElement.Name ).ClientTemplate(" #= WbsElement ? WbsElement.Name : '' # ").Title("WBS");
-                                                            columns.Bound(o => o.RequestorName).Title("Requestor");
+                                                          //  columns.Bound(o => o.RequestorName).Title("Requestor");
                                                             columns.Bound(o => o.PurchaseOrderLineFromEbd.PurchaseOrder.VendorName).Title("Vendor Name");
                                                             columns.Bound(o => o.ContractType.Name).Title("Contract Type");
                                                             columns.Bound(o => o.CostCenter.FullName).ClientTemplate(" #= CostCenter ? CostCenter.FullName : '' # ").Title("Cost Center");

@@ -25,6 +25,6 @@
         public virtual string PurchaserName { get; set; }
         public virtual string Comments { get; set; }
         public virtual string InvoiceNumber { get; set; }
-        //public virtual PurchaseOrderLineFromEbd PurchaseOrderLineFromEbd { get; set; }
+        public virtual List<PurchaseOrderLineFromEbd> PurchaseOrderLineFromEbd { get; set; }
     }
 }

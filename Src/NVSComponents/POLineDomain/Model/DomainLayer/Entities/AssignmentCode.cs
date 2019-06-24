@@ -8,7 +8,7 @@ namespace Volvo.LAT.PartDomain.DomainLayer.Entities
 {
    public class AssignmentCode
     {
-        public Guid AssignmentCodeID { get; set; }
+        public virtual Guid AssignmentCodeID { get; set; }
         public virtual DateTime? StartDate { get; set; }
         public virtual DateTime? EndDate { get; set; }
         public virtual DateTime? DelayedDate { get; set; }
@@ -19,5 +19,11 @@ namespace Volvo.LAT.PartDomain.DomainLayer.Entities
         public virtual int? ExchangeRateYear { get; set; }
         public virtual System.Guid PurchaseOrderLineId { get; set; }
         public virtual decimal MonthlyRate { get; set; }
+
+
+        public virtual int PoLine { get; set; }
+        public virtual string AmpId { get; set; }
+        public virtual string Applcation { get; set; }
+        public virtual string AcOrWBS { get; set; }
     }
 }

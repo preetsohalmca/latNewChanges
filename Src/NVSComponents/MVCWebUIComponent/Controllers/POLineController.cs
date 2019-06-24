@@ -103,7 +103,7 @@
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Index()
         {
-          return View("searchPOs");
+            return View("searchPOs");
         }
 
         private IQueryable<POLine> SortGridQuerable(IQueryable<POLine> list, string member, string sortDirection)
@@ -163,11 +163,11 @@
                     {
                         if (sortDirection == "Ascending")
                         {
-                            list = list.OrderBy(x => x.StartDate);
+                            //  list = list.OrderBy(x => x.StartDate);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.StartDate);
+                            //  list = list.OrderByDescending(x => x.StartDate);
                         }
                         break;
                     }
@@ -175,11 +175,11 @@
                     {
                         if (sortDirection == "Ascending")
                         {
-                            list = list.OrderBy(x => x.EndDate);
+                            //  list = list.OrderBy(x => x.EndDate);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.EndDate);
+                            // list = list.OrderByDescending(x => x.EndDate);
                         }
                         break;
                     }
@@ -259,11 +259,11 @@
                     {
                         if (sortDirection == "Ascending")
                         {
-                            list = list.OrderBy(x => x.RequestorName);
+                            // list = list.OrderBy(x => x.RequestorName);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.RequestorName);
+                            // list = list.OrderByDescending(x => x.RequestorName);
                         }
                         break;
                     }
@@ -328,11 +328,11 @@
                     {
                         if (sortDirection == "Ascending")
                         {
-                            list = list.OrderBy(x => x.StartDate);
+                            //list = list.OrderBy(x => x.StartDate);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.StartDate);
+                            //  list = list.OrderByDescending(x => x.StartDate);
                         }
                         break;
                     }
@@ -340,11 +340,11 @@
                     {
                         if (sortDirection == "Ascending")
                         {
-                            list = list.OrderBy(x => x.EndDate);
+                            // list = list.OrderBy(x => x.EndDate);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.EndDate);
+                            // list = list.OrderByDescending(x => x.EndDate);
                         }
                         break;
                     }
@@ -424,11 +424,11 @@
                     {
                         if (sortDirection == "Ascending")
                         {
-                            list = list.OrderBy(x => x.RequestorName);
+                            //  list = list.OrderBy(x => x.RequestorName);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.RequestorName);
+                            // list = list.OrderByDescending(x => x.RequestorName);
                         }
                         break;
                     }
@@ -516,13 +516,13 @@
             }
             if (isAdvancedSearch)
             {
-              if(  (searchText=="") && (startDate == null) && endDate == null
-                    && (applicationId=="")&&(ownerName=="")&&(requesterName=="")&&(wbs=="")&&(assignmentCode=="")
-                    && (contractTypeId=="")&&(isRenewalYes==false)&& isRenewalNo==false && isRenewalAll==false)
-                           
-                isAdvancedSearch = false;
+                if ((searchText == "") && (startDate == null) && endDate == null
+                      && (applicationId == "") && (ownerName == "") && (requesterName == "") && (wbs == "") && (assignmentCode == "")
+                      && (contractTypeId == "") && (isRenewalYes == false) && isRenewalNo == false && isRenewalAll == false)
+
+                    isAdvancedSearch = false;
             }
-                if (string.IsNullOrEmpty(searchText) && !isAdvancedSearch)
+            if (string.IsNullOrEmpty(searchText) && !isAdvancedSearch)
             {
                 var rrr = this.POLineServices.FindPOLineAsQueryableNew().AsQueryable();
                 var response = new List<POLine>();
@@ -533,16 +533,16 @@
 
                     var pageRecords = request.Page > 1 ? (request.Page - 1) * request.PageSize : 0;
                     response = rrr.Take(request.PageSize).Skip(pageRecords).ToList();//.Skip(request.Page).ToList();
-                 }
+                }
                 else
                 {
-                     totalRecords = rrr.Count();
+                    totalRecords = rrr.Count();
                     var pageRecords = request.Page > 1 ? (request.Page - 1) * request.PageSize : 0;
                     response = rrr.OrderBy(x => x.EbdNumber).OrderBy(x => x.PoLine).Take(request.PageSize).Skip(pageRecords).ToList();//.Skip(request.Page).ToList();
-                  }
+                }
                 result.Data = response;
                 result.Total = totalRecords;
-                 return Json(result, JsonRequestBehavior.AllowGet);
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -551,7 +551,7 @@
                     var response = this.POLineServices.FindPOLineAsQueryable1(searchText, false, strtDate, endDte, applicationId,
                         ownerName, requesterName, wbs, assignmentCode, contractTypeId, isRenewalYes, isRenewalNo, isRenewalAll,
                         request.PageSize, request.Page, out totalRecords);
-                   
+
 
                     result.Total = totalRecords;
                     if (request.Sorts.Count > 0)
@@ -565,16 +565,16 @@
 
                             if (strtDate != DateTime.MinValue)
                             {
-                                response = response.OrderBy(x => x.StartDate).ToList();
+                                // response = response.OrderBy(x => x.StartDate).ToList();
 
                             }
                             if (endDte != DateTime.MinValue && strtDate == DateTime.MinValue)
                             {
-                                response = response.OrderBy(x => x.EndDate).ToList();
+                                //  response = response.OrderBy(x => x.EndDate).ToList();
                             }
                         }
                         else
-                        response = response.OrderBy(x => x.EbdNumber);
+                            response = response.OrderBy(x => x.EbdNumber);
                     }
                     var pageRecords = request.Page > 1 ? (request.Page - 1) * request.PageSize : 0;
                     result.Data = response.Skip(pageRecords).Take(request.PageSize).ToList();
@@ -585,7 +585,7 @@
                     var pageRecords = request.Page > 1 ? (request.Page - 1) * request.PageSize : 0;
                     var response2 = this.POLineServices.FindPOLineAsQueryable1(searchText, false, strtDate, endDte, applicationId, ownerName, requesterName, wbs, assignmentCode, contractTypeId, isRenewalYes, isRenewalNo, isRenewalAll, request.PageSize, request.Page, out totalRecords).Skip(pageRecords).Take(request.PageSize).ToDataSourceResult(request);
                     response2.Total = totalRecords;
-                     return Json(response2, JsonRequestBehavior.AllowGet);
+                    return Json(response2, JsonRequestBehavior.AllowGet);
                 }
 
             }
@@ -601,7 +601,7 @@
             return Json(result.Select(x => new { text = x, value = x }), JsonRequestBehavior.AllowGet);
         }
 
-    
+
         [NHibernateMvcSessionContext]
         public JsonResult GetApplicationName()
         {
@@ -641,7 +641,16 @@
         [HttpGet]
         public ActionResult GetPurchaseOrderDetail(string purchaseOrderId)
         {
-          var result = this.PurchaseOrderService.GetPurchaseOrderDetail(purchaseOrderId);
+            var purchaseOrder = this.PurchaseOrderService.GetPurchaseOrderByEBDNumber(purchaseOrderId);
+            purchaseOrder.PurchaseOrderLineFromEbd = this.PurchaseOrderService.GetPurchaseOrderLineEBD(purchaseOrder.PurchaseOrderId);
+
+
+
+            var result = this.PurchaseOrderService.GetPurchaseOrderDetail(purchaseOrderId);
+            var groupResult = result.GroupBy(x => x.PoLine);
+
+
+
             if (result != null && result.Any())
             {
                 decimal totalOrderAmunt = 0;
@@ -652,7 +661,7 @@
                 searchModel.Owners = this.POLineServices.GetAllOwners();
                 var assignmentCode = this.POLineServices.FindAllWBSORAssignmentCode();
                 searchModel.AssignmentCodes = assignmentCode.Select(x => new DDLModel() { text = x, value = x }).ToList();
-                 var wbsElements = this.POLineServices.FindPOLineAsQueryableNew().Where(x => x.WbsElement != null).Select(x => x.WbsElement).ToList();
+                var wbsElements = this.POLineServices.FindPOLineAsQueryableNew().Where(x => x.WbsElement != null).Select(x => x.WbsElement).ToList();
                 var wbsElementsIds = wbsElements.Select(x => x.WbsElementID).Distinct().ToList();
 
                 var itemWbs = this.POLineServices.GetAllWbs().Where(x => wbsElementsIds.Contains(x.WbsElementID));
@@ -663,6 +672,8 @@
                 searchModel.Requestores = this.POLineServices.FindAllRequesterName().Where(x => !string.IsNullOrEmpty(x)).Distinct().Select(x => new DDLModel() { text = x, value = x });
                 result.ForEach(a =>
                 {
+
+
                     var year = Convert.ToDateTime(a.StartDate);
                     var seekRate = this.POLineServices.GetPOlineSeekAmount(a.Currency, year.Year);
 
@@ -694,7 +705,7 @@
                     a.SearchModelDetail = searchModel;
 
                 });
-                 var user = this.UserService.GetUserBtUserId(result.FirstOrDefault().LastChangeBy);
+                var user = this.UserService.GetUserBtUserId(result.FirstOrDefault().LastChangeBy);
                 result.ForEach(c =>
                 {
                     c.OrderamountAmount = totalOrderAmunt;
@@ -708,10 +719,20 @@
         }
 
         [NHibernateMvcSessionContext]
+        public ActionResult UpdateAssignment(AssignmentCode assignment)
+        {
+
+            this.PurchaseOrderService.SaveAssignmentCodeDetails(assignment);
+            return Json(true, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        [NHibernateMvcSessionContext]
         public ActionResult CheckIfPoNumberExistsInDB(string poNumber)
         {
-            var result = this.POLineServices.FindPOLineAsQueryableNew().Where(x=>x.EbdNumber == poNumber);
-            if(result.ToList().Count() > 0)
+            var result = this.POLineServices.FindPOLineAsQueryableNew().Where(x => x.EbdNumber == poNumber);
+            if (result.ToList().Count() > 0)
             {
                 return Json(new { status = true }, JsonRequestBehavior.AllowGet);
             }
@@ -723,7 +744,12 @@
         public ActionResult GetRenewalDaysLeft(string endDate, string renewalOrderLine)
         {
             var today = DateTime.Now;
+            if (string.IsNullOrEmpty(endDate) || endDate == "null")
+            {
+                return this.Json(0, JsonRequestBehavior.AllowGet);
+            }
             var endDay = Convert.ToDateTime(endDate);
+
             var daysLeft = (today - endDay).TotalDays;
             if (renewalOrderLine != null && string.Compare(renewalOrderLine, "") != 0)
             {
@@ -797,6 +823,7 @@
             int renwalDaysLeft = 0;
             var currentUser = this.UserService.GetCurrent();
             var result = this.POLineServices.FindPolineByPurchaseOrderLineID(pOLineSave.PurchaseOrderLineId);
+            var assignment = this.PurchaseOrderService.GetAssignmentCode(pOLineSave.PurchaseOrderLineId);
             if (result != null)
             {
                 result.StatusPoID = pOLineSave.StatusPoId;
@@ -804,34 +831,35 @@
                 result.AcOrWbs = pOLineSave.AcOrWbs;
                 result.ActivityTypeId = pOLineSave.ActivityTypeId;
                 result.AppId = pOLineSave.AppId;
-                result.ContactPerson = pOLineSave.ContactPerson;
-                result.RequestorName = string.IsNullOrEmpty(pOLineSave.RequestorName) ? null : pOLineSave.RequestorName;
+                assignment.ContactPerson = pOLineSave.ContactPerson;
+                assignment.RequestorName = string.IsNullOrEmpty(pOLineSave.RequestorName) ? null : pOLineSave.RequestorName;
                 if (pOLineSave.ContractEndDate != null)
                 {
-                    result.EndDate = Convert.ToDateTime(pOLineSave.ContractEndDate);
+                    assignment.EndDate = Convert.ToDateTime(pOLineSave.ContractEndDate);
                 }
                 else
-                    result.EndDate = null;
+                    assignment.EndDate = null;
 
                 if (pOLineSave.ContractStartDate != null)
                 {
-                    result.StartDate = Convert.ToDateTime(pOLineSave.ContractStartDate);
+                    assignment.StartDate = Convert.ToDateTime(pOLineSave.ContractStartDate);
                 }
                 else
-                    result.StartDate = null;
+                    assignment.StartDate = null;
                 result.ContractTypeId = pOLineSave.ContractTypeId;
 
                 if (pOLineSave.EarlierPaymentDate != null)
                 {
-                    result.EarlierPaymentDate = Convert.ToDateTime(pOLineSave.EarlierPaymentDate);
+                    assignment.EarlierPaymentDate = Convert.ToDateTime(pOLineSave.EarlierPaymentDate);
                 }
                 else
                 {
-                    result.EarlierPaymentDate = null;
+                    assignment.EarlierPaymentDate = null;
                 }
 
 
-                result.ExchangeRateYear = pOLineSave.ExchangeRateYear;
+                assignment.ExchangeRateYear = pOLineSave.ExchangeRateYear;
+                //  assignment.MonthlyRate= pOLineSave.
                 result.InvoiceNumber = pOLineSave.InvoiceNumber;
                 result.PurchaseOrderLineFromEbd.PurchaseOrder.InvoiceNumber = pOLineSave.InvoiceNumberHeader;
                 result.LastChangeDate = DateTime.Now;
@@ -840,41 +868,42 @@
                 result.Renewal = pOLineSave.Renewal;
                 result.OwnerId = pOLineSave.OwnerId;
                 result.CostTypeId = pOLineSave.CostTypeId;
-                result.SplitLineItemAmount = pOLineSave.RechargeAmount;
-                if(pOLineSave.RenewalOrderPurchaseLine !=null)
-                { 
-                var renewalorderlineSplit = pOLineSave.RenewalOrderPurchaseLine.Split('_');
-                if(renewalorderlineSplit[0]!=result.EbdNumber)
-                result.RenewalOrderPurchaseLine = pOLineSave.RenewalOrderPurchaseLine;
+                assignment.SplitLineItemAmount = pOLineSave.RechargeAmount;
+                if (pOLineSave.RenewalOrderPurchaseLine != null)
+                {
+                    var renewalorderlineSplit = pOLineSave.RenewalOrderPurchaseLine.Split('_');
+                    if (renewalorderlineSplit[0] != result.EbdNumber)
+                        result.RenewalOrderPurchaseLine = pOLineSave.RenewalOrderPurchaseLine;
                 }
                 result.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaserName = string.IsNullOrEmpty(pOLineSave.PurchaserName) ? null : pOLineSave.PurchaserName;
                 result.LastChangeBy = currentUser.UserID;
                 // result.Comments = POLineSave.Comments;
                 if (pOLineSave.DelayedPaymentDate != null)
                 {
-                    result.DelayedDate = Convert.ToDateTime(pOLineSave.DelayedPaymentDate);
+                    assignment.DelayedDate = Convert.ToDateTime(pOLineSave.DelayedPaymentDate);
                 }
                 else
                 {
-                    result.DelayedDate = null;
+                    assignment.DelayedDate = null;
                 }
 
                 this.POLineServices.SaveUpdateDetail(result, pOLineSave.Comments);
+                this.PurchaseOrderService.SaveAssignmentCodeDetails(assignment);
 
-                if (result.EndDate.HasValue)
+                if (assignment.EndDate.HasValue)
                 {
                     var today = DateTime.Now;
-                    var endDay = Convert.ToDateTime(result.EndDate);
+                    var endDay = Convert.ToDateTime(assignment.EndDate);
                     var daysLeft = (today - endDay).TotalDays;
                     renwalDaysLeft = Convert.ToInt32(daysLeft);
                 }
 
-                var totalCurrntMonths = NumberOfChargeMonths(result.StartDate, result.EndDate, result.EarlierPaymentDate, result.DelayedDate);
+                var totalCurrntMonths = NumberOfChargeMonths(assignment.StartDate, assignment.EndDate, assignment.EarlierPaymentDate, assignment.DelayedDate);
 
-                 return this.Json(new { statusO = true, renewaDaysLeft = renwalDaysLeft, lastChangedBy = currentUser.Name, lastUpdatedDate= DateTime.Now.ToString("MM/dd/yyyy hh:ss tt"),TotalMonths=totalCurrntMonths }, JsonRequestBehavior.AllowGet);
+                return this.Json(new { statusO = true, renewaDaysLeft = renwalDaysLeft, lastChangedBy = currentUser.Name, lastUpdatedDate = DateTime.Now.ToString("MM/dd/yyyy hh:ss tt"), TotalMonths = totalCurrntMonths }, JsonRequestBehavior.AllowGet);
             }
 
-              return this.Json(new { statusO = false, renewaDaysLeft = renwalDaysLeft, lastChangedBy = currentUser.Name, lastUpdatedDate = DateTime.Now.ToString("MM/dd/yyyy hh:ss tt") }, JsonRequestBehavior.AllowGet);
+            return this.Json(new { statusO = false, renewaDaysLeft = renwalDaysLeft, lastChangedBy = currentUser.Name, lastUpdatedDate = DateTime.Now.ToString("MM/dd/yyyy hh:ss tt") }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -889,7 +918,7 @@
             {
                 int m1 = end.Value.Month - start.Value.Month;//for years
                 int m2 = (end.Value.Year - start.Value.Year) * 12; //for months
-                 if (m1 < 0)
+                if (m1 < 0)
                 {
                     totalMonths = m2 + m1 + 1;
 
@@ -929,15 +958,15 @@
             {
                 int m1 = early.Value.Month - delay.Value.Month;//for years
                 int m2 = (early.Value.Year - delay.Value.Year) * 12; //for months
-                if(m1<0)
+                if (m1 < 0)
                 {
-                    totalMonths = m2 +m1+1;
-                    
+                    totalMonths = m2 + m1 + 1;
+
                 }
                 else
-                totalMonths = m1 + m2 + 1;
+                    totalMonths = m1 + m2 + 1;
 
-           }
+            }
             return Math.Abs(totalMonths);
         }
         [NHibernateMvcSessionContext]
@@ -959,32 +988,32 @@
                 foreach (var item in multiplePORecords)
                 {
                     polineIdVar = Convert.ToString(item.polineId);
-                    var records = GetCostListData(Convert.ToString(item.polineId));
-                    if (records != null && records.Item1 != null && records.Item1.Count > 0)
-                    {
-                        if (records.Item1.Any(x => x.DateAndYear == currentDate))
-                        {
-                            var currentRec = records.Item1.FirstOrDefault(x => x.DateAndYear == currentDate);
-                            if (currentRec != null)
-                            {
-                                currentMonthCost = currentRec.Cost;
-                            }
-                            if (!(currentMonthCost > 0))
-                            {
-                                if (records.Item2 > 0)
-                                {
-                                    currentMonthCost = records.Item2;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (records.Item2 > 0)
-                            {
-                                currentMonthCost = records.Item2;
-                            }
-                        }
-                    }
+                    var records = "";// GetCostListData(Convert.ToString(item.polineId));
+                    //if (records != null && records.Item1 != null && records.Item1.Count > 0)
+                    //{
+                    //    if (records.Item1.Any(x => x.DateAndYear == currentDate))
+                    //    {
+                    //        var currentRec = records.Item1.FirstOrDefault(x => x.DateAndYear == currentDate);
+                    //        if (currentRec != null)
+                    //        {
+                    //            currentMonthCost = currentRec.Cost;
+                    //        }
+                    //        if (!(currentMonthCost > 0))
+                    //        {
+                    //            if (records.Item2 > 0)
+                    //            {
+                    //                currentMonthCost = records.Item2;
+                    //            }
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        if (records.Item2 > 0)
+                    //        {
+                    //            currentMonthCost = records.Item2;
+                    //        }
+                    //    }
+                    //}
 
                     tupleRstlList.Add(new Tuple<string, string, decimal>(poNumber, polineIdVar, currentMonthCost));
                 }
@@ -999,6 +1028,7 @@
         {
             var monthDuration = 0;
             var item = this.POLineServices.GetById(new Guid(poLineNumber));
+            var assignment = this.PurchaseOrderService.GetAssignmentCode(item.PurchaseOrderLineId.ToString());
             var costlist = new List<CostListViewModel>();
             var currentMonthYear = DateTime.Now.ToString("yyyy-MM");
             var tuppleList = new List<Tuple<string, string, decimal>>();
@@ -1010,18 +1040,18 @@
             {
                 return new Tuple<List<CostListViewModel>, decimal, List<CustomModelSecondGrid>>(costlist, decimal.Round(monthlyAmountForView, 2, MidpointRounding.AwayFromZero), secondGridData);
             }
-          if (item.StartDate.HasValue && item.EndDate.HasValue)
+            if (assignment.StartDate.HasValue && assignment.EndDate.HasValue)
             {
                 var startDateToEndDateMonths = Enumerable.Range(0, int.MaxValue)
-                                 .Select(e => item.StartDate.Value.AddMonths(e))
-                                 .TakeWhile(e => e <= item.EndDate)
+                                 .Select(e => assignment.StartDate.Value.AddMonths(e))
+                                 .TakeWhile(e => e <= assignment.EndDate)
                                  .Select(e => e.ToString("yyyy-MM"));
 
                 var totalMonthsCountStartDateToEndDate = startDateToEndDateMonths.Count();
-                var perMonthCalculatedAmount = item.SplitLineItemAmount / totalMonthsCountStartDateToEndDate;
+                var perMonthCalculatedAmount = assignment.SplitLineItemAmount / totalMonthsCountStartDateToEndDate;
                 monthlyAmountForView = perMonthCalculatedAmount.HasValue ? perMonthCalculatedAmount.Value : 0;
 
-                if (item.EarlierPaymentDate == null && item.DelayedDate == null)
+                if (assignment.EarlierPaymentDate == null && assignment.DelayedDate == null)
                 {
                     var case1Result = startDateToEndDateMonths.Select(x => new CostListViewModel
                     {
@@ -1032,20 +1062,20 @@
                     }).ToList();
                     costlist = case1Result;
                 }
-                else if (item.EarlierPaymentDate == null && item.DelayedDate != null)
+                else if (assignment.EarlierPaymentDate == null && assignment.DelayedDate != null)
                 {
                     var startDateToDelayedDateMonths = Enumerable.Range(0, int.MaxValue)
-                             .Select(e => item.StartDate.Value.AddMonths(e))
-                             .TakeWhile(e => e <= item.DelayedDate)
+                             .Select(e => assignment.StartDate.Value.AddMonths(e))
+                             .TakeWhile(e => e <= assignment.DelayedDate)
                              .Select(e => e.ToString("yyyy-MM"));
                     var startDateToDelayedDateMonthCount = startDateToDelayedDateMonths.Count();
                     foreach (var element in startDateToEndDateMonths)
                     {
                         var costlistVm = new CostListViewModel();
                         var tempDate = Convert.ToDateTime(element);
-                        if ((tempDate.Year < item.DelayedDate.Value.Year)
-                            || (tempDate.Year == item.DelayedDate.Value.Year
-                                    && tempDate.Month < item.DelayedDate.Value.Month))
+                        if ((tempDate.Year < assignment.DelayedDate.Value.Year)
+                            || (tempDate.Year == assignment.DelayedDate.Value.Year
+                                    && tempDate.Month < assignment.DelayedDate.Value.Month))
                         {
                             costlistVm.Cost = 0;
                             costlistVm.DateAndYear = tempDate.ToString("yyyy-MM");
@@ -1053,8 +1083,8 @@
                             costlistVm.PoLineId = item.PurchaseOrderLineId.ToString();
                             costlistVm.PoNumber = item.EbdNumber;
                         }
-                        else if (tempDate.Year == item.DelayedDate.Value.Year
-                                    && tempDate.Month == item.DelayedDate.Value.Month)
+                        else if (tempDate.Year == assignment.DelayedDate.Value.Year
+                                    && tempDate.Month == assignment.DelayedDate.Value.Month)
                         {
                             costlistVm.Cost = (perMonthCalculatedAmount.HasValue
                                                         && startDateToDelayedDateMonthCount > 0
@@ -1079,20 +1109,20 @@
                         costlist.Add(costlistVm);
                     }
                 }
-                else if (item.EarlierPaymentDate != null && item.DelayedDate == null)
+                else if (assignment.EarlierPaymentDate != null && assignment.DelayedDate == null)
                 {
 
                     var startDateToEarlierPaymentDateMonths = Enumerable.Range(0, int.MaxValue)
-                             .Select(e => item.StartDate.Value.AddMonths(e))
-                             .TakeWhile(e => e <= item.EarlierPaymentDate)
+                             .Select(e => assignment.StartDate.Value.AddMonths(e))
+                             .TakeWhile(e => e <= assignment.EarlierPaymentDate)
                              .Select(e => e.ToString("yyyy-MM"));
 
 
                     var startDateToEarlierDateMonthCount = startDateToEarlierPaymentDateMonths.Count();
                     decimal? perMonthAmountAsPerEarlierPaymentDate = 0;
-                    if (startDateToEarlierDateMonthCount > 0 && item.SplitLineItemAmount > 0)
+                    if (startDateToEarlierDateMonthCount > 0 && assignment.SplitLineItemAmount > 0)
                     {
-                        perMonthAmountAsPerEarlierPaymentDate = item.SplitLineItemAmount / startDateToEarlierDateMonthCount;
+                        perMonthAmountAsPerEarlierPaymentDate = assignment.SplitLineItemAmount / startDateToEarlierDateMonthCount;
                     }
                     monthlyAmountForView = perMonthAmountAsPerEarlierPaymentDate.Value;
 
@@ -1100,9 +1130,9 @@
                     {
                         var costlistVm = new CostListViewModel();
                         var tempDate = Convert.ToDateTime(element);
-                        if ((tempDate.Year < item.EarlierPaymentDate.Value.Year)
-                            || (tempDate.Year == item.EarlierPaymentDate.Value.Year
-                                    && tempDate.Month <= item.EarlierPaymentDate.Value.Month))
+                        if ((tempDate.Year < assignment.EarlierPaymentDate.Value.Year)
+                            || (tempDate.Year == assignment.EarlierPaymentDate.Value.Year
+                                    && tempDate.Month <= assignment.EarlierPaymentDate.Value.Month))
                         {
                             costlistVm.Cost = perMonthAmountAsPerEarlierPaymentDate.HasValue ? perMonthAmountAsPerEarlierPaymentDate.Value : 0;
                             costlistVm.Cost = decimal.Round(costlistVm.Cost, 2, MidpointRounding.AwayFromZero);
@@ -1123,18 +1153,18 @@
                         costlist.Add(costlistVm);
                     }
                 }
-                else if (item.EarlierPaymentDate != null && item.DelayedDate != null)
+                else if (assignment.EarlierPaymentDate != null && assignment.DelayedDate != null)
                 {
-                    if (item.EarlierPaymentDate.Value.Year == item.DelayedDate.Value.Year
-                                && item.EarlierPaymentDate.Value.Month == item.DelayedDate.Value.Month)
+                    if (assignment.EarlierPaymentDate.Value.Year == assignment.DelayedDate.Value.Year
+                                && assignment.EarlierPaymentDate.Value.Month == assignment.DelayedDate.Value.Month)
                     {
                         foreach (var element in startDateToEndDateMonths)
                         {
                             var costlistVm = new CostListViewModel();
                             var tempDate = Convert.ToDateTime(element);
-                            if (tempDate.Year == item.EarlierPaymentDate.Value.Year && tempDate.Month == item.EarlierPaymentDate.Value.Month)
+                            if (tempDate.Year == assignment.EarlierPaymentDate.Value.Year && tempDate.Month == assignment.EarlierPaymentDate.Value.Month)
                             {
-                                costlistVm.Cost = item.SplitLineItemAmount.HasValue ? item.SplitLineItemAmount.Value : 0;
+                                costlistVm.Cost = assignment.SplitLineItemAmount.HasValue ? assignment.SplitLineItemAmount.Value : 0;
                                 costlistVm.Cost = decimal.Round(costlistVm.Cost, 2, MidpointRounding.AwayFromZero);
                                 costlistVm.DateAndYear = tempDate.ToString("yyyy-MM");
                                 //New
@@ -1142,8 +1172,8 @@
                                 costlistVm.PoNumber = item.EbdNumber;
 
                                 var totalMonthsfromStartToEarlierMonth = Enumerable.Range(0, int.MaxValue)
-                                 .Select(e => item.StartDate.Value.AddMonths(e))
-                                 .TakeWhile(e => e <= item.EarlierPaymentDate)
+                                 .Select(e => assignment.StartDate.Value.AddMonths(e))
+                                 .TakeWhile(e => e <= assignment.EarlierPaymentDate)
                                  .Select(e => e.ToString("yyyy-MM"));
                                 if (totalMonthsfromStartToEarlierMonth.Count() > 0)
                                 {
@@ -1166,8 +1196,8 @@
                     else
                     {
                         var startDateToDelayedDateMonths = Enumerable.Range(0, int.MaxValue)
-                             .Select(e => item.StartDate.Value.AddMonths(e))
-                             .TakeWhile(e => e <= item.DelayedDate)
+                             .Select(e => assignment.StartDate.Value.AddMonths(e))
+                             .TakeWhile(e => e <= assignment.DelayedDate)
                              .Select(e => e.ToString("yyyy-MM"));
                         Console.WriteLine("----------------------------------------------------------------");
 
@@ -1177,8 +1207,8 @@
 
                         // Retrieve start date to earlier date months
                         var startDateToEarlierDateMonths = Enumerable.Range(0, int.MaxValue)
-                            .Select(e => item.StartDate.Value.AddMonths(e))
-                            .TakeWhile(e => e <= item.EarlierPaymentDate)
+                            .Select(e => assignment.StartDate.Value.AddMonths(e))
+                            .TakeWhile(e => e <= assignment.EarlierPaymentDate)
                             .Select(e => e.ToString("yyyy-MM"));
                         Console.WriteLine("----------------------------------------------------------------"); ;
 
@@ -1186,7 +1216,7 @@
                         // to earlier payment date.
                         var startDateToEarlierDateMonthCount = startDateToEarlierDateMonths.Count();
                         // calculate permonth amount by divideing total splitlineamount with startDateToEarlierDateMonthCount.
-                        var startToEarlierDateMonthlyAmount = item.SplitLineItemAmount / startDateToEarlierDateMonthCount;
+                        var startToEarlierDateMonthlyAmount = assignment.SplitLineItemAmount / startDateToEarlierDateMonthCount;
 
                         monthlyAmountForView = startToEarlierDateMonthlyAmount.Value;
 
@@ -1194,11 +1224,11 @@
                         {
                             var costlistVm = new CostListViewModel();
                             var tempDate = Convert.ToDateTime(element);
-                            if (((tempDate.Year < item.DelayedDate.Value.Year)
-                                || (tempDate.Year == item.DelayedDate.Value.Year
-                                && tempDate.Month < item.DelayedDate.Value.Month)) || (tempDate.Year > item.EarlierPaymentDate.Value.Year)
-                                || (tempDate.Year == item.EarlierPaymentDate.Value.Year
-                                && tempDate.Month > item.EarlierPaymentDate.Value.Month))
+                            if (((tempDate.Year < assignment.DelayedDate.Value.Year)
+                                || (tempDate.Year == assignment.DelayedDate.Value.Year
+                                && tempDate.Month < assignment.DelayedDate.Value.Month)) || (tempDate.Year > assignment.EarlierPaymentDate.Value.Year)
+                                || (tempDate.Year == assignment.EarlierPaymentDate.Value.Year
+                                && tempDate.Month > assignment.EarlierPaymentDate.Value.Month))
                             {
                                 costlistVm.Cost = 0;
                                 costlistVm.DateAndYear = element;
@@ -1206,7 +1236,7 @@
                                 costlistVm.PoLineId = item.PurchaseOrderLineId.ToString();
                                 costlistVm.PoNumber = item.EbdNumber;
                             }
-                            else if (tempDate.Year == item.DelayedDate.Value.Year && tempDate.Month == item.DelayedDate.Value.Month)
+                            else if (tempDate.Year == assignment.DelayedDate.Value.Year && tempDate.Month == assignment.DelayedDate.Value.Month)
                             {
                                 costlistVm.Cost = startToEarlierDateMonthlyAmount.HasValue
                                                             && startToEarlierDateMonthlyAmount > 0
@@ -1219,8 +1249,8 @@
                                 costlistVm.PoLineId = item.PurchaseOrderLineId.ToString();
                                 costlistVm.PoNumber = item.EbdNumber;
                             }
-                            else if ((tempDate.Year == item.EarlierPaymentDate.Value.Year && tempDate.Month <= item.EarlierPaymentDate.Value.Month)
-                                        || (tempDate.Year == item.DelayedDate.Value.Year && tempDate.Month > item.DelayedDate.Value.Month))
+                            else if ((tempDate.Year == assignment.EarlierPaymentDate.Value.Year && tempDate.Month <= assignment.EarlierPaymentDate.Value.Month)
+                                        || (tempDate.Year == assignment.DelayedDate.Value.Year && tempDate.Month > assignment.DelayedDate.Value.Month))
                             {
                                 costlistVm.Cost = decimal.Round(startToEarlierDateMonthlyAmount.Value, 2, MidpointRounding.AwayFromZero);
                                 costlistVm.DateAndYear = element;
@@ -1232,32 +1262,32 @@
                         }
                     }
                 }
+
             }
-            //}
 
-            if (!ignoreSecondGridData)
-            {
-                try
-                {
-                    this.ConvertAndSaveCostListData(costlist, item.EbdNumber, item.PurchaseOrderLineId.ToString());
-                }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
-                catch (Exception ex) { }
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+//            if (!ignoreSecondGridData)
+//            {
+//                try
+//                {
+//                    this.ConvertAndSaveCostListData(costlist, item.EbdNumber, item.PurchaseOrderLineId.ToString());
+//                }
+//#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+//                catch (Exception ex) { }
+//#pragma warning restore CS0168 // The variable 'ex' is declared but never used
 
-                secondGridData = this.GetSecondGridData(item.PurchaseOrderLineId.ToString());
+//                secondGridData = this.GetSecondGridData(item.PurchaseOrderLineId.ToString());
 
-                if (secondGridData.Count() > 0)
-                {
-                    foreach (var rec in secondGridData)
-                    {
-                        if (monthlyAmountForView > 0)
-                        {
-                            rec.MonthlyRate = Convert.ToString(decimal.Round(monthlyAmountForView, 2, MidpointRounding.AwayFromZero));
-                        }
-                    }
-                }
-            }
+//                if (secondGridData.Count() > 0)
+//                {
+//                    foreach (var rec in secondGridData)
+//                    {
+//                        if (monthlyAmountForView > 0)
+//                        {
+//                            rec.MonthlyRate = Convert.ToString(decimal.Round(monthlyAmountForView, 2, MidpointRounding.AwayFromZero));
+//                        }
+//                    }
+//                }
+//            }
 
             if (costlist.Any(x => x.DateAndYear == currentMonthYear))
             {
@@ -1266,7 +1296,7 @@
                 {
                     if (monthDuration > 0)
                     {
-                        var perMonthCalculatedAmount = item.SplitLineItemAmount / monthDuration;
+                        var perMonthCalculatedAmount = assignment.SplitLineItemAmount / monthDuration;
                         var monthlyAmount = perMonthCalculatedAmount.HasValue ? perMonthCalculatedAmount.Value : 0;
                         monthlyAmountForView = monthlyAmount;
                         tuppleList.Add(new Tuple<string, string, decimal>(item.EbdNumber, poLineNumber, decimal.Round(monthlyAmount, 2, MidpointRounding.AwayFromZero)));
@@ -1280,7 +1310,7 @@
                 {
                     if (monthDuration > 0)
                     {
-                        var perMonthCalculatedAmount = item.SplitLineItemAmount / monthDuration;
+                        var perMonthCalculatedAmount = assignment.SplitLineItemAmount / monthDuration;
                         var monthlyAmount = perMonthCalculatedAmount.HasValue ? perMonthCalculatedAmount.Value : 0;
                         monthlyAmountForView = monthlyAmount;
                         tuppleList.Add(new Tuple<string, string, decimal>(item.EbdNumber, poLineNumber, decimal.Round(monthlyAmount, 2, MidpointRounding.AwayFromZero)));
@@ -1295,7 +1325,7 @@
             {
                 if (monthDuration > 0)
                 {
-                    var perMonthCalculatedAmount = item.SplitLineItemAmount / monthDuration;
+                    var perMonthCalculatedAmount = assignment.SplitLineItemAmount / monthDuration;
                     var monthlyAmount = perMonthCalculatedAmount.HasValue ? perMonthCalculatedAmount.Value : 0;
                     monthlyAmountForView = monthlyAmount;
                     tuppleList.Add(new Tuple<string, string, decimal>(item.EbdNumber, poLineNumber, decimal.Round(monthlyAmount, 2, MidpointRounding.AwayFromZero)));
@@ -1369,6 +1399,7 @@
         {
             var tupleResult = this.GetCostListData(poLineNumber);
             return this.Json(new { Costlist = tupleResult.Item1, MonthlyDividedAmount = tupleResult.Item2, SecondGridData = tupleResult.Item3 }, JsonRequestBehavior.AllowGet);
+
         }
 
         public List<CustomModelSecondGrid> GetSecondGridData(string poLineId)
@@ -1415,15 +1446,15 @@
                 var currentUser = this.UserService.GetCurrent();
                 var purchaseOrderRecords = this.POLineServices.GetAllPurchaseOrders().ToList();
                 List<InvoiceReportRecordDTO> listInvoiceReportDTO = new List<InvoiceReportRecordDTO>();
-                var records = this.POLineServices.FindPOLineAsQueryable()
-                .Where(x => (x.StartDate.HasValue && x.StartDate.Value.Year <= selectedDate.Value.Year
-                                && x.StartDate.Value.Month <= selectedDate.Value.Month)
-                                    && (x.EndDate.HasValue && x.EndDate.Value.Year >= selectedDate.Value.Year
-                                    && x.EndDate.Value.Month >= selectedDate.Value.Month));
+                var records = this.POLineServices.FindPOLineAsQueryable();
+                //.Where(x => (x.StartDate.HasValue && x.StartDate.Value.Year <= selectedDate.Value.Year
+                //                && x.StartDate.Value.Month <= selectedDate.Value.Month)
+                //                    && (x.EndDate.HasValue && x.EndDate.Value.Year >= selectedDate.Value.Year
+                //                    && x.EndDate.Value.Month >= selectedDate.Value.Month));
                 //.Where(x => x.StartDate <= selectedDate || x.EndDate >= selectedDate);
 
                 if (records.ToList().Count() > 0)
-               {
+                {
                     foreach (var item in records)
                     {
                         var costListData = this.CostListService.GetAllCostListsByPoLineId(item.PurchaseOrderLineId.ToString())
@@ -1434,19 +1465,19 @@
                         {
                             AcOrWbs = item.AcOrWbs,
                             ActivityType = item.ActivityType.Name,
-                           
-                            CostCenter = ((item.CostCenter!=null) ? (item.CostCenter.CountryCode + "" + item.CostCenter.FullName): null),
-                             
+
+                            CostCenter = ((item.CostCenter != null) ? (item.CostCenter.CountryCode + "" + item.CostCenter.FullName) : null),
+
                             EbdNumber = item.EbdNumber,
                             InvoiceMasterId = Convert.ToString(item.PurchaseOrderLineId),
                             PoName = item.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderName,
-                            Volume = (costListData != null && costListData.Cost > 0) ? Convert.ToString(costListData.Cost) : (item.MonthlyRate > 0) ? Convert.ToString(item.MonthlyRate) : string.Empty,
+                            // Volume = (costListData != null && costListData.Cost > 0) ? Convert.ToString(costListData.Cost) : (item.MonthlyRate > 0) ? Convert.ToString(item.MonthlyRate) : string.Empty,
                         };
                         if (!string.IsNullOrEmpty(obj.Volume))
                             listInvoiceReportDTO.Add(obj);
                     }
                 }
-            
+
                 //get the same month existing reports
                 var sameMonthReports = this.InvoiceReportServices.GetInvoicingReports()
                                         .OrderByDescending(x => x.TimeStamp)
@@ -1516,7 +1547,7 @@
                                                 InvoiceMasterId = matchedItem.InvoiceMasterId,
                                                 PoName = matchedItem.PoName,
                                             };
-                                             if (!newerToOldReportInvoiceMasterIds.Any(x => x == newRecord.InvoiceMasterId))
+                                            if (!newerToOldReportInvoiceMasterIds.Any(x => x == newRecord.InvoiceMasterId))
                                             {
                                                 comparedAndCalculatedList.Add(comparedAndCalculatedObj);
                                                 comparedAndCalculatedList.Add(comparedAndCalculatedObjNewRec);
@@ -1559,7 +1590,7 @@
                                 }
                             }
                         }
- 
+
                     }
 
                     if (comparedAndCalculatedList.Count > 0)
@@ -1585,20 +1616,20 @@
                 else
                 {
                     //First time report
-                     finalXML = new XDocument(
-                                new XDeclaration("1.0", "UTF-16", ""),
-                                new XElement("ArrayOfInvoicingReportRecord",
-                                from rec in listInvoiceReportDTO
-                                select new XElement("InvoicingReportRecord",
-                                         new XElement("AcOrWbs", rec.AcOrWbs),
-                                           new XElement("CostCenter", rec.CostCenter),
-                                           new XElement("ActivityType", rec.ActivityType),
-                                           new XElement("Volume", rec.Volume),
-                                           new XElement("PoName", rec.PoName),
-                                           new XElement("EbdNumber", rec.EbdNumber),
-                                           new XElement("InvoiceMasterId", rec.InvoiceMasterId)
-                                       ))
-                                );
+                    finalXML = new XDocument(
+                               new XDeclaration("1.0", "UTF-16", ""),
+                               new XElement("ArrayOfInvoicingReportRecord",
+                               from rec in listInvoiceReportDTO
+                               select new XElement("InvoicingReportRecord",
+                                        new XElement("AcOrWbs", rec.AcOrWbs),
+                                          new XElement("CostCenter", rec.CostCenter),
+                                          new XElement("ActivityType", rec.ActivityType),
+                                          new XElement("Volume", rec.Volume),
+                                          new XElement("PoName", rec.PoName),
+                                          new XElement("EbdNumber", rec.EbdNumber),
+                                          new XElement("InvoiceMasterId", rec.InvoiceMasterId)
+                                      ))
+                               );
                 }
 
                 if (finalXML != null)
@@ -1610,7 +1641,7 @@
                         Month = selectedDate.HasValue ? Convert.ToDateTime(selectedDate).Month : DateTime.Now.Month,
                         Year = selectedDate.HasValue ? Convert.ToDateTime(selectedDate).Year : DateTime.Now.Year,
                         Xml = finalXML.ToString(),
-                        CreatedUser= currentUser
+                        CreatedUser = currentUser
                     };
 
                     this.InvoiceReportServices.SaveInvoicingReport(entityObj);
@@ -1632,7 +1663,7 @@
         {
             var fillInvoiceReportObjList = this.InvoiceReportServices.GetInvoicingReports()
                                     .OrderByDescending(x => x.TimeStamp)
-                                    .Select(x => new { InvoiceReportID = x.InvoicingReportID, Year = x.Year, TimeStamp = x.TimeStamp.ToString("MM/dd/yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture), Month = x.Month, InvoiceReportId = x.InvoicingReportID,CreatedBy= x.CreatedUser?.Name })
+                                    .Select(x => new { InvoiceReportID = x.InvoicingReportID, Year = x.Year, TimeStamp = x.TimeStamp.ToString("MM/dd/yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture), Month = x.Month, InvoiceReportId = x.InvoicingReportID, CreatedBy = x.CreatedUser?.Name })
                                     .ToList();
             return this.Json(new { FillInvoiceReportObjList = fillInvoiceReportObjList }, JsonRequestBehavior.AllowGet);
         }
@@ -1676,7 +1707,7 @@
                 }
                 req.Add(requsterInner);
             }
-            
+
 
             foreach (var contactEmail in ContactPerson)
             {
@@ -1740,76 +1771,76 @@
                 string currency = string.Empty;
                 result.ForEach(a =>
                 {
-                    var year = Convert.ToDateTime(a.StartDate);
-                    var seekRate = this.POLineServices.GetPOlineSeekAmount(a.Currency, year.Year);
+                    //var year = Convert.ToDateTime(a.StartDate);
+                    //var seekRate = this.POLineServices.GetPOlineSeekAmount(a.Currency, year.Year);
 
-                    decimal exchangeRateCurrencyRate = 0;
+                    //decimal exchangeRateCurrencyRate = 0;
 
-                    if (a.ExchangeRateYear.HasValue)
-                    {
-                        exchangeRateCurrencyRate = this.POLineServices.GetPOlineSeekAmount(a.Currency, a.ExchangeRateYear.Value);
-                    }
-                    a.SekRate = seekRate;
-                    a.ExchangeRateCurrencyRate = exchangeRateCurrencyRate;
-                    a.LastChangeByName = string.Empty;
-                    totalOrderAmunt = totalOrderAmunt + Convert.ToDecimal(a.OrderAmount);
-                    totalSeekAmount = totalSeekAmount + (Convert.ToDecimal(a.OrderAmount) * seekRate);
-                    splitLineItemAmount = splitLineItemAmount + Convert.ToDecimal(a.SplitLineItemAmount);
-                    currency = a.Currency;
+                    //if (a.ExchangeRateYear.HasValue)
+                    //{
+                    //    exchangeRateCurrencyRate = this.POLineServices.GetPOlineSeekAmount(a.Currency, a.ExchangeRateYear.Value);
+                    //}
+                    //a.SekRate = seekRate;
+                    //a.ExchangeRateCurrencyRate = exchangeRateCurrencyRate;
+                    //a.LastChangeByName = string.Empty;
+                    //totalOrderAmunt = totalOrderAmunt + Convert.ToDecimal(a.OrderAmount);
+                    //totalSeekAmount = totalSeekAmount + (Convert.ToDecimal(a.OrderAmount) * seekRate);
+                    //splitLineItemAmount = splitLineItemAmount + Convert.ToDecimal(a.SplitLineItemAmount);
+                    //currency = a.Currency;
 
                 });
                 var assignmentCodeResult = result.GroupBy(x => x.AcOrWbs).ToList();
                 foreach (var assignmentCode in assignmentCodeResult)
                 {
 
-                    sb.Append("Assignment Code : " + assignmentCode.FirstOrDefault().AcOrWbs + "<br/>");
-                    sb.Append("WBS : " + assignmentCode.FirstOrDefault().WBS + "<br/>");
-                    sb.Append("Total amount recharged for this WBS is (" + assignmentCode.FirstOrDefault().Currency + ")" + string.Format("{0:n}", result.Sum(x => x.SplitLineItemAmount)) + "(+2% mark-up and overhead costs)<br/>");
-                    var costList = new List<CostListViewModel>();
-                    var polineCostList = new List<PolineCostList>();
-                    foreach (var item in assignmentCode)
-                    {
-                        var polineobj = new PolineCostList();
-                        costList.AddRange(this.GetCostListData(item.PurchaseOrderLineId.ToString()).Item1);
-                        polineobj.CostLists.AddRange(this.GetCostListData(item.PurchaseOrderLineId.ToString()).Item1);
-                        polineCostList.Add(polineobj);
-                    }
-                    var earliestStartDate = Convert.ToDateTime(costList.Min(x => x.DateAndYear));
-                    var earliestEndDate = Convert.ToDateTime(costList.Max(x => x.DateAndYear));
+                    //    sb.Append("Assignment Code : " + assignmentCode.FirstOrDefault().AcOrWbs + "<br/>");
+                    //    sb.Append("WBS : " + assignmentCode.FirstOrDefault().WBS + "<br/>");
+                    //    sb.Append("Total amount recharged for this WBS is (" + assignmentCode.FirstOrDefault().Currency + ")" + string.Format("{0:n}", result.Sum(x => x.SplitLineItemAmount)) + "(+2% mark-up and overhead costs)<br/>");
+                    //    var costList = new List<CostListViewModel>();
+                    //    var polineCostList = new List<PolineCostList>();
+                    //    foreach (var item in assignmentCode)
+                    //    {
+                    //        var polineobj = new PolineCostList();
+                    //        //costList.AddRange(this.GetCostListData(item.PurchaseOrderLineId.ToString()).Item1);
+                    //        // polineobj.CostLists.AddRange(this.GetCostListData(item.PurchaseOrderLineId.ToString()).Item1);
+                    //        polineCostList.Add(polineobj);
+                    //    }
+                    //    var earliestStartDate = Convert.ToDateTime(costList.Min(x => x.DateAndYear));
+                    //    var earliestEndDate = Convert.ToDateTime(costList.Max(x => x.DateAndYear));
 
 
 
-                    var totalSUm = costList.GroupBy(c => c.DateAndYear)
-                        .Select(g => new Cost()
-                        {
-                            Total = g.Sum(s => s.Cost),
-                            Date = g.Key
-                        }).ToList();
+                    //    var totalSUm = costList.GroupBy(c => c.DateAndYear)
+                    //        .Select(g => new Cost()
+                    //        {
+                    //            Total = g.Sum(s => s.Cost),
+                    //            Date = g.Key
+                    //        }).ToList();
 
-                    var listFinal = new List<Cost>();
-                    foreach (var cost in totalSUm)
-                    {
-                        listFinal.Add(cost);
-                    }
-                    var lst = listFinal.GroupBy(g => g.Total);
+                    //    var listFinal = new List<Cost>();
+                    //    foreach (var cost in totalSUm)
+                    //    {
+                    //        listFinal.Add(cost);
+                    //    }
+                    //    var lst = listFinal.GroupBy(g => g.Total);
 
-                    foreach (var amount in lst)
-                    {
-                        var earliestDate = amount.Min(x => x.Date);
-                        var enddate = amount.Max(x => x.Date);
-                        var total = amount.FirstOrDefault().Total;
-                        string toDates = earliestDate;
-                        if (earliestDate != enddate)
-                        {
-                            toDates += " to " + enddate;
-                        }
-                        else
-                        {
-                            toDates += ":";
-                        }
-                        sb.Append("Monthly charge for " + toDates + " " + string.Format("{0:n}", total) + " " + currency + " (+2% mark-up and overhead costs) <br/>");
-                    }
-                    sb.Append("<br/>");
+                    //    foreach (var amount in lst)
+                    //    {
+                    //        var earliestDate = amount.Min(x => x.Date);
+                    //        var enddate = amount.Max(x => x.Date);
+                    //        var total = amount.FirstOrDefault().Total;
+                    //        string toDates = earliestDate;
+                    //        if (earliestDate != enddate)
+                    //        {
+                    //            toDates += " to " + enddate;
+                    //        }
+                    //        else
+                    //        {
+                    //            toDates += ":";
+                    //        }
+                    //        sb.Append("Monthly charge for " + toDates + " " + string.Format("{0:n}", total) + " " + currency + " (+2% mark-up and overhead costs) <br/>");
+                    //    }
+                    //    sb.Append("<br/>");
                 }
                 sb.Append("<br/>");
                 return sb.ToString();
@@ -1842,9 +1873,9 @@
                     var emailTemplate = new EmailTemplate();
                     var details = this.PurchaseOrderService.GetPurchaseOrderDetail(ebdNumber);
                     details = details.Where(c => ids.Contains(c.PoLine)).ToList();
-                    emailTemplate.AllOrderAmount = Math.Round(Convert.ToDecimal(details.Sum(x => Convert.ToDecimal(x.OrderAmount))), 2);
+                    //  emailTemplate.AllOrderAmount = Math.Round(Convert.ToDecimal(details.Sum(x => Convert.ToDecimal(x.OrderAmount))), 2);
                     emailTemplate.EmailTemplateString = polineTempalte;
-                    emailTemplate.CustomViewModel = details.FirstOrDefault();
+                    // emailTemplate.CustomViewModel = details.FirstOrDefault();
                     emailTemplate.Name = currentUser.Name;
                     emailTemplate.userName = currentUser.Username;
                     var templateForReq = this.RenderPartialToString("~/views/poline/_EmailTemplate.cshtml", emailTemplate);
@@ -1960,7 +1991,7 @@
             catch (Exception ex)
 #pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-              return File(new byte[] { }, "application/CSV", "No File-" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".csv");
+                return File(new byte[] { }, "application/CSV", "No File-" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".csv");
             }
         }
 
@@ -2006,7 +2037,7 @@
                     workSheet.Column(7).AutoFit();
 
                     return excel.GetAsByteArray();
-                  }
+                }
             }
             catch (Exception ex)
             {
@@ -2045,323 +2076,325 @@
             ////var allPoLineIds = this.POLineServices.GetAllPurchaseOrders().Distinct().Select(x => new { x.PoNumber });
             var allPoLineIds = this.POLineServices.FindPOLineAsQueryable(false);
             var allpo = from t in allPoLineIds
-                        where t.MonthlyRate == 0
-                        && t.StartDate != null
-                        && t.EndDate != null
+                            // where t.MonthlyRate == 0
+                            // && t.StartDate != null
+                            // && t.EndDate != null
                         select new { t.EbdNumber, t.PurchaseOrderLineId };
             foreach (var poLine in allpo)
             {
+                var assignment = this.PurchaseOrderService.GetAssignmentCode(poLine.PurchaseOrderLineId.ToString());
 
-
-                //if (poLine.MonthlyRate == 0 && poLine.StartDate != null)
-                //{
-                var tupleResult = GetCostListData(poLine.PurchaseOrderLineId.ToString(), true);
-            }
-        }
-        [NHibernateMvcSessionContext]
-        public ActionResult ImportData(FormCollection formCollection)
-        {
-            var polinerec = new List<POLine>();
-            var searchModel = new SearchModel();
-            var currentUser = this.UserService.GetCurrent();
-            if (this.Request != null)
-            {
-                var assignmentCode = this.POLineServices.FindAllWBSORAssignmentCode();
-                searchModel.AssignmentCodes = assignmentCode.Select(x => new DDLModel() { text = x, value = x }).ToList();
-                searchModel.WBS = assignmentCode.Select(x => new DDLModel() { text = x, value = x }).ToList();
-                searchModel.ContractTypes = this.POLineServices.GetAllContractTypes();
-                searchModel.Applications = this.POLineServices.GetAllApplications();
-                searchModel.Requestores = this.POLineServices.FindAllRequesterName().Where(x => !string.IsNullOrEmpty(x)).Distinct().Select(x => new DDLModel() { text = x, value = x });
-
-                HttpPostedFileBase file = this.Request.Files["UploadedFile"];
-                string fileExtention = Path.GetExtension(file.FileName);
-                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (fileExtention == ".xlsx" || fileExtention == "xls"))
+                if (assignment.MonthlyRate == 0 && assignment.StartDate != null)
                 {
-                    string fileName = file.FileName;
-                    string fileContentType = file.ContentType;
-                    byte[] fileBytes = new byte[file.ContentLength];
-                    var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-                    using (var package = new ExcelPackage(file.InputStream))
-                    {
-                        var currentSheet = package.Workbook.Worksheets;
-                        var workSheet = currentSheet.First();
-                        var noOfCol = workSheet.Dimension.End.Column;
-                        var noOfRow = workSheet.Dimension.End.Row;
-                        var purchaseOrderLineED = new PurchaseOrderLineFromEbd();
-                        var purchaseOrder = new PurchaseOrder();
-                        /// var purchaseOrderLine = new POLine();
-
-                        var statusPo = new List<StatusPo>();
-                        var costCenter = new List<CostCenter>();
-                        var owner = this.POLineServices.GetAllOwners();
-                        var curenncy = new List<Currency>();
-                        statusPo.AddRange(this.POLineServices.GetAllStatus());
-                        costCenter.AddRange(this.POLineServices.GetAllCostCenter());
-                        curenncy.AddRange(this.POLineServices.GetAllCurrency());
-
-                        List<POLine> poLines = new List<POLine>();
-
-                        for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
-                        {
-                            try
-                            {
-
-
-                                
-                                var purchaseOrderFromDb = this.PurchaseOrderService.GetPurchaseOrderByEBDNumber(Convert.ToString(workSheet.Cells[rowIterator, 2].Value.ToString()));
-                                var purchaseOrderLineEBD = new PurchaseOrderLineFromEbd();
-                                if (purchaseOrderFromDb.PurchaseOrderId != Guid.Empty)
-                                {
-                                    purchaseOrderLineEBD = this.PurchaseOrderService.GetPurchaseOrderLineEBD(purchaseOrderFromDb.PurchaseOrderId);
-                                }
-
-                                int i = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
-                                var purchaseOrderLine = this.POLineServices.GetPolineByEbdNumberPoline(Convert.ToString(workSheet.Cells[rowIterator, 2].Value.ToString()), i);
-                                if (purchaseOrderLine == null && purchaseOrderFromDb.PurchaseOrderId == Guid.Empty)
-                                {
-                                    purchaseOrderLine = new POLine();
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd = new PurchaseOrderLineFromEbd();
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder = new PurchaseOrder();
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrderLineFromEbdId = Guid.NewGuid();
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderId = Guid.NewGuid();
-                                    purchaseOrderLine.PurchaseOrderLineId = Guid.NewGuid();
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd_ID = purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrderLineFromEbdId;
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.Owner = new Owner();
-                                    var ownerlist = owner.FirstOrDefault(c => c.Name == currentUser.Name);
-                                    if (ownerlist != null)
-                                    {
-                                        purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name = ownerlist.Name;
-                                        purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.OwnerId = ownerlist.OwnerId;
-                                        
-                                        purchaseOrderLine.OwnerId = ownerlist.OwnerId.ToString();
-                                    }
-                                }
-
-                                if (purchaseOrderLine == null && purchaseOrderFromDb.PurchaseOrderId != Guid.Empty)
-                                {
-                                    purchaseOrderLine = new POLine();
-                                    purchaseOrderLine.StartDate = null;
-                                    purchaseOrderLine.EndDate = null;
-                                    purchaseOrderLine.ApprovedBy = null;
-                                    purchaseOrderLine.ApprovedDate = null;
-                                    purchaseOrderLine.ContactPerson = null;
-                                    purchaseOrderLine.DelayedDate = null;
-                                    purchaseOrderLine.EarlierPaymentDate = null;
-                                    purchaseOrderLine.EbdNumber = null;
-                                    purchaseOrderLine.PoLine = 0;
-                                    purchaseOrderLine.ProductNumber = null;
-                                    purchaseOrderLine.Remark = null;
-                                    purchaseOrderLine.RenewalOrderPurchaseLine = null;
-                                    purchaseOrderLine.RequestorName = null;
-                                    purchaseOrderLine.Software = null;
-                                    purchaseOrderLine.SplitLineItemAmount = null;
-                                    purchaseOrderLine.PurchaseOrderLineId = Guid.NewGuid();
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd = purchaseOrderLineEBD;
-
-                                }
-
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PoNumber = Convert.ToString(workSheet.Cells[rowIterator, 2].Value.ToString());
-                                purchaseOrderLine.EbdNumber = Convert.ToString(workSheet.Cells[rowIterator, 2].Value.ToString());
-                                purchaseOrderLineED.PoLine = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value);
-                                purchaseOrderLine.PoLine = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value);
-
-                                purchaseOrderLine.StatusPo = new StatusPo();
-                                var status = statusPo.FirstOrDefault(x => x.Name == Convert.ToString(workSheet.Cells[rowIterator, 4].Value));
-                                if (status != null)
-                                {
-                                   purchaseOrderLine.StatusPo.Name = status.Name;
-                                   purchaseOrderLine.StatusPo.StatusPoId = status.StatusPoId;
-                                    purchaseOrderLine.StatusPoID= status.StatusPoId.ToString();
-                                }
-                                else
-                                {
-                                    purchaseOrderLine.StatusPo = new StatusPo();
-                                    purchaseOrderLine.StatusPo.StatusPoId = Guid.NewGuid();
-                                    purchaseOrderLine.StatusPo.Name = Convert.ToString(workSheet.Cells[rowIterator, 4].Value);
-                                    purchaseOrderLine.StatusPo.TimeStamp = DateTime.Now;
-
-                                  var statusr=  this.POLineServices.InsertStatusPo(purchaseOrderLine.StatusPo);
-                                    purchaseOrderLine.StatusPo = new StatusPo();
-                                    purchaseOrderLine.StatusPo = statusr;
-                                    purchaseOrderLine.StatusPoID = purchaseOrderLine.StatusPo.StatusPoId.ToString();
-                                }
-
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.LineItemDescription = new string(Convert.ToString(workSheet.Cells[rowIterator, 5].Value).Take(199).ToArray());                                 
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderName = new string(Convert.ToString(workSheet.Cells[rowIterator, 6].Value).Take(199).ToArray());
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.OrderAmount = Convert.ToDecimal(workSheet.Cells[rowIterator, 7].Value);
-
-                                purchaseOrderLine.Currency = new Currency();
-                                var curey = curenncy.FirstOrDefault(x => x.Name == Convert.ToString(workSheet.Cells[rowIterator, 8].Value));
-                                if (curey != null)
-                                {
-                                    purchaseOrderLine.Currency.Name = curey.Name;
-                                    purchaseOrderLine.Currency.CurrencyID = curey.CurrencyID;
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.Currency = curey.Name;
-
-                                }
-                                var blanketOrder = Convert.ToString(workSheet.Cells[rowIterator, 9].Value);
-
-                                try
-                                {
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.CreationDate = Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 10].Value.ToString()))); //creationDate;
-
-                                }
-                                catch (Exception ee)
-                                {
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.CreationDate = DateTime.Now;
-                                }
-
-                                try
-                                {
-
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.OrderDate = Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 11].Value.ToString()))); //creationDate;
-                                }
-                                catch (Exception ee)
-                                {
-                                    purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.OrderDate = DateTime.Now;
-                                }
-
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.SpendType = Convert.ToString(workSheet.Cells[rowIterator, 12].Value.ToString());
-
-                                purchaseOrderLine.CostCenter = new CostCenter();
-                                var cost = costCenter.FirstOrDefault(c => c.FullName == Convert.ToString(workSheet.Cells[rowIterator, 13].Value.ToString()));
-                                if (cost != null)
-                                {
-                                    purchaseOrderLine.CostCenter.Name = cost.Name;
-                                    purchaseOrderLine.CostCenter.CostCenterId = cost.CostCenterId;
-                                    purchaseOrderLine.CostCenterId = cost.CostCenterId.ToString();
-                                }
-
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.CompanyId = Convert.ToString(workSheet.Cells[rowIterator, 15].Value);
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.ShortDescription = Convert.ToString(workSheet.Cells[rowIterator, 16].Value);
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.GeographicalSite = Convert.ToString(workSheet.Cells[rowIterator, 17].Value);
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.LowestBorg = new string(Convert.ToString(workSheet.Cells[rowIterator, 18].Value).Take(199).ToArray());
-                                purchaseOrderLine.RequestorName = Convert.ToString(workSheet.Cells[rowIterator, 19].Value.ToString());
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.RequesterEmail = new string(Convert.ToString(workSheet.Cells[rowIterator, 20].Value).Take(199).ToArray()); 
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaserName = new string(Convert.ToString(workSheet.Cells[rowIterator, 21].Value).Take(199).ToArray()); 
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.FunctionalApproverName = new string(Convert.ToString(workSheet.Cells[rowIterator, 22].Value).Take(199).ToArray());
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.VendorName = new string(Convert.ToString(workSheet.Cells[rowIterator, 23].Value).Take(199).ToArray());
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.ParmaNbr = Convert.ToString(workSheet.Cells[rowIterator, 24].Value);
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.OrderedQuantity = Convert.ToDecimal(workSheet.Cells[rowIterator, 25].Value);
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.ReceivedQuantity = Convert.ToDecimal(workSheet.Cells[rowIterator, 26].Value);
-
-                                try
-                                {
-                                    if (Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 27].Value.ToString()))) == DateTime.MinValue)
-                                    {
-                                        purchaseOrderLine.PurchaseOrderLineFromEbd.ContractStartDate = DateTime.Now;
-                                    }
-                                    else
-                                    {
-                                        purchaseOrderLine.PurchaseOrderLineFromEbd.ContractStartDate = Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 27].Value.ToString()))); //creationDate;
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-
-
-                                }
-                                try
-                                {
-                                    if (Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 28].Value.ToString()))) == DateTime.MinValue)
-                                    {
-                                        purchaseOrderLine.PurchaseOrderLineFromEbd.ContractEndDate = DateTime.Now;
-                                    }
-                                    else
-                                    {
-                                        purchaseOrderLine.PurchaseOrderLineFromEbd.ContractEndDate = Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 28].Value.ToString()))); //creationDate;
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-
-
-                                } 
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.LicenseType = new string(Convert.ToString(workSheet.Cells[rowIterator, 29].Value).Take(199).ToArray());
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.SoftwareName = new string(Convert.ToString(workSheet.Cells[rowIterator, 30].Value).Take(199).ToArray());
-                                purchaseOrderLine.StartDate = purchaseOrderLine.PurchaseOrderLineFromEbd.ContractStartDate;
-                                purchaseOrderLine.EndDate = purchaseOrderLine.PurchaseOrderLineFromEbd.ContractEndDate;
-                                if(purchaseOrderLine.SplitLineItemAmount == null)
-                                purchaseOrderLine.SplitLineItemAmount = purchaseOrderLine.PurchaseOrderLineFromEbd.OrderAmount;
-                                purchaseOrderLine.PoLine = i;
-                                purchaseOrderLine.PurchaserName = purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderName;
-                                purchaseOrderLine.EbdNumber = purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PoNumber;
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.TimeStamp = DateTime.Now;
-                                purchaseOrderLine.Software = purchaseOrderLine.PurchaseOrderLineFromEbd.SoftwareName;
-
-                                purchaseOrderLine.PurchaseOrderLineFromEbd.TimeStamp = DateTime.Now;
-
-                                purchaseOrderLine.TimeStamp = DateTime.Now;
-                                purchaseOrderLine.LastChangeDate = DateTime.Now;
-
-                                purchaseOrderLine.ContractType = new ContractType();
-                                var contracttype = this.POLineServices.GetAllContractTypes().FirstOrDefault();
-                                if (contracttype != null)
-                                {
-                                    purchaseOrderLine.ContractType.Name = contracttype.Name;
-                                    purchaseOrderLine.ContractType.ContractTypeId = contracttype.ContractTypeId;
-                                    purchaseOrderLine.ContractTypeId= contracttype.ContractTypeId.ToString();
-                                }
-
-                                purchaseOrderLine.App = new App();
-                                var app = this.POLineServices.GetAllApplications().FirstOrDefault();
-                                if (app != null)
-                                {
-                                    purchaseOrderLine.App.Name = app.Name;
-                                    purchaseOrderLine.App.AppId = app.AppId;
-                                    purchaseOrderLine.AppId = app.AppId.ToString();
-                                }
-
-                                purchaseOrderLine.ActivityType = new ActivityType();
-                                var acc = this.POLineServices.GetAllActivityTypes().FirstOrDefault();
-                                if (acc != null)
-                                {
-                                    purchaseOrderLine.ActivityType.Name = acc.Name;
-                                    purchaseOrderLine.ActivityType.ActivityTypeId = acc.ActivityTypeId;
-                                    purchaseOrderLine.ActivityTypeId = acc.ActivityTypeId.ToString();
-                                }
-
-                                purchaseOrderLine.CostType = new CostType();
-                                var cos = this.POLineServices.GellAllCostTypes().FirstOrDefault();
-                                if (cos != null)
-                                {
-                                    purchaseOrderLine.CostType.Name = cos.Name;
-                                    purchaseOrderLine.CostType.CostTypeId = cos.CostTypeId;
-                                    purchaseOrderLine.CostTypeId = cos.CostTypeId.ToString();
-                                }
-
-                                purchaseOrderLine.Product = new Product();
-                                var pr = this.POLineServices.GellAllProducts().FirstOrDefault();
-                                if (pr != null)
-                                {
-                                    purchaseOrderLine.Product.Name = pr.Name;
-                                    purchaseOrderLine.Product.ProductId = pr.ProductId;
-                                }
-                                purchaseOrderLine.LastChangeBy = currentUser.UserID;
-                                poLines.Add(purchaseOrderLine);
-                            }
-                            catch (Exception ex)
-                            {
-                                var st = new StackTrace(ex, true);
-                                // Get the top stack frame
-                                var frame = st.GetFrame(0);
-                                // Get the line number from the stack frame
-                                var line = frame.GetFileLineNumber();
-
-
-                            }
-
-                        }
-
-                        this.POLineServices.InserBulk(poLines);
-
-                    }
-
+                    var tupleResult = GetCostListData(poLine.PurchaseOrderLineId.ToString(), true);
                 }
-
             }
-            this.ViewBag.ExcelImported = true;
-            return this.View("reports", searchModel);
         }
+    
+        //[NHibernateMvcSessionContext]
+        //public ActionResult ImportData(FormCollection formCollection)
+        //{
+        //    var polinerec = new List<POLine>();
+        //    var searchModel = new SearchModel();
+        //    var currentUser = this.UserService.GetCurrent();
+        //    if (this.Request != null)
+        //    {
+        //        var assignmentCode = this.POLineServices.FindAllWBSORAssignmentCode();
+        //        searchModel.AssignmentCodes = assignmentCode.Select(x => new DDLModel() { text = x, value = x }).ToList();
+        //        searchModel.WBS = assignmentCode.Select(x => new DDLModel() { text = x, value = x }).ToList();
+        //        searchModel.ContractTypes = this.POLineServices.GetAllContractTypes();
+        //        searchModel.Applications = this.POLineServices.GetAllApplications();
+        //        searchModel.Requestores = this.POLineServices.FindAllRequesterName().Where(x => !string.IsNullOrEmpty(x)).Distinct().Select(x => new DDLModel() { text = x, value = x });
+
+        //        HttpPostedFileBase file = this.Request.Files["UploadedFile"];
+        //        string fileExtention = Path.GetExtension(file.FileName);
+        //        if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName) && (fileExtention == ".xlsx" || fileExtention == "xls"))
+        //        {
+        //            string fileName = file.FileName;
+        //            string fileContentType = file.ContentType;
+        //            byte[] fileBytes = new byte[file.ContentLength];
+        //            var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+        //            using (var package = new ExcelPackage(file.InputStream))
+        //            {
+        //                var currentSheet = package.Workbook.Worksheets;
+        //                var workSheet = currentSheet.First();
+        //                var noOfCol = workSheet.Dimension.End.Column;
+        //                var noOfRow = workSheet.Dimension.End.Row;
+        //                var purchaseOrderLineED = new PurchaseOrderLineFromEbd();
+        //                var purchaseOrder = new PurchaseOrder();
+        //                /// var purchaseOrderLine = new POLine();
+
+        //                var statusPo = new List<StatusPo>();
+        //                var costCenter = new List<CostCenter>();
+        //                var owner = this.POLineServices.GetAllOwners();
+        //                var curenncy = new List<Currency>();
+        //                statusPo.AddRange(this.POLineServices.GetAllStatus());
+        //                costCenter.AddRange(this.POLineServices.GetAllCostCenter());
+        //                curenncy.AddRange(this.POLineServices.GetAllCurrency());
+
+        //                List<POLine> poLines = new List<POLine>();
+
+        //                for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
+        //                {
+        //                    try
+        //                    {
+
+
+
+        //                        var purchaseOrderFromDb = this.PurchaseOrderService.GetPurchaseOrderByEBDNumber(Convert.ToString(workSheet.Cells[rowIterator, 2].Value.ToString()));
+        //                        var purchaseOrderLineEBD = new PurchaseOrderLineFromEbd();
+        //                        if (purchaseOrderFromDb.PurchaseOrderId != Guid.Empty)
+        //                        {
+        //                            purchaseOrderLineEBD = this.PurchaseOrderService.GetPurchaseOrderLineEBD(purchaseOrderFromDb.PurchaseOrderId);
+        //                        }
+
+        //                        int i = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value.ToString());
+        //                        var purchaseOrderLine = this.POLineServices.GetPolineByEbdNumberPoline(Convert.ToString(workSheet.Cells[rowIterator, 2].Value.ToString()), i);
+        //                        if (purchaseOrderLine == null && purchaseOrderFromDb.PurchaseOrderId == Guid.Empty)
+        //                        {
+        //                            purchaseOrderLine = new POLine();
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd = new PurchaseOrderLineFromEbd();
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder = new PurchaseOrder();
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrderLineFromEbdId = Guid.NewGuid();
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderId = Guid.NewGuid();
+        //                            purchaseOrderLine.PurchaseOrderLineId = Guid.NewGuid();
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd_ID = purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrderLineFromEbdId;
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.Owner = new Owner();
+        //                            var ownerlist = owner.FirstOrDefault(c => c.Name == currentUser.Name);
+        //                            if (ownerlist != null)
+        //                            {
+        //                                purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name = ownerlist.Name;
+        //                                purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.OwnerId = ownerlist.OwnerId;
+
+        //                                purchaseOrderLine.OwnerId = ownerlist.OwnerId.ToString();
+        //                            }
+        //                        }
+
+        //                        if (purchaseOrderLine == null && purchaseOrderFromDb.PurchaseOrderId != Guid.Empty)
+        //                        {
+        //                            purchaseOrderLine = new POLine();
+        //                            purchaseOrderLine.StartDate = null;
+        //                            purchaseOrderLine.EndDate = null;
+        //                            purchaseOrderLine.ApprovedBy = null;
+        //                            purchaseOrderLine.ApprovedDate = null;
+        //                            purchaseOrderLine.ContactPerson = null;
+        //                            purchaseOrderLine.DelayedDate = null;
+        //                            purchaseOrderLine.EarlierPaymentDate = null;
+        //                            purchaseOrderLine.EbdNumber = null;
+        //                            purchaseOrderLine.PoLine = 0;
+        //                            purchaseOrderLine.ProductNumber = null;
+        //                            purchaseOrderLine.Remark = null;
+        //                            purchaseOrderLine.RenewalOrderPurchaseLine = null;
+        //                            purchaseOrderLine.RequestorName = null;
+        //                            purchaseOrderLine.Software = null;
+        //                            purchaseOrderLine.SplitLineItemAmount = null;
+        //                            purchaseOrderLine.PurchaseOrderLineId = Guid.NewGuid();
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd = purchaseOrderLineEBD;
+
+        //                        }
+
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PoNumber = Convert.ToString(workSheet.Cells[rowIterator, 2].Value.ToString());
+        //                        purchaseOrderLine.EbdNumber = Convert.ToString(workSheet.Cells[rowIterator, 2].Value.ToString());
+        //                        purchaseOrderLineED.PoLine = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value);
+        //                        purchaseOrderLine.PoLine = Convert.ToInt32(workSheet.Cells[rowIterator, 3].Value);
+
+        //                        purchaseOrderLine.StatusPo = new StatusPo();
+        //                        var status = statusPo.FirstOrDefault(x => x.Name == Convert.ToString(workSheet.Cells[rowIterator, 4].Value));
+        //                        if (status != null)
+        //                        {
+        //                           purchaseOrderLine.StatusPo.Name = status.Name;
+        //                           purchaseOrderLine.StatusPo.StatusPoId = status.StatusPoId;
+        //                            purchaseOrderLine.StatusPoID= status.StatusPoId.ToString();
+        //                        }
+        //                        else
+        //                        {
+        //                            purchaseOrderLine.StatusPo = new StatusPo();
+        //                            purchaseOrderLine.StatusPo.StatusPoId = Guid.NewGuid();
+        //                            purchaseOrderLine.StatusPo.Name = Convert.ToString(workSheet.Cells[rowIterator, 4].Value);
+        //                            purchaseOrderLine.StatusPo.TimeStamp = DateTime.Now;
+
+        //                          var statusr=  this.POLineServices.InsertStatusPo(purchaseOrderLine.StatusPo);
+        //                            purchaseOrderLine.StatusPo = new StatusPo();
+        //                            purchaseOrderLine.StatusPo = statusr;
+        //                            purchaseOrderLine.StatusPoID = purchaseOrderLine.StatusPo.StatusPoId.ToString();
+        //                        }
+
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.LineItemDescription = new string(Convert.ToString(workSheet.Cells[rowIterator, 5].Value).Take(199).ToArray());                                 
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderName = new string(Convert.ToString(workSheet.Cells[rowIterator, 6].Value).Take(199).ToArray());
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.OrderAmount = Convert.ToDecimal(workSheet.Cells[rowIterator, 7].Value);
+
+        //                        purchaseOrderLine.Currency = new Currency();
+        //                        var curey = curenncy.FirstOrDefault(x => x.Name == Convert.ToString(workSheet.Cells[rowIterator, 8].Value));
+        //                        if (curey != null)
+        //                        {
+        //                            purchaseOrderLine.Currency.Name = curey.Name;
+        //                            purchaseOrderLine.Currency.CurrencyID = curey.CurrencyID;
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.Currency = curey.Name;
+
+        //                        }
+        //                        var blanketOrder = Convert.ToString(workSheet.Cells[rowIterator, 9].Value);
+
+        //                        try
+        //                        {
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.CreationDate = Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 10].Value.ToString()))); //creationDate;
+
+        //                        }
+        //                        catch (Exception ee)
+        //                        {
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.CreationDate = DateTime.Now;
+        //                        }
+
+        //                        try
+        //                        {
+
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.OrderDate = Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 11].Value.ToString()))); //creationDate;
+        //                        }
+        //                        catch (Exception ee)
+        //                        {
+        //                            purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.OrderDate = DateTime.Now;
+        //                        }
+
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.SpendType = Convert.ToString(workSheet.Cells[rowIterator, 12].Value.ToString());
+
+        //                        purchaseOrderLine.CostCenter = new CostCenter();
+        //                        var cost = costCenter.FirstOrDefault(c => c.FullName == Convert.ToString(workSheet.Cells[rowIterator, 13].Value.ToString()));
+        //                        if (cost != null)
+        //                        {
+        //                            purchaseOrderLine.CostCenter.Name = cost.Name;
+        //                            purchaseOrderLine.CostCenter.CostCenterId = cost.CostCenterId;
+        //                            purchaseOrderLine.CostCenterId = cost.CostCenterId.ToString();
+        //                        }
+
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.CompanyId = Convert.ToString(workSheet.Cells[rowIterator, 15].Value);
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.ShortDescription = Convert.ToString(workSheet.Cells[rowIterator, 16].Value);
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.GeographicalSite = Convert.ToString(workSheet.Cells[rowIterator, 17].Value);
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.LowestBorg = new string(Convert.ToString(workSheet.Cells[rowIterator, 18].Value).Take(199).ToArray());
+        //                        purchaseOrderLine.RequestorName = Convert.ToString(workSheet.Cells[rowIterator, 19].Value.ToString());
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.RequesterEmail = new string(Convert.ToString(workSheet.Cells[rowIterator, 20].Value).Take(199).ToArray()); 
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaserName = new string(Convert.ToString(workSheet.Cells[rowIterator, 21].Value).Take(199).ToArray()); 
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.FunctionalApproverName = new string(Convert.ToString(workSheet.Cells[rowIterator, 22].Value).Take(199).ToArray());
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.VendorName = new string(Convert.ToString(workSheet.Cells[rowIterator, 23].Value).Take(199).ToArray());
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.ParmaNbr = Convert.ToString(workSheet.Cells[rowIterator, 24].Value);
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.OrderedQuantity = Convert.ToDecimal(workSheet.Cells[rowIterator, 25].Value);
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.ReceivedQuantity = Convert.ToDecimal(workSheet.Cells[rowIterator, 26].Value);
+
+        //                        try
+        //                        {
+        //                            if (Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 27].Value.ToString()))) == DateTime.MinValue)
+        //                            {
+        //                                purchaseOrderLine.PurchaseOrderLineFromEbd.ContractStartDate = DateTime.Now;
+        //                            }
+        //                            else
+        //                            {
+        //                                purchaseOrderLine.PurchaseOrderLineFromEbd.ContractStartDate = Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 27].Value.ToString()))); //creationDate;
+        //                            }
+        //                        }
+        //                        catch (Exception ex)
+        //                        {
+
+
+        //                        }
+        //                        try
+        //                        {
+        //                            if (Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 28].Value.ToString()))) == DateTime.MinValue)
+        //                            {
+        //                                purchaseOrderLine.PurchaseOrderLineFromEbd.ContractEndDate = DateTime.Now;
+        //                            }
+        //                            else
+        //                            {
+        //                                purchaseOrderLine.PurchaseOrderLineFromEbd.ContractEndDate = Convert.ToDateTime(DateTime.FromOADate(double.Parse(workSheet.Cells[rowIterator, 28].Value.ToString()))); //creationDate;
+        //                            }
+        //                        }
+        //                        catch (Exception ex)
+        //                        {
+
+
+        //                        } 
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.LicenseType = new string(Convert.ToString(workSheet.Cells[rowIterator, 29].Value).Take(199).ToArray());
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.SoftwareName = new string(Convert.ToString(workSheet.Cells[rowIterator, 30].Value).Take(199).ToArray());
+        //                        purchaseOrderLine.StartDate = purchaseOrderLine.PurchaseOrderLineFromEbd.ContractStartDate;
+        //                        purchaseOrderLine.EndDate = purchaseOrderLine.PurchaseOrderLineFromEbd.ContractEndDate;
+        //                        if(purchaseOrderLine.SplitLineItemAmount == null)
+        //                        purchaseOrderLine.SplitLineItemAmount = purchaseOrderLine.PurchaseOrderLineFromEbd.OrderAmount;
+        //                        purchaseOrderLine.PoLine = i;
+        //                        purchaseOrderLine.PurchaserName = purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PurchaseOrderName;
+        //                        purchaseOrderLine.EbdNumber = purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.PoNumber;
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.PurchaseOrder.TimeStamp = DateTime.Now;
+        //                        purchaseOrderLine.Software = purchaseOrderLine.PurchaseOrderLineFromEbd.SoftwareName;
+
+        //                        purchaseOrderLine.PurchaseOrderLineFromEbd.TimeStamp = DateTime.Now;
+
+        //                        purchaseOrderLine.TimeStamp = DateTime.Now;
+        //                        purchaseOrderLine.LastChangeDate = DateTime.Now;
+
+        //                        purchaseOrderLine.ContractType = new ContractType();
+        //                        var contracttype = this.POLineServices.GetAllContractTypes().FirstOrDefault();
+        //                        if (contracttype != null)
+        //                        {
+        //                            purchaseOrderLine.ContractType.Name = contracttype.Name;
+        //                            purchaseOrderLine.ContractType.ContractTypeId = contracttype.ContractTypeId;
+        //                            purchaseOrderLine.ContractTypeId= contracttype.ContractTypeId.ToString();
+        //                        }
+
+        //                        purchaseOrderLine.App = new App();
+        //                        var app = this.POLineServices.GetAllApplications().FirstOrDefault();
+        //                        if (app != null)
+        //                        {
+        //                            purchaseOrderLine.App.Name = app.Name;
+        //                            purchaseOrderLine.App.AppId = app.AppId;
+        //                            purchaseOrderLine.AppId = app.AppId.ToString();
+        //                        }
+
+        //                        purchaseOrderLine.ActivityType = new ActivityType();
+        //                        var acc = this.POLineServices.GetAllActivityTypes().FirstOrDefault();
+        //                        if (acc != null)
+        //                        {
+        //                            purchaseOrderLine.ActivityType.Name = acc.Name;
+        //                            purchaseOrderLine.ActivityType.ActivityTypeId = acc.ActivityTypeId;
+        //                            purchaseOrderLine.ActivityTypeId = acc.ActivityTypeId.ToString();
+        //                        }
+
+        //                        purchaseOrderLine.CostType = new CostType();
+        //                        var cos = this.POLineServices.GellAllCostTypes().FirstOrDefault();
+        //                        if (cos != null)
+        //                        {
+        //                            purchaseOrderLine.CostType.Name = cos.Name;
+        //                            purchaseOrderLine.CostType.CostTypeId = cos.CostTypeId;
+        //                            purchaseOrderLine.CostTypeId = cos.CostTypeId.ToString();
+        //                        }
+
+        //                        purchaseOrderLine.Product = new Product();
+        //                        var pr = this.POLineServices.GellAllProducts().FirstOrDefault();
+        //                        if (pr != null)
+        //                        {
+        //                            purchaseOrderLine.Product.Name = pr.Name;
+        //                            purchaseOrderLine.Product.ProductId = pr.ProductId;
+        //                        }
+        //                        purchaseOrderLine.LastChangeBy = currentUser.UserID;
+        //                        poLines.Add(purchaseOrderLine);
+        //                    }
+        //                    catch (Exception ex)
+        //                    {
+        //                        var st = new StackTrace(ex, true);
+        //                        // Get the top stack frame
+        //                        var frame = st.GetFrame(0);
+        //                        // Get the line number from the stack frame
+        //                        var line = frame.GetFileLineNumber();
+
+
+        //                    }
+
+        //                }
+
+        //                this.POLineServices.InserBulk(poLines);
+
+        //            }
+
+        //        }
+
+        //    }
+        //    this.ViewBag.ExcelImported = true;
+        //    return this.View("reports", searchModel);
+        //}
     }
 }

@@ -200,12 +200,12 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories
                 foreach (var item in poLineList)
                 {
                     CustomModelSecondGrid obj = new CustomModelSecondGrid();
-                    obj.EarlierPaymentDate = (item.EarlierPaymentDate.HasValue) ? item.EarlierPaymentDate.Value.ToString("yyyy-MM") : string.Empty;
-                    obj.DelayedPaymentDate = (item.DelayedDate.HasValue) ? item.DelayedDate.Value.ToString("yyyy-MM") : string.Empty;
-                    obj.RechargeAmount = (item.SplitLineItemAmount.HasValue) ? item.SplitLineItemAmount.Value.ToString() : string.Empty;
-                    obj.ContractStartDate = (item.StartDate.HasValue) ? item.StartDate.Value.ToString("yyyy-MM") : string.Empty;
-                    obj.ContractEndDate = (item.EndDate.HasValue) ? item.EndDate.Value.ToString("yyyy-MM") : string.Empty;
-                    obj.RequesterName = item.RequestorName;
+                    //obj.EarlierPaymentDate = (item.EarlierPaymentDate.HasValue) ? item.EarlierPaymentDate.Value.ToString("yyyy-MM") : string.Empty;
+                    //obj.DelayedPaymentDate = (item.DelayedDate.HasValue) ? item.DelayedDate.Value.ToString("yyyy-MM") : string.Empty;
+                    //obj.RechargeAmount = (item.SplitLineItemAmount.HasValue) ? item.SplitLineItemAmount.Value.ToString() : string.Empty;
+                    //obj.ContractStartDate = (item.StartDate.HasValue) ? item.StartDate.Value.ToString("yyyy-MM") : string.Empty;
+                    //obj.ContractEndDate = (item.EndDate.HasValue) ? item.EndDate.Value.ToString("yyyy-MM") : string.Empty;
+                    //obj.RequesterName = item.RequestorName;
 
                     var wbsDta = this.Session.QueryOver<WbsElement>().Where(x => x.AssignmentCode == item.AcOrWbs).List().FirstOrDefault();
                     if (wbsDta != null)
@@ -248,8 +248,8 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories
                     recipents.ContactPersonEmail = new List<ContactPersonEmail>();
                     foreach (var item in result)
                     {
-                        recipents.RequestorEmail.Add(new RequestorEmail() { EbdNumber = item.EbdNumber, RequestorEmailId = item.RequestorName, PoLineId = item.PoLine });
-                        recipents.ContactPersonEmail.Add(new ContactPersonEmail() { EbdNumber = item.EbdNumber, ContactPersonEmailId = item.ContactPerson, PoLineId = item.PoLine });
+                      //  recipents.RequestorEmail.Add(new RequestorEmail() { EbdNumber = item.EbdNumber, RequestorEmailId = item.RequestorName, PoLineId = item.PoLine });
+                      // recipents.ContactPersonEmail.Add(new ContactPersonEmail() { EbdNumber = item.EbdNumber, ContactPersonEmailId = item.ContactPerson, PoLineId = item.PoLine });
 
                     }
 
@@ -402,6 +402,18 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Repositories
 
                 }
             }
+        }
+
+        public IEnumerable<AssignmentCode> GetAssignmentCode(string ponumder,int poline)
+        {
+            
+            //return this.Session.QueryOver<AssignmentCode>().Where(x=>x.PurchaseOrderLineId== guid).List();
+            var assignmentCodes = this.Session.CreateSQLQuery("exec GetAssignmentCodes :ponumber, :poline")
+                                .AddEntity(typeof(AssignmentCode))
+                                .SetParameter("ponumber", ponumder)
+                                .SetParameter("poline", poline)
+                                .List<AssignmentCode>();
+            return assignmentCodes;
         }
     }
 }

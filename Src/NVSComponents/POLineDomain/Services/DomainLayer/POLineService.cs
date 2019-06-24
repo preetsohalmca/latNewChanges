@@ -104,9 +104,10 @@
 
             if(startDate != DateTime.MinValue)
             {
-                query = this.POLineRepository.Find().Where(x => (x.StartDate != null
-                                               && x.StartDate.Value.Year >= startDate.Year
-                                               && x.StartDate.Value.Month >= startDate.Month));
+                query = this.POLineRepository.Find();
+                    //.Where(x => (x.StartDate != null
+                                            //   && x.StartDate.Value.Year >= startDate.Year
+                                             //  && x.StartDate.Value.Month >= startDate.Month));
                 isFilterExists = true;
             }
 
@@ -114,15 +115,15 @@
             {
                 if (query != null)
                 {
-                    query = query.Where(x => (x.EndDate != null
-                                                    && x.EndDate.Value.Year <= endDate.Year
-                                                    && x.EndDate.Value.Month <= endDate.Month));
+                    //query = query.Where(x => (x.EndDate != null
+                    //                                && x.EndDate.Value.Year <= endDate.Year
+                    //                                && x.EndDate.Value.Month <= endDate.Month));
                 }
                 else
                 {
-                    query = this.POLineRepository.Find().Where(x => (x.EndDate != null
-                                                    && x.EndDate.Value.Year <= endDate.Year
-                                                    && x.EndDate.Value.Month <= endDate.Month));
+                    //query = this.POLineRepository.Find().Where(x => (x.EndDate != null
+                    //                                && x.EndDate.Value.Year <= endDate.Year
+                    //                                && x.EndDate.Value.Month <= endDate.Month));
                 }
                 isFilterExists = true;
             }
@@ -147,13 +148,13 @@
                 {
                     ////query = query.Where(x => x.RequestorName.Trim().ToLower() == requesterName.Trim().ToLower());
                     //query = query.Where(x => String.Equals(x.RequestorName, requesterName, StringComparison.OrdinalIgnoreCase));
-                    query = query.Where(x => x.RequestorName.Equals(requesterName));
+                    //query = query.Where(x => x.RequestorName.Equals(requesterName));
                 }
                 else
                 {
                     ////query = this.POLineRepository.Find().Where(x => x.RequestorName.Trim().ToLower() == requesterName.Trim().ToLower());
                     //query = this.POLineRepository.Find().Where(x => String.Equals(x.RequestorName, requesterName, StringComparison.OrdinalIgnoreCase));
-                    query = this.POLineRepository.Find().Where(x => x.RequestorName.Equals(requesterName));
+                    //query = this.POLineRepository.Find().Where(x => x.RequestorName.Equals(requesterName));
                 }
                 isFilterExists = true;
             }
@@ -268,10 +269,10 @@
             {
               
                 resultSet2 = this.POLineRepository.Find().Where(x => (x.Software != null && x.Software.Contains(search))
-                                                                || (x.ContactPerson != null && x.ContactPerson.Contains(search))
+                                                             //   || (x.ContactPerson != null && x.ContactPerson.Contains(search))
                                                                 || (x.ProductNumber != null && x.ProductNumber.Contains(search))
                                                                 || (x.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name != null && x.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name.Contains(search))//x.OwnerName.Contains(search))
-                                                                || (x.RequestorName != null && x.RequestorName.Contains(search))
+                                                               // || (x.RequestorName != null && x.RequestorName.Contains(search))
                                                                 || (x.EbdNumber != null && x.EbdNumber.Contains(search))
                                                                 || (x.AcOrWbs != null && x.AcOrWbs.Contains(search))
                                                                 || (poLine > 0 && x.PoLine == poLine)
@@ -295,11 +296,11 @@
             if (resultSet1.Count > 0 && !string.IsNullOrEmpty(search))
             {
                 result = resultSet1.Where(x => (!string.IsNullOrEmpty(x.Software) && x.Software.Contains(search))
-                                                                || (!string.IsNullOrEmpty(x.ContactPerson) && x.ContactPerson.Contains(search))
+                                                               // || (!string.IsNullOrEmpty(x.ContactPerson) && x.ContactPerson.Contains(search))
                                                                 || (!string.IsNullOrEmpty(x.ProductNumber) && x.ProductNumber.Contains(search))
                                                                 //|| (!string.IsNullOrEmpty(x.OwnerName) && x.OwnerName.Contains(search))
                                                                 || (x.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name != null && x.PurchaseOrderLineFromEbd.PurchaseOrder.Owner.Name.Contains(search))
-                                                                || (!string.IsNullOrEmpty(x.RequestorName) && x.RequestorName.Contains(search))
+                                                              // || (!string.IsNullOrEmpty(x.RequestorName) && x.RequestorName.Contains(search))
                                                                 || (!string.IsNullOrEmpty(x.EbdNumber) && x.EbdNumber.Contains(search))
                                                                 || (!string.IsNullOrEmpty(x.AcOrWbs) && x.AcOrWbs.Contains(search))
                                                                 || (poLine > 0 && x.PoLine == poLine)
@@ -354,7 +355,7 @@
         public IEnumerable<App> GetApplicationName() => this.AppRepository.GetAllApps().ToList();
       public virtual IEnumerable<string> FindAllWBSORAssignmentCode() => this.POLineRepository.Find().OrderBy(x=>x.AcOrWbs).Select(x => x.AcOrWbs).Distinct().ToList();
 
-        public virtual IEnumerable<string> FindAllRequesterName() => this.POLineRepository.Find().OrderBy(x => x.RequestorName).Select(x => x.RequestorName).Distinct().ToList();
+        public virtual IEnumerable<string> FindAllRequesterName() => this.POLineRepository.Find().OrderBy(x => x.Currency.Name).Select(x => x.Currency.Name).Distinct().ToList();
 
 
         public virtual IEnumerable<Owner> GetAllOwners() => this.POLineRepository.GetAllOwners().OrderBy(s=>s.Name);
@@ -395,6 +396,8 @@
         public IEnumerable<WbsElement> GetAllWbs() => this.POLineRepository.GetAllWbs().OrderBy(x=>x.Name);
 
         public StatusPo InsertStatusPo(StatusPo status) => this.POLineRepository.InserStatusPo(status);
+
+        public IEnumerable<AssignmentCode> GetAssignmentCode(string ponumber, int poline) => this.POLineRepository.GetAssignmentCode(ponumber,poline);
     }    
 }
 

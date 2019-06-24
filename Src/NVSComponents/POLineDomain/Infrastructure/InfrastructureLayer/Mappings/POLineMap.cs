@@ -114,13 +114,13 @@ namespace Volvo.LAT.POLineDomain.InfrastructureLayer.Mappings
                 map.Cascade(Cascade.None);
                 map.ForeignKey("WbsElement_ID");
             });
-            this.ManyToOne(x => x.AssignmentCode, map =>
-            {
-                map.Column("AssignmentCode_ID");
-                map.Lazy(LazyRelation.NoLazy);
-                map.Cascade(Cascade.None);
-                map.ForeignKey("AssignmentCode_ID");
-            });
+            //this.ManyToOne(x => x.AssignmentCode, map =>
+            //{
+            //    map.Column("PurchaseOrderLine_ID");
+            //    map.Lazy(LazyRelation.NoLazy);
+            //    map.Cascade(Cascade.None);
+            //    map.ForeignKey("PurchaseOrderLine_ID");
+            //});
         }
     }
 }

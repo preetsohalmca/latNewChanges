@@ -62,7 +62,7 @@
         public virtual Product Product { get; set; }
         public virtual PurchaseOrderLineFromEbd PurchaseOrderLineFromEbd { get; set; }
         public virtual WbsElement WbsElement { get; set; }
-        public virtual AssignmentCode AssignmentCode { get; set; }
+        
         public virtual Currency Currency { get; set; }
         //public virtual string Comments { get; set; }
         public virtual string RenewalOrderPurchaseLine { get; set; }

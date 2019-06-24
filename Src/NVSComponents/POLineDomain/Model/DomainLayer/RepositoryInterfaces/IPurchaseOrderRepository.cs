@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Volvo.LAT.PartDomain.DomainLayer.Entities;
     using Volvo.LAT.POLineDomain.DomainLayer.Entities;
     using Volvo.NVS.Persistence.Repositories;
 
@@ -15,6 +16,8 @@
         List<CustomModel> GetPurchaseOrderDetail(string purchaseOrderId);
         bool SavePurchaserName(string purchaserName, string poEbd_Id);
         PurchaseOrder GetPurchaseOrderByEBDNumber(string EBDNumber);
-        PurchaseOrderLineFromEbd GetPurchaseOrderLineEBD(Guid PurchaseOrderId);
+        List<PurchaseOrderLineFromEbd> GetPurchaseOrderLineEBD(Guid PurchaseOrderId);
+        bool SaveAssignmentCodeDetails(AssignmentCode assignmentCode);
+        AssignmentCode GetAssignmentCode(string purchaseorderlineid);
     }
 }

@@ -29,11 +29,11 @@ namespace Volvo.LAT.POLineDomain.ServiceLayer.Contracts
             totalrecords = 0;
             return default(IEnumerable<POLine>)
                 .Where(x =>
-                        x.ContactPerson.Contains(search) ||
+                       // x.ContactPerson.Contains(search) ||
                         x.ProductNumber.Contains(search) ||
                         x.OwnerName.Contains(search)
-                        || (x.StartDate.HasValue && (x.StartDate == startDate || startDate == DateTime.MinValue))
-                        || (x.EndDate.HasValue && (x.EndDate == endDate || endDate == DateTime.MinValue))
+                      //  || (x.StartDate.HasValue && (x.StartDate == startDate || startDate == DateTime.MinValue))
+                       // || (x.EndDate.HasValue && (x.EndDate == endDate || endDate == DateTime.MinValue))
                         || (!string.IsNullOrEmpty(x.OwnerName) && (x.OwnerName == ownerName || ownerName == null))
                         || (!string.IsNullOrEmpty(x.AcOrWbs) && (x.AcOrWbs == assignmentCode || assignmentCode == null))
                         || (!string.IsNullOrEmpty(x.AcOrWbs) && (x.AcOrWbs == wbs || wbs == null))
@@ -45,24 +45,24 @@ namespace Volvo.LAT.POLineDomain.ServiceLayer.Contracts
             bool isRenewalYes, bool isRenewalNo, bool isRenewalAll, int pageSize, int pageNumber, out int totalrecords)
         {
             totalrecords = 0;
-            return default(IQueryable<POLine>)
-                .Where(x =>
-                        x.ContactPerson.Contains(search) ||
-                        x.ProductNumber.Contains(search) ||
-                        x.OwnerName.Contains(search)
-                        || (x.StartDate.HasValue && (x.StartDate == startDate || startDate == DateTime.MinValue))
-                        || (x.EndDate.HasValue && (x.EndDate == endDate || endDate == DateTime.MinValue))
-                        || (!string.IsNullOrEmpty(x.OwnerName) && (x.OwnerName == ownerName || ownerName == null))
-                        || (!string.IsNullOrEmpty(x.AcOrWbs) && (x.AcOrWbs == assignmentCode || assignmentCode == null))
-                        || (!string.IsNullOrEmpty(x.AcOrWbs) && (x.AcOrWbs == wbs || wbs == null))
-                        );
+            return default(IQueryable<POLine>);
+                //.Where(x =>
+                //        x.ContactPerson.Contains(search) ||
+                //        x.ProductNumber.Contains(search) ||
+                //        x.OwnerName.Contains(search)
+                //        || (x.StartDate.HasValue && (x.StartDate == startDate || startDate == DateTime.MinValue))
+                //        || (x.EndDate.HasValue && (x.EndDate == endDate || endDate == DateTime.MinValue))
+                //        || (!string.IsNullOrEmpty(x.OwnerName) && (x.OwnerName == ownerName || ownerName == null))
+                //        || (!string.IsNullOrEmpty(x.AcOrWbs) && (x.AcOrWbs == assignmentCode || assignmentCode == null))
+                //        || (!string.IsNullOrEmpty(x.AcOrWbs) && (x.AcOrWbs == wbs || wbs == null))
+                //        );
         }
 
         ////public IEnumerable<string> GetApplicationName() => default(IEnumerable<App>).Select(x => x.DeliveryManager).Distinct().ToList();
         //public IEnumerable<App> GetApplicationName() => default(IEnumerable<App>);
 
         public IEnumerable<string> FindAllWBSORAssignmentCode() => default(IEnumerable<POLine>).OrderBy(x => x.AcOrWbs).Select(x => x.AcOrWbs).Distinct().ToList();
-        public IEnumerable<string> FindAllRequesterName() => default(IEnumerable<POLine>).OrderBy(x => x.RequestorName).Select(x => x.RequestorName).Distinct().ToList();
+        public IEnumerable<string> FindAllRequesterName() => default(IEnumerable<POLine>).OrderBy(x => x.Currency.Name).Select(x => x.Currency.Name).Distinct().ToList();
         //public void UpdatePOLineAvailability(IList<POLineNewAvailability> listOfPOLine) => Contract.Requires(listOfPOLine != null);
         public IEnumerable<Owner> GetAllOwners() => default(IEnumerable<Owner>);
         public IEnumerable<StatusPo> GetAllStatus() => default(IEnumerable<StatusPo>);
@@ -115,5 +115,7 @@ namespace Volvo.LAT.POLineDomain.ServiceLayer.Contracts
         public IEnumerable<WbsElement> GetAllWbs() => default(IEnumerable<WbsElement>);
 
         public StatusPo InsertStatusPo(StatusPo status) => default(StatusPo);
+
+        public IEnumerable<AssignmentCode> GetAssignmentCode(string ponumber, int poline) => default(IEnumerable<AssignmentCode>);
     }
 }

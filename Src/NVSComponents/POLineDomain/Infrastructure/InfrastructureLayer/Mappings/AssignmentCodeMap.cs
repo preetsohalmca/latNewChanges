@@ -21,6 +21,7 @@
                 map.Column("AssignmentCode_ID");
                 map.Generator(Generators.Assigned);
             });
+            
             this.Property(x => x.StartDate);
             this.Property(x => x.EndDate);
             this.Property(x => x.DelayedDate);
@@ -30,6 +31,13 @@
             this.Property(x => x.EarlierPaymentDate);
             this.Property(x => x.ExchangeRateYear);
             this.Property(x => x.MonthlyRate);
+            //this.Property(x => x.AmpId);
+            //this.Property(x => x.AcOrWBS);
+            //this.Property(x => x.PoLine);
+            //this.Property(x => x.Applcation);
+            this.Property(x => x.PurchaseOrderLineId,map=> {
+                map.Column("PurchaseOrderLine_ID");
+            });
         }
     }
 }

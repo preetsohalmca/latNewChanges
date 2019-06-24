@@ -68,6 +68,7 @@ namespace Volvo.LAT.POLineDomain.ServiceLayer
         bool CheckRenewalOrderLineExist(string renewalOredrLine);
         bool InserBulk(List<POLine> polines);
         IEnumerable<WbsElement> GetAllWbs();
+        IEnumerable<AssignmentCode> GetAssignmentCode(string ponumber,int poline);
         StatusPo InsertStatusPo(StatusPo status);
 
     }
